@@ -7,12 +7,12 @@ Keep checking for any news.
 Contributors
 
 https://github.com/dogruomerfaruk <br/>
-https://github.com/cemreefe
-https://github.com/irem-ustunboyacioglu
-https://github.com/altayince
-https://github.com/emirhansarac29
-https://github.com/eray-kurtulus-2015400159
-https://github.com/emrehoser
-https://github.com/metekurt
-https://github.com/ufukyilmaz
-https://github.com/omer-toptas-2014400225
+https://github.com/cemreefe<br/>
+https://github.com/irem-ustunboyacioglu<br/>
+https://github.com/altayince<br/>
+https://github.com/emirhansarac29<br/>
+https://github.com/eray-kurtulus-2015400159<br/>
+https://github.com/emrehoser<br/>
+https://github.com/metekurt<br/>
+https://github.com/ufukyilmaz<br/>
+https://github.com/omer-toptas-2014400225<br/>
