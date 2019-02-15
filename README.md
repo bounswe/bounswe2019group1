@@ -6,7 +6,7 @@ Keep checking for any news.
 
 ## Contributors
 
-* Ömer Faruk Doğru - https://github.com/dogruomerfaruk <br/>
+* [Ömer Faruk Doğru](https://github.com/dogruomerfaruk) <br/>
 * Cemre Efe Karakaş - https://github.com/cemreefe<br/>
 * İrem Üstünboyacıoğlu - https://github.com/irem-ustunboyacioglu<br/>
 * Mehmet Altay İnce - https://github.com/altayince<br/>
