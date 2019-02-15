@@ -6,7 +6,7 @@ Keep checking for any news.
 
 Contributors
 
-https://github.com/dogruomerfaruk
+https://github.com/dogruomerfaruk <br/>
 https://github.com/cemreefe
 https://github.com/irem-ustunboyacioglu
 https://github.com/altayince
