@@ -15,7 +15,7 @@ Keep checking for any news.
 * [Emre Hoşer](https://github.com/emrehoser) <br/>
 * [Mete Kurt](https://github.com/metekurt) <br/>
 * [Ufuk Yılmaz](https://github.com/ufukyilmaz) <br/>
-* [Ömer Toptaş](https://github.com/omer-toptas-2014400225) <br/>
+* [Ömer Faruk Toptaş](https://github.com/omer-toptas-2014400225) <br/>
 * [İlker Özkan](https://github.com/ilkerozkan1) <br/>
 
 
