@@ -3,6 +3,9 @@
 Welcome to the project repository of CmpE 352 Group 1.
 
 Keep checking for any news.
+
+![Team Members](/resources/images/team_members.jpg)
+
 ## Project Description
 
 In this project, we will create a social platform for users who can be considered as a trader. The platform enables the users to trade and follow a broad variety of financial vehicles including indices, stocks, ETFs, bonds, commodities, currencies, funds, bonds, and cryptocurrencies.  The platform will support various interactions, such as sharing ideas as an article, commenting and rating ideas of other users, commenting about trading equipment. Users will be able to follow other users, and trading equipment and also set alerts for certain levels of trading equipment.
