@@ -4,7 +4,7 @@ Welcome to the project repository of CmpE 352 Group 1.
 
 Keep checking for any news.
 
-![Team Members](/resources/images/team_members.jpg)
+![Team Members]()
 
 ## Project Description
 
