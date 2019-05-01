@@ -1,4 +1,4 @@
-# BounSWE 2019 Group 1
+# Khaji-it
 
 Welcome to the project repository of CmpE 352 Group 1.
 
