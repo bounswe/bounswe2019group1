@@ -16,19 +16,12 @@ High performance and efficiency requires well documentation and clearly explaine
 
 ### Commit Message Template
 git commit -m " **ISSUE_LINK** **COMMIT_TYPE** **DESCRIPTION**"
-
 **ISSUE_LINK** --> Related issue number e.g. **#3** (All issues have a number like Database update #70)
-
 **COMMIT_TYPE** --> **Fix:** || **Docs:** || **Feat:** || **Refactor:** || **Test:**
-
 **Fix:** --> Fixing a bug or another type of problem
-
 **Docs:** --> Documentation or commenting
-
 **Feat:** --> New feature, functionality, is added
-
 **Refactor:** --> Renaming variables and code re-arranging to improve the maintainability and readability(Functionality can change but behavior should be the same)
-
 **Test:** --> Testing 
 
 Example good commits:
