@@ -1,0 +1,57 @@
+<html>
+<head>
+<title> Login_page </title>   
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+    <div id="login-box">
+      <div class="left-box">
+        <h1> Log in</h1>
+          
+
+        <form name="login">
+			Username<input type="text" name="userid"/>
+			Password<input type="password" name="pswrd"/>
+			<input type="submit" onclick="check(this.form)" value="Login"/>
+		</form>
+
+          <h3> Isn't a member?</h3>
+          <input type="button" onclick="location.href='sign_up.html';" name="sign_up-button" value="Sign Up"/>
+
+
+        
+        </div>
+        <div class="right-box">
+          <span class="signinwith">Sign in with<br/>Social Network     </span>
+        
+        <button class="social facebook">Log in with Facebook</button>    
+        <button class="social twitter">Log in with Twitter</button> 
+        <button class="social google">Log in with Google+</button> 
+            
+        
+        </div>
+        <div class="or">OR</div>
+    </div>
+    
+
+    <script language="javascript">
+	function check(form)/*function to check userid & password*/
+	{
+ 	/*the following code checkes whether the entered userid and password are matching*/
+ 	if(form.userid.value == "myuserid" && form.pswrd.value == "mypswrd")
+  	{
+    	window.open('target.html')/*opens the target page while Id & password matches*/
+  	}
+ 	else
+ 	{
+   		alert("Error Password or Username")/*displays error message*/
+  	}
+
+	}
+	</script>
+
+</body>    
+</html>
+
+

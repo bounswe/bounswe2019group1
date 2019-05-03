@@ -1,0 +1,22 @@
+{
+  "name": "khaji-it",
+  "version": "1.0.1",
+  "description": "Trading Platform",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "mongodb": "^3.2.3",
+    "nodemon": "^1.19.0",
+    "promise": "^8.0.3"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.1"
+  }
+}
