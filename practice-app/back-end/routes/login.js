@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
 module.exports = router;
 
 async function login(username, password) {
-    res = await dbfuncs.findAllRecords("app_user", {name: username, password: password});
+    res = await dbfuncs.findAllRecords("app_user", {username: username, password: password});
     if(res.length == 0)
         return false;
     else
