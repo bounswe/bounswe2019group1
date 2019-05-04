@@ -3,7 +3,7 @@ const router = express.Router();
 const dbfuncs = require('../../database/database');
 
 router.get('/', (req, res) => {
-    res.sendFile("login.html",{root:__dirname+"../../../front-end"})
+    res.sendFile("signup.html",{root:__dirname+"../../../front-end"})
 });
 
 router.post('/', async (req, res) => {
@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
 
     //res.status(200);
 
-    var success = await login(req.query.username, req.query.password);
+    var success = await signup(req.query.username, req.query.password);
     console.log(success);
     res.status(200).end(JSON.stringify({success: success}));
     //res.end(JSON.stringify({a:1, b:23}));
@@ -25,10 +25,11 @@ router.post('/', async (req, res) => {
 
 module.exports = router;
 
-async function login(username, password) {
-    res = await dbfuncs.findAllRecords("app_user", {username: username, password: password});
-    if(res.length == 0)
-        return false;
-    else
+async function signup(username, password) {
+    res = await dbfuncs.findAllRecords("app_user", {username: username});
+    if (res.length == 0){
+        await dbfuncs.insertOneRecord("app_user", {username: username, password: password});
         return true;
+    } else
+        return false;
 }

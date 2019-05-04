@@ -18,7 +18,6 @@ deleteOneRecord("test_1", {name:"Viggo"});
 sortRecords("test_1", {age:-1});
 updateOneRecord("test_1", {name : "Viggo"}, { $set: {name: "Viggos"} });
 */
-
 /*
     Creates database.
  */
