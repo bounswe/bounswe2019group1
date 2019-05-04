@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
 
     //res.status(200);
 
-    var success = await login("asd", "asd");
+    var success = await login(req.query.username, req.query.password);
     console.log(success);
     res.status(200).end(JSON.stringify({success: success}));
     //res.end(JSON.stringify({a:1, b:23}));
