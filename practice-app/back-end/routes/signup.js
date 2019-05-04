@@ -26,11 +26,10 @@ router.post('/', async (req, res) => {
 module.exports = router;
 
 async function signup(username, password) {
-    res = await dbfuncs.findAllRecords("app_user", {username: username, password: password});
-    if (res.length == 1)
-        return false;
-    else {
-        await  dbfuncs.insertOneRecord("app_user",{username: username, password: password});
+    res = await dbfuncs.findAllRecords("app_user", {username: username});
+    if (res.length == 0){
+        await dbfuncs.insertOneRecord("app_user", {username: username, password: password});
         return true;
-    }
+    } else
+        return false;
 }
