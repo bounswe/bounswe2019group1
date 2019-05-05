@@ -1,0 +1,277 @@
+/*
+Author       : Tech Trek.
+Template Name: Bitfonix - Bitcoin And Crypto Currency HTML Template
+Version      : 1.0
+*/
+
+
+/* Large Layouts */
+
+@media only screen and (max-width: 1400px) {}
+
+@media only screen and (max-width: 1340px) {
+	.main-header .top-area .info-menu li a {
+		margin-right: 18px;
+	}
+	.logo-area .header-info-box {
+		margin-left: 20px;
+	}
+}
+
+@media only screen and (max-width: 1200px) {
+	.image-style-wrapper .image-one {
+		top: 8px;
+		width: 481px;
+		left: -16px;
+	}
+}
+
+@media only screen and (max-width: 1140px) {
+	.main-header .top-area .info-menu li a {
+		margin-right: 8px;
+	}
+	.logo-area .header-info-box {
+		margin-left: 0px;
+		padding: 0 0 0 50px;
+	}
+	.main-header .mainmenu-area .navbar-nav .nav-link {
+		padding: 10px 24px;
+	}
+}
+
+@media only screen and (max-width: 1023px) {
+	.main-header .top-area .info-menu li a {
+		margin-right: 6px;
+	}
+	.logo-area .header-info-box {
+		margin-left: -2px;
+		padding: 0 0 0 45px;
+	}
+	.main-header .mainmenu-area .navbar-nav .nav-link {
+		padding: 10px 23px;
+	}
+}
+
+
+/* Tablet Layout: 768px. */
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+	.sticky-menu {
+		position: relative !important;
+	}
+	.main-header .top-area {
+		padding: 20px 0;
+	}
+	.main-header .top-area .info-menu {
+		float: none;
+		text-align: center;
+	}
+	.logo-area .header-info-box {
+		margin-left: 35px;
+		padding: 0 0 0 55px;
+	}
+	.slider-section,
+	.single-page-title-area {
+		margin-top: 0;
+	}
+	.image-style-wrapper .image-one {
+		height: 78px;
+		top: 18px;
+		width: 362px;
+		left: -16px;
+	}
+	.single-wcus-text {
+		width: 59%;
+	}
+	.single-wcus-icon {
+		margin: 17px 15px 0 0;
+	}
+	.singleRecpost:last-child {
+		margin-bottom: 0;
+		padding-bottom: 0;
+	}
+	.single-service-text {
+		width: 72%;
+	}
+	.image-style-2-inner .image-two {
+		padding: 30px;
+	}
+	.single-award-text h5 {
+		font-size: 16px;
+	}
+	.main-header .mainmenu-area.menu-animation .navbar {
+		display: none !important;
+	}
+	.home-3 .logo-area {
+		padding-bottom: 0;
+	}
+	.main-header.header-3 .mainmenu-area .navbar-nav .nav-link {
+		color: #fff;
+	}
+}
+
+
+/* Mobile Layout: 320px. */
+
+@media only screen and (max-width: 767px) {
+	.sticky-menu {
+		position: relative !important;
+	}
+	.main-header .top-area {
+		padding: 20px 0;
+	}
+	.main-header .top-area .info-menu {
+		float: none;
+		text-align: center;
+		margin-bottom: 10px;
+	}
+	.slider-section,
+	.single-page-title-area {
+		margin-top: 0;
+	}
+	.home-single-slide h2 {
+		font-size: 30px;
+	}
+	.home-single-slide-button a {
+		margin: 0 0 20px;
+	}
+	.home-single-slide-dec {
+		bottom: -145px;
+	}
+	.main-header .top-area .info-menu li a {
+		line-height: 30px;
+	}
+	.logo-area .header-info-box {
+		margin-left: 28px;
+		margin-bottom: 20px;
+	}
+	.logo-area .header-info-box:last-child {
+		padding-left: 8px;
+	}
+	section#about {
+		margin-top: 0;
+		z-index: 0;
+	}
+	.image-one {
+		display: none;
+	}
+	.single-wcus-icon {
+		margin: 17px 0 35px 0;
+	}
+	.single-wcus-text {
+		width: 100%;
+	}
+	.counter-wrapper .counter-wrapper-inner {
+		border: none;
+	}
+	.counter-wrapper::after {
+		opacity: 0;
+	}
+	.single-service-text {
+		width: auto;
+	}
+	.youtube-promo-video i {
+		font-size: 25px;
+		height: 60px;
+		width: 60px;
+		line-height: 60px;
+	}
+	.home-p-form-wrapper {
+		padding: 20px;
+	}
+	.single-testimonial .single-testimonial-content {
+		padding: 0 10px;
+	}
+	.single-testimonial:before {
+		left: 10px;
+		font-size: 25px;
+	}
+	.single-blog-hdec {
+		padding: 25px;
+	}
+	.footer-menu ul li a {
+		padding: 0 7px;
+	}
+	.singleRecpost:last-child {
+		margin-bottom: 0;
+		padding-bottom: 0;
+	}
+	.image-style-2-inner .image-one img {
+		display: none;
+	}
+	.image-style-2-inner .image-two {
+		width: 100%;
+		height: auto;
+	}
+	.error-page-wrap h3 {
+		font-size: 50px;
+		letter-spacing: 13px;
+	}
+	.error-page-wrap h4 {
+		font-size: 22px;
+	}
+	.error-search p {
+		font-size: 25px;
+	}
+	.grid-item,
+	.grid-item--width2 {
+		width: 250px;
+	}
+	.grid .entry {
+		margin-bottom: 10px;
+	}
+	.buysell-tab-list .nav-tabs .nav-link {
+		margin-bottom: 25px;
+	}
+	.single-blog-link a {
+		font-size: 15px;
+	}
+	.single-blog-quote .blockquote-wrapper,
+	.single-blog-link {
+		padding: 50px 25px;
+	}
+	.theme-pagination .page-link {
+		margin: 0;
+		padding: 10px;
+	}
+	.theme-pagination .page-link i {
+		padding: 7px 10px;
+	}
+	.blog-single-image-wra {
+		margin-bottom: 30px;
+	}
+	.blog-single-image-wra-des {
+		position: relative;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+	.single-page-title h2:before {
+		left: 0;
+	}
+	.single-page-title h2:after {
+		right: 0;
+	}
+	.main-header .mainmenu-area.menu-animation .navbar {
+		display: none !important;
+	}
+	.main-header.header-2 .logo-area .header-info-box {
+    	margin-left: 30px;
+	}
+	.home-3 .logo-area {
+		padding-bottom: 0;
+	}
+	.main-header.header-3 .mainmenu-area .navbar-nav .nav-link {
+		color: #fff;
+	}
+	.single-shop-img img {
+		width: 100%;
+	}
+	.filter-btn-price label {
+    	left: 0;
+	}
+}
+
+/* Wide Mobile Layout: 480px. */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {}
