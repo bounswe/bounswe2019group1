@@ -5,7 +5,6 @@ const request = require('request')
 api.get('/', function(req,res) {
 
     const url = "https://api-pub.bitfinex.com/v2/";
-    //custom get
     const word=req.query.word;
     const options1 = {
         url: "https://api-pub.bitfinex.com/v2/"+"tickers?symbols=t"+word,
