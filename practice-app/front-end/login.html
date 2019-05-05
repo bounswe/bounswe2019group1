@@ -10,14 +10,17 @@
 
     $(document).ready(function(){
         $("#submitBtn").click(function(){
-            console.log($("#userid").val(),$("#password").val())
             $.post("/login",
                 {
                     username: $("#userid").val(),
                     password: $("#password").val()
                 },
                 function (data, status) {
+                if(JSON.parse(data).success) {
+                    window.location.href = "/main"
+                } else {
                     alert("Data: " + data + "\nStatus: " + status);
+                }
                 });
             $("#login").submit(); // Submit the form
 
@@ -37,7 +40,7 @@
         </form>
 
         <h3> Isn't a member?</h3>
-        <input type="button" onclick="location.href='sign_up.html';" name="sign_up-button" value="Sign Up"/>
+        <input type="button" onclick="location.href='/signup';" name="sign_up-button" value="Sign Up"/>
 
 
     </div>

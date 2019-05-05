@@ -8,11 +8,11 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
 
-    console.log(req.query);
+    console.log(req.body);
 
     //res.status(200);
 
-    var success = await signup(req.query.username, req.query.password);
+    var success = await signup(req.body.username, req.body.password);
     console.log(success);
     res.status(200).end(JSON.stringify({success: success}));
     //res.end(JSON.stringify({a:1, b:23}));
