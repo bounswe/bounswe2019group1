@@ -24,10 +24,10 @@ updateOneRecord("test_1", {name : "Viggo"}, { $set: {name: "Viggos"} });
 function create_database() {
     return new Promise(
         function (resolve, reject) {
-            MongoClient.connect(URL,{ useNewUrlParser: true },function(err, result) {
+            MongoClient.connect(URL,{ useNewUrlParser: true },function(err, db) {
                 if (err) reject(err);
                 //console.log("Database created!");
-                resolve(result);
+                resolve(db);
                 db.close();
             });
         });
@@ -231,7 +231,7 @@ function deleteCollection(collection_type) {
  */
 function updateOneRecord(collection_type, query_object, new_record_values) {
     return new Promise(
-        function (resolve, reject) {
+        function (resolve, reject ) {
             MongoClient.connect(URL,{ useNewUrlParser: true },function(err, db) {
                 if (err) reject(err);
                 const dbo = db.db(dbName);
