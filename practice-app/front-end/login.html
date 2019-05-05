@@ -2,6 +2,10 @@
 <head>
 <title> Login_page </title>   
     <link rel="stylesheet" type="text/css" href="style.css">
+
+    <meta name="google-signin-client_id" content="510505564353-nlhputgs749pijf4cbbs2un19ucl11ue.apps.googleusercontent.com">
+
+    <script src="https://apis.google.com/js/client:platform.js?onload=startApp"></script>
 </head>
 <body>
 
@@ -27,13 +31,34 @@
         
         <button class="social facebook">Log in with Facebook</button>    
         <button class="social twitter">Log in with Twitter</button> 
-        <button class="social google">Log in with Google+</button> 
-            
         
-        </div>
-        <div class="or">OR</div>
-    </div>
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
     
+    
+
+
+
+   <script>
+      function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  var id_token = googleUser.getAuthResponse().id_token;
+  window.location.href='https://github.com/bounswe/bounswe2019group1';
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'https://yourbackend.example.com/tokensignin');
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onload = function() {
+  console.log('Signed in as: ' + xhr.responseText);
+  };
+  xhr.send('idtoken=' + id_token);
+
+}
+    </script>
+
 
     <script language="javascript">
 	function check(form)/*function to check userid & password*/
@@ -47,11 +72,8 @@
  	{
    		alert("Error Password or Username")/*displays error message*/
   	}
-
 	}
 	</script>
 
 </body>    
 </html>
-
-
