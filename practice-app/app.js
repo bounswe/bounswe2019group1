@@ -1,9 +1,16 @@
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser')
 const session = require('express-session');
 
 var app = express();
 app.use(cors()); // for all routes
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
 
 var port = process.env.PORT || 8080;
 
