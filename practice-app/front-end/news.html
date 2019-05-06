@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Table V02</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-table100">
+			<div class="wrap-table100">
+					<div class="table" >
+
+						<div class="row header">
+							<div class="cell" >
+								Title
+							</div>
+							<div class="cell">
+								Description
+							</div>
+							<div class="cell">
+								Country
+							</div>
+							<div class="cell">
+								Category
+							</div>
+						</div>
+						<div class="row">
+							<div class="cell" data-title="Full Name" id="c1_1"></div>
+							<div class="cell" data-title="Age" id="c1_2" ></div>
+							<div class="cell" data-title="Job Title" id="c1_3"></div>
+							<div class="cell" data-title="Location" id="c1_4"></div>
+						</div>
+						<div class="row">
+							<div class="cell" data-title="Full Name" id="c2_1"></div>
+							<div class="cell" data-title="Age" id="c2_2"></div>
+							<div class="cell" data-title="Job Title" id="c2_3"></div>
+							<div class="cell" data-title="Location" id="c2_4"></div>
+						</div>
+						<div class="row">
+							<div class="cell" data-title="Full Name" id="c3_1"></div>
+							<div class="cell" data-title="Age" id="c3_2"></div>
+							<div class="cell" data-title="Job Title" id="c3_3"></div>
+							<div class="cell" data-title="Location" id="c3_4"></div>
+						</div>
+						<div class="row">
+							<div class="cell" data-title="Full Name" id="c4_1"></div>
+							<div class="cell" data-title="Age" id="c4_2"></div>
+							<div class="cell" data-title="Job Title" id="c4_3"></div>
+							<div class="cell" data-title="Location" id="c4_4"></div>
+						</div>
+						<div class="row">
+							<div class="cell" data-title="Full Name" id="c5_1"></div>
+							<div class="cell" data-title="Age" id="c5_2"></div>
+							<div class="cell" data-title="Job Title" id="c5_3"></div>
+							<div class="cell" data-title="Location" id="c5_4"></div>
+						</div>
+						<div class="row">
+							<div class="cell" data-title="Full Name" id="c6_1"></div>
+							<div class="cell" data-title="Age" id="c6_2"></div>
+							<div class="cell" data-title="Job Title" id="c6_3"></div>
+							<div class="cell" data-title="Location" id="c6_4"></div>
+						</div>
+						<div class="row">
+							<div class="cell" data-title="Full Name" id="c7_1"></div>
+							<div class="cell" data-title="Age" id="c7_2"></div>
+							<div class="cell" data-title="Job Title" id="c7_3"></div>
+							<div class="cell" data-title="Location" id="c7_4"></div>
+						</div>
+						<div class="row">
+							<div class="cell" data-title="Full Name" id="c8_1"></div>
+							<div class="cell" data-title="Age" id="c8_2"></div>
+							<div class="cell" data-title="Job Title" id="c8_3"></div>
+							<div class="cell" data-title="Location" id="c8_4"></div>
+						</div>
+						<div class="row">
+							<div class="cell" data-title="Full Name" id="c9_1"></div>
+							<div class="cell" data-title="Age" id="c9_2"></div>
+							<div class="cell" data-title="Job Title" id="c9_3"></div>
+							<div class="cell" data-title="Location" id="c9_4"></div>
+						</div>
+						<div class="row">
+							<div class="cell" data-title="Full Name" id="c10_1"></div>
+							<div class="cell" data-title="Age" id="c10_2"></div>
+							<div class="cell" data-title="Job Title" id="c10_3"></div>
+							<div class="cell" data-title="Location" id="c10_4"></div>
+						</div>
+
+					</div>
+			</div>
+		</div>
+	</div>
+
+<!--===============================================================================================-->	
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+	<script>
+		$(document).ready(function(){
+			$.post("/news",
+					{
+					},
+					function (data, status) {
+						var temp = JSON.parse(data);
+						for (var i = 1 ; i<=10 ;  i++) {
+							$("#c" + i + "_1").text(temp[i-1].title);
+							$("#c" + i + "_2").text(temp[i-1].description);
+							$("#c" + i + "_3").text(temp[i-1].country);
+							$("#c" + i + "_4").text(temp[i-1].category);
+						}
+					});
+			$("#login").submit(); // Submit the form
+		});
+	</script>
+
+</body>
+</html>
