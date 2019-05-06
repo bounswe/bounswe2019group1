@@ -3,10 +3,10 @@
 # Getting Articles
 Filters by country or/and category and returns articles from last 10. If no filter is defined, returns last 10 articles.
 
-**URL :** `/news&articles/articles`
-**METHOD :** `GET`
-**AUTHORIZATION :** `-`
-**PARAMETERS :** `?country={country name}&category={category name}` 
+**URL :** `/news&articles/articles`<br>
+**METHOD :** `GET`<br>
+**AUTHORIZATION :** `-`<br>
+**PARAMETERS :** `?country={country name}&category={category name}`
 ### RESPONSE
 Returned JSON Object from request `localhost:8080/news&articles/articles?country=Switzerland`
 
@@ -15,9 +15,9 @@ Returned JSON Object from request `localhost:8080/news&articles/articles?country
 # Getting News
 Filters by country or/and category and returns news from last 10. If no filter is defined, returns last 10 news
 
-**URL :** `/news&articles/news`
-**METHOD :** `GET`
-**AUTHORIZATION :** `-`
+**URL :** `/news&articles/news`<br>
+**METHOD :** `GET`<br>
+**AUTHORIZATION :** `-`<br>
 **PARAMETERS :** `?country={country name}&category={category name}` 
 ### RESPONSE
 Returned JSON Object from request `localhost:8080/news&articles/news?category=Inflation Rate&country=Tunisia`
