@@ -1,4 +1,4 @@
-## Base URL = ... 
+## Base URL = 35.166.169.167:8080
 
 # Getting Articles
 Filters by country or/and category and returns articles from last 10. If no filter is defined, returns last 10 articles.
