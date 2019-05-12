@@ -1,5 +1,6 @@
 const express = require('express');
-const app = express.Router();
+const router = express.Router();
+const http = require("http")
 var jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const { window } = new JSDOM();
@@ -8,50 +9,37 @@ const { document } = (new JSDOM('')).window;
 global.document = document;
 var $ = jQuery = require('jquery')(window);
 
-// set endpoint and your access key
-endpoint = 'latest'
-access_key = 'e6bd540558679f6909d74efe2470aee6';
-
-
+// set access key
+const access_key = 'aabb98fbc1d445dd4fb18dfd6bc136df';
 
 //
-app.get('/currencyapi', (req, res) => {
-    var x = getAjax()
-    res.end(x)
+router.get('/', (req, res) => {
+    res.sendFile("currencies.html",{root:__dirname+"../../../front-end"})
 });
 
-app.post('/currencyapi', async (req, res) => {
+router.post('/', async (req, res) => {
 
-    //console.log(req.body);
-    //res.status(200);
-    var success = await login(req.body.username, req.body.password);
-    console.log(success);
-    res.status(200).end(JSON.stringify({success: success}));
-    //res.end(JSON.stringify({a:1, b:23}));
-    //...password check
-    //.. bla bla
-    //res.status(200).redirect("./profile")
+    var currencies_json = JSON.parse(await get_currencies());
+    console.log(currencies_json.rates);
+    res.status(200).end(JSON.stringify(currencies_json));
 });
 
-function getAjax() {
-    // get the most recent exchange rates via the "latest" endpoint:
-    return $.ajax({
-        url: 'https://data.fixer.io/api/' + endpoint + '?access_key=' + access_key,
-        dataType: 'jsonp',
-        success: function(json) {
-            // exchange rata data is stored in json.rates
-            alert(json.rates.GBP);
-            // base currency is stored in json.base
-            alert(json.base);
-            // timestamp can be accessed in json.timestamp
-            alert(json.timestamp);
-        },
-        error: function( req, status, err ) {
-            console.log( 'something went wrong', status, err );
-        }
-    });
+async function get_currencies() {
+    return new Promise(
+        function (resolve, reject) {
+            var buffer = '';
 
+            callback = function(response) {
+                response.on('data', function (chunk) {
+                    buffer += chunk;
+                });
+                response.on('end', function () {
+                    resolve(buffer);
+                    //console.log(JSON.parse(buffer));
+                });
+            };
+            http.get("http://data.fixer.io/api/latest?access_key="+ access_key, callback).end();
+        });
 }
 
-
-
+module.exports = router;
