@@ -23,6 +23,7 @@ var port = process.env.PORT || 8080;
 app.use(express.static(path.join(__dirname, "front-end"))); //Sends whole directory when page is requested to provide css files.
 app.use('/login',require('./back-end/routes/login'));
 app.use('/signup',require('./back-end/routes/signup'));
+app.use('/currencies',require('./back-end/routes/currencyapi'));
 app.use('/main',require('./back-end/routes/main'));
 app.use('/news',require('./back-end/routes/news'));
 app.use('/article',require('./back-end/routes/article'));
