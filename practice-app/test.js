@@ -5,8 +5,14 @@ const dbfunc = require('./database/database');
 const https = require('https');
 const http = require('http');
 
-const IP_HOST = "https:localhost:8080";
+const IP_HOST = "http://ec2-35-166-169-167.us-west-2.compute.amazonaws.com:8080";
 
+/*
+    This is the file that all test cases should reside in. To run test cases, first mongoDB should be waken up.
+    Run the commands in the respective order to check test cases.
+    1- mongod
+    2- npm run test
+ */
 moc.describe ('TEST CASES', function() {
 
     moc.describe('DATABASE', function() {
@@ -115,7 +121,7 @@ moc.describe ('TEST CASES', function() {
                             //console.log(JSON.parse(buffer).status);
                         });
                     };
-                    http.get("http://ec2-35-166-169-167.us-west-2.compute.amazonaws.com:8080/news&articles/news", callback).end();
+                    http.get(IP_HOST + "/news&articles/news", callback).end();
                 }, 200);
             });
             var result = await testPromise;
@@ -136,7 +142,7 @@ moc.describe ('TEST CASES', function() {
                             //console.log(JSON.parse(buffer).status);
                         });
                     };
-                    http.get("http://ec2-35-166-169-167.us-west-2.compute.amazonaws.com:8080/news&articles/articles", callback).end();
+                    http.get(IP_HOST + "/news&articles/articles", callback).end();
                 }, 20);
             });
             var result = await testPromise;
@@ -157,7 +163,7 @@ moc.describe ('TEST CASES', function() {
                             //console.log(JSON.parse(buffer).status);
                         });
                     };
-                    http.get("http://ec2-35-166-169-167.us-west-2.compute.amazonaws.com:8080/news&articles/news", callback).end();
+                    http.get(IP_HOST + "/news&articles/news", callback).end();
                 }, 20);
             });
             var result = await testPromise;
