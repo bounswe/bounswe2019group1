@@ -193,13 +193,16 @@
 
     <script>
         $(document).ready(function(){
-            //alert("Passwords don't match");
+
             $("#signBtn").click(function(){
                 var p1 = $("#passwordsignup").val().toString();
                 var p2 = $("#passwordsignup_confirm").val().toString();
                 if(p1.localeCompare(p2) == -1) {
+                    // Checks password matching
                     alert("Passwords don't match");
                 } else {
+                    // POST request to URL/signup, sends username and password to server
+                    // If such user exists pops up alert, if not redirect to homepage.html
                     $.post("/signup",
                         {
                             username: $("#usernamesignup").val(),

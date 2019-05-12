@@ -3,16 +3,18 @@ const router = express.Router();
 const dbfuncs = require('../../database/database');
 const http = require('https');
 
+// Returns news.html page to client
 router.get('/', (req, res) => {
     res.sendFile("news.html",{root:__dirname+"../../../front-end"})
 });
 
-// Returns 3 latest news.
+// Returns 10 latest news.
 router.post('/',  async (req, res) => {
     const news = JSON.parse(await get_news());
     res.status(200).end(JSON.stringify(news));
 });
 
+// Requests news from Tradingeconomics API
 async function get_news() {
     return new Promise(
         function (resolve, reject) {

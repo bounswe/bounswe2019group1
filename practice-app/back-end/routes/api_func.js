@@ -55,6 +55,7 @@ router.get('/articles', async (req, res) => {
 
 module.exports = router;
 
+// Requests articles from Tradingeconomics API
 async function get_articles() {
     return new Promise(
         function (resolve, reject) {
@@ -83,6 +84,7 @@ async function get_articles() {
         });
 }
 
+// Requests news from Tradingeconomics API
 async function get_news() {
     return new Promise(
         function (resolve, reject) {

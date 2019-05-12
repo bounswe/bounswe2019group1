@@ -197,6 +197,8 @@
 
     <script>
         $(document).ready(function(){
+            // POST request to URL/login, sends username and password to server
+            // If such user exists redirect to homepage.html if not alert pops up.
             $("#submitBtn").click(function(){
                 $.post("/login",
                     {
