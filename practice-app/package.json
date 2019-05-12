@@ -23,6 +23,7 @@
     "mongodb": "^3.2.3",
     "nodemon": "^1.19.0",
     "promise": "^8.0.3",
+    "request": "^2.88.0",
     "sinon": "^7.3.2"
   },
   "devDependencies": {
