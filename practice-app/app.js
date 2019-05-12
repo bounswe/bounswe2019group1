@@ -13,5 +13,6 @@ var port = process.env.PORT || 8080;
 app.use(express.static(__dirname + "./front-end"));
 app.use('/login',require('./back-end/routes/login'));
 app.use('/signup',require('./back-end/routes/signup'));
+app.use('/bitfinex',require('./back-end/routes/getBfx'));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
