@@ -23,6 +23,7 @@ app.use('/main',require('./back-end/routes/main'));
 app.use('/news',require('./back-end/routes/news'));
 app.use('/article',require('./back-end/routes/article'));
 app.use('/news&articles',require('./back-end/routes/api_func'));
+app.use('/bitfinex',require('./back-end/routes/getBfx'));
 app.use(session({ secret: '23jfDer94b3re6ibk3d1mw8ac', resave: false, saveUninitialized: false }));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
