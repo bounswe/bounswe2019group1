@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const http = require('https');
+const https = require('https');
 
 
 // Returns the news about country and category
@@ -55,6 +55,7 @@ router.get('/articles', async (req, res) => {
 
 module.exports = router;
 
+// Requests articles from Tradingeconomics API
 async function get_articles() {
     return new Promise(
         function (resolve, reject) {
@@ -79,10 +80,11 @@ async function get_articles() {
                     //console.log(JSON.parse(buffer));
                 });
             };
-            http.get(options, callback).end();
+            https.get(options, callback).end();
         });
 }
 
+// Requests news from Tradingeconomics API
 async function get_news() {
     return new Promise(
         function (resolve, reject) {
@@ -107,6 +109,6 @@ async function get_news() {
                     //console.log(JSON.parse(buffer));
                 });
             };
-            http.get(options, callback).end();
+            https.get(options, callback).end();
         });
 }

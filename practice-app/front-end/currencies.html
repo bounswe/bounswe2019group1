@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="./style3.css">
+    <link rel="stylesheet" type="text/css" href="./style2.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <title>Currencies</title>
 </head>
 <body>
@@ -24,8 +26,69 @@
 
 
 
+<h1><span class="yellow">Currencies(Base: EUR)</span></h1>
 
+<table class="container">
+    <thead>
+    <tr>
+        <th><h1>Currency Name</h1></th>
+        <th><h1>Exchange Rate</h1></th>
+     \
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>TRY</td>
+        <td id="TRY_ER"></td>
 
+    </tr>
+    <tr>
+        <td>USD</td>
+        <td id="USD_ER"></td>
+
+    </tr>
+    <tr>
+        <td>GBP</td>
+        <td id="GBP_ER"></td>
+
+    </tr>
+    <tr>
+        <td>CAD</td>
+        <td id="CAD_ER"></td>
+
+    </tr>
+    <tr>
+        <td>SEK</td>
+        <td id="SEK_ER"></td>
+
+    </tr>
+    <tr>
+        <td>CHF</td>
+        <td id="CHF_ER"></td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function(){
+        console.log("dsadas")
+        $.post("/currencies",
+            {
+            },
+            function (data, status) {
+                var curr = JSON.parse(data);
+                console.log(curr)
+                $("#TRY_ER").text(curr.rates.TRY);
+                $("#USD_ER").text(curr.rates.USD);
+                $("#GBP_ER").text(curr.rates.GBP);
+                $("#CAD_ER").text(curr.rates.CAD);
+                $("#SEK_ER").text(curr.rates.SEK);
+                $("#CHF_ER").text(curr.rates.CHF);
+            });
+    });
+</script>
 
 
 </body>

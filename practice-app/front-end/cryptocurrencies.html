@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="./style3.css">
+    <link rel="stylesheet" type="text/css" href="./style2.css">
     <title>Title</title>
 </head>
 <body>
@@ -21,6 +22,73 @@
     <li style="float:right"><a href="about.html">About</a></li>
 </ul>
 <!-- NAVIGATION BAR ENDS -->
+
+
+
+<h1><span class="yellow">Cryptocurrencies(Base: USD)</span></h1>
+
+<table class="container">
+    <thead>
+    <tr>
+        <th><h1>Currency Name</h1></th>
+        <th><h1>Exchange Rate</h1></th>
+        \
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>BITCOIN</td>
+        <td id="BTC"></td>
+
+    </tr>
+    <tr>
+        <td>ETHEREUM</td>
+        <td id="ETHER"></td>
+
+    </tr>
+    <tr>
+        <td>RIPPLE</td>
+        <td id="RIPPLE"></td>
+
+    </tr>
+    <tr>
+        <td>EOS</td>
+        <td id="EOS"></td>
+
+    </tr>
+    <tr>
+        <td>LITECOIN</td>
+        <td id="LITECOIN"></td>
+
+    </tr>
+    <tr>
+        <td>IOTA</td>
+        <td id="IOTA"></td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function(){
+        $.post("/cryptocurrencies",
+            {
+            },
+            function (data, status) {
+                var curr = JSON.parse(data);
+                console.log(curr)
+
+                $("#BTC").text(curr.rates.TRY);
+                $("#ETHER").text(curr.rates.USD);
+                $("#RIPPLE").text(curr.rates.GBP);
+                $("#EOS").text(curr.rates.CAD);
+                $("#LITECOIN").text(curr.rates.SEK);
+                $("#IOTA").text(curr.rates.CHF);
+
+            });
+    });
+</script>
 
 
 
