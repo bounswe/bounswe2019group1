@@ -1,6 +1,6 @@
 # Khaji-it
 
-Welcome to the project repository of CmpE 352 Group 1.
+Welcome to the project repository of CmpE 451 Group 1.
 
 Keep checking for any news.
 
