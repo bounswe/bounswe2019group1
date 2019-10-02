@@ -32,8 +32,8 @@ class TempUserCreateSerializer(ModelSerializer):
         extra_kwargs = {"password": {"write_only": True,"required": False},
                         "phone_number": {"required": False},
                         "location": {"required": False},
-                        "iban_number":{"required":True},
-                        "citizenship_number":{"required":True},
+                        "iban_number":{"required":False},
+                        "citizenship_number":{"required":False},
                         }
 
 
