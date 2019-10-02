@@ -1,0 +1,19 @@
+After pulling last version of project go to the directory backend/tradersplatform.
+Then create virtual environment inside of this directory or some else directory which is not inside of project. 
+But if you want to create virtual environment inside of project you should locate the virtual 
+enviroment exactly in the /bounswe2019group1/backend/tradersplatform/  because .gitignore has
+been written according to that. To create virtual environment the command should be :
+virtualenv "name_of_virtualenv"
+then to activate:
+for windows:
+source env/bin/activate
+for mac:
+. venv/bin/activate
+You should create virtual environment for only first time but activate every time. 
+Then you should install packages in requirements if any new package was added to project :
+pip install -r requirements.txt
+Then the project is ready to go. To create or update database:
+python manage.py makemigrations
+python manage.py migrate
+After that you can run the project:
+python manage.py runserver
