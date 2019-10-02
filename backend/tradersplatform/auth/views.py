@@ -23,5 +23,5 @@ class UserCreateAPIView(CreateAPIView):
 
 
 class UserListAPIView(ListAPIView):
-    serializer_class = UserCreateSerializer
+    serializer_class = UserListSerializer
     queryset = User.objects.filter()
