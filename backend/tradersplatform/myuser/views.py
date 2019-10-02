@@ -43,8 +43,15 @@ class TempUserCreateAPIView(CreateAPIView):
         my_group, created = Group.objects.get_or_create(name=group_name)
         my_group.user_set.add(user)
         user_temp=TemplateUser.objects.get(id=user.id)
+        new_data={}
         serializer=TempUserCreateSerializer(user_temp)
-        return Response(serializer.data, status=200)
+        new_data["user"]=serializer.data
+        temp_data={"username":request.data["username"],"password":password}
+        serializer = TempUserLoginSerializer(data=temp_data)
+        if serializer.is_valid(raise_exception=True):
+            new_data["token"] = serializer.data["token"]
+            return Response(new_data, status=HTTP_200_OK)
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 
 class UserLoginAPIView(APIView):
@@ -72,4 +79,3 @@ class UserAutoLogin(APIView):
         serializer=TempUserCreateSerializer(general_user)
         return Response(serializer.data, status=200)
 
-    
