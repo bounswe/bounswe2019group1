@@ -1,7 +1,8 @@
 venv
-db.sqlite3
+backend/tradersplatform/db.sqlite3
 .DS_Store
 .idea
+traders_virtualenv
 
 __pycache__
 __pycache__/*
