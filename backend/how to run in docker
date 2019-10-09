@@ -1,0 +1,10 @@
+After you started the docker and be sure about docker is running you can simply 
+run this commands :
+docker-compose build
+then
+docker-compose up
+in the first time you start the project. 
+After that only docker-compose up will be sufficient unless any database or
+library change occurs. If this will be the case you should also run docker-compose build 
+before docker-compose up. Sometimes build does not install libraries that you need
+if this is the case you need to run docker-compose down first then build then up.
