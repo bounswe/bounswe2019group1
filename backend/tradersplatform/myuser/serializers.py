@@ -1,3 +1,4 @@
+import django.utils.timezone
 from rest_framework.serializers import ModelSerializer
 
 from auth.serializers import UserListSerializer
@@ -14,7 +15,6 @@ jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
 
 class TempUserCreateSerializer(ModelSerializer):
-
     class Meta:
         model = TemplateUser
         fields = [
@@ -28,12 +28,14 @@ class TempUserCreateSerializer(ModelSerializer):
             'phone_number',
             'iban_number',
             'citizenship_number',
+            'last_changed_password_date',
         ]
-        extra_kwargs = {"password": {"write_only": True,"required": False},
+        extra_kwargs = {"password": {"write_only": True, "required": False},
                         "phone_number": {"required": False},
                         "location": {"required": False},
-                        "iban_number":{"required":False},
-                        "citizenship_number":{"required":False},
+                        "iban_number": {"required": False},
+                        "citizenship_number": {"required": False},
+                        "last_changed_password_date": {"required": False}
                         }
 
 
@@ -67,6 +69,9 @@ class TempUserLoginSerializer(ModelSerializer):
         if user_obj:
             if not user_obj.check_password(password):
                 raise ValidationError("Incorrect credential")
+            if (getattr(user_obj, "last_changed_password_date") + django.utils.timezone.timedelta(6 * 365 / 12)) \
+                    < django.utils.timezone.now():
+                raise ValidationError("Password out of date")
 
         payload = jwt_payload_handler(user_obj)
         token = jwt_encode_handler(payload)
