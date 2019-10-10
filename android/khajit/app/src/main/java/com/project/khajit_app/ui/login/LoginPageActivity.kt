@@ -17,7 +17,18 @@ class LoginPageActivity : AppCompatActivity() {
         } catch (e: NullPointerException){}
     }
 
-    fun goToRegister(view: View) {
+    fun goToRegister(view:View) {
         startActivity(Intent(this, SignUpPageActivity::class.java))
+    }
+    fun loginAccount(view: View) {
+       // startActivity(Intent(this, SignUpPageActivity::class.java))
+    }
+
+    fun loginAsGoogle(view: View) {
+        // startActivity(Intent(this, SignUpPageActivity::class.java))
+    }
+
+    fun forgetPassword(view: View) {
+        // startActivity(Intent(this, SignUpPageActivity::class.java))
     }
 }

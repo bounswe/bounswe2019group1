@@ -152,7 +152,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/button_switch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
@@ -160,6 +160,36 @@
             android:layout_marginBottom="30dp"
             android:onClick="switchUserType"
             android:text="Register as Trader" />
+
+        <Button
+            android:id="@+id/button_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginBottom="30dp"
+            android:onClick="completeRegistration"
+            android:text="Register" />
+
+        <Button
+            android:id="@+id/button_register_google"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:layout_marginBottom="30dp"
+            android:onClick="completeRegistrationAsGoogle"
+            android:text="Register on Google" />
+
+        <TextView
+            android:id="@+id/link_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:onClick="goToLogin"
+            android:text="Already have an account?"
+            android:textSize="16dip" />
 
     </LinearLayout>
 </ScrollView>

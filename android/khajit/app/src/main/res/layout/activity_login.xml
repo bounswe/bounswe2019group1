@@ -57,6 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="12dp"
+            android:onClick="loginAccount"
             android:padding="12dp"
             android:text="Login" />
 
@@ -67,18 +68,29 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="24dp"
+            android:onClick="loginAsGoogle"
             android:padding="12dp"
             android:text="Login with Google" />
 
 
         <TextView
-            android:id="@+id/link_signup"
+        android:id="@+id/link_signup"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:onClick="goToRegister"
+        android:text="No account yet? Create one"
+        android:textSize="16dip" />
+
+        <TextView
+            android:id="@+id/link_forgetpw"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:gravity="center"
-            android:onClick="goToRegister"
-            android:text="No account yet? Create one"
+            android:onClick="forgetPassword"
+            android:text="Forget Password? Enter your email only"
             android:textSize="16dip" />
 
 
