@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+.idea/
+=======
 venv
 backend/tradersplatform/db.sqlite3
 .DS_Store
@@ -7,3 +10,4 @@ traders_virtualenv
 __pycache__
 __pycache__/*
 *.sqlite3
+>>>>>>> master
