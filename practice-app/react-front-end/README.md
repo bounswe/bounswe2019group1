@@ -4,6 +4,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+## Useful Links
+
+These icons can be easily imported.
+https://material.io/resources/icons/?icon=grade&style=baseline
+
 ### `npm install`
 
 install the app to run it.
