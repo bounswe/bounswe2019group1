@@ -24,6 +24,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import image from "assets/img/bg7.jpg";
 const useStyles = makeStyles(styles);
+
+
+
 export default function SignupPage(props) {
     const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
     setTimeout(function() {
@@ -31,12 +34,22 @@ export default function SignupPage(props) {
     }, 700);
     const classes = useStyles();
     const { ...rest } = props;
+    const handleChange = event => {
+      setValues(oldValues => ({
+        ...oldValues,
+        [event.target.name]: event.target.value,
+      }));
+    };
+    const [values, setValues] = React.useState({
+      age: '',
+      name: 'hai',
+    });
     return (
       <div>
         <Header
           absolute
           color="transparent"
-          brand="Traders Platform"
+          brand="Khaji-it Traders Platform"
           rightLinks={<HeaderLinks />}
           {...rest}
         />
@@ -140,33 +153,19 @@ export default function SignupPage(props) {
                         }}
                       />
                       
-                     {/* <CustomInput
-                        labelText="Select User Type..."
-                        id="email"
-                        formControlProps={{
-                          fullWidth: true
-                        }}
-                        
-                        inputProps={{
-                          type: "email",
-                          endAdornment: (
-                            <InputAdornment position="end">
-                             <Icon className={classes.inputIconsColor}>
-                              people
-                              </Icon>
-                            </InputAdornment>
-                          )
-                        }}
-                        
-                      />*/}
                     
-                    
-                      
                     
           <FormControl className={classes.formControl}>
-          <Select >
-            <MenuItem value={10}>Basic</MenuItem>
-            <MenuItem value={20}>Trading</MenuItem>
+          <Select 
+          value={values.age}
+          onChange={handleChange}
+          
+          inputProps={{
+          name: 'age',
+          id: 'outlined-age-simple',
+          }}>
+            <MenuItem value={1}>Basic</MenuItem>
+            <MenuItem value={2}>Trading</MenuItem>
             
           </Select>
           <FormHelperText>Select User Type</FormHelperText>   
