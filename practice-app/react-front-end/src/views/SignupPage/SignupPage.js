@@ -86,7 +86,7 @@ export default function SignupPage(props) {
             <p className={classes.divider}>Or Be Classical</p>
             <CardBody>
               <CustomInput
-                labelText="First Name..."
+                labelText="Name and Surname"
                 id="first"
                 formControlProps={{
                   fullWidth: true
@@ -124,7 +124,7 @@ export default function SignupPage(props) {
                   fullWidth: true
                 }}
                 inputProps={{
-                  type: "password",
+                  type: "pass",
                   endAdornment: (
                     <InputAdornment position="end">
                       <Icon className={classes.inputIconsColor}>
