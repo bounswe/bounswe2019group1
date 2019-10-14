@@ -4,7 +4,7 @@
     android:id="@+id/root"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/background_image"
+    android:background="@drawable/big_picture_currency"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -22,20 +22,14 @@
             android:layout_marginBottom="24dp"
             android:src="@drawable/app_name" />
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp"
-            android:clickable="false"
-            android:text="Personal Info" />
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:background="#D3FFFFFF">
 
             <EditText
                 android:id="@+id/input_email"
@@ -49,7 +43,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:background="#D3FFFFFF">
 
             <EditText
                 android:id="@+id/input_password"
@@ -63,7 +58,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:background="#D3FFFFFF">
 
             <EditText
                 android:id="@+id/input_repassword"
@@ -72,6 +68,38 @@
                 android:hint="Repeat Password"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#D3FFFFFF">
+
+            <EditText
+                android:id="@+id/input_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="First Name"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#D3FFFFFF">
+
+            <EditText
+                android:id="@+id/input_last_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Last Name"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
 
         <Button
             android:id="@+id/button5"
@@ -152,32 +180,35 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/button_switch"
+            android:id="@+id/register_as_trader_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
             android:layout_marginRight="80dp"
             android:layout_marginBottom="30dp"
+            android:background="#EEF2F5"
             android:onClick="switchUserType"
             android:text="Register as Trader" />
 
         <Button
-            android:id="@+id/button_register"
+            android:id="@+id/register_as_basic_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
             android:layout_marginRight="80dp"
             android:layout_marginBottom="30dp"
+            android:background="#EEF2F5"
             android:onClick="completeRegistration"
             android:text="Register" />
 
         <Button
-            android:id="@+id/button_register_google"
+            android:id="@+id/register_with_google_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
             android:layout_marginRight="80dp"
             android:layout_marginBottom="30dp"
+            android:background="#EEF2F5"
             android:onClick="completeRegistrationAsGoogle"
             android:text="Register on Google" />
 
