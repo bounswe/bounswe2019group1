@@ -100,13 +100,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
-
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/layout_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
             android:layout_marginRight="80dp"
+            android:background="#EEF2F5"
             android:clickable="false"
             android:text="Card Info"
             android:visibility="gone" />
@@ -117,6 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:background="#D3FFFFFF"
             android:visibility="gone">
 
             <EditText
@@ -134,6 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:background="#D3FFFFFF"
             android:visibility="gone">
 
             <EditText
@@ -151,6 +153,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:background="#D3FFFFFF"
             android:visibility="gone">
 
             <EditText
@@ -168,6 +171,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
+            android:background="#D3FFFFFF"
             android:visibility="gone">
 
             <EditText

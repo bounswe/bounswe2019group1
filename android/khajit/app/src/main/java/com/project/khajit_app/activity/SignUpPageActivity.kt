@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputLayout
 import com.project.khajit_app.R
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.BasicRegisterResponse
@@ -107,7 +108,7 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
 
                 )
         }
-
+/*
 
         trader_button.setOnClickListener {
             val intent = Intent(this@SignUpPageActivity,SignUpPageTraderActivity::class.java)
@@ -136,7 +137,7 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
            // intent.putExtra("Password", password)
             startActivity(intent);
         }
-
+*/
 
 
     }
@@ -157,6 +158,25 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
 
     fun completeRegistrationAsGoogle(view: View) {
         // TODO
+    }
+
+    fun switchUserType(view: View) {
+
+        if(findViewById<TextInputLayout>(R.id.layout_card_ccv).visibility == View.GONE) {
+            findViewById<TextInputLayout>(R.id.layout_card_ccv).visibility = View.VISIBLE
+            findViewById<TextInputLayout>(R.id.layout_card_expire).visibility = View.VISIBLE
+            findViewById<TextInputLayout>(R.id.layout_card_number).visibility = View.VISIBLE
+            findViewById<TextInputLayout>(R.id.layout_card_owner).visibility = View.VISIBLE
+            findViewById<Button>(R.id.layout_info).visibility = View.VISIBLE
+            findViewById<Button>(R.id.register_as_trader_button).text = "Register as Basic"
+        }else {
+            findViewById<TextInputLayout>(R.id.layout_card_ccv).visibility = View.GONE
+            findViewById<TextInputLayout>(R.id.layout_card_expire).visibility = View.GONE
+            findViewById<TextInputLayout>(R.id.layout_card_number).visibility = View.GONE
+            findViewById<TextInputLayout>(R.id.layout_card_owner).visibility = View.GONE
+            findViewById<Button>(R.id.layout_info).visibility = View.GONE
+            findViewById<Button>(R.id.register_as_trader_button).text = "Register as Trader"
+        }
     }
 
 }
