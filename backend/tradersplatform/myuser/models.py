@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
+from datetime import datetime
 
 
 # Create your models here.
@@ -15,4 +16,5 @@ class TemplateUser(User):
                                          validators=[MinValueValidator(1000000000000000),
                                                      MaxValueValidator(10000000000000000 - 1)], default=0)
     citizenship_number = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')
-    last_changed_password_date = models.DateTimeField(auto_now_add=True)
+    last_changed_password_date = models.DateTimeField( blank=True, null=True, unique=False, default=None)
+    #yeni = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')

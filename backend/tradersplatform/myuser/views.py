@@ -11,6 +11,7 @@ from rest_framework.exceptions import ValidationError
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from datetime import datetime
 
 
 class TempUserCreateAPIView(CreateAPIView):
@@ -24,6 +25,9 @@ class TempUserCreateAPIView(CreateAPIView):
         if password is None:
             raise ValidationError("you need to give a password")
         del data['password']
+        register_time=datetime.now()
+        time=register_time.strftime("%m/%d/%Y, %H:%M:%S")
+        data['last_changed_password_date']=register_time
         serializer=TempUserCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
