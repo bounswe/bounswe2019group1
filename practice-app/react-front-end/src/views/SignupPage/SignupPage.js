@@ -24,6 +24,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import image from "assets/img/dollar-hd.jpg";
 import LocationPicker from 'react-location-picker';
+import { Link } from "react-router-dom";
+
 
 const useStyles = makeStyles(styles);
 
@@ -140,7 +142,7 @@ export default function SignupPage(props) {
                 formControlProps={{
                   fullWidth: true
                 }}
-                value = {location.address} 
+                value = {location.address}
                 inputProps={{
                   type: "location",
                   endAdornment: (
@@ -172,6 +174,12 @@ export default function SignupPage(props) {
               <Button simple color="primary" size="lg">
                 Confirm
                 </Button>
+            </CardFooter>
+            <CardFooter className={classes.cardFooter}>
+              Already registered?
+              <Link to="/login-page">
+                Login here
+              </Link>
             </CardFooter>
           </form>
         </Card>
@@ -240,5 +248,3 @@ class LocationPickerMap extends Component {
     )
   }
 }
-
-

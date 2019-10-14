@@ -17,6 +17,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
+import { Link } from "react-router-dom";
 
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 
@@ -104,6 +105,12 @@ export default function LoginPage(props) {
                     <Button simple color="primary" size="lg">
                       Login
                     </Button>
+                  </CardFooter>
+                  <CardFooter className={classes.cardFooter}>
+                    New to Khaji-it?
+                    <Link to="/sign-up">
+                      Sign up now
+                    </Link>
                   </CardFooter>
                 </form>
               </Card>
