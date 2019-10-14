@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -24,12 +24,28 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import image from "assets/img/dollar-hd.jpg";
 const useStyles = makeStyles(styles);
 export default function LoginPage(props) {
-  const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
+  const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
+  const [values, setValues] = useState({
+    email:"",
+    pass:""
+  });
   const classes = useStyles();
   const { ...rest } = props;
+
+  const handleChange = event => {
+    event.persist();
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.id]:  event.target.value
+    }));
+  };
+  const handleSubmit = event => {
+    console.log(values)
+    event.preventDefault();
+  };
   return (
     <div>
       <Header
@@ -81,6 +97,7 @@ export default function LoginPage(props) {
                           </InputAdornment>
                         )
                       }}
+                      onChange={handleChange}
                     />
                     <CustomInput
                       labelText="Password"
@@ -99,18 +116,22 @@ export default function LoginPage(props) {
                         ),
                         autoComplete: "off"
                       }}
+                      onChange={handleChange}
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
+                    <Button
+                      simple
+                      color="primary"
+                      size="lg"
+                      onClick={handleSubmit}
+                    >
                       Login
                     </Button>
                   </CardFooter>
                   <CardFooter className={classes.cardFooter}>
                     New to Khaji-it?
-                    <Link to="/sign-up">
-                      Sign up now
-                    </Link>
+                    <Link to="/sign-up">Sign up now</Link>
                   </CardFooter>
                 </form>
               </Card>

@@ -25,6 +25,7 @@ export default function CustomInput(props) {
     white,
     value,
     onClick,
+    onChange,
     inputRootCustomClasses,
     success
   } = props;
@@ -77,6 +78,7 @@ export default function CustomInput(props) {
         value = {value}
         multiline = {true}
         onClick = {onClick}
+        onChange = {onChange}
         {...inputProps}
       />
     </FormControl>
