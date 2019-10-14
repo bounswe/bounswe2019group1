@@ -4,6 +4,8 @@ from django.shortcuts import render
 from rest_framework.generics import RetrieveAPIView, ListAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.views import APIView
 from rest_framework_jwt.settings import api_settings
+
+from myuser.functions import send_email_cv
 from myuser.models import TemplateUser
 from myuser.serializers import TempUserCreateSerializer, TempUserLoginSerializer
 from django.contrib.auth.models import Group
@@ -31,6 +33,14 @@ class TempUserCreateAPIView(CreateAPIView):
         serializer=TempUserCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        try:
+            send_email_cv(serializer.data)
+        except:
+            serializer=serializer.data
+            id=serializer['id']
+            temp=TemplateUser.objects.get(id=id)
+            temp.delete()
+            raise ValidationError("email is not valid")
         id=serializer.data["id"]
         user=User.objects.filter(id=id)
         if not user:
@@ -55,6 +65,7 @@ class TempUserCreateAPIView(CreateAPIView):
         if serializer.is_valid(raise_exception=True):
             new_data["token"] = serializer.data["token"]
             return Response(new_data, status=HTTP_200_OK)
+
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 

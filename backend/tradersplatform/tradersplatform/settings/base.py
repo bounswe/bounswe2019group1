@@ -136,6 +136,10 @@ MEDIA_URL =  '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
+AWS_KEY=""
+AWS_SECRET_KEY=""
+
+
 REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': (
