@@ -22,7 +22,7 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import { Select } from "@material-ui/core";
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import image from "assets/img/bg7.jpg";
+import image from "assets/img/dollar-hd.jpg";
 const useStyles = makeStyles(styles);
 
 
