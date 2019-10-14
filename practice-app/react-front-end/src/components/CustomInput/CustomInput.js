@@ -23,6 +23,8 @@ export default function CustomInput(props) {
     inputProps,
     error,
     white,
+    value,
+    onClick,
     inputRootCustomClasses,
     success
   } = props;
@@ -72,6 +74,9 @@ export default function CustomInput(props) {
           underline: underlineClasses
         }}
         id={id}
+        value = {value}
+        multiline = {true}
+        onClick = {onClick}
         {...inputProps}
       />
     </FormControl>
