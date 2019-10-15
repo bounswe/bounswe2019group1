@@ -1,5 +1,7 @@
 package com.project.khajit_app.activity
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
@@ -11,6 +13,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.project.khajit_app.R
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.BasicRegisterResponse
+import com.project.khajit_app.data.models.BasicUser
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -49,7 +52,7 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
         last_name_input = findViewById(R.id.input_last_name)
 
 
-        basic_user_register.setOnClickListener {
+        basic_user_register.setOnClickListener{
             var email_information = email_input.text.toString().trim()
             var username_information = ""
             var password_information = password_input.text.toString().trim()
@@ -57,46 +60,46 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
             var firstname_information = first_name_input.text.toString().trim()
             var lastname_information = last_name_input.text.toString().trim()
 
-            if (email_information.isEmpty()) {
+            if(email_information.isEmpty()){
                 email_input.error = "Email is required."
                 email_input.requestFocus()
                 return@setOnClickListener
             }
-            if (password_information.isEmpty()) {
+            if(password_information.isEmpty()){
                 password_input.error = "Email is required."
                 password_input.requestFocus()
                 return@setOnClickListener
             }
-            if (repassword_information.isEmpty()) {
+            if(repassword_information.isEmpty()){
                 repeat_password_input.error = "Email is required."
                 repeat_password_input.requestFocus()
                 return@setOnClickListener
             }
-            if (firstname_information.isEmpty()) {
+            if(firstname_information.isEmpty()){
                 first_name_input.error = "Fİrst name is required."
                 first_name_input.requestFocus()
                 return@setOnClickListener
             }
-            if (lastname_information.isEmpty()) {
+            if(lastname_information.isEmpty()){
                 last_name_input.error = "Last name is required."
                 last_name_input.requestFocus()
                 return@setOnClickListener
             }
-            if (!password_information.equals(repassword_information)) {
+            if(!password_information.equals(repassword_information)){
                 repeat_password_input.error = "Passwords are not the same."
                 repeat_password_input.requestFocus()
                 return@setOnClickListener
             }
 
             username_information = email_information
-
-            RetrofitClient.instance.createBasicUser(username_information,password_information,email_information,firstname_information,lastname_information)
+            val userInfo = BasicUser(username_information,email_information,firstname_information,lastname_information,password_information)
+            RetrofitClient.instance.createBasicUser(userInfo)
                 .enqueue(object : Callback<BasicRegisterResponse>{
                     override fun onResponse(
-                        call: Call<BasicRegisterResponse>,
-                        response: Response<BasicRegisterResponse>
+                        call: Call<BasicRegisterResponse>?,
+                        response: Response<BasicRegisterResponse>?
                     ) {
-                        Toast.makeText(applicationContext,response.body()?.token,Toast.LENGTH_LONG).show()
+                        Toast.makeText(applicationContext,"oldu",Toast.LENGTH_LONG).show()
                     }
 
                     override fun onFailure(call: Call<BasicRegisterResponse>, t: Throwable) {
@@ -142,15 +145,6 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        var email_information = email_input.text.toString().trim()
-        var password_information = password_input.text.toString().trim()
-        var repassword_information = repeat_password_input.text.toString().trim()
-
-        if(email_information.isEmpty()){
-            email_input.error = "Email is required"
-            //Toast.makeText(SignUpPageActivity, "Error Msg", Toast.LENGTH_SHORT).show()
-        }
-
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -179,3 +173,4 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
     }
 
 }
+
