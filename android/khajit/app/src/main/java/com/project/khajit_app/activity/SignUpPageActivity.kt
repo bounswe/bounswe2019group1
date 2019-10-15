@@ -1,6 +1,5 @@
 package com.project.khajit_app.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
@@ -50,7 +49,7 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
         last_name_input = findViewById(R.id.input_last_name)
 
 
-        basic_user_register.setOnClickListener{
+        basic_user_register.setOnClickListener {
             var email_information = email_input.text.toString().trim()
             var username_information = ""
             var password_information = password_input.text.toString().trim()
@@ -58,32 +57,32 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
             var firstname_information = first_name_input.text.toString().trim()
             var lastname_information = last_name_input.text.toString().trim()
 
-            if(email_information.isEmpty()){
+            if (email_information.isEmpty()) {
                 email_input.error = "Email is required."
                 email_input.requestFocus()
                 return@setOnClickListener
             }
-            if(password_information.isEmpty()){
+            if (password_information.isEmpty()) {
                 password_input.error = "Email is required."
                 password_input.requestFocus()
                 return@setOnClickListener
             }
-            if(repassword_information.isEmpty()){
+            if (repassword_information.isEmpty()) {
                 repeat_password_input.error = "Email is required."
                 repeat_password_input.requestFocus()
                 return@setOnClickListener
             }
-            if(firstname_information.isEmpty()){
+            if (firstname_information.isEmpty()) {
                 first_name_input.error = "Fİrst name is required."
                 first_name_input.requestFocus()
                 return@setOnClickListener
             }
-            if(lastname_information.isEmpty()){
+            if (lastname_information.isEmpty()) {
                 last_name_input.error = "Last name is required."
                 last_name_input.requestFocus()
                 return@setOnClickListener
             }
-            if(!password_information.equals(repassword_information)){
+            if (!password_information.equals(repassword_information)) {
                 repeat_password_input.error = "Passwords are not the same."
                 repeat_password_input.requestFocus()
                 return@setOnClickListener
