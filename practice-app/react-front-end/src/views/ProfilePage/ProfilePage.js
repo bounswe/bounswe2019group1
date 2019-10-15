@@ -43,7 +43,6 @@ export default function ProfilePage(props) {
     classes.imgFluid
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
-  console.log("hey haha")
   return (
     <div>
       <Header

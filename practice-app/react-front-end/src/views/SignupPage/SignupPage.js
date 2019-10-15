@@ -68,17 +68,24 @@ export default function SignupPage(props) {
       lng: 29.092968749999955
     }
   });
+  const validateForm = x => {
+
+    values
+
+  }
   const handleSubmit = event => {
     console.log(values);
     /*
     if (event.target.value === "Basic") {
+      validateForm(values);
       axios.post(base_url + "/user/registerbasic", values);
     }else{
+      validateForm(values);
+
       axios.post(base_url + "/user/registertrader", values);
     }
     */
     // validate the inputs and then send the backend
-
     event.preventDefault();
   };
 
@@ -141,7 +148,9 @@ export default function SignupPage(props) {
                     type: "username",
                     endAdornment: (
                       <InputAdornment position="end">
-                        <Email className={classes.inputIconsColor} />
+                        <Icon className={classes.inputIconsColor}>
+                          perm_identity
+                        </Icon>
                       </InputAdornment>
                     )
                   }}
@@ -219,7 +228,7 @@ export default function SignupPage(props) {
                   onChange={handleChange}
                 />
                 <CustomInput
-                  labelText="Location..."
+                  labelText="Location"
                   id="location"
                   onClick={() => {
                     setIsLocationSelected({ selected: true });
@@ -376,7 +385,7 @@ export default function SignupPage(props) {
                   onChange={handleChange}
                 />
                 <CustomInput
-                  labelText="Location..."
+                  labelText="Location"
                   id="location"
                   onClick={() => {
                     setIsLocationSelected({ selected: true });
