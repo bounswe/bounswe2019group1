@@ -45,7 +45,7 @@ export default function LoginPage(props) {
   const handleSubmit = event => {
     console.log(values);
     const base_url = "localhost:80";
-    axios.post(base_url + "/login", values).then(
+    axios.post(base_url + "/user/login/", values).then(
       response => {
         console.log(response);
       },
