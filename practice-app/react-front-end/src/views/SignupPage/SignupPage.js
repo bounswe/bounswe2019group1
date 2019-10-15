@@ -36,24 +36,32 @@ export default function SignupPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
 
-
   const [values, setValues] = React.useState({
     name: "",
     surname: "",
     email: "",
+    pass: "",
     location: "",
     usertype: "Basic"
   });
 
   const handleChange = event => {
     event.persist();
+    console.log(event.target.id);
     setValues(oldValues => ({
       ...oldValues,
       [event.target.id]: event.target.value
     }));
   };
+  const handleChangeForm = event => {
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.name]: event.target.value
+    }));
+  };
   const handleSubmit = event => {
-    console.log(values)
+    console.log(values);
+    // validate the inputs and then send the backend
     event.preventDefault();
   };
   const [isLocationSelected, setIsLocationSelected] = React.useState({
@@ -149,10 +157,11 @@ export default function SignupPage(props) {
                       </InputAdornment>
                     )
                   }}
+                  onChange={handleChange}
                 />
                 <CustomInput
                   labelText="Password"
-                  id="password"
+                  id="pass"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -167,7 +176,7 @@ export default function SignupPage(props) {
                     ),
                     autoComplete: "off"
                   }}
-
+                  onChange={handleChange}
                 />
                 <CustomInput
                   labelText="Location..."
@@ -192,24 +201,19 @@ export default function SignupPage(props) {
                 <FormControl className={classes.formControl}>
                   <Select
                     value={values.usertype}
-                    onChange={handleChange}
                     inputProps={{
-                      name: "Basic",
-                      id: "usertype"
+                      name: "usertype"
                     }}
+                    onChange={handleChangeForm}
                   >
-                    <MenuItem value={1}>Basic</MenuItem>
-                    <MenuItem value={2}>Trading</MenuItem>
+                    <MenuItem value={"Basic"}>Basic</MenuItem>
+                    <MenuItem value={"Trading"}>Trading</MenuItem>
                   </Select>
                   <FormHelperText>Select User Type</FormHelperText>
                 </FormControl>
               </CardBody>
               <CardFooter className={classes.cardFooter}>
-                <Button
-                  simple color="primary"
-                  size="lg"
-                  onClick={handleSubmit}
-                >
+                <Button simple color="primary" size="lg" onClick={handleSubmit}>
                   Confirm
                 </Button>
               </CardFooter>
@@ -264,6 +268,7 @@ class LocationPickerMap extends Component {
   handleLocationChange({ position, address, places }) {
     // Set new location
     this.props.setLocation({ position: position, address: address });
+    // eslint-disable-next-line react/prop-types
     this.props.setIsLocationSelected({ selected: false });
   }
 

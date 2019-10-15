@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -18,10 +18,10 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import { Link } from "react-router-dom";
-
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
-
 import image from "assets/img/dollar-hd.jpg";
+import axios from "axios";
+
 const useStyles = makeStyles(styles);
 export default function LoginPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
@@ -29,8 +29,8 @@ export default function LoginPage(props) {
     setCardAnimation("");
   }, 700);
   const [values, setValues] = useState({
-    email:"",
-    pass:""
+    email: "",
+    pass: ""
   });
   const classes = useStyles();
   const { ...rest } = props;
@@ -39,11 +39,20 @@ export default function LoginPage(props) {
     event.persist();
     setValues(oldValues => ({
       ...oldValues,
-      [event.target.id]:  event.target.value
+      [event.target.id]: event.target.value
     }));
   };
   const handleSubmit = event => {
-    console.log(values)
+    console.log(values);
+    const base_url = "localhost:80";
+    axios.post(base_url + "/login", values).then(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
     event.preventDefault();
   };
   return (
