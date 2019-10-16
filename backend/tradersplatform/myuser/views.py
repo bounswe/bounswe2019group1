@@ -4,6 +4,8 @@ from django.shortcuts import render
 from rest_framework.generics import RetrieveAPIView, ListAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.views import APIView
 from rest_framework_jwt.settings import api_settings
+
+from myuser.functions import send_email_cv
 from myuser.models import TemplateUser
 from myuser.serializers import TempUserCreateSerializer, TempUserLoginSerializer
 from django.contrib.auth.models import Group
@@ -11,6 +13,7 @@ from rest_framework.exceptions import ValidationError
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+from datetime import datetime
 
 
 class TempUserCreateAPIView(CreateAPIView):
@@ -24,9 +27,20 @@ class TempUserCreateAPIView(CreateAPIView):
         if password is None:
             raise ValidationError("you need to give a password")
         del data['password']
+        register_time=datetime.now()
+        time=register_time.strftime("%m/%d/%Y, %H:%M:%S")
+        data['last_changed_password_date']=register_time
         serializer=TempUserCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        try:
+            send_email_cv(serializer.data)
+        except:
+            serializer=serializer.data
+            id=serializer['id']
+            temp=TemplateUser.objects.get(id=id)
+            temp.delete()
+            raise ValidationError("email is not valid")
         id=serializer.data["id"]
         user=User.objects.filter(id=id)
         if not user:
@@ -51,6 +65,7 @@ class TempUserCreateAPIView(CreateAPIView):
         if serializer.is_valid(raise_exception=True):
             new_data["token"] = serializer.data["token"]
             return Response(new_data, status=HTTP_200_OK)
+
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 

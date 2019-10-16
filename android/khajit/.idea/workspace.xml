@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6311a1cb-e9f1-4cbc-be51-93db56656241" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../backend/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/how to run" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/how to run" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/how to run in docker" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/how to run in docker" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/auth/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/auth/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/auth/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/auth/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/auth/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/auth/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/auth/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/auth/migrations/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/auth/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/auth/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/auth/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/auth/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/auth/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/auth/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/auth/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/auth/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/auth/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/auth/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/event/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/event/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/event/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/event/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/event/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/event/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/event/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/event/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/event/migrations/0002_event_followers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/event/migrations/0002_event_followers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/event/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/event/migrations/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/event/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/event/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/event/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/event/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/event/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/event/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/event/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/event/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/migrations/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/migrations/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/tests/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/tests/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/tests/test_urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/tests/test_urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/tests/test_views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/tests/test_views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/myuser/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/tradersplatform/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/tradersplatform/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/tradersplatform/settings/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/tradersplatform/settings/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/tradersplatform/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/tradersplatform/settings/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/tradersplatform/settings/local.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/tradersplatform/settings/local.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/tradersplatform/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/tradersplatform/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../backend/tradersplatform/tradersplatform/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../backend/tradersplatform/tradersplatform/wsgi.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_3_API_27" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="Khajit-app" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/HomeFeedPageActivity.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard.xml">
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml">
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="469">
+              <caret line="41" column="52" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/api/RetrofitClient.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="89">
+              <caret line="9" column="100" selection-start-line="9" selection-start-column="100" selection-end-line="9" selection-end-column="100" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/data/models/BasicRegisterResponse.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="123" selection-start-line="2" selection-start-column="123" selection-end-line="2" selection-end-column="123" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/SignUpPageActivity.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="249">
+              <caret line="95" column="60" selection-start-line="95" selection-start-column="52" selection-end-line="95" selection-end-column="60" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/MainPageActivity.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="346">
+              <caret line="37" selection-start-line="37" selection-end-line="41" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/api/Api.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="11" column="44" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="44" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/data/models/BasicUser.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="2" column="135" selection-start-line="2" selection-start-column="135" selection-end-line="2" selection-end-column="135" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin File" />
+        <option value="Kotlin Interface" />
+        <option value="Kotlin Object" />
+        <option value="Kotlin Class" />
+        <option value="resourceFile" />
+        <option value="navigationResourceFile" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/ui/login/MainPageActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/ui/login/Globals.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/activities/Globals.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/activities/SignUpPageActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/Activity/SignUpPageActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/activity/SignUpPageActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/SignUpPageTraderActivity.kt" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/fragments/ProfitLossManuelFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home_page2.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home_page3.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_feed.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/bottom_nav_menu.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/bottom_navigation_menu.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/HomePageActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/navigation/mobile_navigation.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home_page.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_homepage.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/MainPageActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/LoginPageActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/ui/dashboard/DashboardFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/ui/home/HomeFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/ui/notifications/NotificationsFragment.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/data/models/BasicUser.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/SignUpPageActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home_feed_page.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/HomeFeedPageActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/api/Api.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/api/RetrofitClient.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/data/models/BasicRegisterResponse.kt" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="612" />
+    <option name="height" value="900" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Khajit-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="khajit" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="khajit" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="khajit" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="b2602c69:ProjectViewProjectNode" />
+              <item name="khajit" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Khajit-app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="activity" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="activity" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="HomeFeedPageActivity" type="2c5a2ef7:KtClassOrObjectTreeNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="activity" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="SignUpPageActivity" type="2c5a2ef7:KtClassOrObjectTreeNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="api" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="api" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="Api" type="2c5a2ef7:KtClassOrObjectTreeNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="api" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="RetrofitClient" type="2c5a2ef7:KtClassOrObjectTreeNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="models" type="cbb59c9e:AndroidPsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="models" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="BasicRegisterResponse" type="2c5a2ef7:KtClassOrObjectTreeNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res" type="d4f16f75:AndroidResFolderNode" />
+              <item name="layout" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res (generated)" type="d4f16f75:AndroidResFolderNode" />
+            </path>
+            <path>
+              <item name="Khajit-app" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="res (generated)" type="d4f16f75:AndroidResFolderNode" />
+              <item name="values" type="ddeffd01:AndroidResFolderTypeNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_3_API_27" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2019-10-13T15:50:32.296Z" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="not.eligible.for.single.variant.sync" value="true" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.project.khajit_app.activity" />
+      <recent name="activities" />
+    </key>
+    <key name="android.template.packageName">
+      <recent name="com.project.khajit_app.activity" />
+      <recent name="com.project.khajit_app.data.models" />
+      <recent name="api" />
+      <recent name="activity" />
+      <recent name="activities" />
+    </key>
+    <key name="android.template.parentActivityClass">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/fragments" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6311a1cb-e9f1-4cbc-be51-93db56656241" name="Default Changelist" comment="" />
+      <created>1570966147050</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1570966147050</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.49759036" visible="true" weight="0.32403433" />
+      <window_info id="Structure" order="2" sideWeight="0.50240964" side_tool="true" weight="0.3261745" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Build Variants" order="4" side_tool="true" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Designer" order="6" />
+      <window_info id="Resources Explorer" order="7" weight="0.32826748" />
+      <window_info id="Capture Tool" order="8" />
+      <window_info anchor="bottom" id="Run" order="0" weight="0.16433121" />
+      <window_info anchor="bottom" id="Logcat" order="1" />
+      <window_info anchor="bottom" id="TODO" order="2" weight="0.32891566" />
+      <window_info anchor="bottom" id="Debug" order="3" />
+      <window_info anchor="bottom" id="Terminal" order="4" />
+      <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="6" weight="0.32891566" />
+      <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.3120482" />
+      <window_info anchor="bottom" id="Find" order="8" weight="0.32891566" />
+      <window_info anchor="bottom" id="Android Profiler" order="9" weight="0.3299363" />
+      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Gradle" order="2" weight="0.3295711" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="right" id="Preview" order="4" weight="0.3295711" />
+      <window_info anchor="right" id="Palette&#9;" order="5" />
+    </layout>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/HomeFragment.kt" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/fragments/HomeFragment.kt" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/fragments/NotificationFragment.kt" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_notification.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_profit_loss_manuel.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/fragments/MessagesFragment.kt" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_messages.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/fragments/SearchFragment.kt" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_notifications_black_24dp.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-xxhdpi/ic_launcher.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-mdpi/ic_launcher.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/ic_launcher.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/ic_dashboard_black_24dp.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home_page2.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/ui/dashboard/DashboardViewModel.kt" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/fragments/ProfitLossManuelFragment.kt" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/fragments/FeedFragment.kt" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_notifications.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_feed.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home_page3.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/deneme.kt" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_deneme.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/bottom_nav_menu.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/bottom_navigation_menu.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home_page.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_homepage.xml" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/HomePageActivity.kt" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/navigation/mobile_navigation.xml">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="nav-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="6" column="36" selection-start-line="6" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_signup.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="677">
+          <caret line="103" column="15" selection-start-line="103" selection-start-column="15" selection-end-line="103" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="4" lean-forward="true" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="53" />
+          <folding>
+            <element signature="e#706#745#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/LoginPageActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="103" column="59" selection-start-line="103" selection-start-column="59" selection-end-line="103" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/ui/dashboard/DashboardFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="24" column="83" selection-start-line="24" selection-start-column="83" selection-end-line="24" selection-end-column="83" />
+          <folding>
+            <element signature="e#54#349#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/ui/notifications/NotificationsFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="87" selection-start-line="24" selection-start-column="87" selection-end-line="24" selection-end-column="87" />
+          <folding>
+            <element signature="e#58#353#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/ui/home/HomeViewModel.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/ui/home/HomeFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+          <folding>
+            <element signature="e#49#344#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="-427">
+          <caret line="12" column="28" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/data/models/BasicUser.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="135" selection-start-line="2" selection-start-column="135" selection-end-line="2" selection-end-column="135" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/MainPageActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="37" selection-start-line="37" selection-end-line="41" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="469">
+          <caret line="41" column="52" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_home_feed_page.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="13" lean-forward="true" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/HomeFeedPageActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/activity/SignUpPageActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="249">
+          <caret line="95" column="60" selection-start-line="95" selection-start-column="52" selection-end-line="95" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/api/Api.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="11" column="44" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/data/models/BasicRegisterResponse.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="123" selection-start-line="2" selection-start-column="123" selection-end-line="2" selection-end-column="123" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/project/khajit_app/api/RetrofitClient.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="9" column="100" selection-start-line="9" selection-start-column="100" selection-end-line="9" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>Android API 27 Platform</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
