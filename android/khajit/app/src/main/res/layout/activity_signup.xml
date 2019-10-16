@@ -202,7 +202,7 @@
             android:layout_marginRight="80dp"
             android:layout_marginBottom="30dp"
             android:background="#EEF2F5"
-            android:onClick="completeRegistration"
+            android:onClick="goToSignUpPageTraderActivity"
             android:text="Register" />
 
         <Button

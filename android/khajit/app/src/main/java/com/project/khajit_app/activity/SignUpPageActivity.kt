@@ -42,6 +42,54 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
         } catch (e: NullPointerException){}
 
 
+
+/*
+
+        trader_button.setOnClickListener {
+            val intent = Intent(this@SignUpPageActivity,SignUpPageTraderActivity::class.java)
+            var email_information = email_input.text.toString().trim()
+            var password_information = password_input.text.toString().trim()
+            var repassword_information = repeat_password_input.text.toString().trim()
+
+            if(email_information.isEmpty()){
+                email_input.error = "Email is required"
+                email_input.requestFocus()
+                return@setOnClickListener
+            }
+            if(password_information.isEmpty()){
+                password_input.error = "Email is required"
+                password_input.requestFocus()
+                return@setOnClickListener
+            }
+            if(repassword_information.isEmpty()){
+                repeat_password_input.error = "Email is required"
+                repeat_password_input.requestFocus()
+                return@setOnClickListener
+            }
+
+
+           // intent.putExtra("Username", userName)
+           // intent.putExtra("Password", password)
+            startActivity(intent);
+        }
+*/
+
+
+    }
+
+    override fun onClick(v: View?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+
+    fun completeRegistrationAsGoogle(view: View) {
+        // TODO
+    }
+    fun goToSignUpPageTraderActivity(view : View) {
+
+        val intent = Intent(this@SignUpPageActivity,SignUpPageTraderActivity::class.java);
+
+
         email_input = findViewById(R.id.input_email)
         password_input = findViewById(R.id.input_password)
         repeat_password_input = findViewById(R.id.input_repassword)
@@ -93,7 +141,7 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
 
             username_information = email_information
             val userInfo = BasicUser(username_information,email_information,firstname_information,lastname_information,password_information)
-            RetrofitClient.instance.createBasicUser(userInfo)
+      /*      RetrofitClient.instance.createBasicUser(userInfo)
                 .enqueue(object : Callback<BasicRegisterResponse>{
                     override fun onResponse(
                         call: Call<BasicRegisterResponse>?,
@@ -109,48 +157,14 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
                 }
 
                 )
+
+       */
+            intent.putExtra("userInfo", userInfo)
+            intent.putExtra("googleUser",0)
+            startActivity(intent)
+            finish()
         }
-/*
 
-        trader_button.setOnClickListener {
-            val intent = Intent(this@SignUpPageActivity,SignUpPageTraderActivity::class.java)
-            var email_information = email_input.text.toString().trim()
-            var password_information = password_input.text.toString().trim()
-            var repassword_information = repeat_password_input.text.toString().trim()
-
-            if(email_information.isEmpty()){
-                email_input.error = "Email is required"
-                email_input.requestFocus()
-                return@setOnClickListener
-            }
-            if(password_information.isEmpty()){
-                password_input.error = "Email is required"
-                password_input.requestFocus()
-                return@setOnClickListener
-            }
-            if(repassword_information.isEmpty()){
-                repeat_password_input.error = "Email is required"
-                repeat_password_input.requestFocus()
-                return@setOnClickListener
-            }
-
-
-           // intent.putExtra("Username", userName)
-           // intent.putExtra("Password", password)
-            startActivity(intent);
-        }
-*/
-
-
-    }
-
-    override fun onClick(v: View?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-
-    fun completeRegistrationAsGoogle(view: View) {
-        // TODO
     }
 
     fun switchUserType(view: View) {
