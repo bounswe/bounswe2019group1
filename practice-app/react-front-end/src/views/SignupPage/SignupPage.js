@@ -26,8 +26,9 @@ import image from "assets/img/dollar-hd.jpg";
 import LocationPicker from "react-location-picker";
 import { Link } from "react-router-dom";
 import axios from "axios";
-const useStyles = makeStyles(styles);
+import {environment} from "environments/environment.prod.js"
 
+const useStyles = makeStyles(styles);
 export default function SignupPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
   setTimeout(function() {

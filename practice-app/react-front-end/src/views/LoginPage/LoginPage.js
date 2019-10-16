@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 // @material-ui/icons
-import Email from "@material-ui/icons/Email";
 // core components
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -20,7 +19,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import { Link } from "react-router-dom";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import image from "assets/img/dollar-hd.jpg";
-import { login } from "service/authentication.service.js";
+import { login } from "../../service/authentication.service.js";
 
 const useStyles = makeStyles(styles);
 export default function LoginPage(props) {
@@ -44,7 +43,8 @@ export default function LoginPage(props) {
   };
   const handleSubmit = event => {
     console.log(values);
-    let token = login(values.username, values.pass);
+    login(values.username, values.pass);
+    //let token = login(values.username, values.pass);
     /*
     axios.post(base_url + "/user/login/", values).then(
       response => {

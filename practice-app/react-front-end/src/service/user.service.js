@@ -1,5 +1,5 @@
-import environment from "../environments/environment.prod";
-import { authHeader } from "../utils/auth-header";
+import environment from "environments/environment.prod";
+import { authHeader } from "utils/auth-header";
 //import { handleResponse } from "../utils/responseHandlers";
 import axios from "axios";
 

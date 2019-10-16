@@ -1,3 +1,3 @@
 export const secret = {
-  googleApiKey: secret.googleApiKey
+  googleApiKey: "secret.googleApiKey"
 };
