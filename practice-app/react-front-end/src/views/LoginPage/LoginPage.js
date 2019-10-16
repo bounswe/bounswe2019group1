@@ -20,7 +20,7 @@ import CustomInput from "components/CustomInput/CustomInput.js";
 import { Link } from "react-router-dom";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import image from "assets/img/dollar-hd.jpg";
-import axios from "axios";
+import { login } from "service/authentication.service.js";
 
 const useStyles = makeStyles(styles);
 export default function LoginPage(props) {
@@ -29,7 +29,7 @@ export default function LoginPage(props) {
     setCardAnimation("");
   }, 700);
   const [values, setValues] = useState({
-    email: "",
+    username: "",
     pass: ""
   });
   const classes = useStyles();
@@ -44,7 +44,8 @@ export default function LoginPage(props) {
   };
   const handleSubmit = event => {
     console.log(values);
-    const base_url = "localhost:80";
+    let token = login(values.username, values.pass);
+    /*
     axios.post(base_url + "/user/login/", values).then(
       response => {
         console.log(response);
@@ -53,6 +54,7 @@ export default function LoginPage(props) {
         console.log(error);
       }
     );
+    */
     event.preventDefault();
   };
   return (
@@ -93,16 +95,16 @@ export default function LoginPage(props) {
                   </CardHeader>
                   <CardBody>
                     <CustomInput
-                      labelText="Email..."
-                      id="email"
+                      labelText="Username"
+                      id="username"
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        type: "email",
+                        type: "username",
                         endAdornment: (
                           <InputAdornment position="end">
-                            <Email className={classes.inputIconsColor} />
+                            perm_identity
                           </InputAdornment>
                         )
                       }}
