@@ -24,7 +24,9 @@ export default function CustomInput(props) {
     error,
     white,
     value,
+    multiline,
     onClick,
+    onChange,
     inputRootCustomClasses,
     success
   } = props;
@@ -75,8 +77,9 @@ export default function CustomInput(props) {
         }}
         id={id}
         value = {value}
-        multiline = {true}
+        multiline = {multiline}
         onClick = {onClick}
+        onChange = {onChange}
         {...inputProps}
       />
     </FormControl>
@@ -90,6 +93,7 @@ CustomInput.propTypes = {
   inputProps: PropTypes.object,
   formControlProps: PropTypes.object,
   inputRootCustomClasses: PropTypes.string,
+  multiline: PropTypes.bool,
   error: PropTypes.bool,
   success: PropTypes.bool,
   white: PropTypes.bool

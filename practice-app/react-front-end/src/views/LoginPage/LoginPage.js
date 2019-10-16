@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -18,18 +18,45 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardFooter from "components/Card/CardFooter.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import { Link } from "react-router-dom";
-
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
-
 import image from "assets/img/dollar-hd.jpg";
+import { login } from "service/authentication.service.js";
+
 const useStyles = makeStyles(styles);
 export default function LoginPage(props) {
-  const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
+  const [cardAnimaton, setCardAnimation] = useState("cardHidden");
   setTimeout(function() {
     setCardAnimation("");
   }, 700);
+  const [values, setValues] = useState({
+    username: "",
+    pass: ""
+  });
   const classes = useStyles();
   const { ...rest } = props;
+
+  const handleChange = event => {
+    event.persist();
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.id]: event.target.value
+    }));
+  };
+  const handleSubmit = event => {
+    console.log(values);
+    let token = login(values.username, values.pass);
+    /*
+    axios.post(base_url + "/user/login/", values).then(
+      response => {
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+    */
+    event.preventDefault();
+  };
   return (
     <div>
       <Header
@@ -68,19 +95,20 @@ export default function LoginPage(props) {
                   </CardHeader>
                   <CardBody>
                     <CustomInput
-                      labelText="Email..."
-                      id="email"
+                      labelText="Username"
+                      id="username"
                       formControlProps={{
                         fullWidth: true
                       }}
                       inputProps={{
-                        type: "email",
+                        type: "username",
                         endAdornment: (
                           <InputAdornment position="end">
-                            <Email className={classes.inputIconsColor} />
+                            perm_identity
                           </InputAdornment>
                         )
                       }}
+                      onChange={handleChange}
                     />
                     <CustomInput
                       labelText="Password"
@@ -99,18 +127,22 @@ export default function LoginPage(props) {
                         ),
                         autoComplete: "off"
                       }}
+                      onChange={handleChange}
                     />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
-                    <Button simple color="primary" size="lg">
+                    <Button
+                      simple
+                      color="primary"
+                      size="lg"
+                      onClick={handleSubmit}
+                    >
                       Login
                     </Button>
                   </CardFooter>
                   <CardFooter className={classes.cardFooter}>
                     New to Khaji-it?
-                    <Link to="/sign-up">
-                      Sign up now
-                    </Link>
+                    <Link to="/sign-up">Sign up now</Link>
                   </CardFooter>
                 </form>
               </Card>
