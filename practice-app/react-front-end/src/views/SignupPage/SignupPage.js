@@ -27,7 +27,6 @@ import LocationPicker from "react-location-picker";
 import { Link } from "react-router-dom";
 import axios from "axios";
 const useStyles = makeStyles(styles);
-import environment from "environments/environments.prod";
 
 export default function SignupPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
