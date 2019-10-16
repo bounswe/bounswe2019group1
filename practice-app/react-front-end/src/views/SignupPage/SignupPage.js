@@ -27,6 +27,7 @@ import LocationPicker from "react-location-picker";
 import { Link } from "react-router-dom";
 import axios from "axios";
 const useStyles = makeStyles(styles);
+import environment from "environments/environments.prod";
 
 export default function SignupPage(props) {
   const [cardAnimaton, setCardAnimation] = React.useState("cardHidden");
@@ -68,24 +69,23 @@ export default function SignupPage(props) {
       lng: 29.092968749999955
     }
   });
-  const validateForm = x => {
-
-    values
-
+  const validateForm = () => {
+    return true;
   }
+
   const handleSubmit = event => {
     console.log(values);
-    /*
+    // validate the inputs and then send the backend
     if (event.target.value === "Basic") {
       validateForm(values);
-      axios.post(base_url + "/user/registerbasic", values);
+      axios.post(environment.api_url + "/user/registerbasic", values);
     }else{
       validateForm(values);
 
-      axios.post(base_url + "/user/registertrader", values);
+      axios.post(environment.api_url + "/user/registertrader", values);
     }
-    */
-    // validate the inputs and then send the backend
+
+
     event.preventDefault();
   };
 
