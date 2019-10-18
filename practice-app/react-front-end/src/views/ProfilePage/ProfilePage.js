@@ -17,18 +17,18 @@ import HeaderLinks from "components/Header/HeaderLinks.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 
-import profile from "assets/img/faces/christian.jpg";
+import profile from "assets/img/faces/ai.jpg";
 
-import studio1 from "assets/img/examples/studio-1.jpg";
-import studio2 from "assets/img/examples/studio-2.jpg";
-import studio3 from "assets/img/examples/studio-3.jpg";
-import studio4 from "assets/img/examples/studio-4.jpg";
-import studio5 from "assets/img/examples/studio-5.jpg";
-import work1 from "assets/img/examples/olu-eletu.jpg";
-import work2 from "assets/img/examples/clem-onojeghuo.jpg";
-import work3 from "assets/img/examples/cynthia-del-rio.jpg";
-import work4 from "assets/img/examples/mariya-georgieva.jpg";
-import work5 from "assets/img/examples/clem-onojegaw.jpg";
+import portfolio1 from "assets/img/examples/studio-1.jpg";
+import portfolio2 from "assets/img/examples/studio-2.jpg";
+import portfolio3 from "assets/img/examples/studio-3.jpg";
+import portfolio4 from "assets/img/examples/studio-4.jpg";
+import portfolio5 from "assets/img/examples/studio-5.jpg";
+import event1 from "assets/img/examples/olu-eletu.jpg";
+import event2 from "assets/img/examples/clem-onojeghuo.jpg";
+import event3 from "assets/img/examples/cynthia-del-rio.jpg";
+import event4 from "assets/img/examples/mariya-georgieva.jpg";
+import event5 from "assets/img/examples/clem-onojegaw.jpg";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 
@@ -47,7 +47,7 @@ export default function ProfilePage(props) {
     <div>
       <Header
         color="transparent"
-        brand="Material Kit React"
+        brand="Khaji-it Traders Platform"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
@@ -71,8 +71,8 @@ export default function ProfilePage(props) {
                     <img src={profile} alt="..." className={imageClasses} />
                   </div>
                   <div className={classes.name}>
-                    <h3 className={classes.title}>Christian Louboutin</h3>
-                    <h6>DESIGNER</h6>
+                    <h3 className={classes.title}>Arda Sayar</h3>
+                    <h6>ECONOMIST</h6>
                     <Button justIcon link className={classes.margin5}>
                       <i className={"fab fa-twitter"} />
                     </Button>
@@ -88,10 +88,8 @@ export default function ProfilePage(props) {
             </GridContainer>
             <div className={classes.description}>
               <p>
-                An artist of considerable range, Chet Faker — the name taken by
-                Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-                and records all of his own music, giving it a warm, intimate
-                feel with a solid groove structure.{" "}
+              23 years old, Lives in İstanbul,
+              Graduated from Boğaziçi University, Department of Economics.{" "}
               </p>
             </div>
             <GridContainer justify="center">
@@ -101,31 +99,31 @@ export default function ProfilePage(props) {
                   color="primary"
                   tabs={[
                     {
-                      tabButton: "Studio",
+                      tabButton: "Portfolios",
                       tabIcon: Camera,
                       tabContent: (
                         <GridContainer justify="center">
                           <GridItem xs={12} sm={12} md={4}>
                             <img
                               alt="..."
-                              src={studio1}
+                              src={portfolio1}
                               className={navImageClasses}
                             />
                             <img
                               alt="..."
-                              src={studio2}
+                              src={portfolio2}
                               className={navImageClasses}
                             />
                           </GridItem>
                           <GridItem xs={12} sm={12} md={4}>
                             <img
                               alt="..."
-                              src={studio5}
+                              src={portfolio5}
                               className={navImageClasses}
                             />
                             <img
                               alt="..."
-                              src={studio4}
+                              src={portfolio4}
                               className={navImageClasses}
                             />
                           </GridItem>
@@ -133,36 +131,36 @@ export default function ProfilePage(props) {
                       )
                     },
                     {
-                      tabButton: "Work",
+                      tabButton: "Events",
                       tabIcon: Palette,
                       tabContent: (
                         <GridContainer justify="center">
                           <GridItem xs={12} sm={12} md={4}>
                             <img
                               alt="..."
-                              src={work1}
+                              src={event1}
                               className={navImageClasses}
                             />
                             <img
                               alt="..."
-                              src={work2}
+                              src={event2}
                               className={navImageClasses}
                             />
                             <img
                               alt="..."
-                              src={work3}
+                              src={event3}
                               className={navImageClasses}
                             />
                           </GridItem>
                           <GridItem xs={12} sm={12} md={4}>
                             <img
                               alt="..."
-                              src={work4}
+                              src={event4}
                               className={navImageClasses}
                             />
                             <img
                               alt="..."
-                              src={work5}
+                              src={event5}
                               className={navImageClasses}
                             />
                           </GridItem>
@@ -170,36 +168,36 @@ export default function ProfilePage(props) {
                       )
                     },
                     {
-                      tabButton: "Favorite",
+                      tabButton: "Likes",
                       tabIcon: Favorite,
                       tabContent: (
                         <GridContainer justify="center">
                           <GridItem xs={12} sm={12} md={4}>
                             <img
                               alt="..."
-                              src={work4}
+                              src={event4}
                               className={navImageClasses}
                             />
                             <img
                               alt="..."
-                              src={studio3}
+                              src={portfolio3}
                               className={navImageClasses}
                             />
                           </GridItem>
                           <GridItem xs={12} sm={12} md={4}>
                             <img
                               alt="..."
-                              src={work2}
+                              src={event2}
                               className={navImageClasses}
                             />
                             <img
                               alt="..."
-                              src={work1}
+                              src={event1}
                               className={navImageClasses}
                             />
                             <img
                               alt="..."
-                              src={studio1}
+                              src={portfolio1}
                               className={navImageClasses}
                             />
                           </GridItem>

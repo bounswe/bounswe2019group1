@@ -104,7 +104,9 @@ export default function LoginPage(props) {
                         type: "username",
                         endAdornment: (
                           <InputAdornment position="end">
-                            perm_identity
+                            <Icon className={classes.inputIconsColor}>
+                          perm_identity
+                           </Icon>
                           </InputAdornment>
                         )
                       }}
@@ -141,8 +143,8 @@ export default function LoginPage(props) {
                     </Button>
                   </CardFooter>
                   <CardFooter className={classes.cardFooter}>
-                    New to Khaji-it?
-                    <Link to="/sign-up">Sign up now</Link>
+                    New to Khaji-it? 
+                    <Link to="/sign-up"> Sign up now</Link>
                   </CardFooter>
                 </form>
               </Card>

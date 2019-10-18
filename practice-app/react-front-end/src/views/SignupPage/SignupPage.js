@@ -268,7 +268,7 @@ export default function SignupPage(props) {
               </CardFooter>
               <CardFooter className={classes.cardFooter}>
                 Already registered?
-                <Link to="/login-page">Login here</Link>
+                <Link to="/login-page"> Login here</Link>
               </CardFooter>
             </form>
           </Card>
