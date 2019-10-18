@@ -13,6 +13,16 @@ const profilePageStyle = {
       transform: "translate3d(0, -50%, 0)"
     }
   },
+  followers: {
+    marginTop: "-80px",
+    textAlign: "left",
+    color: "#149",
+  },
+  following: {
+    //marginTop: "-80px",
+    textAlign: "right",
+    color: "#149",
+  },
   description: {
     margin: "1.071rem auto 0",
     maxWidth: "600px",

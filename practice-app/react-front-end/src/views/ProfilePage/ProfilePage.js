@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 import Camera from "@material-ui/icons/Camera";
 import Palette from "@material-ui/icons/Palette";
+import Event from "@material-ui/icons/Event";
 import Favorite from "@material-ui/icons/Favorite";
 // core components
 import Header from "components/Header/Header.js";
@@ -59,7 +60,7 @@ export default function ProfilePage(props) {
       <Parallax
         small
         filter
-        image={require("assets/img/profile-bg.jpg")}
+        image={require("assets/img/dollar-hd.jpg")}
       />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
@@ -70,19 +71,12 @@ export default function ProfilePage(props) {
                   <div>
                     <img src={profile} alt="..." className={imageClasses} />
                   </div>
+                  
                   <div className={classes.name}>
                     <h3 className={classes.title}>Arda Sayar</h3>
                     <h6>ECONOMIST</h6>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={"fab fa-twitter"} />
-                    </Button>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={"fab fa-instagram"} />
-                    </Button>
-                    <Button justIcon link className={classes.margin5}>
-                      <i className={"fab fa-facebook"} />
-                    </Button>
                   </div>
+                  
                 </div>
               </GridItem>
             </GridContainer>
@@ -132,7 +126,7 @@ export default function ProfilePage(props) {
                     },
                     {
                       tabButton: "Events",
-                      tabIcon: Palette,
+                      tabIcon: Event,
                       tabContent: (
                         <GridContainer justify="center">
                           <GridItem xs={12} sm={12} md={4}>
