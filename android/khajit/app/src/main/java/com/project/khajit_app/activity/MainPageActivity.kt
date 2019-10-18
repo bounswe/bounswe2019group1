@@ -32,7 +32,7 @@ class MainPageActivity : AppCompatActivity() {
         startActivity(Intent(this, LoginPageActivity::class.java))
     }
     fun goToHomePage(view : View) {
-        startActivity(Intent(this, HomeFeedPageActivity::class.java))
+        startActivity(Intent(this, ProfilePageActivity::class.java))
     }
 
     companion object {

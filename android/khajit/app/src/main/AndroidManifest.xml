@@ -28,6 +28,7 @@
         </activity>
         <activity android:name=".activity.LoginPageActivity" />
         <activity android:name=".activity.SignUpPageActivity" />
+        <activity android:name=".activity.ProfilePageActivity" />
     </application>
 
 </manifest>
