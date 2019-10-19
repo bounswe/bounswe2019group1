@@ -7,13 +7,14 @@ export function login(username, password) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*"
     },
     body: JSON.stringify({
       username: username,
       password: password
     })
   };
-  return axios(`${environment.api_url}user/login`, requestOptions).then(
+  return axios(`${environment.api_url}user/login/`, requestOptions).then(
     token => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       localStorage.setItem("currentUser", JSON.stringify(token));

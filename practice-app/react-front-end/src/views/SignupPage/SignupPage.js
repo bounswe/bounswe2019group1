@@ -77,11 +77,11 @@ export default function SignupPage(props) {
     // validate the inputs and then send the backend
     if (event.target.value === "Basic") {
       validateForm(values);
-      axios.post(environment.api_url + "/user/registerbasic", values);
+      axios.post(environment.api_url + "user/registerbasic/", values);
     } else {
       validateForm(values);
 
-      axios.post(environment.api_url + "/user/registertrader", values);
+      axios.post(environment.api_url + "user/registertrader/", values);
     }
 
     event.preventDefault();
