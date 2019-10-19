@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^auth/', include('auth.urls')),
     url(r'^user/', include('myuser.urls')),
     url(r'^event/', include('event.urls')),
+    url(r'^follow/', include('follow.urls')),
 ]
