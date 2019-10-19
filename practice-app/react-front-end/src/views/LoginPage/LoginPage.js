@@ -42,20 +42,8 @@ export default function LoginPage(props) {
     }));
   };
   const handleSubmit = event => {
-    console.log(values);
     let token = login(values.username, values.pass);
-    console.log(token)
-    //let token = login(values.username, values.pass);
-    /*
-    axios.post(base_url + "/user/login/", values).then(
-      response => {
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-    */
+    console.log(token);
     event.preventDefault();
   };
   return (
@@ -106,8 +94,8 @@ export default function LoginPage(props) {
                         endAdornment: (
                           <InputAdornment position="end">
                             <Icon className={classes.inputIconsColor}>
-                          perm_identity
-                           </Icon>
+                              perm_identity
+                            </Icon>
                           </InputAdornment>
                         )
                       }}
@@ -144,7 +132,7 @@ export default function LoginPage(props) {
                     </Button>
                   </CardFooter>
                   <CardFooter className={classes.cardFooter}>
-                    New to Khaji-it? 
+                    New to Khaji-it?
                     <Link to="/sign-up"> Sign up now</Link>
                   </CardFooter>
                 </form>
