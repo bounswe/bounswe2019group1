@@ -25,8 +25,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import image from "assets/img/dollar-hd.jpg";
 import LocationPicker from "react-location-picker";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { environment } from "environments/environment.prod.js";
+import { registerBasic, RegisterTrader } from "../../service/registration.service";
 
 const useStyles = makeStyles(styles);
 export default function SignupPage(props) {
@@ -77,11 +76,27 @@ export default function SignupPage(props) {
     // validate the inputs and then send the backend
     if (event.target.value === "Basic") {
       validateForm(values);
-      axios.post(environment.api_url + "user/registerbasic/", values);
+      let status = registerBasic(
+        values.username,
+        values.pass,
+        values.email,
+        values.name,
+        values.surname
+      );
+      console.log(status);
     } else {
       validateForm(values);
-
-      axios.post(environment.api_url + "user/registertrader/", values);
+      let status = RegisterTrader(
+        values.username,
+        values.pass,
+        values.email,
+        values.name,
+        values.surname,
+        values.location,
+        values.iban,
+        values.citizenshipno
+      );
+      console.log(status);
     }
 
     event.preventDefault();
