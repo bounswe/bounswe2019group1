@@ -57,11 +57,7 @@ export default function ProfilePage(props) {
         }}
         {...rest}
       />
-      <Parallax
-        small
-        filter
-        image={require("assets/img/dollar-hd.jpg")}
-      />
+      <Parallax small filter image={require("assets/img/dollar-hd.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <div className={classes.container}>
@@ -71,19 +67,18 @@ export default function ProfilePage(props) {
                   <div>
                     <img src={profile} alt="..." className={imageClasses} />
                   </div>
-                  
+
                   <div className={classes.name}>
                     <h3 className={classes.title}>Arda Sayar</h3>
                     <h6>ECONOMIST</h6>
                   </div>
-                  
                 </div>
               </GridItem>
             </GridContainer>
             <div className={classes.description}>
               <p>
-              23 years old, Lives in İstanbul,
-              Graduated from Boğaziçi University, Department of Economics.{" "}
+                23 years old, Lives in İstanbul, Graduated from Boğaziçi
+                University, Department of Economics.{" "}
               </p>
             </div>
             <GridContainer justify="center">

@@ -43,7 +43,8 @@ export default function LoginPage(props) {
   };
   const handleSubmit = event => {
     console.log(values);
-    login(values.username, values.pass);
+    let token = login(values.username, values.pass);
+    console.log(token)
     //let token = login(values.username, values.pass);
     /*
     axios.post(base_url + "/user/login/", values).then(
