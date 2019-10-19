@@ -14,6 +14,25 @@ const signupPageStyle = {
     opacity: "0",
     transform: "translate3d(0, -60px, 0)"
   },
+  card: {
+    maxWidth: 345,
+    position: "absolute",
+    left: "-30vh",
+    top: "5vh"
+  },
+  card2: {
+    maxWidth: 345,
+    position: "absolute",
+    left: "30vh",
+    top: "5vh"
+  },
+  button: {
+    justifyContent: 'center',
+    left:"12vh"
+  },
+  media: {
+    height: 140,
+  },
   pageHeader: {
     minHeight: "100vh",
     height: "auto",
