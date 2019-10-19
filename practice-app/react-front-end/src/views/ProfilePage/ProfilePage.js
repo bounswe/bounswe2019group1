@@ -32,6 +32,7 @@ import event4 from "assets/img/examples/mariya-georgieva.jpg";
 import event5 from "assets/img/examples/clem-onojegaw.jpg";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
+// import {getProfileInfo} from "../../service/getProfileInformation";
 
 const useStyles = makeStyles(styles);
 
@@ -69,7 +70,7 @@ export default function ProfilePage(props) {
                   </div>
 
                   <div className={classes.name}>
-                    <h3 className={classes.title}>Arda Sayar</h3>
+                    <h3 className={classes.title}>Arda Keskin</h3>
                     <h6>ECONOMIST</h6>
                   </div>
                 </div>

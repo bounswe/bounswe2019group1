@@ -18,7 +18,7 @@ export function login(username, password) {
       requestOptions.body,
       requestOptions.headers
     )
-    .then(res => (res.status == 200 ? res.data.token : null))
+    .then(res => (res.status === 200 ? res.data.token : null))
     .then(token => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       if (token) {
