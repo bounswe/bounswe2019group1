@@ -204,7 +204,7 @@ export default function SignupPage(props) {
                     endAdornment: (
                       <InputAdornment position="end">
                         <Icon className={classes.inputIconsColor}>
-                          perm_identity
+                          how_to_reg
                         </Icon>
                       </InputAdornment>
                     )
@@ -223,7 +223,7 @@ export default function SignupPage(props) {
                     endAdornment: (
                       <InputAdornment position="end">
                         <Icon className={classes.inputIconsColor}>
-                          perm_identity
+                          how_to_reg
                         </Icon>
                       </InputAdornment>
                     )
@@ -302,7 +302,7 @@ export default function SignupPage(props) {
                   </Button>
                 </div>
               </CardHeader>
-              <p className={classes.divider}>Or Be Classical</p>
+              <p className={classes.divider}>Khaji-it</p>
               <CardBody>
                 <CustomInput
                   labelText="Username"
@@ -315,7 +315,9 @@ export default function SignupPage(props) {
                     type: "username",
                     endAdornment: (
                       <InputAdornment position="end">
-                        perm_identity
+                        <Icon className={classes.inputIconsColor}>
+                          perm_identity
+                        </Icon>
                       </InputAdornment>
                     )
                   }}
@@ -370,7 +372,7 @@ export default function SignupPage(props) {
                     endAdornment: (
                       <InputAdornment position="end">
                         <Icon className={classes.inputIconsColor}>
-                          perm_identity
+                          how_to_reg
                         </Icon>
                       </InputAdornment>
                     )
@@ -389,7 +391,7 @@ export default function SignupPage(props) {
                     endAdornment: (
                       <InputAdornment position="end">
                         <Icon className={classes.inputIconsColor}>
-                          perm_identity
+                          how_to_reg
                         </Icon>
                       </InputAdornment>
                     )
@@ -441,7 +443,7 @@ export default function SignupPage(props) {
                     endAdornment: (
                       <InputAdornment position="end">
                         <Icon className={classes.inputIconsColor}>
-                          perm_identity
+                          credit_card
                         </Icon>
                       </InputAdornment>
                     )
@@ -460,7 +462,7 @@ export default function SignupPage(props) {
                     endAdornment: (
                       <InputAdornment position="end">
                         <Icon className={classes.inputIconsColor}>
-                          perm_identity
+                          supervisor_account
                         </Icon>
                       </InputAdornment>
                     )
@@ -475,7 +477,7 @@ export default function SignupPage(props) {
               </CardFooter>
               <CardFooter className={classes.cardFooter}>
                 Already registered?
-                <Link to="/login-page">Login here</Link>
+                <Link to="/login-page"> Login here</Link>
               </CardFooter>
             </form>
           </Card>
