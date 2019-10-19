@@ -19,9 +19,7 @@
         android:layout_height="50dp"
         android:layout_gravity="start"
         android:backgroundTint="#BB3f51b5"
-        android:clickable="true"
         android:enabled="true"
-        android:onClick="goToLogin"
         android:text="Followings"
         android:textColor="#FFFFFF"
         android:textSize="12sp"
@@ -53,9 +51,7 @@
         android:layout_height="50dp"
         android:layout_gravity="start"
         android:backgroundTint="#BB3f51b5"
-        android:clickable="true"
         android:enabled="true"
-        android:onClick="goToLogin"
         android:text="Followers"
         android:textColor="#FFFFFF"
         android:textSize="12sp"
@@ -175,6 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginTop="10dp"
+            android:onClick="goEdit"
             android:text="About"
             android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -242,6 +239,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="2dp"
                     android:layout_marginBottom="2dp"
+                    android:textStyle="bold"
                     android:background="#B5A33535"
                     android:text="Portfolios" />
 
@@ -253,6 +251,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="2dp"
                     android:layout_marginBottom="2dp"
+                    android:textStyle="bold"
                     android:background="#B5A33535"
                     android:text="Articles" />
 
@@ -264,6 +263,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginRight="2dp"
                     android:layout_marginBottom="2dp"
+                    android:textStyle="bold"
                     android:background="#B5A33535"
                     android:text="Predictions" />
 

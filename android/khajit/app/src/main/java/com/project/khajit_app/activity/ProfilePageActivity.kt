@@ -37,4 +37,8 @@ class ProfilePageActivity : AppCompatActivity() {
         lview.adapter = ladapter
 
     }
+
+    fun goEdit(view : View) {
+        startActivity(Intent(this, EditingProfilePageActivity::class.java))
+    }
 }
