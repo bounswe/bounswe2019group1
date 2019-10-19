@@ -35,15 +35,14 @@ class TempUserCreateAPIView(CreateAPIView):
         serializer=TempUserCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        send_email_cv(serializer.data)
-        try:
-            send_email_cv(serializer.data)
-        except:
-            serializer=serializer.data
-            id=serializer['id']
-            temp=TemplateUser.objects.get(id=id)
-            temp.delete()
-            raise ValidationError("email is not valid")
+        #try:
+            #send_email_cv(serializer.data)
+        #except:
+            #serializer=serializer.data
+            #id=serializer['id']
+            #temp=TemplateUser.objects.get(id=id)
+            #temp.delete()
+            #raise ValidationError("email is not valid")
         id=serializer.data["id"]
         user=User.objects.filter(id=id)
         if not user:
