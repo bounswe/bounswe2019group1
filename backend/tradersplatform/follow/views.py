@@ -11,8 +11,17 @@ from myuser.models import TemplateUser
 
 
 class CreateFollowAPIView(CreateAPIView):
-    serializer_class = FollowCreateSerializer
-    queryset = Follow.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        check_if_user(request)
+        id=request.user.id
+        user=TemplateUser.objects.get(id=id)
+        following = request.data['following']
+        data = {"follower": user, "following": following}
+        serializer=FollowCreateSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=200)
 
 
 class ListFollowAPIView(ListAPIView):
