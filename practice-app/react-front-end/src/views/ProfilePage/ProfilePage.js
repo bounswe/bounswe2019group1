@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // @material-ui/icons
 import Camera from "@material-ui/icons/Camera";
-import Palette from "@material-ui/icons/Palette";
+//import Palette from "@material-ui/icons/Palette";
+//import Button from "components/CustomButtons/Button.js";
+
 import Event from "@material-ui/icons/Event";
 import Favorite from "@material-ui/icons/Favorite";
 // core components
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
-import Button from "components/CustomButtons/Button.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
@@ -32,16 +33,25 @@ import event4 from "assets/img/examples/mariya-georgieva.jpg";
 import event5 from "assets/img/examples/clem-onojegaw.jpg";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
+import { getProfileInfo } from "../../service/profileinformation.service";
+// import {getProfileInfo} from "../../service/getProfileInformation";
 
 const useStyles = makeStyles(styles);
 
 export default function ProfilePage(props) {
   const classes = useStyles();
   const { ...rest } = props;
+  const [profileValues, setProfileValues] = useState({
+    first_name: "",
+    last_name: ""
+  });
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
     classes.imgFluid
+  );
+  getProfileInfo().then(res =>
+    setProfileValues({ first_name: res.first_name, last_name: res.last_name })
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   return (
@@ -69,7 +79,9 @@ export default function ProfilePage(props) {
                   </div>
 
                   <div className={classes.name}>
-                    <h3 className={classes.title}>Arda Sayar</h3>
+                    <h3 className={classes.title}>
+                      {profileValues.first_name} {profileValues.last_name}
+                    </h3>
                     <h6>ECONOMIST</h6>
                   </div>
                 </div>

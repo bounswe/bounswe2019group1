@@ -25,7 +25,10 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import image from "assets/img/dollar-hd.jpg";
 import LocationPicker from "react-location-picker";
 import { Link } from "react-router-dom";
-import { registerBasic, RegisterTrader } from "../../service/registration.service";
+import {
+  registerBasic,
+  RegisterTrader
+} from "../../service/registration.service";
 
 const useStyles = makeStyles(styles);
 export default function SignupPage(props) {
@@ -72,21 +75,19 @@ export default function SignupPage(props) {
   };
 
   const handleSubmit = event => {
-    console.log(values);
     // validate the inputs and then send the backend
-    if (event.target.value === "Basic") {
+    if (values.usertype === "Basic") {
       validateForm(values);
-      let status = registerBasic(
+      registerBasic(
         values.username,
         values.pass,
         values.email,
         values.name,
         values.surname
-      );
-      console.log(status);
+      ).then(data => console.log(data));
     } else {
       validateForm(values);
-      let status = RegisterTrader(
+      RegisterTrader(
         values.username,
         values.pass,
         values.email,
@@ -95,8 +96,7 @@ export default function SignupPage(props) {
         values.location,
         values.iban,
         values.citizenshipno
-      );
-      console.log(status);
+      ).then(data => console.log(data));
     }
 
     event.preventDefault();
