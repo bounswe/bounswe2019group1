@@ -31,8 +31,10 @@ class ProfilePageActivity : AppCompatActivity() {
 
         findViewById<TextView>(R.id.text_bio).movementMethod = ScrollingMovementMethod()
 
-        var adapter = ArrayAdapter<String>(this, R.layout.activity_listview, equipments)
-        findViewById<ListView>(R.id.list_prediction_name).adapter = adapter
+        // This will be used for further methods in order to set prediction rates
+        var lview =  findViewById<ListView>(R.id.list_prediction_name)
+        var ladapter = ListViewAdapter(this, equipments, rates)
+        lview.adapter = ladapter
 
     }
 }
