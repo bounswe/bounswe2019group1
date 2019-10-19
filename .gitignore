@@ -3,6 +3,7 @@
 =======
 venv
 backend/tradersplatform/db.sqlite3
+backend/tradersplatform/APPNAME.log
 .DS_Store
 .idea
 traders_virtualenv

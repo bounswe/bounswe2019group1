@@ -25,7 +25,19 @@ SECRET_KEY = 'q^4h&mi0ldly58-!5_ttj(&^o008ux6z%o9f69e1w3^6n@q$1f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    "*",
+    "127.0.0.1",
+    "localhost",
+    "35.163.120.227"
+]
+
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+    "http://35.163.120.227:3000",
+    "http://35.163.120.227",
+]
+
 
 
 # Application definition
@@ -37,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'myuser',
     'event',
 ]
@@ -136,9 +149,13 @@ MEDIA_URL =  '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
-AWS_KEY=""
-AWS_SECRET_KEY=""
-
+AWS_KEY="AKIAVMGTHO3HDO7K5G5L"
+AWS_SECRET_KEY="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"
+'''#AWS_KEY="AKIAIJIGRM5MDSAKEZAA"
+#AWS_SECRET_KEY="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"
+AWS_KEY="AKIA2F5UPF3FJR2J5RNE"
+AWS_SECRET_KEY="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"
+'''
 
 REST_FRAMEWORK = {
 
@@ -155,4 +172,38 @@ JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
     'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(seconds=259200),  # 3 days
     'JWT_AUTH_COOKIE': 'JWT',
+}
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'applogfile': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'APPNAME.log'),
+            'maxBytes': 1024 * 1024 * 15,  # 15MB
+            'backupCount': 10,
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'APPNAME': {
+            'handlers': ['applogfile', ],
+            'level': 'DEBUG',
+        },
+    }
 }
