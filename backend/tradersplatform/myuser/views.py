@@ -1,3 +1,4 @@
+from django.core.handlers.base import logger
 from django.shortcuts import render
 
 # Create your views here.
@@ -14,6 +15,7 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from datetime import datetime
+import logging
 
 
 class TempUserCreateAPIView(CreateAPIView):
@@ -33,6 +35,7 @@ class TempUserCreateAPIView(CreateAPIView):
         serializer=TempUserCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        send_email_cv(serializer.data)
         try:
             send_email_cv(serializer.data)
         except:
@@ -57,11 +60,15 @@ class TempUserCreateAPIView(CreateAPIView):
         my_group, created = Group.objects.get_or_create(name=group_name)
         my_group.user_set.add(user)
         user_temp=TemplateUser.objects.get(id=user.id)
+        logger = logging.getLogger('APPNAME')
+        logger.critical('rising in a stunishing level')
+        logger.info('%s logged in successfully', user_temp.username)
         new_data={}
         serializer=TempUserCreateSerializer(user_temp)
         new_data["user"]=serializer.data
         temp_data={"username":request.data["username"],"password":password}
         serializer = TempUserLoginSerializer(data=temp_data)
+        logger2 = logging.getLogger('APPNAME')
         if serializer.is_valid(raise_exception=True):
             new_data["token"] = serializer.data["token"]
             return Response(new_data, status=HTTP_200_OK)
@@ -94,3 +101,9 @@ class UserAutoLogin(APIView):
         serializer=TempUserCreateSerializer(general_user)
         return Response(serializer.data, status=200)
 
+
+class NoParsingFilter(logging.Filter):
+    def filter(self, record):
+        return not record.getMessage().startswith('aa')
+
+logger.addFilter(NoParsingFilter())
