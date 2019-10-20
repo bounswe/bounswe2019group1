@@ -33,11 +33,12 @@ class TempUserCreateAPIView(CreateAPIView):
         username = request.data.get('username', None)
         email = request.data.get('email', None)
         length = len(username)
-        for i in range(length):
+        for i in range(length-3):
+            print(i)
             if username[i:(i+4)] in password:
                 raise ValidationError("Password can not contain public pieces of information")
         length = len(email)
-        for i in range(length):
+        for i in range(length-3):
             if email[i:(i + 4)] in password:
                 raise ValidationError("Password can not contain public pieces of information")
         del data['password']
