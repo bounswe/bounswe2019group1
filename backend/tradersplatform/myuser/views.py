@@ -27,7 +27,19 @@ class TempUserCreateAPIView(CreateAPIView):
         data=request.data
         password = request.data.get('password', None)
         if password is None:
-            raise ValidationError("you need to give a password")
+            raise ValidationError("You need to give a password")
+        elif len(password) < 8:
+            raise ValidationError("Password size should be greater than 8")
+        username = request.data.get('username', None)
+        email = request.data.get('email', None)
+        length = len(username)
+        for i in range(length):
+            if username[i:(i+4)] in password:
+                raise ValidationError("Password can not contain public pieces of information")
+        length = len(email)
+        for i in range(length):
+            if email[i:(i + 4)] in password:
+                raise ValidationError("Password can not contain public pieces of information")
         del data['password']
         register_time=datetime.now()
         time=register_time.strftime("%m/%d/%Y, %H:%M:%S")
