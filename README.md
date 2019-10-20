@@ -4,7 +4,7 @@ Welcome to the project repository of CmpE 451 Group 1.
 
 Keep checking for any news.
 
-![Team Members](/resources/images/team_one.jpg)
+![Team Members](/resources/images/team_two.png)
 
 ## Project Description
 
