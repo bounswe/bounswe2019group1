@@ -1,22 +1,16 @@
 package com.project.khajit_app.activity
 
-import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
-import android.widget.ArrayAdapter
 import android.widget.BaseAdapter
-import android.widget.ListView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import com.project.khajit_app.R
-import android.app.Activity
 import android.view.ViewGroup
 import android.view.View
-import org.w3c.dom.Text
+import com.project.khajit_app.activity.ui.home.HomeFragment
 
 
 // Adapter for prediction success ratios, NEVER CHANGE THIS FILE
 class ListViewAdapter(
-    internal var context: Activity,
+    internal var context: HomeFragment,
     internal var title: Array<String>,
     internal var description: Array<String>
 ) : BaseAdapter() {
