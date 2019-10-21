@@ -28,6 +28,8 @@ class TempUserCreateSerializer(ModelSerializer):
             'phone_number',
             'iban_number',
             'citizenship_number',
+            'biography',
+            'title',
             'last_changed_password_date',
         ]
         extra_kwargs = {"password": {"write_only": True, "required": False},
@@ -35,6 +37,8 @@ class TempUserCreateSerializer(ModelSerializer):
                         "location": {"required": False},
                         "iban_number": {"required": False},
                         "citizenship_number": {"required": False},
+                        "title": {"required": False},
+                        "biography": {"required": False},
                         "last_changed_password_date": {"required": False}
                         }
 

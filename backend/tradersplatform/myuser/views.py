@@ -109,6 +109,11 @@ class NoParsingFilter(logging.Filter):
 #logger.addFilter(NoParsingFilter())
 
 
+class UserRetrieveAPI(RetrieveAPIView):
+    serializer_class = TempUserCreateSerializer
+    queryset = TemplateUser.objects.filter()
+
+
 class SearchUserListAPIView(ListAPIView):
 
     def post(self, request, *args, **kwargs):
