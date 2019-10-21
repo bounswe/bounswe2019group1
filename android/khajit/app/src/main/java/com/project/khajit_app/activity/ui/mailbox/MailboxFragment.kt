@@ -1,4 +1,4 @@
-package com.project.khajit_app.activity.ui.notifications
+package com.project.khajit_app.activity.ui.mailbox
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,9 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.project.khajit_app.R
 
-class NotificationsFragment : Fragment() {
+class MailboxFragment : Fragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    private lateinit var mailboxViewModel: MailboxViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,9 +21,9 @@ class NotificationsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreate(savedInstanceState)
-        notificationsViewModel =
-            ViewModelProviders.of(this).get(NotificationsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
+        mailboxViewModel =
+            ViewModelProviders.of(this).get(MailboxViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_mailbox, container, false)
         var loader = root.findViewById(R.id.progress_loader) as ProgressBar
         loader.visibility = View.GONE
         return root

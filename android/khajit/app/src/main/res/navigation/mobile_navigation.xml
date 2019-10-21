@@ -12,14 +12,26 @@
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.project.khajit_app.activity.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_search"
+        android:name="com.project.khajit_app.activity.ui.search.SearchFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_mailbox" />
+
+    <fragment
+        android:id="@+id/navigation_equipments"
+        android:name="com.project.khajit_app.activity.ui.equipment.EquipmentFragment"
+        android:label="@string/title_equipments"
+        tools:layout="@layout/fragment_mailbox" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.project.khajit_app.activity.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_mailbox"
+        android:name="com.project.khajit_app.activity.ui.mailbox.MailboxFragment"
+        android:label="@string/title_messages"
+        tools:layout="@layout/fragment_mailbox" />
 </navigation>
