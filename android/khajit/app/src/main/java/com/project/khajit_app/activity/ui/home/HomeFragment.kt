@@ -55,13 +55,6 @@ class HomeFragment : Fragment() {
         var loader = root.findViewById(R.id.progress_loader) as ProgressBar
         loader.visibility = View.GONE
 
-        var k = JSONObject()
-        var l = JSONObject()
-        l.put("göz", 222)
-        k.put("kol", 1)
-        k.put("bacak", "asd")
-        k.put("yüz", l)
-        println(k)
 
         Toast.makeText(this.context, "IM AT HOME", Toast.LENGTH_LONG).show()
         /*

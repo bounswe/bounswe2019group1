@@ -7,8 +7,11 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.project.khajit_app.R
+import com.project.khajit_app.api.RetrofitClient
+import com.project.khajit_app.data.models.BasicRegisterResponse
 import com.project.khajit_app.data.models.BasicUser
 import com.project.khajit_app.global.User
 import okhttp3.ResponseBody
@@ -18,7 +21,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class SignUpPageActivity : AppCompatActivity(), OnClickListener {
+class SignUpPageActivity : AppCompatActivity() {
 
 
 
@@ -31,8 +34,6 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
     lateinit var google_user_register : Button
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
@@ -41,14 +42,8 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
             this.supportActionBar?.hide()
         } catch (e: NullPointerException){}
 
+        Toast.makeText(applicationContext, "WELCOME TO THE SIGN UP", Toast.LENGTH_LONG).show()
 
-
-    }
-
-
-
-    override fun onClick(v: View?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     fun completeRegistrationAsGoogle(view: View) {
@@ -57,7 +52,6 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
     fun goToSignUpPageTraderActivity(view : View) {
 
         val intent = Intent(this@SignUpPageActivity,SignUpPageTraderActivity::class.java);
-
 
         email_input = findViewById(R.id.input_email)
         password_input = findViewById(R.id.input_password)
@@ -113,6 +107,7 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
                 return@setOnClickListener
             }
 
+
             username_information = email_information
             val userInfo = BasicUser(username_information,email_information,firstname_information,lastname_information,password_information)
 
@@ -124,7 +119,9 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
                     ) {
                         if(response.isSuccessful ){
                             if(response.body()?.username != null){
-                                Toast.makeText(applicationContext,response.body()?.username.toString(),Toast.LENGTH_LONG).show()
+                                Toast.makeText(applicationContext, "User has been created", Toast.LENGTH_LONG).show()
+                                //Toast.makeText(applicationContext,response.body()?.username.toString(), Toast.LENGTH_LONG).show()
+
                             }else{
                                 println(response)
                                 println(call)
@@ -137,13 +134,12 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
                                 }
 
                             }
-
                         }else{
+                            Toast.makeText(applicationContext,"ERRERORRO",Toast.LENGTH_LONG).show()
                             Log.d("error message:", response.message())
                         }
 
                     }
-
                     override fun onFailure(call: Call<BasicRegisterResponse>, t: Throwable) {
                         Toast.makeText(applicationContext,t.message,Toast.LENGTH_LONG).show()
                     }
@@ -152,11 +148,14 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
 
                 )
 
+            /*
             intent.putExtra("userInfo", userInfo)
             intent.putExtra("googleUser",0)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             startActivity(intent)
             finish()
+            */
+
 
         }
 

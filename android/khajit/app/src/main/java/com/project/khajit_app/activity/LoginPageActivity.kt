@@ -14,7 +14,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.google.android.gms.common.api.ApiException
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.BasicRegisterResponse
 import com.project.khajit_app.data.models.TraderUser
@@ -75,6 +74,8 @@ class LoginPageActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         // Check if a user was already signed in
+
+        /*
         val account = GoogleSignIn.getLastSignedInAccount(this)
         if (account != null) {
             // User is already signed in, start HomePageActivity
@@ -82,6 +83,8 @@ class LoginPageActivity : AppCompatActivity() {
 
             // Commented ^this out because I don't want it to auto-login during development
         }
+        */
+
     }
 
     fun goToRegister(view:View) {
@@ -115,6 +118,8 @@ class LoginPageActivity : AppCompatActivity() {
         // startActivity(Intent(this, SignUpPageActivity::class.java))
     }
 
+    /*
+
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -127,6 +132,9 @@ class LoginPageActivity : AppCompatActivity() {
 
     }
 
+     */
+
+    /*
     private fun handleSignInResult(completedTask : Task<GoogleSignInAccount> ) {
         try {
 
@@ -147,6 +155,8 @@ class LoginPageActivity : AppCompatActivity() {
 
         }
     }
+
+     */
 
     companion object {
         private const val TAG = "GoogleActivity"
