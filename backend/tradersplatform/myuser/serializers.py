@@ -82,3 +82,27 @@ class TempUserLoginSerializer(ModelSerializer):
         data["token"] = token
         data["user"] = user_obj
         return data
+
+
+class UserUpdateSerializer(ModelSerializer):
+
+    class Meta:
+        model = TemplateUser
+        fields = [
+            "id",
+            "first_name",
+            "last_name",
+            "title",
+            "biography",
+        ]
+
+        extra_kwargs = {"first_name":
+                            {"required": False},
+                        "last_name":
+                            {"required": False},
+                        "title":
+                            {"required": False},
+                        "biography":
+                            {"required": False},
+                        }
+
