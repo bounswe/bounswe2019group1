@@ -106,27 +106,6 @@ class LoginPageActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            var loggedInUser = userToBeLogin(email_information,password_information)
-            RetrofitClient.instance.createTraderUser(loggedInUser)
-                .enqueue(object : Callback<BasicRegisterResponse> {
-                    override fun onResponse(
-                        call: Call<BasicRegisterResponse>?,
-                        response: Response<BasicRegisterResponse>?
-                    ) {
-                        Toast.makeText(applicationContext, "oldu-trader", Toast.LENGTH_LONG).show()
-
-                    }
-
-                    override fun onFailure(call: Call<BasicRegisterResponse>, t: Throwable) {
-                        Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
-                    }
-
-                }
-
-                )
-            SignUpPageTraderActivity.getLaunchIntent(this)
-            startActivity(Intent(this, MainPageActivity::class.java))
-
 
         }
     }

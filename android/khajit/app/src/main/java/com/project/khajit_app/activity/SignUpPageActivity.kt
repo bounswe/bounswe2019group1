@@ -90,7 +90,7 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
                 return@setOnClickListener
             }
             if(firstname_information.isEmpty()){
-                first_name_input.error = "Fİrst name is required."
+                first_name_input.error = "First name is required."
                 first_name_input.requestFocus()
                 return@setOnClickListener
             }
