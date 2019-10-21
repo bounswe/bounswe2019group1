@@ -114,6 +114,21 @@ class UserRetrieveAPI(RetrieveAPIView):
     queryset = TemplateUser.objects.filter()
 
 
+class UserRetrieveMobileAPI(RetrieveAPIView):
+
+    def get(self, request, *args, **kwargs):
+        id = request.data.get('id', None)
+        if id is not None:
+            query=TemplateUser.objects.filter(id=id)
+            if not query:
+                raise ValidationError(" User does not exist ")
+            query=query.first()
+            serializer = TempUserCreateSerializer(query)
+            return Response(serializer.data)
+        else:
+            raise ValidationError("Give user id")
+
+
 class SearchUserListAPIView(ListAPIView):
 
     def post(self, request, *args, **kwargs):
