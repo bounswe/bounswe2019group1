@@ -3,11 +3,16 @@ package com.project.khajit_app.api
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.net.Inet4Address
+import java.net.InetAddress.getByAddress
 
 object RetrofitClient {
 
     //private val AUTH = "Basic"
-    private const val BASE_URL = "http://192.168.4.211:8000/"    //dynamic ip adresi girilmesi lazım
+
+    //var ipAddress = Inet4Address.getLocalHost().hostAddress
+    private const val BASE_URL = "http://192.168.1.2:8000/"    //dynamic ip adresi girilmesi lazım
+
 
     private val okHttpClient = OkHttpClient.Builder()
             .addInterceptor {chain ->

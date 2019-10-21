@@ -2,6 +2,9 @@ package com.project.khajit_app.activity
 
 import android.app.Notification
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+
 import android.widget.FrameLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -67,5 +70,27 @@ class HomeFeedPageActivity : AppCompatActivity() {
             .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
             .replace(R.id.content, fragment, fragment.javaClass.simpleName)
             .commit()
+
+    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_top, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.profile_top_menu_item -> {
+            // do stuff
+            true
+        }
+        R.id.settings_top_menu_item -> {
+            // do stuff
+            true
+        }
+        R.id.logout_top_menu_item -> {
+            // do stuff
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
+
     }
 }

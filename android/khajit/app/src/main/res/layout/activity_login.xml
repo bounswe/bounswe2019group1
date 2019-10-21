@@ -15,19 +15,19 @@
         android:paddingRight="24dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="72dp"
+            android:layout_width="281dp"
+            android:layout_height="111dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
-            android:src="@drawable/app_name" />
+            android:src="@drawable/app_logo_to_be_big" />
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="381dp"
-            android:layout_height="73dp"
+            android:layout_width="370dp"
+            android:layout_height="60dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            app:boxBackgroundColor="#D3FFFFFF"
+            android:background="#D3FFFFFF"
             app:boxBackgroundMode="filled">
 
             <EditText
@@ -43,11 +43,11 @@
         <!-- Password Label -->
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="376dp"
-            android:layout_height="73dp"
+            android:layout_width="370dp"
+            android:layout_height="60dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            app:boxBackgroundColor="#D3FFFFFF"
+            android:background="#D3FFFFFF"
             app:boxBackgroundMode="filled">
 
             <EditText

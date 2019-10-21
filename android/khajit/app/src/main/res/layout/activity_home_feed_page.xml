@@ -6,7 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/big_picture_currency"
-    android:paddingTop="?attr/actionBarSize">
+
+    >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/home_top_menu_options_bar"
+        android:minHeight="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titleTextColor="@android:color/white"
+        android:background="?android:attr/windowBackground"
+        tools:ignore="MissingConstraints"
+        app:menu="@menu/menu_top"
+        app:logo="@drawable/app_logo_to_be_small">
+    </androidx.appcompat.widget.Toolbar>
+
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -28,7 +43,8 @@
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/home_top_menu_options_bar">
+
 
     </FrameLayout>
 
