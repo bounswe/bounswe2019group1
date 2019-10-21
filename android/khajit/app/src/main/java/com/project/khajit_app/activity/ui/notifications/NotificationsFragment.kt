@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,13 +20,12 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        super.onCreate(savedInstanceState)
         notificationsViewModel =
             ViewModelProviders.of(this).get(NotificationsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_notifications, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notifications) as TextView
-        notificationsViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
+        var loader = root.findViewById(R.id.progress_loader) as ProgressBar
+        loader.visibility = View.GONE
         return root
     }
 }
