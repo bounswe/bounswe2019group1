@@ -1,21 +1,29 @@
-import {environment} from "../environments/environment.prod";
+import { environment } from "../environments/environment.prod";
 // import { handleResponse } from "../utils/responseHandlers";
 import axios from "axios";
 
 export function login(username, password) {
   const requestOptions = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: {
       username: username,
       password: password
-    })
+    }
   };
-  return axios(`${environment.api_url}/user/login`, requestOptions)
-    .then()
+  return axios
+    .post(
+      `${environment.api_url}user/login/`,
+      requestOptions.body,
+      requestOptions.headers
+    )
+    .then(res => (res.status === 200 ? res.data.token : null))
     .then(token => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
-      localStorage.setItem("currentUser", JSON.stringify(token));
+      if (token) {
+        localStorage.setItem("currentUser", JSON.stringify(token));
+      }
       return token;
     });
 }

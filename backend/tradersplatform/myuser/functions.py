@@ -6,6 +6,7 @@ from email.mime.multipart import MIMEMultipart
 
 from myuser.htmlcontent import feedback_email_part1, feedback_email_part2, feedback_email_part3
 from tradersplatform.settings.base import AWS_KEY, AWS_SECRET_KEY
+from rest_framework.exceptions import ValidationError
 
 
 def send_email_cv(feedback_instance):
@@ -74,7 +75,7 @@ def send_email_cv(feedback_instance):
         )
     # Display an error if something goes wrong.
     except ClientError as e:
-        print(e.response['Error']['Message'])
+        raise ValidationError(e.response['Error']['Message'])
     else:
         print("Email sent! Message ID:"),
         print(response['MessageId'])

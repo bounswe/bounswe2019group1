@@ -12,15 +12,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:paddingLeft="24dp"
-        android:paddingTop="56dp"
+        android:paddingTop="20dp"
         android:paddingRight="24dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="72dp"
+            android:layout_width="281dp"
+            android:layout_height="111dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"
-            android:src="@drawable/app_name" />
+            android:src="@drawable/app_logo_to_be_big" />
 
 
 
@@ -99,101 +99,6 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
-        <Button
-            android:id="@+id/layout_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp"
-            android:background="#EEF2F5"
-            android:clickable="false"
-            android:text="Card Info"
-            android:visibility="gone" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_card_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="#D3FFFFFF"
-            android:visibility="gone">
-
-            <EditText
-                android:id="@+id/input_card_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Card Number as 16 digits"
-                android:inputType="number"
-                android:visibility="visible" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_card_owner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="#D3FFFFFF"
-            android:visibility="gone">
-
-            <EditText
-                android:id="@+id/input_card_owner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Full name on the card"
-                android:inputType="textPersonName"
-                android:visibility="visible" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_card_expire"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="#D3FFFFFF"
-            android:visibility="gone">
-
-            <EditText
-                android:id="@+id/input_card_expire"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Expiration date as MM.YY"
-                android:inputType="date"
-                android:visibility="visible" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layout_card_ccv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="#D3FFFFFF"
-            android:visibility="gone">
-
-            <EditText
-                android:id="@+id/input_card_ccv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="CCV number"
-                android:inputType="number"
-                android:visibility="visible" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/register_as_trader_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="80dp"
-            android:layout_marginBottom="30dp"
-            android:background="#EEF2F5"
-            android:onClick="switchUserType"
-            android:text="Register as Trader" />
-
         <Button
             android:id="@+id/register_as_basic_button"
             android:layout_width="match_parent"
@@ -202,7 +107,7 @@
             android:layout_marginRight="80dp"
             android:layout_marginBottom="30dp"
             android:background="#EEF2F5"
-            android:onClick="completeRegistration"
+            android:onClick="goToSignUpPageTraderActivity"
             android:text="Register" />
 
         <Button

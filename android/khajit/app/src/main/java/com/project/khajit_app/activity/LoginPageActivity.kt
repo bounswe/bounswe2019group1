@@ -11,14 +11,29 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.tasks.Task
 import android.util.Log
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import com.google.android.gms.common.api.ApiException
+import com.project.khajit_app.api.RetrofitClient
+import com.project.khajit_app.data.models.BasicRegisterResponse
+import com.project.khajit_app.data.models.TraderUser
+import com.project.khajit_app.data.models.userToBeLogin
 import kotlinx.android.synthetic.main.activity_login.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class LoginPageActivity : AppCompatActivity() {
 
+
+    private lateinit var email_input : EditText
+    private lateinit var password_input : EditText
+    private lateinit var normal_login_button : Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
@@ -73,8 +88,28 @@ class LoginPageActivity : AppCompatActivity() {
         startActivity(Intent(this, SignUpPageActivity::class.java))
     }
     fun loginAccount(view: View) {
+
        // startActivity(Intent(this, SignUpPageActivity::class.java))
+
+        btn_login.setOnClickListener {
+            var email_information = email_input.text.toString().trim()
+            var password_information = password_input.text.toString().trim() //int olsa daha iyi gibi
+
+            if (email_information == null) {
+                email_input.error = "Email is required."
+                email_input.requestFocus()
+                return@setOnClickListener
+            }
+            if (password_information.isEmpty()) {
+                password_input.error = "Password is required."
+                password_input.requestFocus()
+                return@setOnClickListener
+            }
+
+
+        }
     }
+
 
     fun forgetPassword(view: View) {
         // startActivity(Intent(this, SignUpPageActivity::class.java))

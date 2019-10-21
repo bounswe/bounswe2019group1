@@ -20,6 +20,9 @@ import { Link } from "react-router-dom";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import image from "assets/img/dollar-hd.jpg";
 import { login } from "../../service/authentication.service.js";
+import swal from 'sweetalert';
+import Dialog from '@material-ui/core/Dialog';
+
 
 const useStyles = makeStyles(styles);
 export default function LoginPage(props) {
@@ -42,20 +45,17 @@ export default function LoginPage(props) {
     }));
   };
   const handleSubmit = event => {
-    console.log(values);
-    login(values.username, values.pass);
-    //let token = login(values.username, values.pass);
-    /*
-    axios.post(base_url + "/user/login/", values).then(
-      response => {
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-    */
+    
     event.preventDefault();
+    login(values.username, values.pass).then(function(response){
+      response &&
+      props.history.push("/profile-page")},function(){
+        
+        swal ( "Oops" ,  "Incorrect username or password!" ,  "error" )
+
+      }
+      );
+    
   };
   return (
     <div>
@@ -104,7 +104,9 @@ export default function LoginPage(props) {
                         type: "username",
                         endAdornment: (
                           <InputAdornment position="end">
-                            perm_identity
+                            <Icon className={classes.inputIconsColor}>
+                              perm_identity
+                            </Icon>
                           </InputAdornment>
                         )
                       }}
@@ -142,7 +144,7 @@ export default function LoginPage(props) {
                   </CardFooter>
                   <CardFooter className={classes.cardFooter}>
                     New to Khaji-it?
-                    <Link to="/sign-up">Sign up now</Link>
+                    <Link to="/sign-up"> Sign up now</Link>
                   </CardFooter>
                 </form>
               </Card>

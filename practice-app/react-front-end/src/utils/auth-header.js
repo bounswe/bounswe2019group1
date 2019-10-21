@@ -1,11 +1,7 @@
-import { authenticationService } from "../service/authentication.service";
-
 export function authHeader() {
-  // return authorization header with jwt token
-  // const currentUser = authenticationService.currentUserValue;
-  const currentUser = { token: "jwttoken" };
+  const currentUser = { token: localStorage.getItem("currentUser") };
   if (currentUser && currentUser.token) {
-    return { Authorization: `Bearer ${currentUser.token}` };
+    return `JWT ${currentUser.token}`.replace(/"/g,"");
   } else {
     return {};
   }

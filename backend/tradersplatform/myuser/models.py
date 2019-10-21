@@ -16,5 +16,7 @@ class TemplateUser(User):
                                          validators=[MinValueValidator(1000000000000000),
                                                      MaxValueValidator(10000000000000000 - 1)], default=0)
     citizenship_number = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')
+    title = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')
+    biography = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')
     last_changed_password_date = models.DateTimeField( blank=True, null=True, unique=False, default=None)
     #yeni = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')

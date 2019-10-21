@@ -25,8 +25,10 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import image from "assets/img/dollar-hd.jpg";
 import LocationPicker from "react-location-picker";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import {environment} from "environments/environment.prod.js"
+import {
+  registerBasic,
+  RegisterTrader
+} from "../../service/registration.service";
 
 const useStyles = makeStyles(styles);
 export default function SignupPage(props) {
@@ -43,7 +45,13 @@ export default function SignupPage(props) {
     name: "",
     surname: "",
     email: "",
-    location: "",
+    location: {
+      address: "Istanbul, Turkey",
+      position: {
+        lat: 41.040578365183514,
+        lng: 29.092968749999955
+      }
+    },
     usertype: "Basic",
     iban: "",
     citizenshipno: 0
@@ -62,29 +70,34 @@ export default function SignupPage(props) {
   const [isTraderUserSelected, setIsTraderUserSelected] = React.useState({
     selected: false
   });
-  const [location, setLocation] = React.useState({
-    address: "Istanbul, Turkey",
-    position: {
-      lat: 41.040578365183514,
-      lng: 29.092968749999955
-    }
-  });
   const validateForm = () => {
     return true;
-  }
+  };
 
   const handleSubmit = event => {
-    console.log(values);
     // validate the inputs and then send the backend
-    if (event.target.value === "Basic") {
+    if (values.usertype === "Basic") {
       validateForm(values);
-      axios.post(environment.api_url + "/user/registerbasic", values);
-    }else{
+      registerBasic(
+        values.username,
+        values.pass,
+        values.email,
+        values.name,
+        values.surname
+      ).then(data => console.log(data));
+    } else {
       validateForm(values);
-
-      axios.post(environment.api_url + "/user/registertrader", values);
+      RegisterTrader(
+        values.username,
+        values.pass,
+        values.email,
+        values.name,
+        values.surname,
+        values.location,
+        values.iban,
+        values.citizenshipno
+      ).then(data => console.log(data));
     }
-
 
     event.preventDefault();
   };
@@ -111,8 +124,8 @@ export default function SignupPage(props) {
   if (isLocationSelected.selected) {
     MapOrForm = (
       <LocationPickerMap
-        location={location}
-        setLocation={setLocation}
+        values={values}
+        setValues={setValues}
         setIsLocationSelected={setIsLocationSelected}
       />
     );
@@ -136,7 +149,7 @@ export default function SignupPage(props) {
                   </Button>
                 </div>
               </CardHeader>
-              <p className={classes.divider}>Or Be Classical</p>
+              <p className={classes.divider}> Khaji-it</p>
               <CardBody>
                 <CustomInput
                   labelText="Username"
@@ -144,6 +157,7 @@ export default function SignupPage(props) {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  value={values.username}
                   inputProps={{
                     type: "username",
                     endAdornment: (
@@ -162,6 +176,7 @@ export default function SignupPage(props) {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  value={values.pass}
                   inputProps={{
                     type: "password",
                     endAdornment: (
@@ -181,6 +196,7 @@ export default function SignupPage(props) {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  value={values.email}
                   inputProps={{
                     type: "email",
                     endAdornment: (
@@ -197,12 +213,13 @@ export default function SignupPage(props) {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  value={values.name}
                   inputProps={{
                     type: "text",
                     endAdornment: (
                       <InputAdornment position="end">
                         <Icon className={classes.inputIconsColor}>
-                          perm_identity
+                          how_to_reg
                         </Icon>
                       </InputAdornment>
                     )
@@ -215,12 +232,13 @@ export default function SignupPage(props) {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  value={values.surname}
                   inputProps={{
                     type: "text",
                     endAdornment: (
                       <InputAdornment position="end">
                         <Icon className={classes.inputIconsColor}>
-                          perm_identity
+                          how_to_reg
                         </Icon>
                       </InputAdornment>
                     )
@@ -230,18 +248,22 @@ export default function SignupPage(props) {
                 <CustomInput
                   labelText="Location"
                   id="location"
-                  onClick={() => {
-                    setIsLocationSelected({ selected: true });
-                  }}
                   formControlProps={{
                     fullWidth: true
                   }}
-                  value={location.address}
+                  value={values.location.address}
                   inputProps={{
                     type: "location",
                     endAdornment: (
                       <InputAdornment position="end">
-                        <Icon className={classes.inputIconsColor}>room</Icon>
+                        <Icon
+                          className={classes.inputIconsColor}
+                          onClick={() => {
+                            setIsLocationSelected({ selected: true });
+                          }}
+                        >
+                          room
+                        </Icon>
                       </InputAdornment>
                     )
                   }}
@@ -268,7 +290,7 @@ export default function SignupPage(props) {
               </CardFooter>
               <CardFooter className={classes.cardFooter}>
                 Already registered?
-                <Link to="/login-page">Login here</Link>
+                <Link to="/login-page"> Login here</Link>
               </CardFooter>
             </form>
           </Card>
@@ -295,11 +317,12 @@ export default function SignupPage(props) {
                   </Button>
                 </div>
               </CardHeader>
-              <p className={classes.divider}>Or Be Classical</p>
+              <p className={classes.divider}>Khaji-it</p>
               <CardBody>
                 <CustomInput
                   labelText="Username"
                   id="username"
+                  value={values.username}
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -307,7 +330,9 @@ export default function SignupPage(props) {
                     type: "username",
                     endAdornment: (
                       <InputAdornment position="end">
-                        perm_identity
+                        <Icon className={classes.inputIconsColor}>
+                          perm_identity
+                        </Icon>
                       </InputAdornment>
                     )
                   }}
@@ -316,6 +341,7 @@ export default function SignupPage(props) {
                 <CustomInput
                   labelText="Password"
                   id="pass"
+                  value={values.pass}
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -338,6 +364,7 @@ export default function SignupPage(props) {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  value={values.email}
                   inputProps={{
                     type: "email",
                     endAdornment: (
@@ -354,12 +381,13 @@ export default function SignupPage(props) {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  value={values.name}
                   inputProps={{
                     type: "text",
                     endAdornment: (
                       <InputAdornment position="end">
                         <Icon className={classes.inputIconsColor}>
-                          perm_identity
+                          how_to_reg
                         </Icon>
                       </InputAdornment>
                     )
@@ -372,12 +400,13 @@ export default function SignupPage(props) {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  value={values.surname}
                   inputProps={{
                     type: "text",
                     endAdornment: (
                       <InputAdornment position="end">
                         <Icon className={classes.inputIconsColor}>
-                          perm_identity
+                          how_to_reg
                         </Icon>
                       </InputAdornment>
                     )
@@ -393,7 +422,7 @@ export default function SignupPage(props) {
                   formControlProps={{
                     fullWidth: true
                   }}
-                  value={location.address}
+                  value={values.location.address}
                   inputProps={{
                     type: "location",
                     endAdornment: (
@@ -420,6 +449,7 @@ export default function SignupPage(props) {
                 <CustomInput
                   labelText="IBAN Number"
                   id="iban"
+                  value={values.iban}
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -428,7 +458,7 @@ export default function SignupPage(props) {
                     endAdornment: (
                       <InputAdornment position="end">
                         <Icon className={classes.inputIconsColor}>
-                          perm_identity
+                          credit_card
                         </Icon>
                       </InputAdornment>
                     )
@@ -438,6 +468,7 @@ export default function SignupPage(props) {
                 <CustomInput
                   labelText="Citizenship No"
                   id="citizenshipno"
+                  value={values.citizenshipno}
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -446,7 +477,7 @@ export default function SignupPage(props) {
                     endAdornment: (
                       <InputAdornment position="end">
                         <Icon className={classes.inputIconsColor}>
-                          perm_identity
+                          supervisor_account
                         </Icon>
                       </InputAdornment>
                     )
@@ -461,7 +492,7 @@ export default function SignupPage(props) {
               </CardFooter>
               <CardFooter className={classes.cardFooter}>
                 Already registered?
-                <Link to="/login-page">Login here</Link>
+                <Link to="/login-page"> Login here</Link>
               </CardFooter>
             </form>
           </Card>
@@ -497,19 +528,25 @@ export default function SignupPage(props) {
 class LocationPickerMap extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      address: props.location.address,
-      position: props.location.position
+      address: "Istanbul, Turkey",
+      position: {
+        lat: 41.040578365183514,
+        lng: 29.092968749999955
+      }
     };
-
     this.props = props;
     this.handleLocationChange = this.handleLocationChange.bind(this);
   }
 
   handleLocationChange({ position, address, places }) {
     // Set new location
-    this.props.setLocation({ position: position, address: address });
+    this.props.setValues(oldValues => ({
+      ...oldValues,
+      location: { position: position, address: address }
+    }));
+
+    // this.props.setLocation({ position: position, address: address });
     // eslint-disable-next-line react/prop-types
     this.props.setIsLocationSelected({ selected: false });
   }

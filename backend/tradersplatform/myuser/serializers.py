@@ -28,6 +28,8 @@ class TempUserCreateSerializer(ModelSerializer):
             'phone_number',
             'iban_number',
             'citizenship_number',
+            'biography',
+            'title',
             'last_changed_password_date',
         ]
         extra_kwargs = {"password": {"write_only": True, "required": False},
@@ -35,6 +37,8 @@ class TempUserCreateSerializer(ModelSerializer):
                         "location": {"required": False},
                         "iban_number": {"required": False},
                         "citizenship_number": {"required": False},
+                        "title": {"required": False},
+                        "biography": {"required": False},
                         "last_changed_password_date": {"required": False}
                         }
 
@@ -78,3 +82,27 @@ class TempUserLoginSerializer(ModelSerializer):
         data["token"] = token
         data["user"] = user_obj
         return data
+
+
+class UserUpdateSerializer(ModelSerializer):
+
+    class Meta:
+        model = TemplateUser
+        fields = [
+            "id",
+            "first_name",
+            "last_name",
+            "title",
+            "biography",
+        ]
+
+        extra_kwargs = {"first_name":
+                            {"required": False},
+                        "last_name":
+                            {"required": False},
+                        "title":
+                            {"required": False},
+                        "biography":
+                            {"required": False},
+                        }
+

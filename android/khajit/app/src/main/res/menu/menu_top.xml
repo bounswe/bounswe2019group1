@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context=".activity.HomeFeedPageActivity"
+    >
 
     <item
-        android:id="@+id/logout"
+        android:id="@+id/logout_top_menu_item"
         android:icon="@android:drawable/ic_lock_power_off"
+        app:showAsAction="never"
         android:title="Log out" />
 
     <item
-        android:id="@+id/settings"
+        android:id="@+id/settings_top_menu_item"
         android:icon="@android:drawable/ic_menu_preferences"
+        app:showAsAction="never"
         android:title="Settings" />
+    <item
+        android:id="@+id/profile_top_menu_item"
+        android:icon="@android:drawable/ic_menu_preferences"
+        app:showAsAction="never"
+        android:title="Profile" />
+
 
 </menu>

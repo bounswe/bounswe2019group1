@@ -41,29 +41,12 @@ export default function Footer(props) {
                 About us
               </a>
             </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                
-                className={classes.block}
-                target="_blank"
-              >
-                Blog
-              </a>
-            </ListItem>
-            <ListItem className={classes.inlineBlock}>
-              <a
-                
-                className={classes.block}
-                target="_blank"
-              >
-                Licenses
-              </a>
-            </ListItem>
+            
+           
           </List>
         </div>
         <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()} , made with{" "}
-          <Favorite className={classes.icon} /> by{" "}
+          &copy; {1900 + new Date().getYear()} , developed by{" "}
           <a
             href="https://github.com/bounswe/bounswe2019group1/blob/master/README.md"
             className={aClasses}
