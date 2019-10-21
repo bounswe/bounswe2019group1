@@ -159,11 +159,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="73dp"
+
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                app:boxBackgroundColor="#D3FFFFFF"
-                app:boxBackgroundMode="filled">
+                android:background="#D3FFFFFF">
+
 
                 <EditText
                     android:id="@+id/input_old_password"
@@ -176,11 +177,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="73dp"
+
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                app:boxBackgroundColor="#D3FFFFFF"
-                app:boxBackgroundMode="filled">
+                android:background="#D3FFFFFF">
+
 
                 <EditText
                     android:id="@+id/input_new_password"
@@ -193,11 +195,12 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="73dp"
+
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                app:boxBackgroundColor="#D3FFFFFF"
-                app:boxBackgroundMode="filled">
+                android:background="#D3FFFFFF">
+
 
                 <EditText
                     android:id="@+id/input_re_new_password"

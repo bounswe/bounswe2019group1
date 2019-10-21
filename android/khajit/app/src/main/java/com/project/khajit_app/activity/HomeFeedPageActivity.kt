@@ -4,6 +4,7 @@ import android.app.Notification
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+
 import android.widget.FrameLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -69,6 +70,7 @@ class HomeFeedPageActivity : AppCompatActivity() {
             .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
             .replace(R.id.content, fragment, fragment.javaClass.simpleName)
             .commit()
+
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_top, menu)
@@ -89,5 +91,6 @@ class HomeFeedPageActivity : AppCompatActivity() {
             true
         }
         else -> super.onOptionsItemSelected(item)
+
     }
 }

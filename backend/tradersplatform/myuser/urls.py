@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^retrieve/(?P<pk>[0-9_]+)/', views.UserRetrieveAPI.as_view(), name="register"),
     url(r'^retrievemobile/', views.UserRetrieveMobileAPI.as_view(), name="register"),
     url(r'^search_user/', views.SearchUserListAPIView.as_view(), name="update_de"),
+    url(r'^updateuser/', views.UserUpdateAPIView.as_view(), name="update_de"),
     #url(r'^logs/', views.NoParsingFilter(), name="register"),
 ]

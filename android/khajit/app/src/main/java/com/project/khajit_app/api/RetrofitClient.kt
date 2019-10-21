@@ -9,8 +9,10 @@ import java.net.InetAddress.getByAddress
 object RetrofitClient {
 
     //private val AUTH = "Basic"
+
     //var ipAddress = Inet4Address.getLocalHost().hostAddress
     private const val BASE_URL = "http://192.168.1.2:8000/"    //dynamic ip adresi girilmesi lazım
+
 
     private val okHttpClient = OkHttpClient.Builder()
             .addInterceptor {chain ->

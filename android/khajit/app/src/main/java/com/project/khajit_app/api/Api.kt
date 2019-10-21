@@ -10,9 +10,11 @@ interface Api {
 
     @Headers("Content-Type: application/json")
     @POST("user/registerbasic/")
+
     fun createBasicUser(@Body body: BasicUser?):Call<BasicRegisterResponse>
 
     @Headers("Content-Type: application/json")
     @POST("user/registertrader/")
     fun createTraderUser(@Body body: TraderUser):Call<BasicRegisterResponse>  //trader user response yapılması lazım
+
 }

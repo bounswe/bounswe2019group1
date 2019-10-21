@@ -9,7 +9,7 @@ from rest_framework_jwt.settings import api_settings
 from follow.views import check_if_user
 from myuser.functions import send_email_cv
 from myuser.models import TemplateUser
-from myuser.serializers import TempUserCreateSerializer, TempUserLoginSerializer
+from myuser.serializers import TempUserCreateSerializer, TempUserLoginSerializer, UserUpdateSerializer
 from django.contrib.auth.models import Group
 from rest_framework.exceptions import ValidationError
 from django.contrib.auth.models import User
@@ -159,3 +159,16 @@ class SearchUserListAPIView(ListAPIView):
 
         serializer = TempUserCreateSerializer(service_query_general, many=True)
         return Response(serializer.data)
+
+
+class UserUpdateAPIView (UpdateAPIView):
+
+    def put(self, request, *args, **kwargs):
+        id = request.user.id
+        user = TemplateUser.objects.filter(id=id).first()
+        if not user:
+            return Response({"detail": "user not exist"}, status=400)
+        serializer = UserUpdateSerializer(user, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=200)
