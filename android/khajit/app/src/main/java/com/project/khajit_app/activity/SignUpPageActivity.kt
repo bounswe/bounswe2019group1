@@ -3,6 +3,7 @@ package com.project.khajit_app.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Button
@@ -14,6 +15,9 @@ import com.project.khajit_app.R
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.BasicRegisterResponse
 import com.project.khajit_app.data.models.BasicUser
+import com.project.khajit_app.global.User
+import okhttp3.ResponseBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -96,10 +100,29 @@ class SignUpPageActivity : AppCompatActivity(), OnClickListener {
             RetrofitClient.instance.createBasicUser(userInfo)
                 .enqueue(object : Callback<BasicRegisterResponse>{
                     override fun onResponse(
-                        call: Call<BasicRegisterResponse>?,
-                        response: Response<BasicRegisterResponse>?
+                        call: Call<BasicRegisterResponse>,
+                        response: Response<BasicRegisterResponse>
                     ) {
-                        Toast.makeText(applicationContext,"oldu",Toast.LENGTH_LONG).show()
+                        if(response.isSuccessful ){
+                            if(response.body()?.username != null){
+                                Toast.makeText(applicationContext,response.body()?.username.toString(),Toast.LENGTH_LONG).show()
+                            }else{
+                                println(response)
+                                println(call)
+                                println(response.body()?.toString()?.trim())
+                                Toast.makeText(applicationContext,"oldu",Toast.LENGTH_LONG).show()
+                                Log.d("success:", "" + response.body()?.user?.username)
+
+                                response.body()?.token.let {
+                                    User.token = it
+                                }
+
+                            }
+
+                        }else{
+                            Log.d("error message:", response.message())
+                        }
+
                     }
 
                     override fun onFailure(call: Call<BasicRegisterResponse>, t: Throwable) {

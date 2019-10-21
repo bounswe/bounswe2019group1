@@ -1,5 +1,6 @@
 package com.project.khajit_app.api
 
+import com.project.khajit_app.global.User
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -7,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient {
 
     //private val AUTH = "Basic"
-    private const val BASE_URL = "http://192.168.4.211:8000/"    //dynamic ip adresi girilmesi lazım
+    private const val BASE_URL = "http://35.163.120.227:8000/"    //dynamic ip adresi girilmesi lazım
 
     private val okHttpClient = OkHttpClient.Builder()
             .addInterceptor {chain ->
@@ -16,6 +17,10 @@ object RetrofitClient {
                 val requestBuilder = original.newBuilder()
                     .addHeader("Content-Type","application/json")
                     .method(original.method(),original.body())
+
+                User.token.let {
+                    requestBuilder.addHeader("Authorization", "JWT %s".format(User.token))
+                }
 
                 val request = requestBuilder.build()
                 chain.proceed(request)

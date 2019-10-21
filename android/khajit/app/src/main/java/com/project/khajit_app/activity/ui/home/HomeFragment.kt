@@ -6,16 +6,20 @@ import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ListView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.EditingProfilePageActivity
 import com.project.khajit_app.activity.ListViewAdapter
+import com.project.khajit_app.api.RetrofitClient
+import com.project.khajit_app.data.models.BasicRegisterResponse
+import com.project.khajit_app.data.models.BasicUser
+import org.json.JSONObject
 import org.w3c.dom.Text
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeFragment : Fragment() {
 
@@ -50,6 +54,23 @@ class HomeFragment : Fragment() {
 
         var loader = root.findViewById(R.id.progress_loader) as ProgressBar
         loader.visibility = View.GONE
+
+        var k = JSONObject()
+        var l = JSONObject()
+        l.put("göz", 222)
+        k.put("kol", 1)
+        k.put("bacak", "asd")
+        k.put("yüz", l)
+        println(k)
+
+        Toast.makeText(this.context, "IM AT HOME", Toast.LENGTH_LONG).show()
+        /*
+        var listview = root.findViewById(R.id.list_prediction_name) as ListView
+        listview.setOnItemClickListener{ parent, view, position, id ->
+            Toast.makeText(this.context, "text is " + " $position", Toast.LENGTH_LONG).show()
+            var ite = ladapter.getItem(position) as String
+        }
+        */
 
         return root
     }
