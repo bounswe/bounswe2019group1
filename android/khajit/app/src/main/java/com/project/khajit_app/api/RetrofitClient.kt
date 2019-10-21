@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient {
 
     //private val AUTH = "Basic"
-    private const val BASE_URL = "http://192.168.4.211:8000/"    //dynamic ip adresi girilmesi lazım
+    private const val BASE_URL = "http://35.163.120.227:8000/"    //dynamic ip adresi girilmesi lazım
 
     private val okHttpClient = OkHttpClient.Builder()
             .addInterceptor {chain ->
