@@ -16,8 +16,10 @@ import android.widget.EditText
 import android.widget.Toast
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.BasicRegisterResponse
+import com.project.khajit_app.data.models.LoginResponse
 import com.project.khajit_app.data.models.TraderUser
 import com.project.khajit_app.data.models.userToBeLogin
+import com.project.khajit_app.global.User
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,7 +31,6 @@ class LoginPageActivity : AppCompatActivity() {
 
     private lateinit var email_input : EditText
     private lateinit var password_input : EditText
-    private lateinit var normal_login_button : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -40,6 +41,10 @@ class LoginPageActivity : AppCompatActivity() {
             this.supportActionBar?.hide()
         } catch (e: NullPointerException){}
 
+        email_input = findViewById(R.id.input_email)
+        password_input = findViewById(R.id.input_password)
+
+        /*
         // [ [ [ Google Sign In ] ] ]
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -69,21 +74,79 @@ class LoginPageActivity : AppCompatActivity() {
         }
         // [ [ [ End of Google Sign In ] ] ]
 
+         */
+
+        var login_button =  findViewById<Button>(R.id.btn_login)
+        login_button.setOnClickListener(loginBasic)
+
     }
 
-    override fun onStart() {
-        super.onStart()
-        // Check if a user was already signed in
+    private val loginBasic = View.OnClickListener { view ->
+        var email_information = email_input.text.toString().trim()
+        var password_information = password_input.text.toString().trim() //int olsa daha iyi gibi
 
-        /*
-        val account = GoogleSignIn.getLastSignedInAccount(this)
-        if (account != null) {
-            // User is already signed in, start HomePageActivity
-            //startActivity(Intent(this, HomePageActivity::class.java))
-
-            // Commented ^this out because I don't want it to auto-login during development
+        if (email_information.isEmpty()) {
+            email_input.error = "Email is required."
+            email_input.requestFocus()
+            return@OnClickListener
         }
-        */
+        if (password_information.isEmpty()) {
+            password_input.error = "Password is required."
+            password_input.requestFocus()
+            return@OnClickListener
+        }
+
+        val userInfo = userToBeLogin(email_information, password_information)
+        RetrofitClient.instance.loginUser(userInfo).enqueue(object : Callback<LoginResponse>{
+            override fun onResponse(
+                call: Call<LoginResponse>,
+                response: Response<LoginResponse>
+            ) {
+                println(response.toString())
+                if(response.code() == 200 ){
+                    if(response.body()?.non_field_errors != null){
+                        Toast.makeText(applicationContext, "interesting", Toast.LENGTH_LONG).show()
+                        //Toast.makeText(applicationContext,response.body()?.username.toString(), Toast.LENGTH_LONG).show()
+
+                    }else{
+                        println(response)
+                        println(call)
+                        println(response.body()?.toString()?.trim())
+                        Toast.makeText(applicationContext,"Logged In",Toast.LENGTH_LONG).show()
+                        Log.d("success:", "" + response.body()?.user?.username)
+
+
+
+                        User.token = response.body()?.token
+                        User.id = response.body()?.user?.id
+                        User.username = response.body()?.user?.username
+                        User.email = response.body()?.user?.email
+                        User.first_name = response.body()?.user?.first_name
+                        User.last_name = response.body()?.user?.last_name
+                        User.type = response.body()?.user?.groups?.get(0)
+                        User.title = response.body()?.user?.email
+                        User.bio = response.body()?.user?.email
+
+                        startActivity(Intent(this@LoginPageActivity, HomeFeedPageActivity::class.java))
+                        /*
+                        response.body()?.token.let {
+                            User.token = it
+                        }
+
+                         */
+                    }
+                }else{
+                    Toast.makeText(applicationContext,"Password or Username is incorrect",Toast.LENGTH_LONG).show()
+                    Log.d("error message:", response.message())
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                Toast.makeText(applicationContext,t.message,Toast.LENGTH_LONG).show()
+            }
+
+        }
+        )
 
     }
 
@@ -94,23 +157,7 @@ class LoginPageActivity : AppCompatActivity() {
 
        // startActivity(Intent(this, SignUpPageActivity::class.java))
 
-        btn_login.setOnClickListener {
-            var email_information = email_input.text.toString().trim()
-            var password_information = password_input.text.toString().trim() //int olsa daha iyi gibi
 
-            if (email_information == null) {
-                email_input.error = "Email is required."
-                email_input.requestFocus()
-                return@setOnClickListener
-            }
-            if (password_information.isEmpty()) {
-                password_input.error = "Password is required."
-                password_input.requestFocus()
-                return@setOnClickListener
-            }
-
-
-        }
     }
 
 
