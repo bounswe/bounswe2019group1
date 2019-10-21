@@ -29,6 +29,11 @@ import {
   registerBasic,
   RegisterTrader
 } from "../../service/registration.service";
+import {
+  validateBasicRegister,
+  validateTraderRegister
+} from "../../utils/validator";
+import swal from "sweetalert";
 
 const useStyles = makeStyles(styles);
 export default function SignupPage(props) {
@@ -40,11 +45,11 @@ export default function SignupPage(props) {
   const { ...rest } = props;
 
   const [values, setValues] = React.useState({
-    username: "",
-    pass: "",
-    name: "",
-    surname: "",
-    email: "",
+    username: "sadfas",
+    pass: "13asf1",
+    name: "fasfd",
+    surname: "asfdafa",
+    email: "ads@gmail.com",
     location: {
       address: "Istanbul, Turkey",
       position: {
@@ -64,39 +69,67 @@ export default function SignupPage(props) {
       [event.target.id]: event.target.value
     }));
   };
+  const handleLocChange = event => {
+    event.persist();
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.id]: {
+        address: event.target.value,
+        position: {}
+      }
+    }));
+  };
   const [isLocationSelected, setIsLocationSelected] = React.useState({
     selected: false
   });
   const [isTraderUserSelected, setIsTraderUserSelected] = React.useState({
     selected: false
   });
-  const validateForm = () => {
-    return true;
-  };
 
   const handleSubmit = event => {
     // validate the inputs and then send the backend
     if (values.usertype === "Basic") {
-      validateForm(values);
-      registerBasic(
-        values.username,
-        values.pass,
-        values.email,
-        values.name,
-        values.surname
-      ).then(data => console.log(data));
+      var validation_response = validateBasicRegister(values);
+      if (validation_response.valid === false) {
+        swal("Oops", validation_response.reason, "error");
+      } else {
+        registerBasic(
+          values.username,
+          values.pass,
+          values.email,
+          values.name,
+          values.surname,
+          values.location
+        )
+          .then(res =>
+            res.status === 200 ? props.history.push("/login") : null
+          )
+          .catch(error => {
+            swal("Oops: ", error.message, "error");
+          });
+      }
     } else {
-      validateForm(values);
-      RegisterTrader(
-        values.username,
-        values.pass,
-        values.email,
-        values.name,
-        values.surname,
-        values.location,
-        values.iban,
-        values.citizenshipno
-      ).then(data => console.log(data));
+      var validation_response2 = validateTraderRegister(values);
+      if (validation_response2.valid === false) {
+        swal("Oops", validation_response2.reason, "error");
+      } else {
+        RegisterTrader(
+          values.username,
+          values.pass,
+          values.email,
+          values.name,
+          values.surname,
+          values.location,
+          values.iban,
+          values.citizenshipno
+        )
+          .then(res =>
+            res.status === 200 ? props.history.push("/login") : null
+          )
+          .catch(error => {
+            swal("Oops: ", error.message, "error");
+          });
+      }
     }
 
     event.preventDefault();
@@ -267,7 +300,7 @@ export default function SignupPage(props) {
                       </InputAdornment>
                     )
                   }}
-                  onChange={handleChange}
+                  onChange={handleLocChange}
                 />
                 <FormControl className={classes.formControl}>
                   <Select
@@ -431,7 +464,7 @@ export default function SignupPage(props) {
                       </InputAdornment>
                     )
                   }}
-                  onChange={handleChange}
+                  onChange={handleLocChange}
                 />
                 <FormControl className={classes.formControl}>
                   <Select

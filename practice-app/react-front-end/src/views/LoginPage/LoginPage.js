@@ -20,9 +20,7 @@ import { Link } from "react-router-dom";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import image from "assets/img/dollar-hd.jpg";
 import { login } from "../../service/authentication.service.js";
-import swal from 'sweetalert';
-import Dialog from '@material-ui/core/Dialog';
-
+import swal from "sweetalert";
 
 const useStyles = makeStyles(styles);
 export default function LoginPage(props) {
@@ -45,17 +43,15 @@ export default function LoginPage(props) {
     }));
   };
   const handleSubmit = event => {
-    
     event.preventDefault();
-    login(values.username, values.pass).then(function(response){
-      response &&
-      props.history.push("/profile-page")},function(){
-        
-        swal ( "Oops" ,  "Incorrect username or password!" ,  "error" )
-
+    login(values.username, values.pass).then(
+      function(response) {
+        response && props.history.push("/profile-page");
+      },
+      function() {
+        swal("Oops", "Incorrect username or password!", "error");
       }
-      );
-    
+    );
   };
   return (
     <div>
