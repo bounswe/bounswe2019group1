@@ -18,7 +18,7 @@ import GridItem from "components/Grid/GridItem.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
-
+import { Link } from "react-router-dom";
 import profile from "assets/img/faces/ai.jpg";
 
 import portfolio1 from "assets/img/examples/studio-1.jpg";
@@ -56,6 +56,7 @@ export default function ProfilePage(props) {
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   return (
     <div>
+      <Link to="/">
       <Header
         color="transparent"
         brand="Khaji-it Traders Platform"
@@ -66,7 +67,7 @@ export default function ProfilePage(props) {
           color: "white"
         }}
         {...rest}
-      />
+      /></Link>
       <Parallax small filter image={require("assets/img/dollar-hd.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>

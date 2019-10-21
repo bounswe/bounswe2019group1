@@ -42,9 +42,13 @@ export default function LoginPage(props) {
     }));
   };
   const handleSubmit = event => {
-    let token = login(values.username, values.pass);
-    console.log(token);
+    
     event.preventDefault();
+    login(values.username, values.pass).then(function(response){
+      response &&
+      props.history.push("/profile-page")    }
+      );
+    
   };
   return (
     <div>
