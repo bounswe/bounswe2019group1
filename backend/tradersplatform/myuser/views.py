@@ -6,6 +6,7 @@ from rest_framework.generics import RetrieveAPIView, ListAPIView, CreateAPIView,
 from rest_framework.views import APIView
 from rest_framework_jwt.settings import api_settings
 
+from follow.views import check_if_user
 from myuser.functions import send_email_cv
 from myuser.models import TemplateUser
 from myuser.serializers import TempUserCreateSerializer, TempUserLoginSerializer
@@ -106,3 +107,23 @@ class NoParsingFilter(logging.Filter):
         return not record.getMessage().startswith('aa')
 
 #logger.addFilter(NoParsingFilter())
+
+
+class SearchUserListAPIView(ListAPIView):
+
+    def post(self, request, *args, **kwargs):
+        check_if_user(request)
+        service_query_general=TemplateUser.objects.all()
+        username = request.data.get('username', None)
+        if username is not None:
+                service_query_general = service_query_general.filter(username__contains=username)
+        else:
+            raise ValidationError("give username")
+
+        page = self.paginate_queryset(service_query_general)
+        if page is not None:
+            serializer = TempUserCreateSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = TempUserCreateSerializer(service_query_general, many=True)
+        return Response(serializer.data)
