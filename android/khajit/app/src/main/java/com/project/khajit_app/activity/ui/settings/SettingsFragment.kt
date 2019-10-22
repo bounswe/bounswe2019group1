@@ -1,31 +1,41 @@
-package com.project.khajit_app.activity
+package com.project.khajit_app.activity.ui.settings
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.project.khajit_app.R
+import com.project.khajit_app.activity.ui.equipment.SettingsViewModel
 
-class EditingProfilePageActivity : AppCompatActivity() {
+class SettingsFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private lateinit var settingsViewModel: SettingsViewModel
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_settings)
+        settingsViewModel =
+            ViewModelProviders.of(this).get(SettingsViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_settings, container, false)
 
-        try {
-            this.supportActionBar?.hide()
-        } catch (e: NullPointerException){}
+        root.findViewById<TextView>(R.id.text_bio_edit).movementMethod = ScrollingMovementMethod()
 
-        findViewById<TextView>(R.id.text_bio_edit).movementMethod = ScrollingMovementMethod()
+        return root
     }
 
     fun changePersonalInfo(view: View) {
-        var first_name = findViewById<EditText>(R.id.input_first_name)
-        var last_name = findViewById<EditText>(R.id.input_last_name)
-        var title = findViewById<EditText>(R.id.input_title)
-        var bio = findViewById<EditText>(R.id.text_bio_edit)
+        var first_name = view.findViewById<EditText>(R.id.input_first_name)
+        var last_name = view.findViewById<EditText>(R.id.input_last_name)
+        var title = view.findViewById<EditText>(R.id.input_title)
+        var bio = view.findViewById<EditText>(R.id.text_bio_edit)
 
         if(first_name.text.isEmpty()){
             first_name.error = "First name is required."
@@ -58,9 +68,9 @@ class EditingProfilePageActivity : AppCompatActivity() {
     }
 
     fun changePasswordInfo(view: View) {
-        var old_pw = findViewById<EditText>(R.id.input_old_password)
-        var new_pw = findViewById<EditText>(R.id.input_new_password)
-        var re_new_pw = findViewById<EditText>(R.id.input_re_new_password)
+        var old_pw = view.findViewById<EditText>(R.id.input_old_password)
+        var new_pw = view.findViewById<EditText>(R.id.input_new_password)
+        var re_new_pw = view.findViewById<EditText>(R.id.input_re_new_password)
 
         if(old_pw.text.isEmpty()){
             old_pw.error = "Current password is required."
