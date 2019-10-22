@@ -2,10 +2,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/big_picture_currency"
-    tools:context=".activity.EditingProfilePageActivity">
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".activity.ui.settings.SettingsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -117,7 +121,6 @@
                     android:layout_marginRight="50dp"
                     android:backgroundTint="#B5A33535"
                     android:enabled="true"
-                    android:onClick="changePersonalInfo"
                     android:text="Apply Changes"
                     android:textSize="12sp"
                     android:textStyle="bold"
@@ -221,7 +224,6 @@
                 android:layout_marginRight="50dp"
                 android:backgroundTint="#B5A33535"
                 android:enabled="true"
-                android:onClick="changePasswordInfo"
                 android:text="Change Password"
                 android:textSize="12sp"
                 android:textStyle="bold"

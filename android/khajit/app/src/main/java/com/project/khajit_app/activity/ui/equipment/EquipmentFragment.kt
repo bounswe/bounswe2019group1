@@ -8,11 +8,10 @@ import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.project.khajit_app.R
-import com.project.khajit_app.activity.ui.home.HomeViewModel
 
 class EquipmentFragment : Fragment() {
 
-    private lateinit var equipmentViewModel: EquipmentViewModel
+    private lateinit var equipmentViewModel: SettingsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,7 +20,7 @@ class EquipmentFragment : Fragment() {
     ): View? {
         super.onCreate(savedInstanceState)
         equipmentViewModel =
-            ViewModelProviders.of(this).get(EquipmentViewModel::class.java)
+            ViewModelProviders.of(this).get(SettingsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_equipment, container, false)
 
         var loader = root.findViewById(R.id.progress_loader) as ProgressBar

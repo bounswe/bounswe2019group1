@@ -25,9 +25,19 @@ object RetrofitClient {
                     .addHeader("Content-Type","application/json")
                     .method(original.method(),original.body())
 
+                if(User.token == "") {
+
+                }
+                else {
+                    requestBuilder.addHeader("Authorization", "JWT %s".format(User.token))
+                }
+                /*
                 User.token.let {
                     requestBuilder.addHeader("Authorization", "JWT %s".format(User.token))
                 }
+
+                 */
+
 
                 val request = requestBuilder.build()
                 chain.proceed(request)

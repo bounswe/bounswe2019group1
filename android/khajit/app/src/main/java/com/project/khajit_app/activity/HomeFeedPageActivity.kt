@@ -1,6 +1,5 @@
 package com.project.khajit_app.activity
 
-import android.app.Notification
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -11,10 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.ui.equipment.EquipmentFragment
+import com.project.khajit_app.activity.ui.equipment.LogoutFragment
 import com.project.khajit_app.activity.ui.home.HomeFragment
 import com.project.khajit_app.activity.ui.mailbox.MailboxFragment
 import com.project.khajit_app.activity.ui.notifications.NotificationsFragment
 import com.project.khajit_app.activity.ui.search.SearchFragment
+import com.project.khajit_app.activity.ui.settings.SettingsFragment
 
 class HomeFeedPageActivity : AppCompatActivity() {
 
@@ -30,7 +31,13 @@ class HomeFeedPageActivity : AppCompatActivity() {
 
         val fragment = HomeFragment.Companion.newInstance()
         addFragment(fragment)
+
+        setSupportActionBar(findViewById(R.id.home_top_menu_options_bar))
+        //home navigation
+        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
     }
+
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
@@ -72,22 +79,22 @@ class HomeFeedPageActivity : AppCompatActivity() {
             .commit()
 
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_top, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.profile_top_menu_item -> {
-            // do stuff
-            true
-        }
         R.id.settings_top_menu_item -> {
-            // do stuff
+            val fragment = SettingsFragment()
+            addFragment(fragment)
+
             true
         }
         R.id.logout_top_menu_item -> {
-            // do stuff
+            val fragment = LogoutFragment()
+            addFragment(fragment)
             true
         }
         else -> super.onOptionsItemSelected(item)
