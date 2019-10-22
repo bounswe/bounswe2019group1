@@ -21,4 +21,8 @@ interface Api {
     @POST("user/login/")
     fun loginUser(@Body body: userToBeLogin?):Call<LoginResponse>
 
+    @Headers("Content-Type: application/json")
+    @GET("user/retrievemobile/")
+    fun getInfo(@Body body: UserInfoGet?):Call<UserAllInfo>
+
 }

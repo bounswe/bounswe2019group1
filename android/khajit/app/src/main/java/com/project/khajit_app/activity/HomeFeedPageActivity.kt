@@ -31,6 +31,7 @@ class HomeFeedPageActivity : AppCompatActivity() {
         val fragment = HomeFragment.Companion.newInstance()
         addFragment(fragment)
     }
+
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
