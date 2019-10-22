@@ -119,15 +119,14 @@ class SettingsFragment : Fragment() {
                     User.title = text_title
                     User.bio = text_bio
 
-                    Toast.makeText(view.context, "User password has been updated", Toast.LENGTH_LONG).show()
+                    Toast.makeText(view.context, "User informations have been updated", Toast.LENGTH_LONG).show()
 
                 }else{
                     Log.d("error message:", response.message())
-                    Toast.makeText(view.context, "Password is not correct", Toast.LENGTH_LONG).show()
                 }
             }
             override fun onFailure(call: Call<UpdateUserResponse>, t: Throwable) {
-                Toast.makeText(view.context,"Password is not correct", Toast.LENGTH_LONG).show()
+               // Toast.makeText(view.context,"Password is not correct", Toast.LENGTH_LONG).show()
             }
         })
 
@@ -176,7 +175,7 @@ class SettingsFragment : Fragment() {
                 println(response.toString())
                 if(response.code() == 200 ){
 
-                    Toast.makeText(view.context, "User profile has been updated", Toast.LENGTH_LONG).show()
+                    Toast.makeText(view.context, "Password has been changed", Toast.LENGTH_LONG).show()
 
                 }else{
                     Log.d("error message:", response.message())

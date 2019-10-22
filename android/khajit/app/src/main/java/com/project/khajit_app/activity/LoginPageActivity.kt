@@ -112,7 +112,7 @@ class LoginPageActivity : AppCompatActivity() {
                         println(response)
                         println(call)
                         println(response.body()?.toString()?.trim())
-                        Toast.makeText(applicationContext,"Logged In",Toast.LENGTH_LONG).show()
+
                         Log.d("success:", "" + response.body()?.user?.username)
 
 

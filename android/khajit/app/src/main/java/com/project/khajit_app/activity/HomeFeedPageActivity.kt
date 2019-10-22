@@ -5,12 +5,11 @@ import android.view.Menu
 import android.view.MenuItem
 
 import android.widget.FrameLayout
-import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.project.khajit_app.R
-import com.project.khajit_app.activity.ui.equipment.EquipmentFragment
+import com.project.khajit_app.activity.ui.equipment.LogoutFragment
 import com.project.khajit_app.activity.ui.home.HomeFragment
 import com.project.khajit_app.activity.ui.mailbox.MailboxFragment
 import com.project.khajit_app.activity.ui.notifications.NotificationsFragment
@@ -53,7 +52,7 @@ class HomeFeedPageActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_equipments -> {
-                val fragment = EquipmentFragment()
+                val fragment = LogoutFragment()
                 addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
@@ -86,10 +85,6 @@ class HomeFeedPageActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.profile_top_menu_item -> {
-            Toast.makeText(this, "asdasd",Toast.LENGTH_LONG).show()
-            true
-        }
         R.id.settings_top_menu_item -> {
             val fragment = SettingsFragment()
             addFragment(fragment)
@@ -97,7 +92,8 @@ class HomeFeedPageActivity : AppCompatActivity() {
             true
         }
         R.id.logout_top_menu_item -> {
-            // do stuff
+            val fragment = LogoutFragment()
+            addFragment(fragment)
             true
         }
         else -> super.onOptionsItemSelected(item)
