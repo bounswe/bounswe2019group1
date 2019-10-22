@@ -58,15 +58,16 @@ class HomeFragment : Fragment() {
         var loader = root.findViewById(R.id.progress_loader) as ProgressBar
         loader.visibility = View.GONE
 
-
-        val userInfo = User.id?.let { UserInfoGet(it) }
-        RetrofitClient.instance.getInfo(userInfo).enqueue(object : Callback<UserAllInfo>{
+        //val userInfo = User.id?.let { UserInfoGet(it) }
+        var userInfo = User.id
+        RetrofitClient.instance.getInfo("user/retrieve/" + userInfo.toString()).enqueue(object : Callback<UserAllInfo>{
             override fun onResponse(
                 call: Call<UserAllInfo>,
                 response: Response<UserAllInfo>
             ) {
                 println(response.toString())
                 if(response.code() == 200 ){
+                    Toast.makeText(context,"2222222",Toast.LENGTH_LONG).show()
                     User.username = response.body()?.username
                     User.email = response.body()?.email
                     User.first_name = response.body()?.first_name
@@ -88,12 +89,13 @@ class HomeFragment : Fragment() {
                     user_bio.text = User.bio
 
                 }else{
-
+                    Toast.makeText(context,"3333333",Toast.LENGTH_LONG).show()
                     Log.d("error message:", response.message())
                 }
             }
             override fun onFailure(call: Call<UserAllInfo>, t: Throwable) {
                 Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
+                Toast.makeText(context,"4444444",Toast.LENGTH_LONG).show()
             }
         })
         /*

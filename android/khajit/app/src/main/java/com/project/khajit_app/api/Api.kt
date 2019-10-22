@@ -22,7 +22,9 @@ interface Api {
     fun loginUser(@Body body: userToBeLogin?):Call<LoginResponse>
 
     @Headers("Content-Type: application/json")
-    @GET("user/retrievemobile/")
-    fun getInfo(@Body body: UserInfoGet?):Call<UserAllInfo>
+    //@GET("user/retrievemobile/{id}")
+    @GET
+    fun getInfo(@Url url: String?):Call<UserAllInfo>
+    //fun getInfo(@Body body: UserInfoGet?):Call<UserAllInfo>
 
 }
