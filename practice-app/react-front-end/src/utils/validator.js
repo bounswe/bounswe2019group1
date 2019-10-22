@@ -1,6 +1,5 @@
 import emailvalidator from "email-validator";
 export function validateCitizenshipNo(citizenship_number) {
-  console.log(citizenship_number);
   citizenship_number = citizenship_number.toString();
   var isEleven = /^[0-9]{11}$/.test(citizenship_number);
   var totalX = 0;

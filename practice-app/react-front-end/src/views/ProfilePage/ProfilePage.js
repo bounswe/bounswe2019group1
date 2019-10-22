@@ -45,8 +45,11 @@ export default function ProfilePage(props) {
   const classes = useStyles();
   const { ...rest } = props;
   const [profileValues, setProfileValues] = useState({
+    username: "",
+    email: "",
     first_name: "",
-    last_name: ""
+    last_name: "",
+    location: ""
   });
   const imageClasses = classNames(
     classes.imgRaised,
@@ -54,7 +57,12 @@ export default function ProfilePage(props) {
     classes.imgFluid
   );
   getProfileInfo().then(res =>
-    setProfileValues({ first_name: res.first_name, last_name: res.last_name })
+    setProfileValues({
+      username: res.username,
+      first_name: res.first_name,
+      last_name: res.last_name,
+      location: res.location
+    })
   );
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   return (

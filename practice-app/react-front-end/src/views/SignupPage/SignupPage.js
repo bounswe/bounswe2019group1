@@ -45,11 +45,11 @@ export default function SignupPage(props) {
   const { ...rest } = props;
 
   const [values, setValues] = React.useState({
-    username: "sadfas",
-    pass: "13asf1",
-    name: "fasfd",
-    surname: "asfdafa",
-    email: "ads@gmail.com",
+    username: "",
+    pass: "",
+    name: "",
+    surname: "",
+    email: "",
     location: {
       address: "Istanbul, Turkey",
       position: {
@@ -102,7 +102,7 @@ export default function SignupPage(props) {
           values.location
         )
           .then(res =>
-            res.status === 200 ? props.history.push("/login") : null
+            res.status === 200 ? props.history.push("/login-page") : null
           )
           .catch(error => {
             swal("Oops: ", error.message, "error");
@@ -124,7 +124,7 @@ export default function SignupPage(props) {
           values.citizenshipno
         )
           .then(res =>
-            res.status === 200 ? props.history.push("/login") : null
+            res.status === 200 ? props.history.push("/login-page") : null
           )
           .catch(error => {
             swal("Oops: ", error.message, "error");
@@ -169,20 +169,10 @@ export default function SignupPage(props) {
           <Card className={classes[cardAnimaton]}>
             <form className={classes.form}>
               <CardHeader color="primary" className={classes.cardHeader}>
-                <h4>Create an Account</h4>
-                <div className={classes.socialLine}>
-                  <Button
-                    justIcon
-                    href="#pablo"
-                    target="_blank"
-                    color="transparent"
-                    onClick={e => e.preventDefault()}
-                  >
-                    <i className={"fab fa-google-plus-g"} />
-                  </Button>
-                </div>
+                <h4>
+                  <b>Create an Account</b>
+                </h4>
               </CardHeader>
-              <p className={classes.divider}> Khaji-it</p>
               <CardBody>
                 <CustomInput
                   labelText="Username"
@@ -337,18 +327,9 @@ export default function SignupPage(props) {
           <Card className={classes[cardAnimaton]}>
             <form className={classes.form}>
               <CardHeader color="primary" className={classes.cardHeader}>
-                <h4>Create an Account</h4>
-                <div className={classes.socialLine}>
-                  <Button
-                    justIcon
-                    href="#pablo"
-                    target="_blank"
-                    color="transparent"
-                    onClick={e => e.preventDefault()}
-                  >
-                    <i className={"fab fa-google-plus-g"} />
-                  </Button>
-                </div>
+                <h4>
+                  <b>Create an Account</b>
+                </h4>
               </CardHeader>
               <p className={classes.divider}>Khaji-it</p>
               <CardBody>
