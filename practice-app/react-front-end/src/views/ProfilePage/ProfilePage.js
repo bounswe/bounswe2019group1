@@ -39,7 +39,7 @@ import Grid from '@material-ui/core/Grid';
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { getProfileInfo } from "../../service/profileinformation.service";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
-// import {getProfileInfo} from "../../service/getProfileInformation";
+
 
 const useStyles = makeStyles(styles);
 
