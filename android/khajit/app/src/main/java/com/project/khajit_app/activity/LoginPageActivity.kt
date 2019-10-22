@@ -151,6 +151,8 @@ class LoginPageActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {
+    }
     fun goToRegister(view:View) {
         startActivity(Intent(this, SignUpPageActivity::class.java))
     }

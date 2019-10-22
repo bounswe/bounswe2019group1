@@ -9,6 +9,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.project.khajit_app.R
+import com.project.khajit_app.activity.ui.equipment.EquipmentFragment
 import com.project.khajit_app.activity.ui.equipment.LogoutFragment
 import com.project.khajit_app.activity.ui.home.HomeFragment
 import com.project.khajit_app.activity.ui.mailbox.MailboxFragment
@@ -52,7 +53,7 @@ class HomeFeedPageActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_equipments -> {
-                val fragment = LogoutFragment()
+                val fragment = EquipmentFragment()
                 addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }

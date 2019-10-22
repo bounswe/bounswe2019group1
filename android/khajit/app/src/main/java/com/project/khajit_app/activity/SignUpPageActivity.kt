@@ -38,8 +38,6 @@ class SignUpPageActivity : AppCompatActivity() {
             this.supportActionBar?.hide()
         } catch (e: NullPointerException){}
 
-        Toast.makeText(applicationContext, "WELCOME TO THE SIGN UP", Toast.LENGTH_LONG).show()
-
         email_input = findViewById(R.id.input_email)
         password_input = findViewById(R.id.input_password)
         repeat_password_input = findViewById(R.id.input_repassword)
