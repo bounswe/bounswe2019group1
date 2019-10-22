@@ -13,12 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.EditingProfilePageActivity"></activity>
+        <activity android:name=".activity.EditingProfilePageActivity" />
         <activity
             android:name=".activity.HomeFeedPageActivity"
-            android:label="@string/title_activity_home_feed_page"
-        />
-
+            android:label="@string/title_activity_home_feed_page" />
         <activity android:name=".activity.SignUpPageTraderActivity" />
         <activity
             android:name=".activity.MainPageActivity"

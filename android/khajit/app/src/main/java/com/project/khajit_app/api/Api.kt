@@ -39,8 +39,13 @@ interface Api {
     fun updateUser(@Body body: UpdateUser):Call<UpdateUserResponse>
 
     @Headers("Content-Type: application/json")
+    @POST("user/search_user/")
+    fun searchUsername(@Body body: SearchRequest):Call<SearchResponse>
+
+    // TODO
+    @Headers("Content-Type: application/json")
     @GET("passwordChange")
-    fun changePassword():Call<List<FollowerModel>>
+    fun changePassword():Call<SearchResponse>
 
 
 }
