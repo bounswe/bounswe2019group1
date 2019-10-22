@@ -23,8 +23,8 @@ interface Api {
 
     @Headers("Content-Type: application/json")
     //@GET("user/retrievemobile/{id}")
-    @GET
-    fun getInfo(@Url url: String?):Call<UserAllInfo>
+    @GET("user/retrieve/{id}")
+    fun getInfo(@Path(value = "id", encoded = true) userId: String):Call<UserAllInfo>
     //fun getInfo(@Body body: UserInfoGet?):Call<UserAllInfo>
 
 }

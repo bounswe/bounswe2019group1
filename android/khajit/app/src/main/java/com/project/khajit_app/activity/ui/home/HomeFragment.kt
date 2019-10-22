@@ -60,7 +60,7 @@ class HomeFragment : Fragment() {
 
         //val userInfo = User.id?.let { UserInfoGet(it) }
         var userInfo = User.id
-        RetrofitClient.instance.getInfo("user/retrieve/" + userInfo.toString()).enqueue(object : Callback<UserAllInfo>{
+        RetrofitClient.instance.getInfo(userInfo.toString()).enqueue(object : Callback<UserAllInfo>{
             override fun onResponse(
                 call: Call<UserAllInfo>,
                 response: Response<UserAllInfo>
