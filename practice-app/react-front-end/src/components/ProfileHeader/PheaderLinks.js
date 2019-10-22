@@ -29,7 +29,7 @@ export default function PheaderLinks(props) {
       <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
-          buttonText="Notifications"
+          buttonText="Settings"
           buttonProps={{
             className: classes.navLink,
             color: "transparent"

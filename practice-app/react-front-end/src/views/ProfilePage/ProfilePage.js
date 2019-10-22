@@ -26,13 +26,15 @@ import portfolio2 from "assets/img/examples/po2.jpeg";
 import portfolio3 from "assets/img/examples/ppp3.jpg";
 import portfolio4 from "assets/img/examples/BTC17-1.jpg";
 import portfolio5 from "assets/img/examples/ppp4.jpeg";
-import event1 from "assets/img/examples/olu-eletu.jpg";
-import event2 from "assets/img/examples/clem-onojeghuo.jpg";
-import event3 from "assets/img/examples/cynthia-del-rio.jpg";
-import event4 from "assets/img/examples/mariya-georgieva.jpg";
-import event5 from "assets/img/examples/clem-onojegaw.jpg";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
+
+import event1 from "assets/img/examples/ev1.jpeg";
+import event2 from "assets/img/examples/ev2.jpeg";
+import event3 from "assets/img/examples/ev3.jpeg";
+import event4 from "assets/img/examples/ev4.jpg";
+import event5 from "assets/img/examples/ev5.jpeg";
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { getProfileInfo } from "../../service/profileinformation.service";

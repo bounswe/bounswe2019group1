@@ -104,9 +104,11 @@ export default function SignupPage(props) {
           .then(res =>
             res.status === 200 ? props.history.push("/login-page") : null
           )
+          .then(function(validation_response){ props.history.push("/login-page");swal("Good job!", "Successfully registered.", "success");})
           .catch(error => {
             swal("Oops: ", error.message, "error");
-          });
+          })
+          
       }
     } else {
       var validation_response2 = validateTraderRegister(values);
