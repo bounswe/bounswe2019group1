@@ -99,6 +99,21 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="#D3FFFFFF">
+
+            <EditText
+                android:id="@+id/input_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Location"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/register_as_basic_button"
             android:layout_width="match_parent"
@@ -119,7 +134,7 @@
             android:layout_marginBottom="30dp"
             android:background="#EEF2F5"
             android:onClick="completeRegistrationAsGoogle"
-            android:text="Register on Google" />
+            android:text="Register with Google" />
 
         <TextView
             android:id="@+id/link_login"

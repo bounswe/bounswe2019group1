@@ -17,6 +17,7 @@ import android.widget.Toast
 import com.google.android.gms.common.api.ApiException
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.BasicRegisterResponse
+import com.project.khajit_app.data.models.LoginResponse
 import com.project.khajit_app.data.models.TraderUser
 import com.project.khajit_app.data.models.userToBeLogin
 import kotlinx.android.synthetic.main.activity_login.*
@@ -42,7 +43,7 @@ class LoginPageActivity : AppCompatActivity() {
         } catch (e: NullPointerException){}
 
         // [ [ [ Google Sign In ] ] ]
-        // Configure sign-in to request the user's ID, email address, and basic
+        // Configure sign-in to request the user's ID, IDToken, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.server_client_id))
@@ -52,21 +53,18 @@ class LoginPageActivity : AppCompatActivity() {
         // Build a GoogleSignInClient with the options specified by gso.
         val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        //
+
         mGoogleSignInClient.signOut().addOnCompleteListener {
 
-            fun onComplete(task : Task<Void>) {
-                // Return to main screen
-                startActivity(Intent(this, MainPageActivity::class.java))
-            }
+            // Return to main screen
+            //startActivity(Intent(this, MainPageActivity::class.java))
+
         }
 
         btn_login_google.setOnClickListener {
             // Launch Google Sign In Intent
             val signInIntent = mGoogleSignInClient.getSignInIntent()
-            startActivityForResult(signInIntent,
-                RC_SIGN_IN
-            )
+            startActivityForResult(signInIntent, RC_SIGN_IN)
         }
         // [ [ [ End of Google Sign In ] ] ]
 
@@ -78,7 +76,7 @@ class LoginPageActivity : AppCompatActivity() {
         val account = GoogleSignIn.getLastSignedInAccount(this)
         if (account != null) {
             // User is already signed in, start HomePageActivity
-            //startActivity(Intent(this, HomePageActivity::class.java))
+            //startActivity(Intent(this, HomeFeedPageActivity::class.java))
 
             // Commented ^this out because I don't want it to auto-login during development
         }
@@ -133,8 +131,29 @@ class LoginPageActivity : AppCompatActivity() {
             val account = completedTask.getResult(ApiException::class.java)
             Toast.makeText(this, "Signed in, idToken: " + account?.idToken, Toast.LENGTH_SHORT).show()
 
-            // TODO : send ID Token to server and validate
+            if (account != null) {
+                // send ID Token to server and validate
+                val userInfo = userToBeLogin(
+                    account.id!!,
+                    "google"
+                )
+                RetrofitClient.instance.loginUser(userInfo)
+                    .enqueue(object : Callback<LoginResponse> {
+                        override fun onResponse(
+                            call: Call<LoginResponse>?,
+                            response: Response<LoginResponse>?
+                        ) {
+                            Toast.makeText(applicationContext, "Logged in as: " + account.displayName, Toast.LENGTH_LONG).show()
+                        }
 
+                        override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                            Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
+                        }
+
+                    })
+            }
+
+            // TODO : Check LoginResponse to see if the backend server has validated
             // Signed in successfully, show authenticated UI.
             startActivity(Intent(this, HomeFeedPageActivity::class.java))
 
