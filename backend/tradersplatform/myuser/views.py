@@ -172,3 +172,26 @@ class UserUpdateAPIView (UpdateAPIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=200)
+
+
+class PasswordUpdateAPIView(UpdateAPIView):
+
+    def put(self, request, *args, **kwargs):
+        id = request.user.id
+        user = TemplateUser.objects.filter(id=id).first()
+        if not user:
+            return Response({"detail": "user not exist"}, status=400)
+        old_password=request.data.get('old_password', None)
+        if old_password is None:
+            raise ValidationError('Give us old password')
+        if not user.check_password(old_password):
+            raise ValidationError("Incorrect credential")
+        new_password = request.data.get('new_password', None)
+        if new_password is None:
+            raise ValidationError('Give us new password')
+        user.set_password(new_password)
+        user.save()
+        id=user.id
+        new_user = TemplateUser.objects.filter(id=id).first()
+        serializer=TempUserCreateSerializer(new_user)
+        return Response(serializer.data, status=200)
