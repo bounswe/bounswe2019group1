@@ -55,11 +55,35 @@ class ListFollowerAPIView(ListAPIView):
         return Response(serializer.data, status=200)
 
 
+class ListFollowerWithIdAPIView(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        id = request.data.get('id', None)
+        if id  is None:
+            raise ValidationError("give id")
+        user=TemplateUser.objects.get(id=id)
+        query=Follow.objects.filter(following=user)
+        serializer = FollowerListSerializer(query, many=True)
+        return Response(serializer.data, status=200)
+
+
 class ListFollowingAPIView(ListAPIView):
 
     def get(self, request, *args, **kwargs):
         check_if_user(request)
         id=request.user.id
+        user=TemplateUser.objects.get(id=id)
+        query=Follow.objects.filter(follower=user)
+        serializer = FollowingListSerializer(query, many=True)
+        return Response(serializer.data, status=200)
+
+
+class ListFollowingWithIdAPIView(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        id = request.data.get('id', None)
+        if id  is None:
+            raise ValidationError("give id")
         user=TemplateUser.objects.get(id=id)
         query=Follow.objects.filter(follower=user)
         serializer = FollowingListSerializer(query, many=True)
