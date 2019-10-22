@@ -81,7 +81,8 @@
             android:layout_gravity="center_horizontal"
             android:backgroundTint="#B5A33535"
             android:padding="10dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/link_signup"
@@ -106,7 +107,8 @@
             android:onClick="forgetPassword"
             android:text="Forgot Password? Enter your email only"
             android:textSize="16dip"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone" />
 
 
     </LinearLayout>
