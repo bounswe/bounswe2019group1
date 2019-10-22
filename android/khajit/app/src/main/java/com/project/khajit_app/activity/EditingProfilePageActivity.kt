@@ -3,10 +3,18 @@ package com.project.khajit_app.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
+import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import com.project.khajit_app.R
+import com.project.khajit_app.api.RetrofitClient
+import com.project.khajit_app.data.models.FollowingModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class EditingProfilePageActivity : AppCompatActivity() {
 
@@ -19,6 +27,8 @@ class EditingProfilePageActivity : AppCompatActivity() {
         } catch (e: NullPointerException){}
 
         findViewById<TextView>(R.id.text_bio_edit).movementMethod = ScrollingMovementMethod()
+
+
     }
 
     fun changePersonalInfo(view: View) {
@@ -53,7 +63,7 @@ class EditingProfilePageActivity : AppCompatActivity() {
             return
         }
 
-        // REQUEST HERE
+
 
     }
 

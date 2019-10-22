@@ -34,5 +34,13 @@ interface Api {
     @GET("follow/listFollower/")
     fun followerList():Call<List<FollowerModel>>
 
+    @Headers("Content-Type: application/json")
+    @PUT("user/updateuser/")
+    fun updateUser(@Body body: UpdateUser):Call<UpdateUserResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("passwordChange")
+    fun changePassword():Call<List<FollowerModel>>
+
 
 }

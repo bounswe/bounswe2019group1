@@ -52,9 +52,6 @@ class HomeFragment : Fragment() {
         var ladapter = ListViewAdapter(this, equipments, rates)
         lview.adapter = ladapter
 
-        var b =  root.findViewById(R.id.button_about) as Button
-        b.setOnClickListener(goEdit)
-
         var loader = root.findViewById(R.id.progress_loader) as ProgressBar
         loader.visibility = View.GONE
 
@@ -83,7 +80,7 @@ class HomeFragment : Fragment() {
                     var user_title = root.findViewById(R.id.user_title) as TextView
                     var user_bio = root.findViewById(R.id.text_bio) as TextView
 
-                    user_name.text = User.first_name + User.last_name
+                    user_name.text = User.first_name + " " + User.last_name
                     user_title.text = User.title
                     user_bio.text = User.bio
 
@@ -152,10 +149,6 @@ class HomeFragment : Fragment() {
         */
 
         return root
-    }
-
-    private val goEdit = View.OnClickListener { view ->
-        startActivity(Intent(activity, EditingProfilePageActivity::class.java))
     }
 
     companion object {
