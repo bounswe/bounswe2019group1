@@ -35,6 +35,7 @@
             android:layout_height="50dp"
             android:layout_gravity="start"
             android:backgroundTint="#BB3f51b5"
+            android:clickable="true"
             android:enabled="true"
             android:text="Followings"
             android:textColor="#FFFFFF"

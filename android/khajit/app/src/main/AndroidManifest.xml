@@ -13,6 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.activity_following"></activity>
+        <activity android:name=".activity.activity_follower" />
         <activity android:name=".activity.EditingProfilePageActivity" />
         <activity
             android:name=".activity.HomeFeedPageActivity"

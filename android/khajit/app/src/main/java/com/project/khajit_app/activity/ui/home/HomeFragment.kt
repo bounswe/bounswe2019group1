@@ -12,9 +12,8 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.project.khajit_app.R
-import com.project.khajit_app.activity.EditingProfilePageActivity
-import com.project.khajit_app.activity.HomeFeedPageActivity
-import com.project.khajit_app.activity.ListViewAdapter
+import com.project.khajit_app.activity.*
+import com.project.khajit_app.activity.ui.settings.SettingsFragment
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.*
 import com.project.khajit_app.global.User
@@ -148,6 +147,15 @@ class HomeFragment : Fragment() {
         }
         */
 
+        var follower_button =  root.findViewById(R.id.follower_button) as Button
+        follower_button.setOnClickListener{
+            startActivity(Intent(this.context, activity_follower::class.java))
+        }
+
+        var following_button =  root.findViewById(R.id.following_button) as Button
+        following_button.setOnClickListener{
+            startActivity(Intent(this.context, activity_following::class.java))
+        }
         return root
     }
 

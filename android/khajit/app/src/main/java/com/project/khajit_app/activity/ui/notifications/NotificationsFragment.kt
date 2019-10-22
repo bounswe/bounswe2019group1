@@ -26,10 +26,7 @@ class NotificationsFragment : Fragment() {
         notificationsViewModel =
             ViewModelProviders.of(this).get(NotificationsViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_notifications, container, false)
-        var loader = root.findViewById(R.id.progress_loader) as ProgressBar
-        loader.visibility = View.GONE
 
-        Toast.makeText(this.context, "" + User.token, Toast.LENGTH_LONG).show()
         return root
     }
 }
