@@ -22,9 +22,17 @@ interface Api {
     fun loginUser(@Body body: userToBeLogin?):Call<LoginResponse>
 
     @Headers("Content-Type: application/json")
-    //@GET("user/retrievemobile/{id}")
     @GET("user/retrieve/{id}")
     fun getInfo(@Path(value = "id", encoded = true) userId: String):Call<UserAllInfo>
     //fun getInfo(@Body body: UserInfoGet?):Call<UserAllInfo>
+
+    @Headers("Content-Type: application/json")
+    @GET("follow/listFollowing/")
+    fun followingList():Call<List<FollowingModel>>
+
+    @Headers("Content-Type: application/json")
+    @GET("follow/listFollower/")
+    fun followerList():Call<List<FollowerModel>>
+
 
 }

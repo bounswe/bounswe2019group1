@@ -7,8 +7,8 @@ val first_name: String,
 val last_name: String,
 val location: String,
 val phone_number: Int,
-val iban_number: Int,
+val iban_number: Long,
 val citizenship_number: String,
 val biography: String,
 val title: String,
-val last_changed_password_date:String)
+val last_changed_password_date: String)
