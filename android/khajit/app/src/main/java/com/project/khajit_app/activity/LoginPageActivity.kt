@@ -124,8 +124,9 @@ class LoginPageActivity : AppCompatActivity() {
                         User.first_name = response.body()?.user?.first_name
                         User.last_name = response.body()?.user?.last_name
                         User.type = response.body()?.user?.groups?.get(0)
-                        User.title = response.body()?.user?.email
-                        User.bio = response.body()?.user?.email
+                        User.title = "No title"
+                        User.bio = "No bio"
+                        User.whereIamAsId = User.id
 
                         startActivity(Intent(this@LoginPageActivity, HomeFeedPageActivity::class.java))
                         /*

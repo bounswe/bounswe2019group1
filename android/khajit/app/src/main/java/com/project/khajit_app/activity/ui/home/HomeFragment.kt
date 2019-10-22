@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
         loader.visibility = View.GONE
 
         //val userInfo = User.id?.let { UserInfoGet(it) }
-        var userInfo = User.id
+        var userInfo = User.whereIamAsId
         RetrofitClient.instance.getInfo(userInfo.toString()).enqueue(object : Callback<UserAllInfo>{
             override fun onResponse(
                 call: Call<UserAllInfo>,
@@ -63,22 +63,25 @@ class HomeFragment : Fragment() {
             ) {
                 println(response.toString())
                 if(response.code() == 200 ){
-                    User.username = response.body()?.username
-                    User.email = response.body()?.email
-                    User.first_name = response.body()?.first_name
-                    User.last_name = response.body()?.last_name
-                    User.location = response.body()?.location
-                    User.phone_number = response.body()?.phone_number
-                    User.iban_number = response.body()?.iban_number
-                    User.citizenship_number = response.body()?.citizenship_number
-                    User.bio = response.body()?.biography
-                    User.title = response.body()?.title
-                    User.last_changed_password_date = response.body()?.last_changed_password_date
+                    if(User.id != User.whereIamAsId) {
+                        User.username = response.body()?.username
+                        User.email = response.body()?.email
+                        User.first_name = response.body()?.first_name
+                        User.last_name = response.body()?.last_name
+                        User.location = response.body()?.location
+                        User.phone_number = response.body()?.phone_number
+                        User.iban_number = response.body()?.iban_number
+                        User.citizenship_number = response.body()?.citizenship_number
+                        User.bio = response.body()?.biography
+                        User.title = response.body()?.title
+                        User.last_changed_password_date = response.body()?.last_changed_password_date
+                    }
 
                     var user_name = root.findViewById(R.id.user_real_name) as TextView
                     var user_title = root.findViewById(R.id.user_title) as TextView
                     var user_bio = root.findViewById(R.id.text_bio) as TextView
 
+                    println(response.body()?.toString())
                     user_name.text = User.first_name + " " + User.last_name
                     user_title.text = User.title
                     user_bio.text = User.bio
@@ -156,6 +159,8 @@ class HomeFragment : Fragment() {
         following_button.setOnClickListener{
             startActivity(Intent(this.context, activity_following::class.java))
         }
+
+
         return root
     }
 

@@ -44,8 +44,8 @@ interface Api {
 
     // TODO
     @Headers("Content-Type: application/json")
-    @GET("passwordChange")
-    fun changePassword():Call<SearchResponse>
+    @PUT("user/updatepass/")
+    fun changePassword(@Body body: PasswordChange):Call<GenericUserModel>
 
 
 }

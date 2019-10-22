@@ -17,9 +17,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.ui.equipment.SettingsViewModel
 import com.project.khajit_app.api.RetrofitClient
-import com.project.khajit_app.data.models.FollowingModel
-import com.project.khajit_app.data.models.UpdateUser
-import com.project.khajit_app.data.models.UpdateUserResponse
+import com.project.khajit_app.data.models.*
 import com.project.khajit_app.global.User
 import kotlinx.android.synthetic.main.fragment_home.*
 import retrofit2.Call
@@ -34,6 +32,10 @@ class SettingsFragment : Fragment() {
     private lateinit var last_name: EditText
     private lateinit var title: EditText
     private lateinit var bio: EditText
+
+    private lateinit var old_pw: EditText
+    private lateinit var new_pw: EditText
+    private lateinit var re_new_pw: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,6 +60,10 @@ class SettingsFragment : Fragment() {
         last_name = root.findViewById(R.id.input_last_name) as EditText
         title = root.findViewById(R.id.input_title) as EditText
         bio = root.findViewById(R.id.text_bio_edit) as EditText
+
+        old_pw = root.findViewById(R.id.input_old_password) as EditText
+        new_pw = root.findViewById(R.id.input_new_password) as EditText
+        re_new_pw = root.findViewById(R.id.input_re_new_password) as EditText
 
         first_name.setText(User.first_name)
         last_name.setText(User.last_name)
@@ -113,26 +119,21 @@ class SettingsFragment : Fragment() {
                     User.title = text_title
                     User.bio = text_bio
 
-                    Toast.makeText(view.context, "User profile has been updated", Toast.LENGTH_LONG).show()
+                    Toast.makeText(view.context, "User password has been updated", Toast.LENGTH_LONG).show()
 
                 }else{
                     Log.d("error message:", response.message())
+                    Toast.makeText(view.context, "Password is not correct", Toast.LENGTH_LONG).show()
                 }
             }
             override fun onFailure(call: Call<UpdateUserResponse>, t: Throwable) {
-                println(t.message)
-                println(t)
-                Toast.makeText(context,t.message, Toast.LENGTH_LONG).show()
+                Toast.makeText(view.context,"Password is not correct", Toast.LENGTH_LONG).show()
             }
         })
 
     }
 
     private val changePasswordInfo = View.OnClickListener { view ->
-        var old_pw = root.findViewById(R.id.input_old_password) as EditText
-        var new_pw = root.findViewById(R.id.input_new_password) as EditText
-        var re_new_pw = root.findViewById(R.id.input_re_new_password) as EditText
-
         if(old_pw.text.isEmpty()){
             old_pw.error = "Current password is required."
             old_pw.requestFocus()
@@ -165,6 +166,28 @@ class SettingsFragment : Fragment() {
         }
 
         // REQUEST GOES HERE, do not forget to check old password validity
+
+        var pw_class = PasswordChange(old_pw.text.toString(), new_pw.text.toString())
+        RetrofitClient.instance.changePassword(pw_class).enqueue(object : Callback<GenericUserModel> {
+            override fun onResponse(
+                call: Call<GenericUserModel>,
+                response: Response<GenericUserModel>
+            ) {
+                println(response.toString())
+                if(response.code() == 200 ){
+
+                    Toast.makeText(view.context, "User profile has been updated", Toast.LENGTH_LONG).show()
+
+                }else{
+                    Log.d("error message:", response.message())
+                }
+            }
+            override fun onFailure(call: Call<GenericUserModel>, t: Throwable) {
+                println(t.message)
+                println(t)
+                Toast.makeText(context,t.message, Toast.LENGTH_LONG).show()
+            }
+        })
 
     }
 }

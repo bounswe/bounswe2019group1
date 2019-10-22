@@ -1,5 +1,6 @@
 package com.project.khajit_app.activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import com.project.khajit_app.R
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.FollowerModel
 import com.project.khajit_app.data.models.FollowingModel
+import com.project.khajit_app.global.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,6 +20,9 @@ class activity_following : AppCompatActivity() {
 
     private var list_usernames = arrayListOf<String>()
     private var list_ids = arrayListOf<Int>()
+
+    lateinit var ladapter: FollowingViewAdapter
+    lateinit var lview: ListView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,8 +48,8 @@ class activity_following : AppCompatActivity() {
                         list_ids.add(response.body()?.get(a-1)!!.following.id)
                     }
                     // This will be used for further methods in order to set prediction rates
-                    var lview =  findViewById<ListView>(R.id.list_users_follow) as ListView
-                    var ladapter = FollowingViewAdapter(this@activity_following, list_usernames)
+                    lview =  findViewById<ListView>(R.id.list_users_follow) as ListView
+                    ladapter = FollowingViewAdapter(this@activity_following, list_usernames)
                     lview.adapter = ladapter
 
                 }else{
@@ -55,5 +60,12 @@ class activity_following : AppCompatActivity() {
                 Toast.makeText(applicationContext,t.message, Toast.LENGTH_LONG).show()
             }
         })
+
+        var listview = findViewById(R.id.list_users_follow) as ListView
+        listview.setOnItemClickListener{ parent, view, position, id ->
+            User.whereIamAsId = list_ids[position]
+            var intent = Intent(this, HomeFeedPageActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.project.khajit_app.activity.ui.search
 
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,14 +11,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import com.project.khajit_app.R
+import com.project.khajit_app.activity.HomeFeedPageActivity
 import com.project.khajit_app.activity.ListViewAdapter
 import com.project.khajit_app.activity.UserViewAdapter
+import com.project.khajit_app.activity.ui.home.HomeFragment
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.FollowingModel
 import com.project.khajit_app.data.models.SearchRequest
 import com.project.khajit_app.data.models.SearchResponse
+import com.project.khajit_app.global.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,6 +35,9 @@ class SearchFragment : Fragment() {
 
     private var list_usernames = arrayListOf<String>()
     private var list_ids = arrayListOf<Int>()
+
+    lateinit var ladapter: UserViewAdapter
+    lateinit var lview: ListView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,8 +81,8 @@ class SearchFragment : Fragment() {
                             }
 
                             // This will be used for further methods in order to set prediction rates
-                            var lview =  root.findViewById(R.id.list_users) as ListView
-                            var ladapter = UserViewAdapter(this@SearchFragment, list_usernames)
+                            lview =  root.findViewById(R.id.list_users) as ListView
+                            ladapter = UserViewAdapter(this@SearchFragment, list_usernames)
                             lview.adapter = ladapter
 
                         }else{
@@ -91,6 +100,17 @@ class SearchFragment : Fragment() {
 
         })
 
+        var listview = root.findViewById(R.id.list_users) as ListView
+        listview.setOnItemClickListener{ parent, view, position, id ->
+            Toast.makeText(this.context, "text is " + " $position", Toast.LENGTH_LONG).show()
+            //<var ite = ladapter!!.getItem(position) as String
+            User.whereIamAsId = list_ids[position]
+
+            var intent = Intent(getActivity(), HomeFeedPageActivity::class.java)
+            startActivity(intent)
+        }
+
         return root
     }
+
 }
