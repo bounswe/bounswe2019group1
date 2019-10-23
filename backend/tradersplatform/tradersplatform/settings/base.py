@@ -29,7 +29,9 @@ ALLOWED_HOSTS = [
     "*",
     "127.0.0.1",
     "localhost",
-    "35.163.120.227"
+    "35.163.120.227",
+    "khajiittraders.tk",
+    "khajiit.tk",
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -37,7 +39,8 @@ CORS_ORIGIN_WHITELIST = [
     "http://35.163.120.227:3000",
     "http://35.163.120.227",
     "http://khajiittraders.tk",
-    "www.khajiit.tk",
+    "http://khajiit.tk",
+    "http://www.khajiit.tk",
 ]
 
 
