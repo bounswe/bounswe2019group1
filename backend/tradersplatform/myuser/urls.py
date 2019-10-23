@@ -13,5 +13,6 @@ urlpatterns = [
     url(r'^search_user/', views.SearchUserListAPIView.as_view(), name="update_de"),
     url(r'^updateuser/', views.UserUpdateAPIView.as_view(), name="update_de"),
     url(r'^updatepass/', views.PasswordUpdateAPIView.as_view(), name="update_de"),
+    url(r'^logarrange/', views.ArrangeLog.as_view(), name="update_de"),
     #url(r'^logs/', views.NoParsingFilter(), name="register"),
 ]

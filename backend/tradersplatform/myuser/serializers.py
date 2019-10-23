@@ -69,7 +69,8 @@ class TempUserLoginSerializer(ModelSerializer):
         if user.exists() and user.count() == 1:
             user_obj = user.first()
         else:
-            raise ValidationError("Incorrect credential")
+            raise ValidationError({"error":"Incorrect credential"})
+
         if user_obj:
             if not user_obj.check_password(password):
                 raise ValidationError("Incorrect credential")

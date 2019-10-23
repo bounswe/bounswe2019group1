@@ -36,6 +36,8 @@ CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "http://35.163.120.227:3000",
     "http://35.163.120.227",
+    "http://khajiittraders.tk",
+    "www.khajiit.tk",
 ]
 
 

@@ -72,14 +72,15 @@ class TempUserCreateAPIView(CreateAPIView):
         my_group, created = Group.objects.get_or_create(name=group_name)
         my_group.user_set.add(user)
         user_temp=TemplateUser.objects.get(id=user.id)
-        #logger = logging.getLogger('APPNAME')
-        #logger.critical('rising in a stunishing level')
-        #logger.info('%s logged in successfully', user_temp.username)
         new_data={}
         serializer=TempUserCreateSerializer(user_temp)
         new_data["user"]=serializer.data
         temp_data={"username":request.data["username"],"password":password}
         serializer = TempUserLoginSerializer(data=temp_data)
+        #logger = logging.getLogger('APPNAME')  # or __name__ for current module
+        #logger.critical('rising in a stunishing level')
+        #logger.info('%s logged in successfully', user_temp.username)
+        #logger.error("now error")
         #logger2 = logging.getLogger('APPNAME')
         if serializer.is_valid(raise_exception=True):
             new_data["token"] = serializer.data["token"]
@@ -98,6 +99,14 @@ class UserLoginAPIView(APIView):
             new_data = serializer.data
             return Response(new_data, status=HTTP_200_OK)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
+
+class ArrangeLog(APIView):
+
+    def post(self, request, *args, **kwargs):
+        logger = logging.getLogger('APPNAME')
+        logger.setLevel(logging.ERROR)
+        return Response("log arranged", status=HTTP_200_OK)
 
 
 class UserAutoLogin(APIView):
