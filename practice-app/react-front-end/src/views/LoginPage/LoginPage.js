@@ -20,9 +20,7 @@ import { Link } from "react-router-dom";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import image from "assets/img/dollar-hd.jpg";
 import { login } from "../../service/authentication.service.js";
-import swal from 'sweetalert';
-import Dialog from '@material-ui/core/Dialog';
-
+import swal from "sweetalert";
 
 const useStyles = makeStyles(styles);
 export default function LoginPage(props) {
@@ -45,17 +43,15 @@ export default function LoginPage(props) {
     }));
   };
   const handleSubmit = event => {
-    
     event.preventDefault();
-    login(values.username, values.pass).then(function(response){
-      response &&
-      props.history.push("/profile-page")},function(){
-        
-        swal ( "Oops" ,  "Incorrect username or password!" ,  "error" )
-
+    login(values.username, values.pass).then(
+      function(response) {
+        response && props.history.push("/profile-page");
+      },
+      function() {
+        swal("Oops", "Incorrect username or password!", "error");
       }
-      );
-    
+    );
   };
   return (
     <div>
@@ -80,18 +76,7 @@ export default function LoginPage(props) {
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
                   <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4>Login</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-google-plus-g"} />
-                      </Button>
-                    </div>
+                    <h4><b>Login</b></h4>
                   </CardHeader>
                   <CardBody>
                     <CustomInput

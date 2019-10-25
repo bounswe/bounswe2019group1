@@ -2,7 +2,7 @@ import { environment } from "../environments/environment.prod";
 // import { handleResponse } from "../utils/responseHandlers";
 import axios from "axios";
 
-export function registerBasic(username, pass, email, name, surname) {
+export function registerBasic(username, pass, email, name, surname, location) {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -11,16 +11,15 @@ export function registerBasic(username, pass, email, name, surname) {
       password: pass,
       email: email,
       first_name: name,
-      last_name: surname
+      last_name: surname,
+      location: location.address
     }
   };
-  return axios
-    .post(
-      `${environment.api_url}user/registerbasic/`,
-      requestOptions.body,
-      requestOptions.headers
-    )
-    .then(res => res.status);
+  return axios.post(
+    `${environment.api_url}user/registerbasic/`,
+    requestOptions.body,
+    requestOptions.headers
+  );
 }
 export function RegisterTrader(
   username,
@@ -47,11 +46,9 @@ export function RegisterTrader(
       citizenship_number: citizenshipno
     }
   };
-  return axios
-    .post(
-      `${environment.api_url}user/registertrader/`,
-      requestOptions.body,
-      requestOptions.headers
-    )
-    .then(res => res.status);
+  return axios.post(
+    `${environment.api_url}user/registertrader/`,
+    requestOptions.body,
+    requestOptions.headers
+  );
 }
