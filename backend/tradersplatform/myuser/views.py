@@ -24,16 +24,28 @@ class TempUserCreateAPIView(CreateAPIView):
     queryset = TemplateUser.objects.filter()
 
     def post(self, request, *args, **kwargs):
-        #make password with set password
-        data=request.data
+        # make password with set password
+        data = request.data
         password = request.data.get('password', None)
         if password is None:
-            raise ValidationError({"detail": "you need to give a password"})
+            raise ValidationError({"detail": "You need to give a password"})
+        elif len(password) < 8:
+            raise ValidationError({"detail": "Password size should be greater than 8"})
+        username = request.data.get('username', None)
+        email = request.data.get('email', None)
+        length = len(username)
+        for i in range(length - 3):
+            if username[i:(i + 4)] in password:
+                raise ValidationError({"detail": "Password can not contain public pieces of information"})
+        length = len(email)
+        for i in range(length - 3):
+            if email[i:(i + 4)] in password:
+                raise ValidationError({"detail": "Password can not contain public pieces of information"})
         del data['password']
-        register_time=datetime.now()
-        time=register_time.strftime("%m/%d/%Y, %H:%M:%S")
-        data['last_changed_password_date']=register_time
-        serializer=TempUserCreateSerializer(data=data)
+        register_time = datetime.now()
+        time = register_time.strftime("%m/%d/%Y, %H:%M:%S")
+        data['last_changed_password_date'] = register_time
+        serializer = TempUserCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         #try:
