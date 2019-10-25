@@ -38,7 +38,7 @@ class DeleteFollowAPIView(DestroyAPIView):
         following=request.data['following']
         query = Follow.objects.filter(following=following,follower=user)
         if not query:
-            raise ValidationError('You do not follow this person')
+            raise ValidationError({"detail": 'You do not follow this person'})
         follow=query.first()
         follow.delete()
         return Response(status=200)
@@ -58,9 +58,10 @@ class ListFollowerAPIView(ListAPIView):
 class ListFollowerWithIdAPIView(ListAPIView):
 
     def get(self, request, *args, **kwargs):
+        check_if_user(request)
         id = request.data.get('id', None)
         if id  is None:
-            raise ValidationError("give id")
+            raise ValidationError({"detail": "give id"})
         user=TemplateUser.objects.get(id=id)
         query=Follow.objects.filter(following=user)
         serializer = FollowerListSerializer(query, many=True)
@@ -81,9 +82,10 @@ class ListFollowingAPIView(ListAPIView):
 class ListFollowingWithIdAPIView(ListAPIView):
 
     def get(self, request, *args, **kwargs):
+        check_if_user(request)
         id = request.data.get('id', None)
         if id  is None:
-            raise ValidationError("give id")
+            raise ValidationError({"detail": "give id"})
         user=TemplateUser.objects.get(id=id)
         query=Follow.objects.filter(follower=user)
         serializer = FollowingListSerializer(query, many=True)
@@ -92,4 +94,4 @@ class ListFollowingWithIdAPIView(ListAPIView):
 
 def check_if_user(request):
     if request.user.is_anonymous:
-        raise ValidationError("User is not authorized")
+        raise ValidationError({"detail": "User is not authorized"})
