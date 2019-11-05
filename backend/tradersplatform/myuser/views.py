@@ -157,8 +157,10 @@ class SearchUserListAPIView(ListAPIView):
         check_if_user(request)
         service_query_general=TemplateUser.objects.all()
         username = request.data.get('username', None)
+        name=username.split()
         if username is not None:
-                service_query_general = service_query_general.filter(username__contains=username)
+                service_query_general = service_query_general.filter(first_name__contains=name[0])
+                service_query_general = service_query_general.filter(last_name__contains=name[1])
         else:
             raise ValidationError({"detail": "give username"})
 
@@ -234,4 +236,4 @@ class ForgotPassword(ListAPIView):
         try:
             send_email(email)
         except:
-            raise ValidationError("email is not valid")
+            raise ValidationError({"detail":"email is not valid"})

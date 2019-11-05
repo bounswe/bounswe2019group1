@@ -19,4 +19,5 @@ class TemplateUser(User):
     title = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')
     biography = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')
     last_changed_password_date = models.DateTimeField( blank=True, null=True, unique=False, default=None)
+    photo = models.FileField(upload_to="profile", blank=True, null=True, unique=False)
     #yeni = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')

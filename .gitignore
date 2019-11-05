@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 .idea/
 =======
 venv
@@ -9,7 +9,7 @@ backend/tradersplatform/APPNAME.log
 .idea
 traders_virtualenv
 
+/*__pycache__
 __pycache__
 __pycache__/*
 *.sqlite3
->>>>>>> master
