@@ -69,14 +69,14 @@ class TempUserLoginSerializer(ModelSerializer):
         if user.exists() and user.count() == 1:
             user_obj = user.first()
         else:
-            raise ValidationError({"error":"Incorrect credential"})
+            raise ValidationError({"detail":"Incorrect credential"})
 
         if user_obj:
             if not user_obj.check_password(password):
-                raise ValidationError("Incorrect credential")
+                raise ValidationError({"detail": "Incorrect credential"})
             if (getattr(user_obj, "last_changed_password_date") + django.utils.timezone.timedelta(6 * 365 / 12)) \
                     < django.utils.timezone.now():
-                raise ValidationError("Password out of date")
+                raise ValidationError({"detail": "Password out of date"})
 
         payload = jwt_payload_handler(user_obj)
         token = jwt_encode_handler(payload)

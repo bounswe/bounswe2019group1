@@ -24,28 +24,28 @@ class TempUserCreateAPIView(CreateAPIView):
     queryset = TemplateUser.objects.filter()
 
     def post(self, request, *args, **kwargs):
-        #make password with set password
-        data=request.data
+        # make password with set password
+        data = request.data
         password = request.data.get('password', None)
         if password is None:
-            raise ValidationError("You need to give a password")
+            raise ValidationError({"detail": "You need to give a password"})
         elif len(password) < 8:
-            raise ValidationError("Password size should be greater than 8")
+            raise ValidationError({"detail": "Password size should be greater than 8"})
         username = request.data.get('username', None)
         email = request.data.get('email', None)
         length = len(username)
-        for i in range(length-3):
-            if username[i:(i+4)] in password:
-                raise ValidationError("Password can not contain public pieces of information")
+        for i in range(length - 3):
+            if username[i:(i + 4)] in password:
+                raise ValidationError({"detail": "Password can not contain public pieces of information"})
         length = len(email)
-        for i in range(length-3):
+        for i in range(length - 3):
             if email[i:(i + 4)] in password:
-                raise ValidationError("Password can not contain public pieces of information")
+                raise ValidationError({"detail": "Password can not contain public pieces of information"})
         del data['password']
-        register_time=datetime.now()
-        time=register_time.strftime("%m/%d/%Y, %H:%M:%S")
-        data['last_changed_password_date']=register_time
-        serializer=TempUserCreateSerializer(data=data)
+        register_time = datetime.now()
+        time = register_time.strftime("%m/%d/%Y, %H:%M:%S")
+        data['last_changed_password_date'] = register_time
+        serializer = TempUserCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         #try:
@@ -59,7 +59,7 @@ class TempUserCreateAPIView(CreateAPIView):
         id=serializer.data["id"]
         user=User.objects.filter(id=id)
         if not user:
-            raise ValidationError("user not exist")
+            raise ValidationError({"detail": "user not exist"})
         user=user.first()
         user.set_password(password)
         user.save()
@@ -113,11 +113,12 @@ class UserAutoLogin(APIView):
 
     def get(self, request, *args, **kwargs):
         if request.user.is_anonymous:
-            raise ValidationError("User is not authorized")
+
+            raise ValidationError({"detail": "User is not authorized"})
         id=request.user.id
         general_user=TemplateUser.objects.filter(id=id)
         if not general_user:
-            raise ValidationError("User does not exist")
+            raise ValidationError({"detail": "User does not exist"})
         general_user=general_user.first()
         serializer=TempUserCreateSerializer(general_user)
         return Response(serializer.data, status=200)
@@ -142,12 +143,12 @@ class UserRetrieveMobileAPI(RetrieveAPIView):
         if id is not None:
             query=TemplateUser.objects.filter(id=id)
             if not query:
-                raise ValidationError(" User does not exist ")
+                raise ValidationError({"detail": " User does not exist "})
             query=query.first()
             serializer = TempUserCreateSerializer(query)
             return Response(serializer.data)
         else:
-            raise ValidationError("Give user id")
+            raise ValidationError({"detail": "Give user id"})
 
 
 class SearchUserListAPIView(ListAPIView):
@@ -159,7 +160,7 @@ class SearchUserListAPIView(ListAPIView):
         if username is not None:
                 service_query_general = service_query_general.filter(username__contains=username)
         else:
-            raise ValidationError("give username")
+            raise ValidationError({"detail": "give username"})
 
         page = self.paginate_queryset(service_query_general)
         if page is not None:
@@ -192,12 +193,12 @@ class PasswordUpdateAPIView(UpdateAPIView):
             return Response({"detail": "user not exist"}, status=400)
         old_password=request.data.get('old_password', None)
         if old_password is None:
-            raise ValidationError('Give us old password')
+            raise ValidationError({"detail": 'Give us old password'})
         if not user.check_password(old_password):
-            raise ValidationError("Incorrect credential")
+            raise ValidationError({"detail": "Incorrect credential"})
         new_password = request.data.get('new_password', None)
         if new_password is None:
-            raise ValidationError('Give us new password')
+            raise ValidationError({"detail": 'Give us new password'})
         user.set_password(new_password)
         user.save()
         id=user.id
