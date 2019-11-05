@@ -3,6 +3,8 @@
 =======
 venv
 backend/tradersplatform/db.sqlite3
+backend/tradersplatform/media
+backend/tradersplatform/media/profile
 backend/tradersplatform/APPNAME.log
 .DS_Store
 ./.DS_Store

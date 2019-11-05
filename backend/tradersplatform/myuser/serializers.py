@@ -7,7 +7,7 @@ from rest_framework.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate
-from rest_framework.fields import CharField
+from rest_framework.fields import CharField, SerializerMethodField
 from rest_framework_jwt.settings import api_settings
 
 jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
@@ -15,6 +15,7 @@ jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
 
 class TempUserCreateSerializer(ModelSerializer):
+
     class Meta:
         model = TemplateUser
         fields = [
@@ -31,6 +32,7 @@ class TempUserCreateSerializer(ModelSerializer):
             'biography',
             'title',
             'last_changed_password_date',
+            'photo',
         ]
         extra_kwargs = {"password": {"write_only": True, "required": False},
                         "phone_number": {"required": False},
@@ -39,7 +41,8 @@ class TempUserCreateSerializer(ModelSerializer):
                         "citizenship_number": {"required": False},
                         "title": {"required": False},
                         "biography": {"required": False},
-                        "last_changed_password_date": {"required": False}
+                        "last_changed_password_date": {"required": False},
+                        "photo": {"required": False}
                         }
 
 
