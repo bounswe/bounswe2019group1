@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/root"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:background="@drawable/big_picture_currency"
+android:fitsSystemWindows="true">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="24dp"
+    android:paddingTop="56dp"
+    android:paddingRight="24dp">
+
+    <ImageView
+        android:layout_width="281dp"
+        android:layout_height="111dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="24dp"
+        android:src="@drawable/app_logo_to_be_big" />
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#D3FFFFFF">
+
+        <EditText
+            android:id="@+id/input_iban"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="IBAN "
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="#D3FFFFFF">
+
+        <EditText
+            android:id="@+id/input_citizen_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Citizen Number"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/register_as_trader_button_first"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="30dp"
+        android:background="#EEF2F5"
+        android:onClick="goToMainTraderUserActivity"
+        android:text="Register as Trader" />
+
+    <Button
+        android:id="@+id/register_as_basic_button_second"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="30dp"
+        android:background="#EEF2F5"
+        android:onClick="goToMainBasicUserActivity"
+        android:text="Skip this step and Continue as Basic User" />
+
+    <TextView
+        android:id="@+id/link_login"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:onClick="goToLogin"
+        android:text="Already have an account?"
+        android:textSize="16dip" />
+
+</LinearLayout>
+</ScrollView>
