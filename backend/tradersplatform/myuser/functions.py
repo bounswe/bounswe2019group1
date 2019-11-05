@@ -9,9 +9,15 @@ from tradersplatform.settings.base import AWS_KEY, AWS_SECRET_KEY
 from rest_framework.exceptions import ValidationError
 
 
-def send_email_cv(feedback_instance):
-
-    email = feedback_instance["email"]
+def send_email(feedback_instance):
+    if not isinstance(feedback_instance, str):
+        email = feedback_instance["email"]
+        SUBJECT = "Forgat Password"
+        BODY_HTML = feedback_email_part1 + email + feedback_email_part2 + "To reset password go to this url" + feedback_email_part3
+    else:
+        email=feedback_instance
+        SUBJECT = "Your register have been completed"
+        BODY_HTML = feedback_email_part1 + email + feedback_email_part2 + "Your account has created" + feedback_email_part3
     SENDER = "Traders Platform <abdullah@birlikte.al>"
 
     # Replace recipient@example.com with a "To" address. If your account
@@ -23,7 +29,7 @@ def send_email_cv(feedback_instance):
     AWS_REGION = "eu-west-1"
 
     # The subject line for the email.
-    SUBJECT = "Your register have been completed"
+
 
     # The full path to the file that will be attached to the email.
 
@@ -33,7 +39,7 @@ def send_email_cv(feedback_instance):
     BODY_TEXT = "Hello,\r\nPlease see the attached file for a list of customers to contact."
 
     # The HTML body of the email.
-    BODY_HTML = feedback_email_part1  + email + feedback_email_part2 + "Your account has created" + feedback_email_part3
+
 
 
     # The character encoding for the email.

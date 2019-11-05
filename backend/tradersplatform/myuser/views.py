@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from rest_framework_jwt.settings import api_settings
 
 from follow.views import check_if_user
-from myuser.functions import send_email_cv
+from myuser.functions import send_email
 from myuser.models import TemplateUser
 from myuser.serializers import TempUserCreateSerializer, TempUserLoginSerializer, UserUpdateSerializer
 from django.contrib.auth.models import Group
@@ -49,7 +49,7 @@ class TempUserCreateAPIView(CreateAPIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         #try:
-            #send_email_cv(serializer.data)
+            #send_email(serializer.data)
         #except:
             #serializer=serializer.data
             #id=serializer['id']
@@ -205,3 +205,33 @@ class PasswordUpdateAPIView(UpdateAPIView):
         new_user = TemplateUser.objects.filter(id=id).first()
         serializer=TempUserCreateSerializer(new_user)
         return Response(serializer.data, status=200)
+
+
+class PasswordUpdateWithoutLoginAPIView(UpdateAPIView):
+
+    def put(self, request, *args, **kwargs):
+        id = kwargs.get("pk")
+        user = TemplateUser.objects.filter(id=id).first()
+        if not user:
+            return Response({"detail": "user not exist"}, status=400)
+        new_password = request.data.get('new_password', None)
+        if new_password is None:
+            raise ValidationError({"detail": 'Give us new password'})
+        user.set_password(new_password)
+        user.save()
+        id=user.id
+        new_user = TemplateUser.objects.filter(id=id).first()
+        serializer=TempUserCreateSerializer(new_user)
+        return Response(serializer.data, status=200)
+
+
+class ForgotPassword(ListAPIView):
+
+    def post(self, request, *args, **kwargs):
+        email=request.data.get('email', None)
+        if email is None:
+            raise ValidationError({"detail": 'Give the email'})
+        try:
+            send_email(email)
+        except:
+            raise ValidationError("email is not valid")
