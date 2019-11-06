@@ -257,3 +257,21 @@ class CurrencyAPI(ListAPIView):
         response = requests.request('GET', url, headers=headers, allow_redirects=False)
         ret=json.loads(response.text)
         return Response(ret, 200)
+
+
+class CryptoCurrencyAPI(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        '''
+        find this request in
+        https://coinlayer.com/ sign up and read the documentation
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        '''
+        url = 'http://api.coinlayer.com/api/live?access_key=9fdc61fa75c3cfce8e1e5fd50f362113'
+        headers = {}
+        response = requests.request('GET', url, headers=headers, allow_redirects=False)
+        ret=json.loads(response.text)
+        return Response(ret, 200)
