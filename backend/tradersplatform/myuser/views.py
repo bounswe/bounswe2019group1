@@ -5,6 +5,7 @@ from django.shortcuts import render
 from rest_framework.generics import RetrieveAPIView, ListAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.views import APIView
 from rest_framework_jwt.settings import api_settings
+import requests
 
 from follow.views import check_if_user
 from myuser.functions import send_email
@@ -16,6 +17,7 @@ from django.contrib.auth.models import User
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from datetime import datetime
+import json
 import logging
 
 
@@ -237,3 +239,21 @@ class ForgotPassword(ListAPIView):
             send_email(email)
         except:
             raise ValidationError({"detail":"email is not valid"})
+
+
+class CurrencyAPI(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        '''
+        find this request in
+        https://fixer.io sign up and read the documentation
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        '''
+        url = 'http://data.fixer.io/api/latest?access_key=1c569a006dc128d15b612d8d1ac04f96'
+        headers = {}
+        response = requests.request('GET', url, headers=headers, allow_redirects=False)
+        ret=json.loads(response.text)
+        return Response(ret, 200)
