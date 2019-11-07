@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'myuser',
     'event',
     'follow',
+    'equipment',
 ]
 
 MIDDLEWARE = [
