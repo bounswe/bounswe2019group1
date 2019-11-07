@@ -240,38 +240,3 @@ class ForgotPassword(ListAPIView):
         except:
             raise ValidationError({"detail":"email is not valid"})
 
-
-class CurrencyAPI(ListAPIView):
-
-    def get(self, request, *args, **kwargs):
-        '''
-        find this request in
-        https://fixer.io sign up and read the documentation
-        :param request:
-        :param args:
-        :param kwargs:
-        :return:
-        '''
-        url = 'http://data.fixer.io/api/latest?access_key=1c569a006dc128d15b612d8d1ac04f96'
-        headers = {}
-        response = requests.request('GET', url, headers=headers, allow_redirects=False)
-        ret=json.loads(response.text)
-        return Response(ret, 200)
-
-
-class CryptoCurrencyAPI(ListAPIView):
-
-    def get(self, request, *args, **kwargs):
-        '''
-        find this request in
-        https://coinlayer.com/ sign up and read the documentation
-        :param request:
-        :param args:
-        :param kwargs:
-        :return:
-        '''
-        url = 'http://api.coinlayer.com/api/live?access_key=9fdc61fa75c3cfce8e1e5fd50f362113'
-        headers = {}
-        response = requests.request('GET', url, headers=headers, allow_redirects=False)
-        ret=json.loads(response.text)
-        return Response(ret, 200)
