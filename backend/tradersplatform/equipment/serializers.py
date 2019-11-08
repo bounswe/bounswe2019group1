@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from equipment.models import CryptoCurrencies, Metals
+from equipment.models import CryptoCurrencies, Metals, Stocks
 
 
 class CryptoCurrencySerializer(ModelSerializer):
@@ -20,4 +20,14 @@ class MetalsSerializer(ModelSerializer):
             "XAG",
             "XAU",
             "XRH"
+        ]
+
+
+class StockSerializer(ModelSerializer):
+    class Meta:
+        model = Stocks
+        fields = [
+            "GOOGL",
+            "AAPL",
+            "GM"
         ]

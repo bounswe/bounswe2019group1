@@ -14,3 +14,9 @@ class Metals(models.Model):
     XAG = models.CharField(max_length=300, blank=True,null=True, unique=False)
     XAU = models.CharField(max_length=300, blank=False, null=False, unique=False)
     XRH = models.CharField(max_length=300, blank=False, null=False, unique=False)
+
+
+class Stocks(models.Model):
+    GOOGL = models.CharField(max_length=300, blank=True,null=True, unique=False)
+    AAPL = models.CharField(max_length=300, blank=False, null=False, unique=False)
+    GM = models.CharField(max_length=300, blank=False, null=False, unique=False)

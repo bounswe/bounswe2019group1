@@ -8,7 +8,7 @@ import datetime
 # Create your views here.
 from rest_framework.generics import ListAPIView
 
-from equipment.serializers import CryptoCurrencySerializer, MetalsSerializer
+from equipment.serializers import CryptoCurrencySerializer, MetalsSerializer, StockSerializer
 
 
 class CurrencyAPI(ListAPIView):
@@ -55,7 +55,7 @@ class MetalCurrencyAPI(ListAPIView):
     def get(self, request, *args, **kwargs):
         '''
         find this request in
-        https://coinlayer.com/ sign up and read the documentation
+        https://metals-api.com/ sign up and read the documentation
         :param request:
         :param args:
         :param kwargs:
@@ -70,3 +70,25 @@ class MetalCurrencyAPI(ListAPIView):
         serializer=MetalsSerializer(data=data_temp)
         serializer.is_valid(raise_exception=True)
         return Response(serializer.data, 200)
+
+
+class StockCurrencyAPI(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        '''
+        find this request in
+        https://financialmodelingprep.com/developer/docs/ read the documentation
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        '''
+        url = 'https://financialmodelingprep.com/api/v3/stock/real-time-price'
+        headers = {}
+        response = requests.request('GET', url, headers=headers, allow_redirects=False)
+        a=response.content
+        ret = json.loads(a)
+        data_temp = ret.get('stockList', None)
+        ret=list(filter(lambda stock: stock['symbol'] == 'AAPL' or stock['symbol'] == 'GOOGL' or stock['symbol'] == 'GM', data_temp))
+        return Response(ret, 200)
+
