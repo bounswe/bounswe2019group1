@@ -129,3 +129,24 @@ class ETFsListAPIView(ListAPIView):
         a=response.content
         ret = json.loads(a)
         return Response(ret, 200)
+
+
+class BondListAPIView(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        '''
+        find this request in
+        It seems not quite what requested will be discussed in meeting
+        https://www.quandl.com/databases/BD/documentation read the documentation
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        '''
+        url = 'https://www.quandl.com/api/v3/datatables/CHORD7/BD?api_key=foyqf3jX2rBjEsXsCgRX'
+        headers = {}
+        response = requests.request('GET', url, headers=headers, allow_redirects=False)
+        a=response.content
+        ret = json.loads(a)
+        return Response(ret, 200)
+
