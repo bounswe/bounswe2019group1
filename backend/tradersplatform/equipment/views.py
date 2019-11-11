@@ -92,3 +92,40 @@ class StockCurrencyAPI(ListAPIView):
         ret=list(filter(lambda stock: stock['symbol'] == 'AAPL' or stock['symbol'] == 'GOOGL' or stock['symbol'] == 'GM', data_temp))
         return Response(ret, 200)
 
+
+class TraceIndices(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        '''
+        find this request in
+        https://financialmodelingprep.com/developer/docs/#Most-of-the-majors-indexes-(Dow-Jones,-Nasdaq,-S&P-500) read the documentation
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        '''
+        url = 'https://financialmodelingprep.com/api/v3/majors-indexes'
+        headers = {}
+        response = requests.request('GET', url, headers=headers, allow_redirects=False)
+        a=response.content
+        ret = json.loads(a)
+        return Response(ret, 200)
+
+
+class ETFsListAPIView(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        '''
+        find this request in
+        https://www.quandl.com/databases/ETFG/documentation read the documentation
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        '''
+        url = 'https://www.quandl.com/api/v3/datatables/ETFG/FUND?api_key=foyqf3jX2rBjEsXsCgRX'
+        headers = {}
+        response = requests.request('GET', url, headers=headers, allow_redirects=False)
+        a=response.content
+        ret = json.loads(a)
+        return Response(ret, 200)

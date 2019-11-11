@@ -8,4 +8,6 @@ urlpatterns = [
     url(r'^cryptocurrency/', views.CryptoCurrencyAPI.as_view(), name="update_de"),
     url(r'^metalcurrency/', views.MetalCurrencyAPI.as_view(), name="update_de"),
     url(r'^stock/', views.StockCurrencyAPI.as_view(), name="update_de"),
+    url(r'^traceindices/', views.TraceIndices.as_view(), name="update_de"),
+    url(r'^etfs/', views.ETFsListAPIView.as_view(), name="update_de"),
 ]
