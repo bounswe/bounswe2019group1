@@ -22,6 +22,22 @@ import image from "assets/img/dollar-hd.jpg";
 import { login } from "../../service/authentication.service.js";
 import swal from "sweetalert";
 
+import ReactDOM from 'react-dom';
+import GoogleLogin from 'react-google-login';
+
+//altay
+const responseGoogleSuccess = (response) => {
+  window.location.href = 'http://localhost:3000/profile-page';
+  console.log(response);
+}
+
+const responseGoogleFailure = (response) => {
+  console.log(response.getStatusCode());
+    swal("Oops", "Incorrect username or password!", "error");
+}
+
+
+
 const useStyles = makeStyles(styles);
 export default function LoginPage(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
@@ -126,6 +142,13 @@ export default function LoginPage(props) {
                     >
                       Login
                     </Button>
+                    <GoogleLogin
+                      clientId="510505564353-67arm3s7fpa87aumuktnak7eto3kq4nc.apps.googleusercontent.com"
+                      buttonText="Login"
+                      onSuccess={responseGoogleSuccess}
+                      onFailure={responseGoogleFailure}
+                      cookiePolicy={'single_host_origin'}
+                    />
                   </CardFooter>
                   <CardFooter className={classes.cardFooter}>
                     New to Khaji-it?
