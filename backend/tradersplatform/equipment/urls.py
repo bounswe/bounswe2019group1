@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^stock/', views.StockCurrencyAPI.as_view(), name="update_de"),
     url(r'^traceindices/', views.TraceIndices.as_view(), name="update_de"),
     url(r'^etfs/', views.ETFsListAPIView.as_view(), name="update_de"),
+    url(r'^bonds/', views.BondListAPIView.as_view(), name="update_de"),
 ]
