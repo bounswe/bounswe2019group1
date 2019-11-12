@@ -32,14 +32,12 @@ import event2 from "assets/img/examples/ev2.jpeg";
 import event3 from "assets/img/examples/ev3.jpeg";
 import event4 from "assets/img/examples/ev4.jpg";
 import event5 from "assets/img/examples/ev5.jpeg";
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { getProfileInfo } from "../../service/profileinformation.service";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
-
 
 const useStyles = makeStyles(styles);
 
