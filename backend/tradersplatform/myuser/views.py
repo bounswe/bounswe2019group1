@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from rest_framework_jwt.settings import api_settings
 import requests
 
-from follow.views import check_if_user
+from follow.views import check_if_user, check_if_basic, check_if_trader
 from myuser.functions import send_email
 from myuser.models import TemplateUser
 from myuser.serializers import TempUserCreateSerializer, TempUserLoginSerializer, UserUpdateSerializer
@@ -240,3 +240,40 @@ class ForgotPassword(ListAPIView):
         except:
             raise ValidationError({"detail":"email is not valid"})
 
+
+class UserUpgradeAPIView(UpdateAPIView):
+
+    def put(self, request, *args, **kwargs):
+        check_if_basic(request)
+        id = request.user.id
+        user = TemplateUser.objects.filter(id=id).first()
+        if not user:
+            return Response({"detail": "user not exist"}, status=400)
+        group_name = "basic"
+        g = Group.objects.get(name=group_name)
+        g.user_set.remove(user)
+        group_name = "trader"
+        my_group, created = Group.objects.get_or_create(name=group_name)
+        my_group.user_set.add(user)
+        user = TemplateUser.objects.filter(id=user.id).first()
+        serializer=TempUserCreateSerializer(user)
+        return Response(serializer.data, status=200)
+
+
+class UserDowngradeAPIView(UpdateAPIView):
+
+    def put(self, request, *args, **kwargs):
+        check_if_trader(request)
+        id = request.user.id
+        user = TemplateUser.objects.filter(id=id).first()
+        if not user:
+            return Response({"detail": "user not exist"}, status=400)
+        group_name = "trader"
+        g = Group.objects.get(name=group_name)
+        g.user_set.remove(user)
+        group_name = "basic"
+        my_group, created = Group.objects.get_or_create(name=group_name)
+        my_group.user_set.add(user)
+        user = TemplateUser.objects.filter(id=user.id).first()
+        serializer=TempUserCreateSerializer(user)
+        return Response(serializer.data, status=200)

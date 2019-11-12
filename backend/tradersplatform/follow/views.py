@@ -95,3 +95,35 @@ class ListFollowingWithIdAPIView(ListAPIView):
 def check_if_user(request):
     if request.user.is_anonymous:
         raise ValidationError({"detail": "User is not authorized"})
+
+
+def check_if_basic(request):
+    if request.user.is_anonymous:
+        raise ValidationError({"detail":"User is not authorized"})
+    user = request.user
+    u = TemplateUser.objects.get(username=user.username)
+    query_groups = u.groups.all()
+    groups_names = []
+    for groups in query_groups:
+        groups_names.append(groups.name)
+
+    if 'trader' in groups_names:
+        raise ValidationError({"detail":"User is already a trader"})
+    if 'basic' not in groups_names:
+        raise ValidationError({"detail":"User is not authorized for this activity"})
+
+
+def check_if_trader(request):
+    if request.user.is_anonymous:
+        raise ValidationError({"detail":"User is not authorized"})
+    user = request.user
+    u = TemplateUser.objects.get(username=user.username)
+    query_groups = u.groups.all()
+    groups_names = []
+    for groups in query_groups:
+        groups_names.append(groups.name)
+
+    if 'basic' in groups_names:
+        raise ValidationError({"detail":"User is already a basic"})
+    if 'trader' not in groups_names:
+        raise ValidationError({"detail":"User is not authorized for this activity"})

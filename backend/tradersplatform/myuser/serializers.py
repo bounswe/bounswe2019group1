@@ -15,6 +15,7 @@ jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
 
 class TempUserCreateSerializer(ModelSerializer):
+    groups = SerializerMethodField()
 
     class Meta:
         model = TemplateUser
@@ -33,6 +34,7 @@ class TempUserCreateSerializer(ModelSerializer):
             'title',
             'last_changed_password_date',
             'photo',
+            'groups'
         ]
         extra_kwargs = {"password": {"write_only": True, "required": False},
                         "phone_number": {"required": False},
@@ -44,6 +46,11 @@ class TempUserCreateSerializer(ModelSerializer):
                         "last_changed_password_date": {"required": False},
                         "photo": {"required": False}
                         }
+
+    def get_groups(self, obj):
+        groups = obj.groups.all()
+        g = [group.name for group in groups]
+        return g
 
 
 class TempUserLoginSerializer(ModelSerializer):
