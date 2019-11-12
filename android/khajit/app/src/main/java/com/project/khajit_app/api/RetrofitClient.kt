@@ -1,5 +1,6 @@
 package com.project.khajit_app.api
 
+import com.project.khajit_app.global.User
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -11,7 +12,7 @@ object RetrofitClient {
     //private val AUTH = "Basic"
 
     //var ipAddress = Inet4Address.getLocalHost().hostAddress
-    private const val BASE_URL = "http://192.168.1.2:8000/"    //dynamic ip adresi girilmesi lazım
+    private const val BASE_URL = "http://35.163.120.227:8000/"    //dynamic ip adresi girilmesi lazım
 
 
     private val okHttpClient = OkHttpClient.Builder()
@@ -22,9 +23,21 @@ object RetrofitClient {
                     .addHeader("Content-Type","application/json")
                     .method(original.method(),original.body())
 
+                if(User.token == "") {
+
+                }
+                else {
+                    requestBuilder.addHeader("Authorization", "JWT %s".format(User.token))
+                }
+                /*
+                User.token.let {
+                    requestBuilder.addHeader("Authorization", "JWT %s".format(User.token))
+                }
+                 */
+
+
                 val request = requestBuilder.build()
                 chain.proceed(request)
-
             }.build()
 
     val instance: Api by lazy{

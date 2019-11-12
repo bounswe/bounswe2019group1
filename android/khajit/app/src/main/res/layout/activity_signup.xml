@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:gravity="center"
-            android:onClick="goToLogin"
+            android:onClick="goToLoginFromRegister"
             android:text="Already have an account?"
             android:textSize="16dip" />
 

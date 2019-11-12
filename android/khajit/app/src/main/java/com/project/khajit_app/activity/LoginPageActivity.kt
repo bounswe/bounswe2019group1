@@ -17,8 +17,10 @@ import android.widget.Toast
 import com.google.android.gms.common.api.ApiException
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.BasicRegisterResponse
+import com.project.khajit_app.data.models.LoginResponse
 import com.project.khajit_app.data.models.TraderUser
 import com.project.khajit_app.data.models.userToBeLogin
+import com.project.khajit_app.global.User
 import kotlinx.android.synthetic.main.activity_login.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,7 +32,6 @@ class LoginPageActivity : AppCompatActivity() {
 
     private lateinit var email_input : EditText
     private lateinit var password_input : EditText
-    private lateinit var normal_login_button : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -41,6 +42,10 @@ class LoginPageActivity : AppCompatActivity() {
             this.supportActionBar?.hide()
         } catch (e: NullPointerException){}
 
+        email_input = findViewById(R.id.input_email)
+        password_input = findViewById(R.id.input_password)
+
+        /*
         // [ [ [ Google Sign In ] ] ]
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
@@ -48,19 +53,15 @@ class LoginPageActivity : AppCompatActivity() {
             .requestIdToken(getString(R.string.server_client_id))
             .requestEmail()
             .build()
-
         // Build a GoogleSignInClient with the options specified by gso.
         val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-
         //
         mGoogleSignInClient.signOut().addOnCompleteListener {
-
             fun onComplete(task : Task<Void>) {
                 // Return to main screen
                 startActivity(Intent(this, MainPageActivity::class.java))
             }
         }
-
         btn_login_google.setOnClickListener {
             // Launch Google Sign In Intent
             val signInIntent = mGoogleSignInClient.getSignInIntent()
@@ -69,19 +70,81 @@ class LoginPageActivity : AppCompatActivity() {
             )
         }
         // [ [ [ End of Google Sign In ] ] ]
+         */
+
+        var login_button =  findViewById<Button>(R.id.btn_login)
+        login_button.setOnClickListener(loginBasic)
 
     }
 
-    override fun onStart() {
-        super.onStart()
-        // Check if a user was already signed in
-        val account = GoogleSignIn.getLastSignedInAccount(this)
-        if (account != null) {
-            // User is already signed in, start HomePageActivity
-            //startActivity(Intent(this, HomePageActivity::class.java))
+    private val loginBasic = View.OnClickListener { view ->
+        var email_information = email_input.text.toString().trim()
+        var password_information = password_input.text.toString().trim() //int olsa daha iyi gibi
 
-            // Commented ^this out because I don't want it to auto-login during development
+        if (email_information.isEmpty()) {
+            email_input.error = "Email is required."
+            email_input.requestFocus()
+            return@OnClickListener
         }
+        if (password_information.isEmpty()) {
+            password_input.error = "Password is required."
+            password_input.requestFocus()
+            return@OnClickListener
+        }
+
+        val userInfo = userToBeLogin(email_information, password_information)
+        RetrofitClient.instance.loginUser(userInfo).enqueue(object : Callback<LoginResponse>{
+            override fun onResponse(
+                call: Call<LoginResponse>,
+                response: Response<LoginResponse>
+            ) {
+                println(response.toString())
+                if(response.code() == 200 ){
+                    if(response.body()?.non_field_errors != null){
+                        Toast.makeText(applicationContext, "interesting", Toast.LENGTH_LONG).show()
+                        //Toast.makeText(applicationContext,response.body()?.username.toString(), Toast.LENGTH_LONG).show()
+
+                    }else{
+                        println(response)
+                        println(call)
+                        println(response.body()?.toString()?.trim())
+
+                        Log.d("success:", "" + response.body()?.user?.username)
+
+
+
+                        User.token = response.body()?.token
+                        User.id = response.body()?.user?.id
+                        User.username = response.body()?.user?.username
+                        User.email = response.body()?.user?.email
+                        User.first_name = response.body()?.user?.first_name
+                        User.last_name = response.body()?.user?.last_name
+                        // if the user is trader type info will be true otherwise user is basic and type info will be false
+                        User.type = (response.body()?.user?.groups?.get(0).equals("trader"))
+                        User.title = "No title"
+                        User.bio = "No bio"
+                        User.whereIamAsId = User.id  //it may be unnecessary to keep
+
+                        startActivity(Intent(this@LoginPageActivity, HomeFeedPageActivity::class.java))
+                        /*
+                        response.body()?.token.let {
+                            User.token = it
+                        }
+                         */
+                    }
+                }else{
+                    Toast.makeText(applicationContext,"Password or Username is incorrect",Toast.LENGTH_LONG).show()
+                    Log.d("error message:", response.message())
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                Toast.makeText(applicationContext,t.message,Toast.LENGTH_LONG).show()
+            }
+
+        }
+        )
+
     }
 
     fun goToRegister(view:View) {
@@ -89,25 +152,9 @@ class LoginPageActivity : AppCompatActivity() {
     }
     fun loginAccount(view: View) {
 
-       // startActivity(Intent(this, SignUpPageActivity::class.java))
-
-        btn_login.setOnClickListener {
-            var email_information = email_input.text.toString().trim()
-            var password_information = password_input.text.toString().trim() //int olsa daha iyi gibi
-
-            if (email_information == null) {
-                email_input.error = "Email is required."
-                email_input.requestFocus()
-                return@setOnClickListener
-            }
-            if (password_information.isEmpty()) {
-                password_input.error = "Password is required."
-                password_input.requestFocus()
-                return@setOnClickListener
-            }
+        // startActivity(Intent(this, SignUpPageActivity::class.java))
 
 
-        }
     }
 
 
@@ -115,38 +162,34 @@ class LoginPageActivity : AppCompatActivity() {
         // startActivity(Intent(this, SignUpPageActivity::class.java))
     }
 
+    /*
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         // Result returned from launching the Intent from mGoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach a listener.
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(task)
         }
-
     }
+     */
 
+    /*
     private fun handleSignInResult(completedTask : Task<GoogleSignInAccount> ) {
         try {
-
             val account = completedTask.getResult(ApiException::class.java)
             Toast.makeText(this, "Signed in, idToken: " + account?.idToken, Toast.LENGTH_SHORT).show()
-
             // TODO : send ID Token to server and validate
-
             // Signed in successfully, show authenticated UI.
             startActivity(Intent(this, HomeFeedPageActivity::class.java))
-
         } catch (e : ApiException) {
-
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
             Toast.makeText(this, "Error while signing in", Toast.LENGTH_SHORT).show()
-
         }
     }
+     */
 
     companion object {
         private const val TAG = "GoogleActivity"

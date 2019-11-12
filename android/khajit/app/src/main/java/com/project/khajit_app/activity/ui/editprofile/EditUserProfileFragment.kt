@@ -1,31 +1,72 @@
-package com.project.khajit_app.activity
+package com.project.khajit_app.activity.ui.editprofile
 
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ListView
+import android.widget.ProgressBar
 import android.widget.TextView
+
 import com.project.khajit_app.R
+import com.project.khajit_app.activity.ListViewAdapter
+import com.project.khajit_app.activity.ui.profile.UserProfile
+import com.project.khajit_app.activity.ui.profile.UserProfileViewModel
 
-class EditingProfilePageActivity : AppCompatActivity() {
+class EditUserProfileFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+
+
+    private lateinit var viewModel: EditUserProfileViewModel
+    private lateinit var first_name: EditText
+    private lateinit var last_name: EditText
+    private lateinit var title: EditText
+    private lateinit var bio :EditText
+    private lateinit var old_pw: EditText
+    private lateinit var new_pw :EditText
+    private lateinit var re_new_pw:EditText
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_editing_profile_page)
 
-        try {
-            this.supportActionBar?.hide()
-        } catch (e: NullPointerException){}
+        viewModel =
+            ViewModelProviders.of(this).get(EditUserProfileViewModel::class.java)
+        val root = inflater.inflate(R.layout.edit_user_profile_fragment, container, false)
 
-        findViewById<TextView>(R.id.text_bio_edit).movementMethod = ScrollingMovementMethod()
+
+        val bio_tex = root.findViewById(R.id.text_bio_edit) as TextView
+        bio_tex.movementMethod = ScrollingMovementMethod()
+
+        first_name = root.findViewById(R.id.input_first_name) as EditText
+        last_name = root.findViewById(R.id.input_last_name)as EditText
+        title  = root.findViewById(R.id.input_title)as EditText
+        bio = root.findViewById(R.id.text_bio_edit)as EditText
+        old_pw = root.findViewById(R.id.input_old_password)as EditText
+        new_pw = root.findViewById(R.id.input_new_password)as EditText
+        re_new_pw = root.findViewById(R.id.input_re_new_password) as EditText
+
+        return root
     }
 
+    companion object {
+        fun newInstance(): EditUserProfileFragment {
+            val fragmentEditUser = EditUserProfileFragment()
+            val args = Bundle()
+            fragmentEditUser.arguments = args
+            return fragmentEditUser
+        }
+
+    }
     fun changePersonalInfo(view: View) {
-        var first_name = findViewById<EditText>(R.id.input_first_name)
-        var last_name = findViewById<EditText>(R.id.input_last_name)
-        var title = findViewById<EditText>(R.id.input_title)
-        var bio = findViewById<EditText>(R.id.text_bio_edit)
 
         if(first_name.text.isEmpty()){
             first_name.error = "First name is required."
@@ -58,9 +99,6 @@ class EditingProfilePageActivity : AppCompatActivity() {
     }
 
     fun changePasswordInfo(view: View) {
-        var old_pw = findViewById<EditText>(R.id.input_old_password)
-        var new_pw = findViewById<EditText>(R.id.input_new_password)
-        var re_new_pw = findViewById<EditText>(R.id.input_re_new_password)
 
         if(old_pw.text.isEmpty()){
             old_pw.error = "Current password is required."
@@ -96,4 +134,10 @@ class EditingProfilePageActivity : AppCompatActivity() {
         // REQUEST GOES HERE, do not forget to check old password validity
 
     }
+
+
+
+
+
 }
+
