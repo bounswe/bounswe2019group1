@@ -34,6 +34,7 @@ class TempUserCreateSerializer(ModelSerializer):
             'title',
             'last_changed_password_date',
             'photo',
+            'is_public',
             'groups'
         ]
         extra_kwargs = {"password": {"write_only": True, "required": False},
@@ -105,6 +106,7 @@ class UserUpdateSerializer(ModelSerializer):
             "last_name",
             "title",
             "biography",
+            "is_public",
         ]
 
         extra_kwargs = {"first_name":
@@ -114,6 +116,8 @@ class UserUpdateSerializer(ModelSerializer):
                         "title":
                             {"required": False},
                         "biography":
+                            {"required": False},
+                        "is_public":
                             {"required": False},
                         }
 
