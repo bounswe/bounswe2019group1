@@ -16,5 +16,7 @@ urlpatterns = [
     url(r'^updatepassforgot/(?P<pk>[0-9_]+)/', views.PasswordUpdateWithoutLoginAPIView.as_view(), name="update_de"),
     url(r'^logarrange/', views.ArrangeLog.as_view(), name="update_de"),
     url(r'^forgotpassword/', views.ForgotPassword.as_view(), name="update_de"),
+    url(r'^userupgrade/', views.UserUpgradeAPIView.as_view(), name="update_de"),
+    url(r'^userdowngrade/', views.UserDowngradeAPIView.as_view(), name="update_de"),
     #url(r'^logs/', views.NoParsingFilter(), name="register"),
 ]
