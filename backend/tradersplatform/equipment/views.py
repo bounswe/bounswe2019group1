@@ -2,11 +2,13 @@ import requests
 from django.shortcuts import render
 import json
 from rest_framework.response import Response
-import datetime
+from datetime import datetime, timedelta
 
 
+from rest_framework.exceptions import ValidationError
 # Create your views here.
 from rest_framework.generics import ListAPIView
+from datetime import datetime
 
 from equipment.models import ETFDetail, ETFs
 from equipment.serializers import CryptoCurrencySerializer, MetalsSerializer, StockSerializer, CurrencySerializer, \
@@ -95,6 +97,31 @@ class StockCurrencyAPI(ListAPIView):
         ret = json.loads(a)
         data_temp = ret.get('stockList', None)
         ret=list(filter(lambda stock: stock['symbol'] == 'AAPL' or stock['symbol'] == 'GOOGL' or stock['symbol'] == 'GM', data_temp))
+        return Response(ret, 200)
+
+
+class StockLastMonth(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        '''
+        find this request in
+        https://financialmodelingprep.com/developer/docs/ read the documentation
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        '''
+        start_date = datetime.now() - timedelta(days=30)
+        one_month=start_date.strftime('%Y-%m-%d')
+        today=datetime.today().strftime('%Y-%m-%d')
+        comp=request.data.get('company_symbol',None)
+        if comp is None:
+            raise ValidationError({"detail":"You have to give company symbol"})
+        url = 'https://financialmodelingprep.com/api/v3/historical-price-full/'+comp+'?from='+one_month+'&to='+today
+        headers = {}
+        response = requests.request('GET', url, headers=headers, allow_redirects=False)
+        a=response.content
+        ret = json.loads(a)
         return Response(ret, 200)
 
 
