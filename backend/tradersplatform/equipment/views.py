@@ -8,7 +8,9 @@ import datetime
 # Create your views here.
 from rest_framework.generics import ListAPIView
 
-from equipment.serializers import CryptoCurrencySerializer, MetalsSerializer, StockSerializer
+from equipment.models import ETFDetail, ETFs
+from equipment.serializers import CryptoCurrencySerializer, MetalsSerializer, StockSerializer, CurrencySerializer, \
+    ETFDetailSerializer, ETFMultSerializer
 
 
 class CurrencyAPI(ListAPIView):
@@ -16,17 +18,20 @@ class CurrencyAPI(ListAPIView):
     def get(self, request, *args, **kwargs):
         '''
         find this request in
-        https://fixer.io sign up and read the documentation
+        https://www.exchangerate-api.com sign up and read the documentation
         :param request:
         :param args:
         :param kwargs:
         :return:
         '''
-        url = 'http://data.fixer.io/api/latest?access_key=1c569a006dc128d15b612d8d1ac04f96'
+        url = 'https://api.exchangerate-api.com/v4/latest/USD'
         headers = {}
         response = requests.request('GET', url, headers=headers, allow_redirects=False)
         ret=json.loads(response.text)
-        return Response(ret, 200)
+        ser=ret['rates']
+        serializer=CurrencySerializer(data=ser)
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data, 200)
 
 
 class CryptoCurrencyAPI(ListAPIView):
@@ -117,18 +122,38 @@ class ETFsListAPIView(ListAPIView):
     def get(self, request, *args, **kwargs):
         '''
         find this request in
-        https://www.quandl.com/databases/ETFG/documentation read the documentation
+        I find this with examining a node js method and look its backend
         :param request:
         :param args:
         :param kwargs:
         :return:
         '''
-        url = 'https://www.quandl.com/api/v3/datatables/ETFG/FUND?api_key=foyqf3jX2rBjEsXsCgRX'
-        headers = {}
-        response = requests.request('GET', url, headers=headers, allow_redirects=False)
+        url = 'https://etfdb.com/api/screener/'
+        payload = "{\n\t\"page\": 1,\n\t\"perPage\": 5\n}"
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        response = requests.request('POST', url, headers=headers, data = payload, allow_redirects=False)
         a=response.content
         ret = json.loads(a)
-        return Response(ret, 200)
+        data=ret['data']
+        for i in range (0,3):
+            curr=ETFDetail.objects.filter(id=i+1).first()
+            if not curr:
+                serializer=ETFDetailSerializer(data=data[i])
+                serializer.is_valid(raise_exception=True)
+                serializer.save()
+            else :
+                serializer = ETFDetailSerializer(curr,data=data[i])
+                serializer.is_valid(raise_exception=True)
+                serializer.save()
+        new_EFT = ETFs(
+            SPY=ETFDetail.objects.get(id=1),
+            IVV=ETFDetail.objects.get(id=2),
+            VTI=ETFDetail.objects.get(id=3),
+        )
+        serializer=ETFMultSerializer(new_EFT)
+        return Response(serializer.data, 200)
 
 
 class BondListAPIView(ListAPIView):
@@ -142,6 +167,7 @@ class BondListAPIView(ListAPIView):
         :param args:
         :param kwargs:
         :return:
+        eod api 5dc9331f614e72.22510470
         '''
         url = 'https://www.quandl.com/api/v3/datatables/CHORD7/BD?api_key=foyqf3jX2rBjEsXsCgRX'
         headers = {}
