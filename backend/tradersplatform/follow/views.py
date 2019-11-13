@@ -1,9 +1,12 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import CreateAPIView, ListAPIView, DestroyAPIView
 from rest_framework.response import Response
+from rest_framework.views import APIView
+import json
 
 from follow.models import Follow
 from follow.serializers import FollowCreateSerializer, FollowerListSerializer, FollowingListSerializer
@@ -77,6 +80,27 @@ class ListFollowingAPIView(ListAPIView):
         query=Follow.objects.filter(follower=user)
         serializer = FollowingListSerializer(query, many=True)
         return Response(serializer.data, status=200)
+
+
+class IsFollowingAPIView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        check_if_user(request)
+        id=request.user.id
+        following_id=request.data.get('following',None)
+        if following_id is None:
+            raise ValidationError({"detail": "give following id"})
+        user=TemplateUser.objects.get(id=id)
+        following=TemplateUser.objects.filter(id=following_id).first()
+        if not following:
+            raise ValidationError({"detail": "User with this following id does not exist"})
+        query=Follow.objects.filter(follower=user,following=following).first()
+        if query:
+            return HttpResponse(json.dumps({'result': 'Found'}),
+                       content_type="application/json")
+        else:
+            return HttpResponse(json.dumps({'result': 'Not Found'}),
+                       content_type="application/json")
 
 
 class ListFollowingWithIdAPIView(ListAPIView):
