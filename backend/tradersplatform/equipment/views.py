@@ -141,6 +141,28 @@ class TraceIndices(ListAPIView):
         response = requests.request('GET', url, headers=headers, allow_redirects=False)
         a=response.content
         ret = json.loads(a)
+        arr=ret['majorIndexesList']
+        arr = arr[:3]
+        ret={'majorIndexesList':arr}
+        return Response(ret, 200)
+
+
+class TraceIndicesGainers(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        '''
+        find this request in
+        https://financialmodelingprep.com/developer/docs/#Most-of-the-majors-indexes-(Dow-Jones,-Nasdaq,-S&P-500) read the documentation
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        '''
+        url = 'https://financialmodelingprep.com/api/v3/stock/gainers'
+        headers = {}
+        response = requests.request('GET', url, headers=headers, allow_redirects=False)
+        a=response.content
+        ret = json.loads(a)
         return Response(ret, 200)
 
 
