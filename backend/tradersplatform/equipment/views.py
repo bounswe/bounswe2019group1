@@ -36,6 +36,28 @@ class CurrencyAPI(ListAPIView):
         return Response(serializer.data, 200)
 
 
+class CurrencyConverterAPI(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        '''
+        find this request in
+        https://ratesapi.io/documentation/ read the documentation
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        '''
+        curr_from = request.data.get('from', None)
+        curr_to = request.data.get('to', None)
+        if curr_from is None or curr_to is None:
+            raise ValidationError({"detail": "You have to give currency symbol"})
+        url = 'https://api.ratesapi.io/api/latest?base='+curr_from+'&symbols='+curr_to
+        headers = {}
+        response = requests.request('GET', url, headers=headers, allow_redirects=False)
+        ret=json.loads(response.text)
+        return Response(ret, 200)
+
+
 class CryptoCurrencyAPI(ListAPIView):
 
     def get(self, request, *args, **kwargs):
