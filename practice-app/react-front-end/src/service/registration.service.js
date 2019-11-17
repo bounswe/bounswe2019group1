@@ -28,8 +28,7 @@ export function RegisterTrader(
   name,
   surname,
   location,
-  iban,
-  citizenshipno
+  iban
 ) {
   // Register the trading user.
   const requestOptions = {
@@ -42,8 +41,7 @@ export function RegisterTrader(
       first_name: name,
       last_name: surname,
       location: location.address,
-      iban_number: iban,
-      citizenship_number: citizenshipno
+      iban_number: iban
     }
   };
   return axios.post(

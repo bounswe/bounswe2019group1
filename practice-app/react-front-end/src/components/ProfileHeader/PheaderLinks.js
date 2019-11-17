@@ -19,7 +19,6 @@ import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 import {logout} from "service/authentication.service.js"
 import styles from "assets/jss/material-kit-react/components/headerLinksStyle.js";
-
 import { fade } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -122,6 +121,7 @@ export default function PheaderLinks(props) {
             />
           </div>
 
+<<<<<<< Updated upstream
 
           <Button
             className={classes.button}
@@ -132,6 +132,8 @@ export default function PheaderLinks(props) {
             <CloudDownload className={classes.icons} /> Articles
           </Button>
 
+=======
+>>>>>>> Stashed changes
         <CustomDropdown
           noLiPadding
           buttonText="Settings"
@@ -156,6 +158,10 @@ export default function PheaderLinks(props) {
         />
       </ListItem>
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     </List>
   );
 }
