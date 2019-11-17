@@ -38,6 +38,8 @@ import Grid from "@material-ui/core/Grid";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { getProfileInfo } from "../../service/profileinformation.service";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
+import { Apps, CloudDownload } from "@material-ui/icons";
+import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 
 const useStyles = makeStyles(styles);
 
@@ -78,6 +80,8 @@ export default function ProfilePage(props) {
         }}
         {...rest}
       />
+
+
       <Parallax small filter image={require("assets/img/dollar-hd.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>

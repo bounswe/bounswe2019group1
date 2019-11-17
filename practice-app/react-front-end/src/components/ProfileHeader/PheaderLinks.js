@@ -101,10 +101,12 @@ const useStyles = makeStyles(theme => ({
 
 export default function PheaderLinks(props) {
   const classes = useStyles();
-  
-  
+
+
   return (
+
     <List className={classes.list}>
+
       <ListItem className={classes.listItem}>
             <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -119,7 +121,17 @@ export default function PheaderLinks(props) {
               inputProps={{ 'aria-label': 'search' }}
             />
           </div>
-          
+
+
+          <Button
+            className={classes.button}
+            href="http://localhost:3000/articles"
+            color="transparent"
+            target="_self"
+          >
+            <CloudDownload className={classes.icons} /> Articles
+          </Button>
+
         <CustomDropdown
           noLiPadding
           buttonText="Settings"
@@ -143,8 +155,7 @@ export default function PheaderLinks(props) {
           ]}
         />
       </ListItem>
-     
-    
+
     </List>
   );
 }
