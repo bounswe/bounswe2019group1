@@ -121,7 +121,6 @@ export default function PheaderLinks(props) {
             />
           </div>
 
-<<<<<<< Updated upstream
 
           <Button
             className={classes.button}
@@ -132,8 +131,6 @@ export default function PheaderLinks(props) {
             <CloudDownload className={classes.icons} /> Articles
           </Button>
 
-=======
->>>>>>> Stashed changes
         <CustomDropdown
           noLiPadding
           buttonText="Settings"
@@ -158,10 +155,6 @@ export default function PheaderLinks(props) {
         />
       </ListItem>
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     </List>
   );
 }
