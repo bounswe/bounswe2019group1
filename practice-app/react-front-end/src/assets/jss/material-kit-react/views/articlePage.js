@@ -14,6 +14,23 @@ const profilePageStyle = {
       transform: "translate3d(0, -50%, 0)"
     }
   },
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    margin: '5%',
+    maxWidth: '100%',
+  },
+  image: {
+    width: 128,
+    height: 128,
+  },
+  img: {
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
+  },
   followers: {
     marginTop: "-80px",
     textAlign: "left",
