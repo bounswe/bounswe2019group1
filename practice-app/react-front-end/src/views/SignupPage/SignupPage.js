@@ -58,8 +58,7 @@ export default function SignupPage(props) {
       }
     },
     usertype: "Basic",
-    iban: "",
-    citizenshipno: 0
+    iban: ""
   });
 
   const handleChange = event => {
@@ -108,7 +107,7 @@ export default function SignupPage(props) {
           .catch(error => {
             swal("Oops: ", error.message, "error");
           })
-          
+
       }
     } else {
       var validation_response2 = validateTraderRegister(values);
@@ -122,8 +121,7 @@ export default function SignupPage(props) {
           values.name,
           values.surname,
           values.location,
-          values.iban,
-          values.citizenshipno
+          values.iban
         )
           .then(res =>
             res.status === 200 ? props.history.push("/login-page") : null
@@ -143,8 +141,7 @@ export default function SignupPage(props) {
       setValues(oldValues => ({
         ...oldValues,
         [event.target.name]: event.target.value,
-        iban: "",
-        citizenshipno: 0
+        iban: ""
       }));
     } else {
       setIsTraderUserSelected({ selected: true });
@@ -481,25 +478,7 @@ export default function SignupPage(props) {
                   }}
                   onChange={handleChange}
                 />
-                <CustomInput
-                  labelText="Citizenship No"
-                  id="citizenshipno"
-                  value={values.citizenshipno}
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  inputProps={{
-                    type: "citizenshipno",
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <Icon className={classes.inputIconsColor}>
-                          supervisor_account
-                        </Icon>
-                      </InputAdornment>
-                    )
-                  }}
-                  onChange={handleChange}
-                />
+
               </CardBody>
               <CardFooter className={classes.cardFooter}>
                 <Button simple color="primary" size="lg" onClick={handleSubmit}>

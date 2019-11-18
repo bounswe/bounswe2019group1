@@ -21,22 +21,22 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import image from "assets/img/dollar-hd.jpg";
 import { login } from "../../service/authentication.service.js";
 import swal from "sweetalert";
+import{Redirect} from "react-router-dom";
 
-import ReactDOM from 'react-dom';
-import GoogleLogin from 'react-google-login';
+
+import ReactDOM from "react-dom";
+import GoogleLogin from "react-google-login";
 
 //altay
-const responseGoogleSuccess = (response) => {
-  window.location.href = 'http://localhost:3000/profile-page';
+const responseGoogleSuccess = response => {
+  window.location.href = "http://localhost:3000/profile-page";
   console.log(response);
-}
+};
 
-const responseGoogleFailure = (response) => {
+const responseGoogleFailure = response => {
   console.log(response.getStatusCode());
-    swal("Oops", "Incorrect username or password!", "error");
-}
-
-
+  swal("Oops", "Incorrect username or password!", "error");
+};
 
 const useStyles = makeStyles(styles);
 export default function LoginPage(props) {
@@ -61,12 +61,14 @@ export default function LoginPage(props) {
   const handleSubmit = event => {
     event.preventDefault();
     login(values.username, values.pass).then(
-      function(response) {
-        response && props.history.push("/profile-page");
+      setTimeout(function(response) {
+        
+        localStorage.getItem('currentUser') && props.history.push("/profile-page");
       },
       function() {
         swal("Oops", "Incorrect username or password!", "error");
-      }
+      },3000)
+      
     );
   };
   return (
@@ -92,7 +94,9 @@ export default function LoginPage(props) {
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
                   <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4><b>Login</b></h4>
+                    <h4>
+                      <b>Login</b>
+                    </h4>
                   </CardHeader>
                   <CardBody>
                     <CustomInput
@@ -147,7 +151,7 @@ export default function LoginPage(props) {
                       buttonText="Login"
                       onSuccess={responseGoogleSuccess}
                       onFailure={responseGoogleFailure}
-                      cookiePolicy={'single_host_origin'}
+                      cookiePolicy={"single_host_origin"}
                     />
                   </CardFooter>
                   <CardFooter className={classes.cardFooter}>

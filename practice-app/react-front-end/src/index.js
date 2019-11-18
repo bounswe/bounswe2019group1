@@ -13,15 +13,16 @@ import SignupPage from "views/SignupPage/SignupPage";
 import EditProfile from "./views/ProfilePage/EditProfile";
 import ArticlesPage from "./views/ArticlesPage/ArticlesPage";
 var hist = createBrowserHistory();
-
 ReactDOM.render(
     <Router history={hist}>
         <Switch>
-            <Route path="/edit-profile" component={EditProfile} />
+            
             <Route path="/login-page" component={LoginPage} />
-            <Route path="/profile-page" component={ProfilePage} />
+            {localStorage.getItem("currentUser")?<Route path="/edit-profile" component={EditProfile} />: <Route path="/login-page" component={LoginPage}/>  }
+            {localStorage.getItem("currentUser")?<Route path="/profile-page" component={ProfilePage} />: <Route path="/login-page" component={LoginPage}/> }
             <Route path="/sign-up" component={SignupPage} />
-            <Route path="/articles" component={ArticlesPage} />
+            {localStorage.getItem("currentUser")?<Route path="/articles" component={ArticlesPage} />: <Route path="/login-page" component={LoginPage}/> }
+            
             <Route path="/" component={App} />
         </Switch>
     </Router>,

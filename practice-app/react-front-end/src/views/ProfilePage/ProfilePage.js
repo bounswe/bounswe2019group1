@@ -51,21 +51,35 @@ export default function ProfilePage(props) {
     email: "",
     first_name: "",
     last_name: "",
-    location: ""
+    location: "",
+    phone_number: 0,
+    biography: "",
+    title: "",
+    photo: "",
+    is_public: "",
+    groups: []
   });
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
     classes.imgFluid
   );
-  getProfileInfo().then(res =>
-    setProfileValues({
-      username: res.username,
-      first_name: res.first_name,
-      last_name: res.last_name,
-      location: res.location
-    })
-  );
+  useState(() => {
+    getProfileInfo().then(res =>
+      setProfileValues({
+        username: res.username,
+        first_name: res.first_name,
+        last_name: res.last_name,
+        location: res.location,
+        phone_number: res.phone_number,
+        biography: res.biography,
+        title: res.title,
+        photo: res.photo,
+        is_public: res.is_public,
+        groups: res.groups
+      })
+    );
+  });
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   return (
     <div>
@@ -96,7 +110,7 @@ export default function ProfilePage(props) {
                     <h3 className={classes.title}>
                       {profileValues.first_name} {profileValues.last_name}
                     </h3>
-                    <h6>ECONOMIST</h6>
+                    <h6>{profileValues.title}</h6>
                   </div>
                   <div className={classes.root}>
                     <Grid container spacing={3}>
@@ -122,10 +136,7 @@ export default function ProfilePage(props) {
               </GridItem>
             </GridContainer>
             <div className={classes.description}>
-              <p>
-                23 years old, Lives in İstanbul, Graduated from Boğaziçi
-                University, Department of Economics.{" "}
-              </p>
+              <p>{profileValues.biography} </p>
             </div>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
