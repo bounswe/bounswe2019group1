@@ -12,6 +12,9 @@ import App from "./App";
 import SignupPage from "views/SignupPage/SignupPage";
 import EditProfile from "./views/ProfilePage/EditProfile";
 import ArticlesPage from "./views/ArticlesPage/ArticlesPage";
+
+import AddArticle from "./views/AddArticle/AddArticle";
+
 import PortfolioPage from "./views/PortfolioPage/Portfolio";
 var hist = createBrowserHistory();
 ReactDOM.render(
@@ -23,7 +26,11 @@ ReactDOM.render(
             {localStorage.getItem("currentUser")?<Route path="/profile-page" component={ProfilePage} />: <Route path="/login-page" component={LoginPage}/> }
             <Route path="/sign-up" component={SignupPage} />
             {localStorage.getItem("currentUser")?<Route path="/articles" component={ArticlesPage} />: <Route path="/login-page" component={LoginPage}/> }
+
+            {localStorage.getItem("currentUser")?<Route path="/add-article" component={AddArticle} />: <Route path="/login-page" component={LoginPage}/> }
+
             <Route path="/portfolio" component={PortfolioPage} />
+
 
             <Route path="/" component={App} />
         </Switch>

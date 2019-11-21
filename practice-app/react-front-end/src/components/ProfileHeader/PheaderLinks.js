@@ -12,7 +12,7 @@ import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 
 // @material-ui/icons
-import { Apps, CloudDownload } from "@material-ui/icons";
+import { Apps, CloudDownload, AddBox } from "@material-ui/icons";
 
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
@@ -134,11 +134,21 @@ export default function PheaderLinks(props) {
 
           <Button
             className={classes.button}
+            href="http://localhost:3000/add-article"
+            color="transparent"
+            target="_self"
+          >
+            <AddBox className={classes.icons} /> Add Article
+
+
+          <Button
+            className={classes.button}
             href="http://localhost:3000/portfolio"
             color="transparent"
             target="_self"
           >
             <CloudDownload className={classes.icons} /> Portfolio
+
           </Button>
 
         <CustomDropdown
