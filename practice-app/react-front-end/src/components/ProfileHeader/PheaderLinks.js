@@ -131,6 +131,16 @@ export default function PheaderLinks(props) {
             <CloudDownload className={classes.icons} /> Articles
           </Button>
 
+
+          <Button
+            className={classes.button}
+            href="http://localhost:3000/portfolio"
+            color="transparent"
+            target="_self"
+          >
+            <CloudDownload className={classes.icons} /> Portfolio
+          </Button>
+
         <CustomDropdown
           noLiPadding
           buttonText="Settings"
