@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -78,23 +79,44 @@ class SignUpPageTraderActivity : AppCompatActivity() {
                 iban_information,
                 citizen_id_information
             )
-            RetrofitClient.instance.createTraderUser(traderUserInfo)
-                .enqueue(object : Callback<BasicRegisterResponse> {
-                    override fun onResponse(
-                        call: Call<BasicRegisterResponse>?,
-                        response: Response<BasicRegisterResponse>?
-                    ) {
-                        Toast.makeText(applicationContext, "oldu-trader", Toast.LENGTH_LONG).show()
 
+            RetrofitClient.instance.createTraderUser(traderUserInfo).enqueue(object : Callback<BasicRegisterResponse>{
+                override fun onResponse(
+                    call: Call<BasicRegisterResponse>,
+                    response: Response<BasicRegisterResponse>
+                ) {
+                    println(response.toString())
+                    if(response.code() == 200 ){
+                        if(response.body()?.username != null){
+                            Toast.makeText(applicationContext, "Something went wrong!", Toast.LENGTH_LONG).show()
+                            //Toast.makeText(applicationContext,response.body()?.username.toString(), Toast.LENGTH_LONG).show()
+
+                        }else{
+                            println(response)
+                            println(call)
+                            println(response.body()?.toString()?.trim())
+                            Toast.makeText(applicationContext,"User has been created",Toast.LENGTH_LONG).show()
+                            Log.d("success:", "" + response.body()?.user?.username)
+
+                            /*
+                            response.body()?.token.let {
+                                User.token = it
+                            }
+
+                             */
+                        }
+                    }else{
+                        Toast.makeText(applicationContext,response.message(),Toast.LENGTH_LONG).show()
+                        Log.d("error message:", response.message())
                     }
-
-                    override fun onFailure(call: Call<BasicRegisterResponse>, t: Throwable) {
-                        Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
-                    }
-
                 }
 
-                )
+                override fun onFailure(call: Call<BasicRegisterResponse>, t: Throwable) {
+                    Toast.makeText(applicationContext,t.message,Toast.LENGTH_LONG).show()
+                }
+
+            }
+            )
             getLaunchIntent(this)
             startActivity(Intent(this, MainPageActivity::class.java))
 
@@ -104,27 +126,47 @@ class SignUpPageTraderActivity : AppCompatActivity() {
 
     fun goToMainBasicUserActivity(view : View) {
 
-        basic_user_register.setOnClickListener {
-            RetrofitClient.instance.createBasicUser(userInfo)
-                .enqueue(object : Callback<BasicRegisterResponse> {
-                    override fun onResponse(
-                        call: Call<BasicRegisterResponse>?,
-                        response: Response<BasicRegisterResponse>?
-                    ) {
-                        Toast.makeText(applicationContext, "oldu-basic", Toast.LENGTH_LONG).show()
-                    }
 
-                    override fun onFailure(call: Call<BasicRegisterResponse>, t: Throwable) {
-                        Toast.makeText(applicationContext, t.message, Toast.LENGTH_LONG).show()
-                    }
+            RetrofitClient.instance.createBasicUser(userInfo).enqueue(object : Callback<BasicRegisterResponse>{
+                override fun onResponse(
+                    call: Call<BasicRegisterResponse>,
+                    response: Response<BasicRegisterResponse>
+                ) {
+                    println(response.toString())
+                    if(response.code() == 200 ){
+                        if(response.body()?.username != null){
+                            Toast.makeText(applicationContext, "interesting", Toast.LENGTH_LONG).show()
+                            //Toast.makeText(applicationContext,response.body()?.username.toString(), Toast.LENGTH_LONG).show()
 
+                        }else{
+                            println(response)
+                            println(call)
+                            println(response.body()?.toString()?.trim())
+                            Toast.makeText(applicationContext,"User has been created",Toast.LENGTH_LONG).show()
+                            Log.d("success:", "" + response.body()?.user?.username)
+                            /*
+                            response.body()?.token.let {
+                                User.token = it
+                            }
+
+                             */
+                        }
+                    }else{
+                        Toast.makeText(applicationContext,response.message(),Toast.LENGTH_LONG).show()
+                        Log.d("error message:", response.message())
+                    }
                 }
 
-                )
+                override fun onFailure(call: Call<BasicRegisterResponse>, t: Throwable) {
+                    Toast.makeText(applicationContext,t.message,Toast.LENGTH_LONG).show()
+                }
+
+            }
+            )
             getLaunchIntent(this)
             startActivity(Intent(this, MainPageActivity::class.java))
 
-        }
+
 
 
 
@@ -135,6 +177,9 @@ class SignUpPageTraderActivity : AppCompatActivity() {
         fun getLaunchIntent(from : Context) = Intent(from, MainPageActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }
+    }
+    fun goToLoginFromRegister(view : View) {
+        startActivity(Intent(this, LoginPageActivity::class.java))
     }
 
 }

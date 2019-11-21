@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/big_picture_currency"
+    tools:context=".activity.ui.editprofile.EditUserProfileFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/button_personal_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:backgroundTint="#BB3f51b5"
+            android:enabled="true"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:text="Personal Information"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_personal_info">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#D3FFFFFF">
+
+                    <EditText
+                        android:id="@+id/input_first_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="First Name"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#D3FFFFFF">
+
+                    <EditText
+                        android:id="@+id/input_last_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Last Name"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#D3FFFFFF">
+
+                    <EditText
+                        android:id="@+id/input_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Title"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="#D3FFFFFF">
+
+                    <EditText
+                        android:id="@+id/text_bio_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:background="#BB3f51b5"
+                        android:hint="About"
+                        android:inputType="text"
+                        android:scrollbars="vertical"
+                        android:text=""
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="20sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:id="@+id/button_apply_change_personal"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="start"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="50dp"
+                    android:backgroundTint="#B5A33535"
+                    android:enabled="true"
+                    android:onClick="changePersonalInfo"
+                    android:text="Apply Changes"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.536"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/button_password_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#BB3f51b5"
+            android:enabled="true"
+            android:text="Password"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_password_info">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="#D3FFFFFF">
+
+
+                <EditText
+                    android:id="@+id/input_old_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:hint="Current Password"
+                    android:inputType="textPassword"
+                    android:textColor="#070505" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="#D3FFFFFF">
+
+
+                <EditText
+                    android:id="@+id/input_new_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:hint="New Password"
+                    android:inputType="textPassword"
+                    android:textColor="#070505" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="#D3FFFFFF">
+
+
+                <EditText
+                    android:id="@+id/input_re_new_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:hint="Repeat New Password"
+                    android:inputType="textPassword"
+                    android:textColor="#070505" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/button_apply_change_password"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"
+                android:backgroundTint="#B5A33535"
+                android:enabled="true"
+                android:onClick="changePasswordInfo"
+                android:text="Change Password"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.536"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
