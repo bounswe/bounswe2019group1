@@ -1,9 +1,6 @@
 package com.project.khajit_app.api
 
 import com.project.khajit_app.data.models.*
-
-import okhttp3.ResponseBody
-
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -46,6 +43,4 @@ interface Api {
     @Headers("Content-Type: application/json")
     @PUT("user/updatepass/")
     fun changePassword(@Body body: PasswordChange):Call<GenericUserModel>
-
-
 }

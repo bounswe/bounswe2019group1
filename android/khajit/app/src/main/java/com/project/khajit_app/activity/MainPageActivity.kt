@@ -7,6 +7,13 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
 import com.project.khajit_app.R
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
+
+
 
 class MainPageActivity : AppCompatActivity() {
 
@@ -32,7 +39,7 @@ class MainPageActivity : AppCompatActivity() {
         startActivity(Intent(this, LoginPageActivity::class.java))
     }
     fun goToHomePage(view : View) {
-        startActivity(Intent(this, HomeFeedPageActivity::class.java))
+        startActivity(Intent(this, HomeFeedPageGuestActivity::class.java))
     }
 
     companion object {
@@ -40,5 +47,7 @@ class MainPageActivity : AppCompatActivity() {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }
     }
+
+    override fun onBackPressed() {}
 
 }

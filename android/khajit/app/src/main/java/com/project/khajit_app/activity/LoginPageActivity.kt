@@ -52,19 +52,15 @@ class LoginPageActivity : AppCompatActivity() {
             .requestIdToken(getString(R.string.server_client_id))
             .requestEmail()
             .build()
-
         // Build a GoogleSignInClient with the options specified by gso.
         val mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-
         //
         mGoogleSignInClient.signOut().addOnCompleteListener {
-
             fun onComplete(task : Task<Void>) {
                 // Return to main screen
                 startActivity(Intent(this, MainPageActivity::class.java))
             }
         }
-
         btn_login_google.setOnClickListener {
             // Launch Google Sign In Intent
             val signInIntent = mGoogleSignInClient.getSignInIntent()
@@ -73,6 +69,10 @@ class LoginPageActivity : AppCompatActivity() {
             )
         }
         // [ [ [ End of Google Sign In ] ] ]
+         */
+
+        var login_button =  findViewById<Button>(R.id.btn_login)
+        login_button.setOnClickListener(loginBasic)
 
          */
 
@@ -123,17 +123,17 @@ class LoginPageActivity : AppCompatActivity() {
                         User.email = response.body()?.user?.email
                         User.first_name = response.body()?.user?.first_name
                         User.last_name = response.body()?.user?.last_name
-                        User.type = response.body()?.user?.groups?.get(0)
+                        // if the user is trader type info will be true otherwise user is basic and type info will be false
+                        User.type = (response.body()?.user?.groups?.get(0).equals("trader"))
                         User.title = "No title"
                         User.bio = "No bio"
-                        User.whereIamAsId = User.id
+                        User.whereIamAsId = User.id  //it may be unnecessary to keep
 
                         startActivity(Intent(this@LoginPageActivity, HomeFeedPageActivity::class.java))
                         /*
                         response.body()?.token.let {
                             User.token = it
                         }
-
                          */
                     }
                 }else{
@@ -158,7 +158,7 @@ class LoginPageActivity : AppCompatActivity() {
     }
     fun loginAccount(view: View) {
 
-       // startActivity(Intent(this, SignUpPageActivity::class.java))
+        // startActivity(Intent(this, SignUpPageActivity::class.java))
 
 
     }
@@ -169,42 +169,33 @@ class LoginPageActivity : AppCompatActivity() {
     }
 
     /*
-
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
         // Result returned from launching the Intent from mGoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach a listener.
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(task)
         }
-
     }
-
      */
 
     /*
     private fun handleSignInResult(completedTask : Task<GoogleSignInAccount> ) {
         try {
-
             val account = completedTask.getResult(ApiException::class.java)
             Toast.makeText(this, "Signed in, idToken: " + account?.idToken, Toast.LENGTH_SHORT).show()
-
             // TODO : send ID Token to server and validate
-
             // Signed in successfully, show authenticated UI.
             startActivity(Intent(this, HomeFeedPageActivity::class.java))
-
         } catch (e : ApiException) {
-
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
             Toast.makeText(this, "Error while signing in", Toast.LENGTH_SHORT).show()
-
         }
     }
+     */
 
      */
 

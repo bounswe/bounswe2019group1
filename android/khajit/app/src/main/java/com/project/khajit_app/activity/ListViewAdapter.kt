@@ -6,11 +6,12 @@ import com.project.khajit_app.R
 import android.view.ViewGroup
 import android.view.View
 import com.project.khajit_app.activity.ui.home.HomeFragment
+import com.project.khajit_app.activity.ui.profile.UserProfile
 
 
 // Adapter for prediction success ratios, NEVER CHANGE THIS FILE
 class ListViewAdapter(
-    internal var context: HomeFragment,
+    internal var context: UserProfile,
     internal var title: Array<String>,
     internal var description: Array<String>
 ) : BaseAdapter() {

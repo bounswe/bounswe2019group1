@@ -7,7 +7,7 @@ object User {
     var email: String? = ""
     var first_name: String? = ""
     var last_name: String? = ""
-    var type: String? = ""
+    var type: Boolean? = false   // if the user is trader type info will be true otherwise user is basic and type info will be false
     var title: String? = ""
     var bio: String? = ""
     var location: String? = ""
