@@ -145,7 +145,4 @@ class HomeFeedPageActivity : AppCompatActivity() {
         else -> super.onOptionsItemSelected(item)
 
     }
-    public void myClickMethod(View v) {
-        someFragment.myClickMethod(v);
-    }
 }

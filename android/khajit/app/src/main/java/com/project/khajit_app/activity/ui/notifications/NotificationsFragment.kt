@@ -14,7 +14,16 @@ import com.project.khajit_app.activity.HomeFeedPageActivity
 import com.project.khajit_app.activity.ui.notificationdetails.notificationDetailFragment
 
 
-class NotificationsFragment : Fragment() {
+class NotificationsFragment : Fragment(),View.OnClickListener {
+
+    override fun onClick(v: View?) {
+        println("iki")
+        val detailFragment=notificationDetailFragment.newInstance()
+        (activity as HomeFeedPageActivity).denemeFragment(
+            notificationDetailFragment.newInstance(),
+            R.id.homePageContent, true, addToBackStack = true,
+            addAnimation = false)
+    }
 
     private lateinit var notificationsViewModel: NotificationsViewModel
 
@@ -30,30 +39,22 @@ class NotificationsFragment : Fragment() {
         val notificationView :View = inflater.inflate(R.layout.fragment_notifications, container, false)
 
         val detailButton = notificationView.findViewById(R.id.buttonToGoToNotificationDetail) as Button
-        /*detailButton.setOnClickListener {
-            println("bir")
-            swapFragment()
-            println("üç")
-        }
-
-         */
-
-
+        detailButton.setOnClickListener(this)
 
         return notificationView
     }
     companion object {
         fun newInstance(): NotificationsFragment {
-            val fragmentGuestHome = NotificationsFragment()
+            val fragmentNotification = NotificationsFragment()
             val args = Bundle()
-            fragmentGuestHome.arguments = args
-            return fragmentGuestHome
+            fragmentNotification.arguments = args
+            return fragmentNotification
         }
 
     }
 
 
-    fun swapFragment(view : View) {
+    /*fun swapFragment(view : View) {
         println("iki")
         val detailFragment=notificationDetailFragment.newInstance()
         (activity as HomeFeedPageActivity).denemeFragment(
@@ -64,6 +65,8 @@ class NotificationsFragment : Fragment() {
 
 
     }
+
+     */
 
 
 

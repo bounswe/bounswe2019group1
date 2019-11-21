@@ -21,7 +21,7 @@ class notificationDetailFragment : Fragment() {
     ): View? {
         viewModel =
             ViewModelProviders.of(this).get(NotificationDetailViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
+        val root = inflater.inflate(R.layout.notification_detail_fragment, container, false)
 
 
         return root

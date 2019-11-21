@@ -30,7 +30,6 @@
         android:backgroundTint="#B5A33535"
         android:enabled="true"
         android:text="@string/go_notification_detail"
-        android:onClick="swapFragment"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
