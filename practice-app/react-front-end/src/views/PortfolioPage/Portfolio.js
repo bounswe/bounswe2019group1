@@ -72,8 +72,69 @@ export default function TableList() {
     AGTHX_USD : false
  });
 
+ const [list, setListState] = React.useState([
+    ["TRY/EUR", "Turkish Lira/Euro", "0.1574"],
+    ["USD/JPY", "United States Dollar/Japanese Yen", "108.7480"],
+    ["GBP/TRY", "British Pound Sterling/Turkish Lira", "7.4000"],
+    ["EUR/USD", "Euro/United States Dollar", "1.1074"],
+    ["USD/TRY", "United States Dollar/Turkish Lira",  "5.7182"],
+    ["EUR/TRY", "Euro/Japanese Yen", "6.3329"],
+    ["GBP/USD", "British Pound Sterling / United States Dollar", "1.2952"],
+    ["BTC/TRY", "Bitcoin / Turkish Lira", "46235.9183"],
+    ["XMR/USD", "Monero / United States Dollar", "58.0200"],
+    ["GOOGL/USD", "Alphabet Inc. / United States Dollar", "1296.4000"],
+    ["AGTHX/USD", "American Funds The Growth Fund of America Class A / United States Dollar", "52.4900"] 
+  ])
+
  const handleChange = name => event => {
    setState({ ...state, [name]: event.target.checked });
+ };
+
+ const onApplyChange = event => {
+    let altay = [];
+    if (state.TRY_EUR) {
+      altay.push(["TRY/EUR", "Turkish Lira/Euro", "0.1574"])
+    }
+
+    if (state.USD_JPY) {
+      altay.push(["USD/JPY", "United States Dollar/Japanese Yen", "108.7480"])
+    }
+
+    if (state.GBP_TRY) {
+      altay.push(["GBP/TRY", "British Pound Sterling/Turkish Lira", "7.4000"])
+    }
+
+    if (state.EUR_USD) {
+      altay.push(["EUR/USD", "Euro/United States Dollar", "1.1074"])
+    }
+
+    if (state.USD_TRY) {
+      altay.push(["USD/TRY", "United States Dollar/Turkish Lira",  "5.7182"])
+    }
+
+    if (state.EUR_TRY) {
+      altay.push(["EUR/TRY", "Euro/Japanese Yen", "6.3329"])
+    }
+    if (state.GBP_USD) {
+      altay.push(["GBP/USD", "British Pound Sterling / United States Dollar", "1.2952"])
+    }
+
+    if (state.BTC_TRY) {
+      altay.push(["BTC/TRY", "Bitcoin / Turkish Lira", "46235.9183"])
+    }
+
+    if (state.XMR_USD) {
+      altay.push(["XMR/USD", "Monero / United States Dollar", "58.0200"])
+    }
+
+    if (state.GOOGL_USD) {
+      altay.push(["GOOGL/USD", "Alphabet Inc. / United States Dollar", "1296.4000"])
+    }
+
+    if (state.AGTHX_USD) {
+      altay.push(["AGTHX/USD", "American Funds The Growth Fund of America Class A / United States Dollar", "52.4900"])
+    }
+    setListState(altay);
  };
 
  const { TRY_EUR, USD_JPY, GBP_TRY, EUR_USD, USD_TRY, EUR_TRY, GBP_USD, BTC_TRY, XMR_USD, GOOGL_USD, AGTHX_USD} = state;
@@ -93,14 +154,7 @@ export default function TableList() {
             <Table
               tableHeaderColor="primary"
               tableHead={["Equipment Symbol", "Equipment Long Name",  "Parity"]}
-              tableData={[
-                ["TRY/EUR", "Turkish Lira/Euro", "₺0.1574"],
-                ["USD/JPY", "United States Dollar/Japanese Yen", "₺108.7480"],
-                ["GBP/TRY", "British Pound Sterling/Turkish Lira", "₺7.4000"],
-                ["EUR/USD", "Euro/United States Dollar", "₺1.1074"],
-                ["USD/TRY", "United States Dollar/Turkish Lira",  "₺5.7182"],
-                ["EUR/TRY", "Euro/Japanese Yen", "₺6.3329"]
-              ]}
+              tableData={list}
             />
           </CardBody>
         </Card>
@@ -180,7 +234,7 @@ export default function TableList() {
                   label="AGTHX/USD"
                 />
             </FormControl>
-            <Button variant="contained" className={classes.button}>
+            <Button variant="contained" className={classes.button} onClick={onApplyChange}>
               Apply changes
             </Button>
           </CardBody>
