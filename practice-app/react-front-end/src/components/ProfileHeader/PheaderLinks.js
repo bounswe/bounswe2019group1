@@ -131,6 +131,7 @@ export default function PheaderLinks(props) {
             <CloudDownload className={classes.icons} /> Articles
           </Button>
 
+
           <Button
             className={classes.button}
             href="http://localhost:3000/add-article"
@@ -138,6 +139,16 @@ export default function PheaderLinks(props) {
             target="_self"
           >
             <AddBox className={classes.icons} /> Add Article
+
+
+          <Button
+            className={classes.button}
+            href="http://localhost:3000/portfolio"
+            color="transparent"
+            target="_self"
+          >
+            <CloudDownload className={classes.icons} /> Portfolio
+
           </Button>
 
         <CustomDropdown
