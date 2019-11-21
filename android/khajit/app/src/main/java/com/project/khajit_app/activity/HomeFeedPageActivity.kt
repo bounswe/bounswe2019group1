@@ -1,6 +1,5 @@
 package com.project.khajit_app.activity
 
-import android.app.Notification
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -10,6 +9,7 @@ import android.widget.FrameLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.ui.equipment.EquipmentFragment
 import com.project.khajit_app.activity.ui.home.HomeFragment
@@ -21,7 +21,7 @@ import com.project.khajit_app.global.User
 
 class HomeFeedPageActivity : AppCompatActivity() {
 
-    private var content: FrameLayout? = null
+    private var homePageContent: FrameLayout? = null
     private var newFragment: Fragment? = null;//global variable
 
 
@@ -30,7 +30,7 @@ class HomeFeedPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_feed_page)
         setSupportActionBar(findViewById(R.id.home_top_menu_options_bar))
-        content = findViewById(R.id.content)
+        homePageContent = findViewById(R.id.homePageContent)
         val navigation = findViewById<BottomNavigationView>(R.id.nav_view)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
@@ -57,7 +57,7 @@ class HomeFeedPageActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                val fragment = NotificationsFragment()
+                val fragment = NotificationsFragment.Companion.newInstance()
                 changeFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
@@ -74,16 +74,39 @@ class HomeFeedPageActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
-            .replace(R.id.content, fragment, fragment.javaClass.simpleName)
+            .replace(R.id.homePageContent, fragment, fragment.javaClass.simpleName)
             .commit()
 
     }
-    private fun changeFragment(fragment: Fragment){
+    fun changeFragment(fragment: Fragment){
         val newFragment = fragment
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.content, newFragment,fragment.javaClass.simpleName)
-        transaction.addToBackStack(null)
-        transaction.commit()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.homePageContent, newFragment,fragment.javaClass.simpleName)
+            .addToBackStack("")
+            .commit()
+    }
+
+    fun denemeFragment(
+        fragment: Fragment,
+        container: Int,
+        replace: Boolean,
+        addToBackStack: Boolean,
+        addAnimation: Boolean
+    ) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        if (addAnimation)
+            fragmentTransaction.setCustomAnimations(
+                R.anim.design_bottom_sheet_slide_in,
+                R.anim.design_bottom_sheet_slide_out
+
+            )
+        if (replace)
+            fragmentTransaction.replace(container, fragment, fragment.javaClass.name)
+        else
+            fragmentTransaction.add(container, fragment, fragment.javaClass.name)
+        if (addToBackStack)
+            fragmentTransaction.addToBackStack(fragment.javaClass.name)
+        fragmentTransaction.commit()
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_top, menu)
@@ -121,5 +144,8 @@ class HomeFeedPageActivity : AppCompatActivity() {
         }
         else -> super.onOptionsItemSelected(item)
 
+    }
+    public void myClickMethod(View v) {
+        someFragment.myClickMethod(v);
     }
 }
