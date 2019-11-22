@@ -28,8 +28,9 @@ ReactDOM.render(
             {localStorage.getItem("currentUser")?<Route path="/articles" component={ArticlesPage} />: <Route path="/login-page" component={LoginPage}/> }
 
             {localStorage.getItem("currentUser")?<Route path="/add-article" component={AddArticle} />: <Route path="/login-page" component={LoginPage}/> }
+            {localStorage.getItem("currentUser")?<Route path="/portfolio" component={PortfolioPage} />: <Route path="/login-page" component={LoginPage}/> }
 
-            <Route path="/portfolio" component={PortfolioPage} />
+            
 
 
             <Route path="/" component={App} />

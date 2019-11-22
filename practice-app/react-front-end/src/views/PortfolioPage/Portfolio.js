@@ -2,6 +2,10 @@ import React from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
+import Header from "components/Header/Header.js";
+import PheaderLinks from "components/ProfileHeader/PheaderLinks";
+import Parallax from "components/Parallax/Parallax.js";
+import classNames from "classnames";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import Table from "components/Table/Table.js";
@@ -141,8 +145,30 @@ export default function TableList() {
  const error = [TRY_EUR, USD_JPY, GBP_TRY, EUR_USD, USD_TRY, EUR_TRY, GBP_USD, BTC_TRY, XMR_USD, GOOGL_USD, AGTHX_USD].filter(v => v).length !== 2;
 
   return (
+    <div>
+    <Header
+    color="transparent"
+    brand="Khaji-it Traders Platform"
+    rightLinks={<PheaderLinks />}
+    fixed
+    changeColorOnScroll={{
+      height: 200,
+      color: "white"
+    }}
+    
+  />
+  <Parallax small filter image={require("assets/img/dollar-hd.jpg")} />
+  <div className={classNames(classes.main, classes.mainRaised)}>
+        <div>
+          <div className={classes.container}>
+            <GridContainer justify="center">
+              <GridItem xs={12} sm={12} md={20}>
+              <div className={classes.root}>
+                
+
+
     <GridContainer>
-      <GridItem xs={12} sm={12} md={12}>
+      <GridItem item xs={120} sm container>
         <Card>
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>Portfolio</h4>
@@ -242,5 +268,15 @@ export default function TableList() {
         </Card>
       </GridItem>
     </GridContainer>
+    </div>
+  
+    </GridItem>
+    </GridContainer>
+    </div>
+    </div>
+    </div>
+    
+    </div>
+   
   );
 }
