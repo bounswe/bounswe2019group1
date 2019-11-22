@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'follow',
     'equipment',
     'article',
+    'article_comment',
 ]
 
 MIDDLEWARE = [

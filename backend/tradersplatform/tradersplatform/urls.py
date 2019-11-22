@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^follow/', include('follow.urls')),
     url(r'^equipment/', include('equipment.urls')),
     url(r'^article/', include('article.urls')),
+    url(r'^article-comment/', include('article_comment.urls')),
 ]
 if settings.DEBUG:
   urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
