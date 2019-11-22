@@ -1,5 +1,7 @@
 package com.project.khajit_app.activity.ui.editprofile
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
@@ -7,15 +9,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
+import androidx.annotation.ContentView
 
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.ListViewAdapter
 import com.project.khajit_app.activity.ui.profile.UserProfile
 import com.project.khajit_app.activity.ui.profile.UserProfileViewModel
+import com.project.khajit_app.global.User
 
 class EditUserProfileFragment : Fragment() {
 
@@ -25,7 +26,11 @@ class EditUserProfileFragment : Fragment() {
     private lateinit var first_name: EditText
     private lateinit var last_name: EditText
     private lateinit var title: EditText
+    private lateinit var location: EditText
+    private lateinit var phone_number: EditText
     private lateinit var bio :EditText
+    private lateinit var iban :EditText
+
     private lateinit var old_pw: EditText
     private lateinit var new_pw :EditText
     private lateinit var re_new_pw:EditText
@@ -50,11 +55,57 @@ class EditUserProfileFragment : Fragment() {
         last_name = root.findViewById(R.id.input_last_name)as EditText
         title  = root.findViewById(R.id.input_title)as EditText
         bio = root.findViewById(R.id.text_bio_edit)as EditText
+        location = root.findViewById(R.id.input_location)as EditText
+        phone_number = root.findViewById(R.id.phone_number)as EditText
+        iban = root.findViewById(R.id.iban_number)as EditText
+
         old_pw = root.findViewById(R.id.input_old_password)as EditText
         new_pw = root.findViewById(R.id.input_new_password)as EditText
         re_new_pw = root.findViewById(R.id.input_re_new_password) as EditText
 
+        first_name.setText(User.first_name)
+        last_name.setText(User.last_name)
+        title.setText(User.title)
+        bio.setText(User.bio)
+        location.setText(User.location)
+        phone_number.setText(User.phone_number.toString())
+        iban.setText(User.iban_number.toString())
+
+        val personal_change = root.findViewById(R.id.button_apply_change_personal) as Button
+        personal_change.setOnClickListener { root ->
+            println("THAT WORKS")
+           // changePersonalInfo(root)
+        }
+
+        val privacy_change = root.findViewById(R.id.button_change_privacy) as Button
+        privacy_change.setOnClickListener { root ->
+            changePrivacyMode(root)
+        }
+
         return root
+    }
+
+    fun changePrivacyMode(root: View?) {
+        val builder = AlertDialog.Builder(this.context)
+        var priv_change = "Do you want to set your privacy mode as public (People can see your profile details without following)"
+        if(User.is_public == true){
+            priv_change = "Do you want to set your privacy mode as private (People can't see your profile details without following)"
+        }
+        builder.setTitle("Privacy Mode")
+        builder.setMessage(priv_change)
+        builder.setCancelable(false)
+        //builder.setIcon(R.drawable.)
+        builder.setPositiveButton("Yes") { dialogInterface: DialogInterface, i: Int ->
+            // Evet butonuna tıklayınca olacaklar
+            println("EVET") }
+
+        builder.setNegativeButton("No") {dialogInterface: DialogInterface, i: Int ->
+            // Hayır butonuna tıklayınca olacaklar
+            println("HAYIR") }
+        builder.show()
+
+
+
     }
 
     companion object {
@@ -66,6 +117,25 @@ class EditUserProfileFragment : Fragment() {
         }
 
     }
+
+    private fun Button.setOnClickListener(editUserProfileFragment: EditUserProfileFragment) {
+        Toast.makeText(this.context, "ASDASDASDASD", Toast.LENGTH_LONG)
+        println("ASDASDASDASD")
+    }
+
+    fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.button_apply_change_personal -> {
+                Toast.makeText(v.context, "HAHAHA", Toast.LENGTH_LONG)
+                println("HAHAHA")
+            }
+
+            else -> {
+
+            }
+        }
+    }
+
     fun changePersonalInfo(view: View) {
 
         if(first_name.text.isEmpty()){
@@ -140,4 +210,5 @@ class EditUserProfileFragment : Fragment() {
 
 
 }
+
 

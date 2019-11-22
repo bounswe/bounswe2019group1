@@ -119,18 +119,17 @@ class LoginPageActivity : AppCompatActivity() {
                         User.email = response.body()?.user?.email
                         User.first_name = response.body()?.user?.first_name
                         User.last_name = response.body()?.user?.last_name
+                        User.location = response.body()?.user?.location
+                        User.phone_number = response.body()?.user?.phone_number
+                        User.iban_number = response.body()?.user?.iban_number
+                        User.location = response.body()?.user?.location
+                        User.bio = response.body()?.user?.biography
+                        User.title = response.body()?.user?.title
+                        User.is_public = response.body()?.user?.is_public
                         // if the user is trader type info will be true otherwise user is basic and type info will be false
                         User.type = (response.body()?.user?.groups?.get(0).equals("trader"))
-                        User.title = "No title"
-                        User.bio = "No bio"
-                        User.whereIamAsId = User.id  //it may be unnecessary to keep
 
                         startActivity(Intent(this@LoginPageActivity, HomeFeedPageActivity::class.java))
-                        /*
-                        response.body()?.token.let {
-                            User.token = it
-                        }
-                         */
                     }
                 }else{
                     Toast.makeText(applicationContext,"Password or Username is incorrect",Toast.LENGTH_LONG).show()

@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.project.khajit_app.R
+import com.project.khajit_app.activity.ui.editprofile.EditUserProfileFragment
 import com.project.khajit_app.activity.ui.equipment.EquipmentFragment
 import com.project.khajit_app.activity.ui.home.HomeFragment
 import com.project.khajit_app.activity.ui.mailbox.MailboxFragment
@@ -120,7 +121,7 @@ class HomeFeedPageActivity : AppCompatActivity() {
             true
         }
         R.id.settings_top_menu_item -> {
-            val profileFragment = UserProfile.Companion.newInstance()
+            val profileFragment = EditUserProfileFragment.Companion.newInstance()
             changeFragment(profileFragment)
             // do stuff
             true

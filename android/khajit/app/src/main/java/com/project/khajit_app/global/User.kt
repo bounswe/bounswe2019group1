@@ -11,9 +11,9 @@ object User {
     var title: String? = ""
     var bio: String? = ""
     var location: String? = ""
-    var phone_number: Int? = 0
+    var phone_number: Long? = 0
     var iban_number: Long? = 0
-    var citizenship_number: String? = ""
-    var last_changed_password_date: String? = ""
-    var whereIamAsId: Int? = 0
+    var is_public: Boolean? = true
+
+    var whereIamAsId: Int? = 0  // DONT USE THIS
 }
