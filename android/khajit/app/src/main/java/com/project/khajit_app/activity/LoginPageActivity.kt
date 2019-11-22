@@ -14,6 +14,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.google.android.gms.common.api.ApiException
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.BasicRegisterResponse
 import com.project.khajit_app.data.models.LoginResponse
@@ -69,11 +70,6 @@ class LoginPageActivity : AppCompatActivity() {
             )
         }
         // [ [ [ End of Google Sign In ] ] ]
-         */
-
-        var login_button =  findViewById<Button>(R.id.btn_login)
-        login_button.setOnClickListener(loginBasic)
-
          */
 
         var login_button =  findViewById<Button>(R.id.btn_login)
@@ -151,8 +147,6 @@ class LoginPageActivity : AppCompatActivity() {
 
     }
 
-    override fun onBackPressed() {
-    }
     fun goToRegister(view:View) {
         startActivity(Intent(this, SignUpPageActivity::class.java))
     }
@@ -195,8 +189,6 @@ class LoginPageActivity : AppCompatActivity() {
             Toast.makeText(this, "Error while signing in", Toast.LENGTH_SHORT).show()
         }
     }
-     */
-
      */
 
     companion object {

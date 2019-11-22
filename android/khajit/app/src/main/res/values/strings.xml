@@ -14,7 +14,7 @@
 
     <string name="server_client_id">"376065553090-e87ovifpgtat2eocv3eme7rjj8cra6l3.apps.googleusercontent.com"</string>
     <string name="title_activity_home_page">HomePageActivity</string>
-    <string name="title_home">Profile</string>
+    <string name="title_home">Home</string>
     <string name="title_search">Search</string>
     <string name="title_equipments">Equipments</string>
     <string name="title_notifications">Notifications</string>

@@ -107,6 +107,7 @@
             android:layout_marginRight="80dp"
             android:layout_marginBottom="30dp"
             android:background="#EEF2F5"
+            android:onClick="goToSignUpPageTraderActivity"
             android:text="Register" />
 
         <Button
@@ -118,8 +119,7 @@
             android:layout_marginBottom="30dp"
             android:background="#EEF2F5"
             android:onClick="completeRegistrationAsGoogle"
-            android:text="Register on Google"
-            android:visibility="gone" />
+            android:text="Register on Google" />
 
         <TextView
             android:id="@+id/link_login"

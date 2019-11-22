@@ -24,7 +24,6 @@ import retrofit2.Response
 
 class SignUpPageActivity : AppCompatActivity() {
 
-class SignUpPageActivity : AppCompatActivity() {
 
     lateinit var email_input : EditText
     lateinit var password_input : EditText
@@ -126,10 +125,11 @@ class SignUpPageActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        )
+
     }
     fun goToLoginFromRegister(view : View) {
         startActivity(Intent(this, LoginPageActivity::class.java))
     }
 
 }
+

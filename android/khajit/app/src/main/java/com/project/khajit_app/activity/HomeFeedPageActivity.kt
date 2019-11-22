@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.ui.equipment.EquipmentFragment
-import com.project.khajit_app.activity.ui.equipment.LogoutFragment
 import com.project.khajit_app.activity.ui.home.HomeFragment
 import com.project.khajit_app.activity.ui.mailbox.MailboxFragment
 import com.project.khajit_app.activity.ui.notifications.NotificationsFragment
@@ -37,13 +36,7 @@ class HomeFeedPageActivity : AppCompatActivity() {
 
         val fragment = HomeFragment.Companion.newInstance()
         addFragment(fragment)
-
-        setSupportActionBar(findViewById(R.id.home_top_menu_options_bar))
-        //home navigation
-        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
     }
-
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
@@ -115,7 +108,6 @@ class HomeFeedPageActivity : AppCompatActivity() {
             fragmentTransaction.addToBackStack(fragment.javaClass.name)
         fragmentTransaction.commit()
     }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_top, menu)
         return true
