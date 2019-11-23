@@ -27,7 +27,7 @@ class TempUserCreateAPIView(CreateAPIView):
 
     def post(self, request, *args, **kwargs):
         # make password with set password
-        data = request.data
+        data = request.data.copy()
         password = request.data.get('password', None)
         if password is None:
             raise ValidationError({"detail": "You need to give a password"})
