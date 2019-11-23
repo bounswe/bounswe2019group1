@@ -29,7 +29,7 @@ class Currencies(models.Model):
 
 class ETFDetail(models.Model):
     mobile_title = models.CharField(max_length=800, blank=True, null=True, unique=False)
-    price = models.CharField(max_length=800, blank=True, null=True, unique=False)
+    #price = models.CharField(max_length=800, blank=True, null=True, unique=False)
     assets = models.CharField(max_length=800, blank=True, null=True, unique=False)
     average_volume = models.CharField(max_length=800, blank=True, null=True, unique=False)
     ytd = models.CharField(max_length=800, blank=True, null=True, unique=False)
