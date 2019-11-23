@@ -20,9 +20,23 @@ import { Link } from "react-router-dom";
 import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import image from "assets/img/dollar-hd.jpg";
 import { login } from "../../service/authentication.service.js";
-import swal from 'sweetalert';
-import Dialog from '@material-ui/core/Dialog';
+import swal from "sweetalert";
+import{Redirect} from "react-router-dom";
 
+
+import ReactDOM from "react-dom";
+import GoogleLogin from "react-google-login";
+
+//altay
+const responseGoogleSuccess = response => {
+  window.location.href = "http://localhost:3000/profile-page";
+  console.log(response);
+};
+
+const responseGoogleFailure = response => {
+  console.log(response.getStatusCode());
+  swal("Oops", "Incorrect username or password!", "error");
+};
 
 const useStyles = makeStyles(styles);
 export default function LoginPage(props) {
@@ -45,17 +59,18 @@ export default function LoginPage(props) {
     }));
   };
   const handleSubmit = event => {
-    
     event.preventDefault();
-    login(values.username, values.pass).then(function(response){
-      response &&
-      props.history.push("/profile-page")},function(){
-        
-        swal ( "Oops" ,  "Incorrect username or password!" ,  "error" )
+    login(values.username, values.pass).then(
+      function(response) {
+        if(localStorage.getItem('currentUser')){
+          props.history.push("/profile-page");
+        } 
 
+      },
+      function() {
+        swal("Oops", "Incorrect username or password!", "error");
       }
-      );
-    
+    );
   };
   return (
     <div>
@@ -80,18 +95,9 @@ export default function LoginPage(props) {
               <Card className={classes[cardAnimaton]}>
                 <form className={classes.form}>
                   <CardHeader color="primary" className={classes.cardHeader}>
-                    <h4>Login</h4>
-                    <div className={classes.socialLine}>
-                      <Button
-                        justIcon
-                        href="#pablo"
-                        target="_blank"
-                        color="transparent"
-                        onClick={e => e.preventDefault()}
-                      >
-                        <i className={"fab fa-google-plus-g"} />
-                      </Button>
-                    </div>
+                    <h4>
+                      <b>Login</b>
+                    </h4>
                   </CardHeader>
                   <CardBody>
                     <CustomInput
@@ -141,6 +147,13 @@ export default function LoginPage(props) {
                     >
                       Login
                     </Button>
+                    <GoogleLogin
+                      clientId="510505564353-67arm3s7fpa87aumuktnak7eto3kq4nc.apps.googleusercontent.com"
+                      buttonText="Login"
+                      onSuccess={responseGoogleSuccess}
+                      onFailure={responseGoogleFailure}
+                      cookiePolicy={"single_host_origin"}
+                    />
                   </CardFooter>
                   <CardFooter className={classes.cardFooter}>
                     New to Khaji-it?

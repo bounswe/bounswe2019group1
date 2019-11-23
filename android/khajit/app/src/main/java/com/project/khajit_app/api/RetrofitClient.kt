@@ -10,11 +10,9 @@ import java.net.InetAddress.getByAddress
 object RetrofitClient {
 
     //private val AUTH = "Basic"
+
     //var ipAddress = Inet4Address.getLocalHost().hostAddress
     private const val BASE_URL = "http://35.163.120.227:8000/"    //dynamic ip adresi girilmesi lazım
-
-
-    
 
 
     private val okHttpClient = OkHttpClient.Builder()
@@ -35,13 +33,11 @@ object RetrofitClient {
                 User.token.let {
                     requestBuilder.addHeader("Authorization", "JWT %s".format(User.token))
                 }
-
                  */
 
 
                 val request = requestBuilder.build()
                 chain.proceed(request)
-
             }.build()
 
     val instance: Api by lazy{
