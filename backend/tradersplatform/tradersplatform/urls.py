@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^event/', include('event.urls')),
     url(r'^follow/', include('follow.urls')),
     url(r'^equipment/', include('equipment.urls')),
+    url(r'^wallet/', include('wallet.urls')),
     url(r'^article/', include('article.urls')),
 ]
 if settings.DEBUG:

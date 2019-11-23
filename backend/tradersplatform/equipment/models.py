@@ -5,9 +5,9 @@ from django.db import models
 
 
 class CryptoCurrencies(models.Model):
-    BTC = models.CharField(max_length=300, blank=True,null=True, unique=False)
-    ETH = models.CharField(max_length=300, blank=False, null=False, unique=False)
-    LTC = models.CharField(max_length=300, blank=False, null=False, unique=False)
+    BTC = models.DecimalField(max_digits=20,decimal_places=10, blank=True,null=True, unique=False)
+    ETH = models.DecimalField(max_digits=20,decimal_places=10, blank=True,null=True, unique=False)
+    LTC = models.DecimalField(max_digits=20,decimal_places=10, blank=True,null=True, unique=False)
 
 
 class Metals(models.Model):
@@ -17,9 +17,9 @@ class Metals(models.Model):
 
 
 class Stocks(models.Model):
-    GOOGL = models.CharField(max_length=300, blank=True,null=True, unique=False)
-    AAPL = models.CharField(max_length=300, blank=False, null=False, unique=False)
-    GM = models.CharField(max_length=300, blank=False, null=False, unique=False)
+    GOOGL = models.DecimalField(max_digits=20,decimal_places=10, blank=True,null=True, unique=False)
+    AAPL = models.DecimalField(max_digits=20,decimal_places=10, blank=True,null=True,  unique=False)
+    GM = models.DecimalField(max_digits=20,decimal_places=10, blank=True,null=True, unique=False)
 
 
 class Currencies(models.Model):

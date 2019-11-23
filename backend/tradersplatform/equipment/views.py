@@ -33,6 +33,7 @@ class CurrencyAPI(ListAPIView):
         ser=ret['rates']
         serializer=CurrencySerializer(data=ser)
         serializer.is_valid(raise_exception=True)
+        serializer.save()
         return Response(serializer.data, 200)
 
 
@@ -76,6 +77,7 @@ class CryptoCurrencyAPI(ListAPIView):
         data_temp = ret.get('rates', None)
         serializer=CryptoCurrencySerializer(data=data_temp)
         serializer.is_valid(raise_exception=True)
+        serializer.save()
         return Response(serializer.data, 200)
 
 
@@ -98,6 +100,7 @@ class MetalCurrencyAPI(ListAPIView):
         data_temp = ret.get('rates', None)
         serializer=MetalsSerializer(data=data_temp)
         serializer.is_valid(raise_exception=True)
+        serializer.save()
         return Response(serializer.data, 200)
 
 
@@ -119,7 +122,13 @@ class StockCurrencyAPI(ListAPIView):
         ret = json.loads(a)
         data_temp = ret.get('stockList', None)
         ret=list(filter(lambda stock: stock['symbol'] == 'AAPL' or stock['symbol'] == 'GOOGL' or stock['symbol'] == 'GM', data_temp))
-        return Response(ret, 200)
+        dict={}
+        for i in range(0,len(ret)):
+            dict[ret[i]['symbol']]=ret[i]['price']
+        serializer=StockSerializer(data=dict)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, 200)
 
 
 class StockLastMonth(ListAPIView):
@@ -224,6 +233,7 @@ class ETFsListAPIView(ListAPIView):
             VTI=ETFDetail.objects.get(id=3),
         )
         serializer=ETFMultSerializer(new_EFT)
+        serializer.save()
         return Response(serializer.data, 200)
 
 
