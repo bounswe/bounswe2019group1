@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Component } from "react";
+import React, { useState, Component } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -14,9 +14,13 @@ import CardHeader from "components/Card/CardHeader.js";
 import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
+import Footer from "components/Footer/Footer.js";
+import Header from "components/Header/Header.js";
 import LocationPicker from "react-location-picker";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
 import avatar from "assets/img/faces/marc.jpg";
+import image from "assets/img/dollar-hd.jpg";
+
 import { getProfileInfo } from "../../service/profileinformation.service";
 
 const styles = {
@@ -29,7 +33,7 @@ const styles = {
   },
   cardTitleWhite: {
     color: "#FFFFFF",
-    marginTop: "0px",
+    marginTop: "40px",
     minHeight: "auto",
     fontWeight: "300",
     fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
@@ -40,9 +44,9 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function EditProfile() {
+export default function EditProfile(props) {
   const classes = useStyles();
-
+  const { ...rest } = props;
   const [profileValues, setProfileValues] = useState({
     username: "",
     email: "",
@@ -108,7 +112,24 @@ export default function EditProfile() {
   } else {
     MapOrForm = (
       <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
+        <GridItem xs={12} sm={12} md={16}>
+          <Card profile>
+            <CardAvatar profile>
+              <a href="#pablo" onClick={e => e.preventDefault()}>
+                <img src={avatar} alt="..." />
+              </a>
+            </CardAvatar>
+            <CardBody profile>
+              <h6 className={classes.cardCategory}>{profileValues.title}</h6>
+              <h4 className={classes.cardTitle}>
+                {profileValues.first_name} {profileValues.last_name}
+              </h4>
+              <p className={classes.description}>{profileValues.biography}</p>
+            </CardBody>
+          </Card>
+        </GridItem>
+
+        <GridItem xs={12} sm={12} md={16}>
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
@@ -209,7 +230,7 @@ export default function EditProfile() {
                 <GridItem xs={12} sm={12} md={12}>
                   <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel>
                   <CustomInput
-                    id="Biography"
+                    id="biography"
                     value={profileValues.biography}
                     formControlProps={{
                       fullWidth: true
@@ -218,7 +239,7 @@ export default function EditProfile() {
                       multiline: true,
                       rows: 5
                     }}
-                    onChange={handleLocChange}
+                    onChange={handleChange}
                   />
                 </GridItem>
               </GridContainer>
@@ -228,44 +249,35 @@ export default function EditProfile() {
             </CardFooter>
           </Card>
         </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src={avatar} alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <h6 className={classes.cardCategory}>{profileValues.title}</h6>
-              <h4 className={classes.cardTitle}>
-                {profileValues.first_name} {profileValues.last_name}
-              </h4>
-              <p className={classes.description}>{profileValues.biography}</p>
-              <Button color="primary" round>
-                Follow
-              </Button>
-            </CardBody>
-          </Card>
-        </GridItem>
       </GridContainer>
     );
   }
-  return;
-  <div className={classNames(classes.main, classes.mainRaised)}>
-    <Header
-      color="transparent"
-      brand="Khaji-it Traders Platform"
-      rightLinks={<PheaderLinks />}
-      fixed
-      changeColorOnScroll={{
-        height: 200,
-        color: "white"
-      }}
-      {...rest}
-    />
-    {MapOrForm}
-    <Footer />
-  </div>;
+  return (
+    <div>
+      <Header
+        color="transparent"
+        brand="Khaji-it Traders Platform"
+        rightLinks={<PheaderLinks />}
+        fixed
+        changeColorOnScroll={{
+          height: 200,
+          color: "white"
+        }}
+        {...rest}
+      />
+      <div
+        className={classes.pageHeader}
+        style={{
+          backgroundImage: "url(" + image + ")",
+          backgroundSize: "cover",
+          backgroundPosition: "top center"
+        }}
+      >
+        <div className={classes.container}>{MapOrForm}</div>
+        <Footer whiteFont />
+      </div>
+    </div>
+  );
 }
 
 class LocationPickerMap extends Component {
