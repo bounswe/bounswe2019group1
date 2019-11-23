@@ -10,7 +10,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.generics import ListAPIView
 from datetime import datetime
 
-from equipment.models import ETFDetail, ETFs
+from equipment.models import ETFDetail, ETFs, ETFDetailNew
 from equipment.serializers import CryptoCurrencySerializer, MetalsSerializer, StockSerializer, CurrencySerializer, \
     ETFDetailSerializer, ETFMultSerializer, TradeIndicesSerializer
 
@@ -222,7 +222,7 @@ class ETFsListAPIView(ListAPIView):
         ret = json.loads(a)
         data=ret['data']
         for i in range (0,3):
-            curr=ETFDetail.objects.filter(id=i+1).first()
+            curr=ETFDetailNew.objects.filter(id=i+1).first()
             if not curr:
                 serializer=ETFDetailSerializer(data=data[i])
                 serializer.is_valid(raise_exception=True)
@@ -232,9 +232,9 @@ class ETFsListAPIView(ListAPIView):
                 serializer.is_valid(raise_exception=True)
                 serializer.save()
         new_EFT = ETFs(
-            SPY=ETFDetail.objects.get(id=1),
-            IVV=ETFDetail.objects.get(id=2),
-            VTI=ETFDetail.objects.get(id=3),
+            SPY=ETFDetailNew.objects.get(id=1),
+            IVV=ETFDetailNew.objects.get(id=2),
+            VTI=ETFDetailNew.objects.get(id=3),
         )
         new_EFT.save()
         serializer=ETFMultSerializer(new_EFT)
@@ -264,4 +264,4 @@ class BondListAPIView(ListAPIView):
 
 class ETFDeatilistAPIView(ListAPIView):
     serializer_class = ETFDetailSerializer
-    queryset = ETFDetail.objects.filter()
+    queryset = ETFDetailNew.objects.filter()
