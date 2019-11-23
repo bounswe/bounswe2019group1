@@ -102,7 +102,7 @@ WSGI_APPLICATION = 'tradersplatform.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'traderdbnew',
+        'NAME': 'traderdb',
         'USER': 'trader',
         'PASSWORD': 'traders.com',
         'HOST': 'db',
