@@ -119,11 +119,7 @@ export default function PheaderLinks(props) {
             <CloudDownload className={classes.icons} /> Articles
           </Button>
         </Link>
-        <Link to="/add-article">
-          <Button className={classes.button} color="transparent" target="_self">
-            <AddBox className={classes.icons} /> Add Article
-          </Button>
-        </Link>
+        
 
         <Link to="/portfolio">
           <Button className={classes.button} color="transparent" target="_self">

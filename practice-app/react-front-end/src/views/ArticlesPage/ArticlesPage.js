@@ -171,6 +171,14 @@ export default function ProfilePage(props) {
                   </Paper>
                 </div>
               </GridItem>
+              <div style={{float: 'right'}}>
+                          <Button  
+                          
+                          href="http://localhost:3000/add-article"
+                          variant="contained" color="primary" >
+                            Add article
+                          </Button>
+                     </div>
             </GridContainer>
             <GridContainer justify="center"></GridContainer>
           </div>
