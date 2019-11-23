@@ -14,4 +14,5 @@ urlpatterns = [
     url(r'^etfs/', views.ETFsListAPIView.as_view(), name="update_de"),
     url(r'^bonds/', views.BondListAPIView.as_view(), name="update_de"),
     url(r'^lastmonth/', views.StockLastMonth.as_view(), name="update_de"),
+    url(r'^etfdetaillist/', views.ETFDeatilistAPIView.as_view(), name="update_de"),
 ]

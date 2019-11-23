@@ -11,9 +11,8 @@ class CryptoCurrencies(models.Model):
 
 
 class Metals(models.Model):
-    XAG = models.CharField(max_length=300, blank=True,null=True, unique=False)
-    XAU = models.CharField(max_length=300, blank=False, null=False, unique=False)
-    XRH = models.CharField(max_length=300, blank=False, null=False, unique=False)
+    XAG = models.DecimalField(max_digits=30,decimal_places=20, blank=True,null=True, unique=False)
+    XAU = models.DecimalField(max_digits=30,decimal_places=20, blank=True,null=True, unique=False)
 
 
 class Stocks(models.Model):
@@ -23,9 +22,9 @@ class Stocks(models.Model):
 
 
 class Currencies(models.Model):
-    EUR = models.CharField(max_length=300, blank=True,null=True, unique=False)
-    GBP = models.CharField(max_length=300, blank=False, null=False, unique=False)
-    TRY = models.CharField(max_length=300, blank=False, null=False, unique=False)
+    EUR = models.DecimalField(max_digits=20,decimal_places=10, blank=True,null=True, unique=False)
+    GBP = models.DecimalField(max_digits=20,decimal_places=10, blank=True,null=True, unique=False)
+    TRY = models.DecimalField(max_digits=20,decimal_places=10, blank=True,null=True, unique=False)
 
 
 class ETFDetail(models.Model):
@@ -40,3 +39,10 @@ class ETFs(models.Model):
     SPY = models.ForeignKey(ETFDetail, on_delete=models.CASCADE, default='',related_name='SPY')
     IVV = models.ForeignKey(ETFDetail, on_delete=models.CASCADE, default='',related_name='IVV')
     VTI = models.ForeignKey(ETFDetail, on_delete=models.CASCADE, default='',related_name='VTI')
+
+
+class TraceIndices(models.Model):
+    DJI = models.DecimalField(max_digits=20,decimal_places=10, blank=True,null=True, unique=False)
+    IXIC = models.DecimalField(max_digits=20,decimal_places=10, blank=True,null=True, unique=False)
+    INX = models.DecimalField(max_digits=20,decimal_places=10, blank=True,null=True, unique=False)
+

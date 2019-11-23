@@ -14,7 +14,6 @@ class Wallet(models.Model):
     LTC = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True, unique=False, default=0)
     XAG = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True, unique=False, default=0)
     XAU = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True, unique=False, default=0)
-    XRH = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True, unique=False, default=0)
     GOOGL = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True, unique=False, default=0)
     AAPL = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True, unique=False, default=0)
     GM = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True, unique=False, default=0)
