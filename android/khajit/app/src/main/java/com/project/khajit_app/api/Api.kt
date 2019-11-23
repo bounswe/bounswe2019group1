@@ -20,7 +20,7 @@ interface Api {
 
     @Headers("Content-Type: application/json")
     @GET("user/retrieve/{id}")
-    fun getInfo(@Path(value = "id", encoded = true) userId: String):Call<UserAllInfo>
+    fun getInfo(@Path(value = "id", encoded = true) userId: String):Call<GenericUserModel>
     //fun getInfo(@Body body: UserInfoGet?):Call<UserAllInfo>
 
     @Headers("Content-Type: application/json")
@@ -36,6 +36,14 @@ interface Api {
     fun updateUser(@Body body: UpdateUser):Call<UpdateUserResponse>
 
     @Headers("Content-Type: application/json")
+    @PUT("user/updateuser/")
+    fun upgrade_downgrade(@Body body: UpgradeDowngrade):Call<UpdateUserResponse>
+
+    @Headers("Content-Type: application/json")
+    @PUT("user/updateuser/")
+    fun changePrivacy(@Body body: ChangePrivacy):Call<UpdateUserResponse>
+
+    @Headers("Content-Type: application/json")
     @POST("user/search_user/")
     fun searchUsername(@Body body: SearchRequest):Call<SearchResponse>
 
@@ -43,4 +51,16 @@ interface Api {
     @Headers("Content-Type: application/json")
     @PUT("user/updatepass/")
     fun changePassword(@Body body: PasswordChange):Call<GenericUserModel>
+
+    @Headers("Content-Type: application/json")
+    @PUT("user/updateuser/")
+    fun changeIban(@Body body: UpgradeDowngrade):Call<UpdateUserResponse>
+
+    @Headers("Content-Type: application/json")
+    @PUT("user/userupgrade/")
+    fun upgradeUser():Call<GenericUserModel>
+
+    @Headers("Content-Type: application/json")
+    @PUT("user/userdowngrade/")
+    fun downgradeUser():Call<GenericUserModel>
 }

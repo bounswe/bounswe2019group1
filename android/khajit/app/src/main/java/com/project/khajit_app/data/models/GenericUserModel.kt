@@ -14,4 +14,5 @@ data class GenericUserModel( val id: Int,
                              val last_changed_password_date: String,
                              val photo: String,
                              val is_public: Boolean,
-                             val groups: List<String>)
+                             val groups: List<String>,
+                             val detail: String?)
