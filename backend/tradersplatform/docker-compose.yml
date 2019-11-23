@@ -21,7 +21,7 @@ services:
     environment:
       POSTGRES_PASSWORD: traders.com
       POSTGRES_USER: trader
-      POSTGRES_DB: traderdb
+      POSTGRES_DB: traderdbnew
     volumes:
       - my_dbdata:/var/lib/postgresql/data
 volumes:
