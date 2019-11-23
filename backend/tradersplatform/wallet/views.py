@@ -104,9 +104,50 @@ class PurchaseEquipmentAPIView(UpdateAPIView):
             curr_wallet.USD = curr_usd - subtract_usd
             setattr(curr_wallet, name, amount)
             curr_wallet.BTC = amount
+            update_wealth(curr_wallet)
             curr_wallet.save()
         serializer=WalletListSerializer(curr_wallet)
         return Response(serializer.data, status=200)
+
+
+def update_wealth(wallet):
+    list_currencies = ['BTC', 'LTC', 'ETH', 'XAG', 'XAU', 'GOOGL', 'AAPL', 'GM', 'EUR', 'GBP', 'TRY', 'DJI', 'IXIC',
+                       'INX', 'SPY', 'IVV', 'VTI']
+    wealth=wallet.USD
+    for i in range(0,len(list_currencies)):
+        is_etf = False
+        if i < 3 :
+            model='CryptoCurrencies'
+        elif i < 5:
+            model = 'Metals'
+        elif i < 8 :
+            model = 'Stocks'
+        elif i < 11 :
+            model = 'Currencies'
+        elif i < 14 :
+            model = 'TraceIndices'
+        elif i < 17 :
+            model = 'ETFs'
+            is_etf = True
+        equipment = apps.get_model("equipment", model)
+        last = equipment.objects.all().last()
+        if not is_etf:
+            currency = getattr(last, list_currencies[i])
+        else:
+            if list_currencies[i] == 'SPY':
+                currency = ETFPrice.objects.get(id=1).price
+            elif list_currencies[i] == 'IVV':
+                currency = ETFPrice.objects.get(id=2).price
+            elif list_currencies[i] == 'VTI':
+                currency = ETFPrice.objects.get(id=3).price
+            currency = decimal.Decimal(float(currency[1:]))
+        amount = decimal.Decimal(getattr(wallet, list_currencies[i]))
+        wealth=wealth+amount*currency
+    wallet.Wealth_USD=wealth
+    wallet.save()
+
+
+
 
     '''        if name == 'BTC':
                 last=CryptoCurrencies.objects.all().last()
