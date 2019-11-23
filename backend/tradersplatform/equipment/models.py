@@ -35,18 +35,14 @@ class ETFDetail(models.Model):
     ytd = models.CharField(max_length=800, blank=True, null=True, unique=False)
 
 
-class ETFDetailNew(models.Model):
-    mobile_title = models.CharField(max_length=800, blank=True, null=True, unique=False)
+class ETFPrice(models.Model):
     price = models.CharField(max_length=800, blank=True, null=True, unique=False)
     assets = models.CharField(max_length=800, blank=True, null=True, unique=False)
-    average_volume = models.CharField(max_length=800, blank=True, null=True, unique=False)
-    ytd = models.CharField(max_length=800, blank=True, null=True, unique=False)
-
 
 class ETFs(models.Model):
-    SPY = models.ForeignKey(ETFDetailNew, on_delete=models.CASCADE, default='',related_name='SPY')
-    IVV = models.ForeignKey(ETFDetailNew, on_delete=models.CASCADE, default='',related_name='IVV')
-    VTI = models.ForeignKey(ETFDetailNew, on_delete=models.CASCADE, default='',related_name='VTI')
+    SPY = models.ForeignKey(ETFPrice, on_delete=models.CASCADE, default='',related_name='SPY')
+    IVV = models.ForeignKey(ETFPrice, on_delete=models.CASCADE, default='',related_name='IVV')
+    VTI = models.ForeignKey(ETFPrice, on_delete=models.CASCADE, default='',related_name='VTI')
 
 
 class TraceIndices(models.Model):
