@@ -18,6 +18,10 @@ import Footer from "components/Footer/Footer.js";
 import Header from "components/Header/Header.js";
 import LocationPicker from "react-location-picker";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
+import { Select } from "@material-ui/core";
+import FormControl from "@material-ui/core/FormControl";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
 import avatar from "assets/img/faces/marc.jpg";
 import image from "assets/img/dollar-hd.jpg";
 
@@ -84,6 +88,7 @@ export default function EditProfile(props) {
       address: ""
     },
     phone_number: 0,
+    usertype: "Trader",
     biography: "",
     title: "",
     photo: "",
@@ -101,6 +106,7 @@ export default function EditProfile(props) {
         location: { address: res.location },
         phone_number: res.phone_number,
         biography: res.biography,
+        usertype: res.groups[0],
         title: res.title,
         photo: res.photo,
         is_public: res.is_public,
@@ -114,6 +120,26 @@ export default function EditProfile(props) {
       ...oldValues,
       [event.target.id]: event.target.value
     }));
+  };
+  const [isTraderUserSelected, setIsTraderUserSelected] = React.useState({
+    selected: false
+  });
+
+  const handleChangeForm = event => {
+    if (event.target.value === "basic") {
+      setIsTraderUserSelected({ selected: false });
+      setProfileValues(oldValues => ({
+        ...oldValues,
+        [event.target.name]: event.target.value,
+        iban: ""
+      }));
+    } else {
+      setIsTraderUserSelected({ selected: true });
+      setProfileValues(oldValues => ({
+        ...oldValues,
+        [event.target.name]: event.target.value
+      }));
+    }
   };
   const handleLocChange = event => {
     event.persist();
@@ -196,7 +222,7 @@ export default function EditProfile(props) {
                 </GridItem>
               </GridContainer>
               <GridContainer>
-                <GridItem xs={12} sm={12} md={6}>
+                <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     labelText="First Name"
                     id="first_name"
@@ -207,11 +233,22 @@ export default function EditProfile(props) {
                     onChange={handleChange}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={6}>
+                <GridItem xs={12} sm={12} md={4}>
                   <CustomInput
                     labelText="Last Name"
                     id="last_name"
                     value={profileValues.last_name}
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    onChange={handleChange}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="Title"
+                    id="title"
+                    value={profileValues.title}
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -264,6 +301,33 @@ export default function EditProfile(props) {
                   />
                 </GridItem>
               </GridContainer>
+              <FormControl className={classes.formControl} fullWidth="true">
+                <Select
+                  value={profileValues.usertype}
+                  inputProps={{
+                    name: "usertype"
+                  }}
+                  onChange={handleChangeForm}
+                >
+                  <MenuItem value={"Basic"}>Basic</MenuItem>
+                  <MenuItem value={"Trading"}>Trading</MenuItem>
+                </Select>
+                <FormHelperText>Select User Type</FormHelperText>
+              </FormControl>
+
+              <FormControl className={classes.formControl} fullWidth="true">
+                <Select
+                  value={profileValues.is_public}
+                  inputProps={{
+                    name: "is_public"
+                  }}
+                  onChange={handleChangeForm}
+                >
+                  <MenuItem value={"true"}>Public</MenuItem>
+                  <MenuItem value={"false"}>Private</MenuItem>
+                </Select>
+                <FormHelperText>Select Privacy Mode</FormHelperText>
+              </FormControl>
             </CardBody>
             <CardFooter>
               <Button color="primary">Update Profile</Button>
