@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'event',
     'follow',
     'equipment',
+    'article',
 ]
 
 MIDDLEWARE = [
