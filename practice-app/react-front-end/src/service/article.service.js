@@ -5,7 +5,7 @@ import axios from "axios";
 export function getPublicArticles() {
   return axios
     .get(`${environment.api_url}article/listPublicArticles/`)
-    .then(res => (res.status === 200 ? res.data.token : null));
+    .then(res => (res.status === 200 ? res.data : null));
 }
 
 export function getMyArticles() {

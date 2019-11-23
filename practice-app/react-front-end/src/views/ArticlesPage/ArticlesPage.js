@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // @material-ui/core components
@@ -19,7 +20,8 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
 import styles from "assets/jss/material-kit-react/views/articlePage.js";
-import { getProfileInfo } from "../../service/profileinformation.service";
+// import { getProfileInfo } from "../../service/profileinformation.service";
+import { getPublicArticles } from "service/article.service.js";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
 
 import Typography from "@material-ui/core/Typography";
@@ -29,30 +31,71 @@ import articleThumbnail from "assets/img/examples/investor.jpeg";
 
 const useStyles = makeStyles(styles);
 
-export default function ProfilePage(props) {
+export default function ArticlesPage(props) {
   const classes = useStyles();
   const { ...rest } = props;
-  const [profileValues, setProfileValues] = useState({
-    username: "",
-    email: "",
-    first_name: "",
-    last_name: "",
-    location: ""
+  // const imageClasses = classNames(
+  //   classes.imgRaised,
+  //   classes.imgRoundedCircle,
+  //   classes.imgFluid
+  // );
+  const [values, setValues] = useState({
+    count: 0,
+    results: []
   });
-  const imageClasses = classNames(
-    classes.imgRaised,
-    classes.imgRoundedCircle,
-    classes.imgFluid
+
+  useState(
+    getPublicArticles().then(res =>
+      setValues({ count: res.count, results: res.results })
+    )
   );
-  getProfileInfo().then(res =>
-    setProfileValues({
-      username: res.username,
-      first_name: res.first_name,
-      last_name: res.last_name,
-      location: res.location
-    })
-  );
-  const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
+  const items = [];
+  for (const [index, value] of values.results.entries()) {
+    items.push(
+      <Paper className={classes.paper}>
+        <Grid container spacing={2}>
+          <Grid item>
+            <ButtonBase className={classes.image}>
+              <img
+                className={classes.img}
+                alt="complex"
+                src={articleThumbnail}
+              />
+            </ButtonBase>
+          </Grid>
+          <Grid item xs={120} sm container>
+            <Grid item xs container direction="column" spacing={2}>
+              <Grid item xs>
+                <Typography gutterBottom variant="subtitle1">
+                  {value.title}
+                </Typography>
+                <Typography variant="body2" gutterBottom>
+                  {value.content}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="body2" style={{ cursor: "pointer" }}>
+                  Author: {value.author.username}
+                </Typography>
+                <div style={{ float: "right" }}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    href="#contained-buttons"
+                  >
+                    Read more
+                  </Button>
+                </div>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Paper>
+      // <li key={index}>{value.title}</li>
+    );
+  }
+
+  // const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   return (
     <div>
       <Header
@@ -72,113 +115,15 @@ export default function ProfilePage(props) {
           <div className={classes.container}>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={20}>
-                <div className={classes.root}>
-                  <Paper className={classes.paper}>
-                    <Grid container spacing={2}>
-                      <Grid item>
-                        <ButtonBase className={classes.image}>
-                          <img
-                            className={classes.img}
-                            alt="complex"
-                            src={articleThumbnail}
-                          />
-                        </ButtonBase>
-                      </Grid>
-                      <Grid item xs={120} sm container>
-                        <Grid item xs container direction="column" spacing={2}>
-                          <Grid item xs>
-                            <Typography gutterBottom variant="subtitle1">
-                              The Key Traits of Patient and Successful Investors
-                            </Typography>
-                            <Typography variant="body2" gutterBottom>
-                              According to Entrepreneur Network partner Phil
-                              Town, one of the most valuable traits an investor
-                              can have is patience. If you are a patient
-                              investor and decide on good businesses, Town says
-                              there is virtually no scenario where you will not
-                              make money. Here are some of the traits of patient
-                              investors ...
-                            </Typography>
-                          </Grid>
-                          <Grid item>
-                            <Typography
-                              variant="body2"
-                              style={{ cursor: "pointer" }}
-                            >
-                              Phil Town
-                            </Typography>
-                            <div style={{ float: "right" }}>
-                              <Button
-                                variant="contained"
-                                color="primary"
-                                href="#contained-buttons"
-                              >
-                                Read more
-                              </Button>
-                            </div>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  </Paper>
-                  <Paper className={classes.paper}>
-                    <Grid container spacing={2}>
-                      <Grid item>
-                        <ButtonBase className={classes.image}>
-                          <img
-                            className={classes.img}
-                            alt="complex"
-                            src={articleThumbnail}
-                          />
-                        </ButtonBase>
-                      </Grid>
-                      <Grid item xs={120} sm container>
-                        <Grid item xs container direction="column" spacing={2}>
-                          <Grid item xs>
-                            <Typography gutterBottom variant="subtitle1">
-                              The Key Traits of Patient and Successful Investors
-                            </Typography>
-                            <Typography variant="body2" gutterBottom>
-                              According to Entrepreneur Network partner Phil
-                              Town, one of the most valuable traits an investor
-                              can have is patience. If you are a patient
-                              investor and decide on good businesses, Town says
-                              there is virtually no scenario where you will not
-                              make money. Here are some of the traits of patient
-                              investors ...
-                            </Typography>
-                          </Grid>
-                          <Grid item>
-                            <Typography
-                              variant="body2"
-                              style={{ cursor: "pointer" }}
-                            >
-                              Phil Town
-                            </Typography>
-                            <div style={{ float: "right" }}>
-                              <Button
-                                variant="contained"
-                                color="primary"
-                                href="#contained-buttons"
-                              >
-                                Read more
-                              </Button>
-                            </div>
-                          </Grid>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  </Paper>
-                </div>
+                <div className={classes.root}>{items}</div>
               </GridItem>
-              <div style={{float: 'right'}}>
-                          <Button  
-                          
-                          href="http://localhost:3000/add-article"
-                          variant="contained" color="primary" >
-                            Add article
-                          </Button>
-                     </div>
+              <div style={{ float: "right" }}>
+                <Link to="/add-article">
+                  <Button variant="contained" color="primary">
+                    Add article
+                  </Button>
+                </Link>
+              </div>
             </GridContainer>
             <GridContainer justify="center"></GridContainer>
           </div>
