@@ -50,6 +50,14 @@ class SendUSDAPIView(UpdateAPIView):
         return Response(serializer.data, status=200)
 
 
+class PurchaseEquipmentAPIView(UpdateAPIView):
+
+    def put(self, request, *args, **kwargs):
+        check_if_user(request)
+        curr_wallet = Wallet.objects.filter(owner=request.user.id).first()
+        if not curr_wallet:
+            raise ValidationError({"detail": "You don't have wallet"})
+
 
 
 

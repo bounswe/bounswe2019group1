@@ -12,7 +12,7 @@ from datetime import datetime
 
 from equipment.models import ETFDetail, ETFs
 from equipment.serializers import CryptoCurrencySerializer, MetalsSerializer, StockSerializer, CurrencySerializer, \
-    ETFDetailSerializer, ETFMultSerializer
+    ETFDetailSerializer, ETFMultSerializer, TradeIndicesSerializer
 
 
 class CurrencyAPI(ListAPIView):
@@ -173,9 +173,13 @@ class TraceIndices(ListAPIView):
         a=response.content
         ret = json.loads(a)
         arr=ret['majorIndexesList']
-        arr = arr[:3]
-        ret={'majorIndexesList':arr}
-        return Response(ret, 200)
+        dict={}
+        for i in range(0,len(arr)):
+            dict[arr[i]['ticker'][1:]] = arr[i]['price']
+        serializer=TradeIndicesSerializer(data=dict)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, 200)
 
 
 class TraceIndicesGainers(ListAPIView):
@@ -232,8 +236,8 @@ class ETFsListAPIView(ListAPIView):
             IVV=ETFDetail.objects.get(id=2),
             VTI=ETFDetail.objects.get(id=3),
         )
+        new_EFT.save()
         serializer=ETFMultSerializer(new_EFT)
-        serializer.save()
         return Response(serializer.data, 200)
 
 
@@ -257,3 +261,7 @@ class BondListAPIView(ListAPIView):
         ret = json.loads(a)
         return Response(ret, 200)
 
+
+class ETFDeatilistAPIView(ListAPIView):
+    serializer_class = ETFDetailSerializer
+    queryset = ETFDetail.objects.filter()
