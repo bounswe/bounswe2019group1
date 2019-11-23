@@ -15,6 +15,7 @@ import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "components/Card/CardBody.js";
 import CardFooter from "components/Card/CardFooter.js";
 import LocationPicker from "react-location-picker";
+import PheaderLinks from "components/ProfileHeader/PheaderLinks";
 import avatar from "assets/img/faces/marc.jpg";
 import { getProfileInfo } from "../../service/profileinformation.service";
 
@@ -74,7 +75,6 @@ export default function EditProfile() {
         groups: res.groups
       })
     );
-
   });
   const handleChange = event => {
     event.persist();
@@ -250,7 +250,22 @@ export default function EditProfile() {
       </GridContainer>
     );
   }
-  return <div>{MapOrForm}</div>;
+  return;
+  <div className={classNames(classes.main, classes.mainRaised)}>
+    <Header
+      color="transparent"
+      brand="Khaji-it Traders Platform"
+      rightLinks={<PheaderLinks />}
+      fixed
+      changeColorOnScroll={{
+        height: 200,
+        color: "white"
+      }}
+      {...rest}
+    />
+    {MapOrForm}
+    <Footer />
+  </div>;
 }
 
 class LocationPickerMap extends Component {
@@ -266,6 +281,7 @@ class LocationPickerMap extends Component {
     this.props = props;
     this.handleLocationChange = this.handleLocationChange.bind(this);
   }
+
   handleLocationChange({ position, address, places }) {
     // Set new location
     this.props.setValues(oldValues => ({
