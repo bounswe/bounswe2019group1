@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^event/', include('event.urls')),
     url(r'^follow/', include('follow.urls')),
     url(r'^equipment/', include('equipment.urls')),
+    url(r'^wallet/', include('wallet.urls')),
 ]
 if settings.DEBUG:
   urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

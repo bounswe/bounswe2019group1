@@ -233,6 +233,7 @@ class ETFsListAPIView(ListAPIView):
             VTI=ETFDetail.objects.get(id=3),
         )
         serializer=ETFMultSerializer(new_EFT)
+        serializer.save()
         return Response(serializer.data, 200)
 
 
