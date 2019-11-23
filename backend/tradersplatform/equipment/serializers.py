@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 
-from equipment.models import CryptoCurrencies, Metals, Stocks, Currencies, ETFs, ETFDetail, TraceIndices, ETFDetailNew
+from equipment.models import CryptoCurrencies, Metals, Stocks, Currencies, ETFs, ETFDetail, TraceIndices, ETFPrice
 
 
 class CryptoCurrencySerializer(ModelSerializer):
@@ -48,7 +48,7 @@ class ETFSerializer(ModelSerializer):
 
 class ETFDetailSerializer(ModelSerializer):
     class Meta:
-        model = ETFDetailNew
+        model = ETFPrice
         fields = '__all__'
 
 
