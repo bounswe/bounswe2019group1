@@ -39,6 +39,7 @@ class ETFPrice(models.Model):
     price = models.CharField(max_length=800, blank=True, null=True, unique=False)
     assets = models.CharField(max_length=800, blank=True, null=True, unique=False)
 
+
 class ETFs(models.Model):
     SPY = models.ForeignKey(ETFPrice, on_delete=models.CASCADE, default='',related_name='SPY')
     IVV = models.ForeignKey(ETFPrice, on_delete=models.CASCADE, default='',related_name='IVV')
