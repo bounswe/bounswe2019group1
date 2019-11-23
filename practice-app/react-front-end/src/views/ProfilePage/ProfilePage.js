@@ -26,18 +26,20 @@ import portfolio2 from "assets/img/examples/po2.jpeg";
 import portfolio3 from "assets/img/examples/ppp3.jpg";
 import portfolio4 from "assets/img/examples/BTC17-1.jpg";
 import portfolio5 from "assets/img/examples/ppp4.jpeg";
-import event1 from "assets/img/examples/olu-eletu.jpg";
-import event2 from "assets/img/examples/clem-onojeghuo.jpg";
-import event3 from "assets/img/examples/cynthia-del-rio.jpg";
-import event4 from "assets/img/examples/mariya-georgieva.jpg";
-import event5 from "assets/img/examples/clem-onojegaw.jpg";
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
+
+import event1 from "assets/img/examples/ev1.jpeg";
+import event2 from "assets/img/examples/ev2.jpeg";
+import event3 from "assets/img/examples/ev3.jpeg";
+import event4 from "assets/img/examples/ev4.jpg";
+import event5 from "assets/img/examples/ev5.jpeg";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { getProfileInfo } from "../../service/profileinformation.service";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
-// import {getProfileInfo} from "../../service/getProfileInformation";
+import { Apps, CloudDownload } from "@material-ui/icons";
+import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 
 const useStyles = makeStyles(styles);
 
@@ -45,21 +47,42 @@ export default function ProfilePage(props) {
   const classes = useStyles();
   const { ...rest } = props;
   const [profileValues, setProfileValues] = useState({
+    username: "",
+    email: "",
     first_name: "",
-    last_name: ""
+    last_name: "",
+    location: "",
+    phone_number: 0,
+    biography: "",
+    title: "",
+    photo: "",
+    is_public: "",
+    groups: []
   });
   const imageClasses = classNames(
     classes.imgRaised,
     classes.imgRoundedCircle,
     classes.imgFluid
   );
-  getProfileInfo().then(res =>
-    setProfileValues({ first_name: res.first_name, last_name: res.last_name })
-  );
+  useState(() => {
+    getProfileInfo().then(res =>
+      setProfileValues({
+        username: res.username,
+        first_name: res.first_name,
+        last_name: res.last_name,
+        location: res.location,
+        phone_number: res.phone_number,
+        biography: res.biography,
+        title: res.title,
+        photo: res.photo,
+        is_public: res.is_public,
+        groups: res.groups
+      })
+    );
+  });
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   return (
     <div>
-      
       <Header
         color="transparent"
         brand="Khaji-it Traders Platform"
@@ -71,6 +94,8 @@ export default function ProfilePage(props) {
         }}
         {...rest}
       />
+
+
       <Parallax small filter image={require("assets/img/dollar-hd.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
@@ -85,41 +110,33 @@ export default function ProfilePage(props) {
                     <h3 className={classes.title}>
                       {profileValues.first_name} {profileValues.last_name}
                     </h3>
-                    <h6>ECONOMIST</h6>
+                    <h6>{profileValues.title}</h6>
                   </div>
                   <div className={classes.root}>
-      <Grid container spacing={3}>
-        <Grid item xs>
-          <Paper className={classes.paper}>Followers</Paper>
-        </Grid>
-        <Grid item xs>
-          
-        </Grid>
-        <Grid item xs>
-          <Paper className={classes.paper}>Following</Paper>
-        </Grid>
-      </Grid>
-      <Grid container spacing={3}>
-        <Grid item xs>
-          <Paper className={classes.paper}>35</Paper>
-        </Grid>
-        <Grid item xs={6}>
-          
-        </Grid>
-        <Grid item xs>
-          <Paper className={classes.paper}>34</Paper>
-        </Grid>
-      </Grid>
-    </div>
-                     
+                    <Grid container spacing={3}>
+                      <Grid item xs>
+                        <Paper className={classes.paper}>Followers</Paper>
+                      </Grid>
+                      <Grid item xs></Grid>
+                      <Grid item xs>
+                        <Paper className={classes.paper}>Following</Paper>
+                      </Grid>
+                    </Grid>
+                    <Grid container spacing={3}>
+                      <Grid item xs>
+                        <Paper className={classes.paper}>35</Paper>
+                      </Grid>
+                      <Grid item xs={6}></Grid>
+                      <Grid item xs>
+                        <Paper className={classes.paper}>34</Paper>
+                      </Grid>
+                    </Grid>
+                  </div>
                 </div>
               </GridItem>
             </GridContainer>
             <div className={classes.description}>
-              <p>
-                23 years old, Lives in İstanbul, Graduated from Boğaziçi
-                University, Department of Economics.{" "}
-              </p>
+              <p>{profileValues.biography} </p>
             </div>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
@@ -145,7 +162,7 @@ export default function ProfilePage(props) {
                             />
                           </GridItem>
                           <GridItem xs={12} sm={12} md={4}>
-                          <img
+                            <img
                               alt="..."
                               src={portfolio4}
                               className={navImageClasses}
@@ -155,7 +172,7 @@ export default function ProfilePage(props) {
                               src={portfolio2}
                               className={navImageClasses}
                             />
-                              <img
+                            <img
                               alt="..."
                               src={portfolio3}
                               className={navImageClasses}
@@ -224,13 +241,12 @@ export default function ProfilePage(props) {
                               src={event2}
                               className={navImageClasses}
                             />
-                            
+
                             <img
                               alt="..."
                               src={portfolio1}
                               className={navImageClasses}
                             />
-                            
                           </GridItem>
                         </GridContainer>
                       )

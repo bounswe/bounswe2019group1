@@ -29,6 +29,11 @@ import {
   registerBasic,
   RegisterTrader
 } from "../../service/registration.service";
+import {
+  validateBasicRegister,
+  validateTraderRegister
+} from "../../utils/validator";
+import swal from "sweetalert";
 
 const useStyles = makeStyles(styles);
 export default function SignupPage(props) {
@@ -53,8 +58,7 @@ export default function SignupPage(props) {
       }
     },
     usertype: "Basic",
-    iban: "",
-    citizenshipno: 0
+    iban: ""
   });
 
   const handleChange = event => {
@@ -64,39 +68,68 @@ export default function SignupPage(props) {
       [event.target.id]: event.target.value
     }));
   };
+  const handleLocChange = event => {
+    event.persist();
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.id]: {
+        address: event.target.value,
+        position: {}
+      }
+    }));
+  };
   const [isLocationSelected, setIsLocationSelected] = React.useState({
     selected: false
   });
   const [isTraderUserSelected, setIsTraderUserSelected] = React.useState({
     selected: false
   });
-  const validateForm = () => {
-    return true;
-  };
 
   const handleSubmit = event => {
     // validate the inputs and then send the backend
     if (values.usertype === "Basic") {
-      validateForm(values);
-      registerBasic(
-        values.username,
-        values.pass,
-        values.email,
-        values.name,
-        values.surname
-      ).then(data => console.log(data));
+      var validation_response = validateBasicRegister(values);
+      if (validation_response.valid === false) {
+        swal("Oops", validation_response.reason, "error");
+      } else {
+        registerBasic(
+          values.username,
+          values.pass,
+          values.email,
+          values.name,
+          values.surname,
+          values.location
+        )
+          .then(res =>
+            res.status === 200 ? props.history.push("/login-page") : null
+          )
+          .then(function(validation_response){ props.history.push("/login-page");swal("Good job!", "Successfully registered.", "success");})
+          .catch(error => {
+            swal("Oops: ", error.message, "error");
+          })
+
+      }
     } else {
-      validateForm(values);
-      RegisterTrader(
-        values.username,
-        values.pass,
-        values.email,
-        values.name,
-        values.surname,
-        values.location,
-        values.iban,
-        values.citizenshipno
-      ).then(data => console.log(data));
+      var validation_response2 = validateTraderRegister(values);
+      if (validation_response2.valid === false) {
+        swal("Oops", validation_response2.reason, "error");
+      } else {
+        RegisterTrader(
+          values.username,
+          values.pass,
+          values.email,
+          values.name,
+          values.surname,
+          values.location,
+          values.iban
+        )
+          .then(res =>
+            res.status === 200 ? props.history.push("/login-page") : null
+          )
+          .catch(error => {
+            swal("Oops: ", error.message, "error");
+          });
+      }
     }
 
     event.preventDefault();
@@ -108,8 +141,7 @@ export default function SignupPage(props) {
       setValues(oldValues => ({
         ...oldValues,
         [event.target.name]: event.target.value,
-        iban: "",
-        citizenshipno: 0
+        iban: ""
       }));
     } else {
       setIsTraderUserSelected({ selected: true });
@@ -136,20 +168,10 @@ export default function SignupPage(props) {
           <Card className={classes[cardAnimaton]}>
             <form className={classes.form}>
               <CardHeader color="primary" className={classes.cardHeader}>
-                <h4>Create an Account</h4>
-                <div className={classes.socialLine}>
-                  <Button
-                    justIcon
-                    href="#pablo"
-                    target="_blank"
-                    color="transparent"
-                    onClick={e => e.preventDefault()}
-                  >
-                    <i className={"fab fa-google-plus-g"} />
-                  </Button>
-                </div>
+                <h4>
+                  <b>Create an Account</b>
+                </h4>
               </CardHeader>
-              <p className={classes.divider}> Khaji-it</p>
               <CardBody>
                 <CustomInput
                   labelText="Username"
@@ -267,7 +289,7 @@ export default function SignupPage(props) {
                       </InputAdornment>
                     )
                   }}
-                  onChange={handleChange}
+                  onChange={handleLocChange}
                 />
                 <FormControl className={classes.formControl}>
                   <Select
@@ -304,18 +326,9 @@ export default function SignupPage(props) {
           <Card className={classes[cardAnimaton]}>
             <form className={classes.form}>
               <CardHeader color="primary" className={classes.cardHeader}>
-                <h4>Create an Account</h4>
-                <div className={classes.socialLine}>
-                  <Button
-                    justIcon
-                    href="#pablo"
-                    target="_blank"
-                    color="transparent"
-                    onClick={e => e.preventDefault()}
-                  >
-                    <i className={"fab fa-google-plus-g"} />
-                  </Button>
-                </div>
+                <h4>
+                  <b>Create an Account</b>
+                </h4>
               </CardHeader>
               <p className={classes.divider}>Khaji-it</p>
               <CardBody>
@@ -431,7 +444,7 @@ export default function SignupPage(props) {
                       </InputAdornment>
                     )
                   }}
-                  onChange={handleChange}
+                  onChange={handleLocChange}
                 />
                 <FormControl className={classes.formControl}>
                   <Select
@@ -465,25 +478,7 @@ export default function SignupPage(props) {
                   }}
                   onChange={handleChange}
                 />
-                <CustomInput
-                  labelText="Citizenship No"
-                  id="citizenshipno"
-                  value={values.citizenshipno}
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  inputProps={{
-                    type: "citizenshipno",
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <Icon className={classes.inputIconsColor}>
-                          supervisor_account
-                        </Icon>
-                      </InputAdornment>
-                    )
-                  }}
-                  onChange={handleChange}
-                />
+
               </CardBody>
               <CardFooter className={classes.cardFooter}>
                 <Button simple color="primary" size="lg" onClick={handleSubmit}>

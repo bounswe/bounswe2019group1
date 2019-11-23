@@ -113,7 +113,7 @@ export default function LoginPage(props) {
                       size="small"
                       color="primary"
                       className={classes.button}
-                    >
+                      >
                       Sign Up
                     </Button>
                   </Link>
