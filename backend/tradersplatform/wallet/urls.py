@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^ListAllWallets/', views.WalletListAPIView.as_view(), name="list"),
     url(r'^sendUSD/', views.SendUSDAPIView.as_view(), name="list"),
     url(r'^takeequipment/', views.PurchaseEquipmentAPIView.as_view(), name="list"),
+    url(r'^sellequipment/', views.SellEquipmentAPIView.as_view(), name="list"),
 ]
