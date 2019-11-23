@@ -22,7 +22,8 @@ export default function Adding() {
         <GridItem cs={12} sm={12} md={8}>
           <h2 className={classes.title}>Share with us</h2>
           <h4 className={classes.description}>
-          The articles you share on this page can be read by the people who follow you. 
+            The articles you share on this page can be read by the people who
+            follow you.
           </h4>
           <form>
             <GridContainer>
@@ -35,7 +36,7 @@ export default function Adding() {
                   }}
                 />
               </GridItem>
-              
+
               <CustomInput
                 labelText="Body of the article"
                 id="message"

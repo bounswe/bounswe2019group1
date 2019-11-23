@@ -95,7 +95,6 @@ export default function ProfilePage(props) {
         {...rest}
       />
 
-
       <Parallax small filter image={require("assets/img/dollar-hd.jpg")} />
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>

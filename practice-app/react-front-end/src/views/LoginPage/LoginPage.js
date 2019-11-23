@@ -21,8 +21,7 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import image from "assets/img/dollar-hd.jpg";
 import { login } from "../../service/authentication.service.js";
 import swal from "sweetalert";
-import{Redirect} from "react-router-dom";
-
+import { Redirect } from "react-router-dom";
 
 import ReactDOM from "react-dom";
 import GoogleLogin from "react-google-login";
@@ -62,10 +61,9 @@ export default function LoginPage(props) {
     event.preventDefault();
     login(values.username, values.pass).then(
       function(response) {
-        if(localStorage.getItem('currentUser')){
+        if (localStorage.getItem("currentUser")) {
           props.history.push("/profile-page");
-        } 
-
+        }
       },
       function() {
         swal("Oops", "Incorrect username or password!", "error");

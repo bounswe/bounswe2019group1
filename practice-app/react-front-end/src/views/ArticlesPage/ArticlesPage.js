@@ -8,7 +8,6 @@ import { makeStyles } from "@material-ui/core/styles";
 //import Palette from "@material-ui/icons/Palette";
 //import Button from "components/CustomButtons/Button.js";
 
-
 // core components
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
@@ -23,13 +22,12 @@ import styles from "assets/jss/material-kit-react/views/articlePage.js";
 import { getProfileInfo } from "../../service/profileinformation.service";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
 
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import Typography from "@material-ui/core/Typography";
+import ButtonBase from "@material-ui/core/ButtonBase";
 
 import articleThumbnail from "assets/img/examples/investor.jpeg";
 
 const useStyles = makeStyles(styles);
-
 
 export default function ProfilePage(props) {
   const classes = useStyles();
@@ -74,84 +72,107 @@ export default function ProfilePage(props) {
           <div className={classes.container}>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={20}>
-              <div className={classes.root}>
-                <Paper className={classes.paper}>
-                  <Grid container spacing={2}>
-                    <Grid item>
-                      <ButtonBase className={classes.image}>
-                        <img className={classes.img} alt="complex" src={articleThumbnail} />
-                      </ButtonBase>
-                    </Grid>
-                    <Grid item xs={120} sm container>
-                      <Grid item xs container direction="column" spacing={2}>
-                        <Grid item xs>
-                          <Typography gutterBottom variant="subtitle1">
-                            The Key Traits of Patient and Successful Investors
-                          </Typography>
-                          <Typography variant="body2" gutterBottom>
-                            According to Entrepreneur Network partner Phil Town,
-                            one of the most valuable traits an investor can have
-                            is patience. If you are a patient investor and decide
-                            on good businesses, Town says there is virtually no
-                            scenario where you will not make money. Here are some
-                            of the traits of patient investors ...
-                          </Typography>
-                        </Grid>
-                        <Grid item>
-                          <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                            Phil Town
-                          </Typography>
-                          <div style={{float: 'right'}}>
-                          <Button  variant="contained" color="primary" href="#contained-buttons">
-                            Read more
-                          </Button>
-                          </div>
+                <div className={classes.root}>
+                  <Paper className={classes.paper}>
+                    <Grid container spacing={2}>
+                      <Grid item>
+                        <ButtonBase className={classes.image}>
+                          <img
+                            className={classes.img}
+                            alt="complex"
+                            src={articleThumbnail}
+                          />
+                        </ButtonBase>
+                      </Grid>
+                      <Grid item xs={120} sm container>
+                        <Grid item xs container direction="column" spacing={2}>
+                          <Grid item xs>
+                            <Typography gutterBottom variant="subtitle1">
+                              The Key Traits of Patient and Successful Investors
+                            </Typography>
+                            <Typography variant="body2" gutterBottom>
+                              According to Entrepreneur Network partner Phil
+                              Town, one of the most valuable traits an investor
+                              can have is patience. If you are a patient
+                              investor and decide on good businesses, Town says
+                              there is virtually no scenario where you will not
+                              make money. Here are some of the traits of patient
+                              investors ...
+                            </Typography>
+                          </Grid>
+                          <Grid item>
+                            <Typography
+                              variant="body2"
+                              style={{ cursor: "pointer" }}
+                            >
+                              Phil Town
+                            </Typography>
+                            <div style={{ float: "right" }}>
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                href="#contained-buttons"
+                              >
+                                Read more
+                              </Button>
+                            </div>
+                          </Grid>
                         </Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
-                </Paper>
-                <Paper className={classes.paper}>
-                  <Grid container spacing={2}>
-                    <Grid item>
-                      <ButtonBase className={classes.image}>
-                        <img className={classes.img} alt="complex" src={articleThumbnail} />
-                      </ButtonBase>
-                    </Grid>
-                    <Grid item xs={120} sm container>
-                      <Grid item xs container direction="column" spacing={2}>
-                        <Grid item xs>
-                          <Typography gutterBottom variant="subtitle1">
-                            The Key Traits of Patient and Successful Investors
-                          </Typography>
-                          <Typography variant="body2" gutterBottom>
-                            According to Entrepreneur Network partner Phil Town,
-                            one of the most valuable traits an investor can have
-                            is patience. If you are a patient investor and decide
-                            on good businesses, Town says there is virtually no
-                            scenario where you will not make money. Here are some
-                            of the traits of patient investors ...
-                          </Typography>
-                        </Grid>
-                        <Grid item>
-                          <Typography variant="body2" style={{ cursor: 'pointer' }}>
-                            Phil Town
-                          </Typography>
-                          <div style={{float: 'right'}}>
-                          <Button  variant="contained" color="primary" href="#contained-buttons">
-                            Read more
-                          </Button>
-                          </div>
+                  </Paper>
+                  <Paper className={classes.paper}>
+                    <Grid container spacing={2}>
+                      <Grid item>
+                        <ButtonBase className={classes.image}>
+                          <img
+                            className={classes.img}
+                            alt="complex"
+                            src={articleThumbnail}
+                          />
+                        </ButtonBase>
+                      </Grid>
+                      <Grid item xs={120} sm container>
+                        <Grid item xs container direction="column" spacing={2}>
+                          <Grid item xs>
+                            <Typography gutterBottom variant="subtitle1">
+                              The Key Traits of Patient and Successful Investors
+                            </Typography>
+                            <Typography variant="body2" gutterBottom>
+                              According to Entrepreneur Network partner Phil
+                              Town, one of the most valuable traits an investor
+                              can have is patience. If you are a patient
+                              investor and decide on good businesses, Town says
+                              there is virtually no scenario where you will not
+                              make money. Here are some of the traits of patient
+                              investors ...
+                            </Typography>
+                          </Grid>
+                          <Grid item>
+                            <Typography
+                              variant="body2"
+                              style={{ cursor: "pointer" }}
+                            >
+                              Phil Town
+                            </Typography>
+                            <div style={{ float: "right" }}>
+                              <Button
+                                variant="contained"
+                                color="primary"
+                                href="#contained-buttons"
+                              >
+                                Read more
+                              </Button>
+                            </div>
+                          </Grid>
                         </Grid>
                       </Grid>
                     </Grid>
-                  </Grid>
-                </Paper>
-              </div>
+                  </Paper>
+                </div>
               </GridItem>
             </GridContainer>
-            <GridContainer justify="center">
-            </GridContainer>
+            <GridContainer justify="center"></GridContainer>
           </div>
         </div>
       </div>
