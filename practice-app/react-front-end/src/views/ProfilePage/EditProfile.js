@@ -24,6 +24,31 @@ import image from "assets/img/dollar-hd.jpg";
 import { getProfileInfo } from "../../service/profileinformation.service";
 
 const styles = {
+  container: {
+    "@media (min-width: 576px)": {
+      maxWidth: "540px"
+    },
+    "@media (min-width: 768px)": {
+      maxWidth: "720px"
+    },
+    "@media (min-width: 992px)": {
+      maxWidth: "960px"
+    },
+    "@media (min-width: 1200px)": {
+      maxWidth: "1140px"
+    },
+    paddingRight: "15px",
+    paddingLeft: "15px",
+    marginRight: "auto",
+    marginLeft: "auto",
+    width: "100%",
+    zIndex: "2",
+    position: "relative",
+    paddingTop: "20vh",
+    color: "#FFFFFF",
+    paddingBottom: "200px",
+    opacity: "0.88"
+  },
   cardCategoryWhite: {
     color: "rgba(255,255,255,.62)",
     margin: "0",
@@ -31,9 +56,12 @@ const styles = {
     marginTop: "0",
     marginBottom: "0"
   },
+  cardTitle: {
+    textAlign: "center"
+  },
   cardTitleWhite: {
     color: "#FFFFFF",
-    marginTop: "40px",
+    marginTop: "0px",
     minHeight: "auto",
     fontWeight: "300",
     fontFamily: "'Roboto', 'Helvetica', 'Arial', sans-serif",
@@ -111,8 +139,8 @@ export default function EditProfile(props) {
     );
   } else {
     MapOrForm = (
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={16}>
+      <GridContainer justify="center">
+        <GridItem xs={12} sm={12} md={12}>
           <Card profile>
             <CardAvatar profile>
               <a href="#pablo" onClick={e => e.preventDefault()}>
@@ -121,15 +149,18 @@ export default function EditProfile(props) {
             </CardAvatar>
             <CardBody profile>
               <h6 className={classes.cardCategory}>{profileValues.title}</h6>
-              <h4 className={classes.cardTitle}>
+              <h3 className={classes.cardTitle}>
                 {profileValues.first_name} {profileValues.last_name}
-              </h4>
-              <p className={classes.description}>{profileValues.biography}</p>
+              </h3>
+              <h5 className={classes.description}>
+                <b>Biography:</b>
+                {profileValues.biography}
+              </h5>
             </CardBody>
           </Card>
         </GridItem>
 
-        <GridItem xs={12} sm={12} md={16}>
+        <GridItem xs={12} sm={12} md={12}>
           <Card>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>Edit Profile</h4>
@@ -139,19 +170,7 @@ export default function EditProfile(props) {
               <GridContainer>
                 <GridItem xs={12} sm={12} md={5}>
                   <CustomInput
-                    labelText="Company (disabled)"
-                    id="company-disabled"
-                    formControlProps={{
-                      fullWidth: true
-                    }}
-                    inputProps={{
-                      disabled: true
-                    }}
-                  />
-                </GridItem>
-                <GridItem xs={12} sm={12} md={3}>
-                  <CustomInput
-                    labelText="Username(Cannot Change)"
+                    labelText="Username"
                     id="username"
                     value={profileValues.username}
                     formControlProps={{
@@ -162,7 +181,7 @@ export default function EditProfile(props) {
                     }}
                   />
                 </GridItem>
-                <GridItem xs={12} sm={12} md={4}>
+                <GridItem xs={12} sm={12} md={7}>
                   <CustomInput
                     labelText="Email address"
                     id="email"
@@ -170,7 +189,9 @@ export default function EditProfile(props) {
                     formControlProps={{
                       fullWidth: true
                     }}
-                    onChange={handleChange}
+                    inputProps={{
+                      disabled: true
+                    }}
                   />
                 </GridItem>
               </GridContainer>
