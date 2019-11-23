@@ -11,7 +11,7 @@ services:
       - "8000:8000"
     volumes:
       - .:/app/
-docker exec my_postgres psql -U postgres -l
+
   db:
     image: postgres
     restart: always
