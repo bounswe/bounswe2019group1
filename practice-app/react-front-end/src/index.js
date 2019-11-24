@@ -12,6 +12,7 @@ import App from "./App";
 import SignupPage from "views/SignupPage/SignupPage";
 import EditProfile from "./views/ProfilePage/EditProfile";
 import ArticlesPage from "./views/ArticlesPage/ArticlesPage";
+import WalletPage from "./views/WalletPage/WalletPage";
 import Article from "./views/ArticlesPage/Article";
 
 import AddArticle from "./views/AddArticle/AddArticle";
@@ -69,6 +70,16 @@ ReactDOM.render(
         render={() =>
           localStorage.getItem("currentUser") ? (
             <AddArticle />
+          ) : (
+            <Redirect to="/login-page" />
+          )
+        }
+      />
+      <Route
+        path="/wallet-page"
+        render={() =>
+          localStorage.getItem("currentUser") ? (
+            <WalletPage />
           ) : (
             <Redirect to="/login-page" />
           )

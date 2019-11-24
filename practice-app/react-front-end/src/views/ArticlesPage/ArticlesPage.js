@@ -18,7 +18,7 @@ import Parallax from "components/Parallax/Parallax.js";
 import Button from "components/CustomButtons/Button.js";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-
+import Icon from '@material-ui/core/Icon';
 import styles from "assets/jss/material-kit-react/views/articlePage.js";
 // import { getProfileInfo } from "../../service/profileinformation.service";
 import { getPublicArticles } from "service/article.service.js";
@@ -80,7 +80,7 @@ export default function ArticlesPage(props) {
                 <div style={{ float: "right" }}>
                   <Button
                     variant="contained"
-                    color="primary"
+                    color="secondary"
                     href="#contained-buttons"
                   >
                     Read more
@@ -89,8 +89,10 @@ export default function ArticlesPage(props) {
               </Grid>
             </Grid>
           </Grid>
+          
         </Grid>
       </Paper>
+      
       // <li key={index}>{value.title}</li>
     );
   }
@@ -113,15 +115,23 @@ export default function ArticlesPage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <div className={classes.container}>
+            
             <GridContainer justify="center">
+              
               <GridItem xs={12} sm={12} md={20}>
                 <div className={classes.root}>{items}</div>
               </GridItem>
-              <div style={{ float: "right" }}>
-                <Link to="/add-article">
-                  <Button variant="contained" color="primary">
-                    Add article
-                  </Button>
+              <div style={{ float: "right" }}>              
+              <Link to="/add-article">
+                
+                  <Button
+                      variant="contained"
+                      color="primary"
+                      className={classes.button}
+                      startIcon={<Icon>add_circle_outline</Icon>}
+                    >
+                      Add Article
+                    </Button>
                 </Link>
               </div>
             </GridContainer>
