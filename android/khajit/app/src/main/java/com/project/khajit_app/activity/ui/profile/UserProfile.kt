@@ -8,19 +8,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.FragmentManager
 
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.ListViewAdapter
+import com.project.khajit_app.activity.ui.followlist.FollowListFragment
+import com.project.khajit_app.activity.ui.notificationdetails.notificationDetailFragment
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.FollowModel
 import com.project.khajit_app.data.models.GeneralFollowModel
 import com.project.khajit_app.global.User
+import interfaces.fragmentOperationsInterface
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class UserProfile : Fragment() {
-
+class UserProfile : Fragment(), fragmentOperationsInterface {
+    var containerId : ViewGroup? = null
 
     private lateinit var viewModel: UserProfileViewModel
     private lateinit var nameBox: TextView
@@ -50,10 +54,11 @@ class UserProfile : Fragment() {
         viewModel =
             ViewModelProviders.of(this).get(UserProfileViewModel::class.java)
         val root = inflater.inflate(R.layout.user_profile_fragment, container, false)
-
+        containerId = container
         val bio_tex = root.findViewById(R.id.text_bio) as TextView
         bio_tex.movementMethod = ScrollingMovementMethod()
 
+        
         // This will be used for further methods in order to set prediction rates
         var lview =  root.findViewById(R.id.list_prediction_name) as ListView
         var ladapter = ListViewAdapter(this, equipments, rates)
@@ -138,7 +143,17 @@ class UserProfile : Fragment() {
 
 
     fun followList(view: View, request: String) {
+        val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
 
+
+        fragmentTransaction(
+            parentActivityManager,
+            FollowListFragment.newInstance(request, User.id),
+            (containerId!!.id),
+            true,
+            true,
+            false
+        )
     }
 
     companion object {
@@ -146,6 +161,7 @@ class UserProfile : Fragment() {
             val fragmentUser = UserProfile()
             val args = Bundle()
             fragmentUser.arguments = args
+            args.putSerializable("request","ffsd")
             return fragmentUser
         }
 

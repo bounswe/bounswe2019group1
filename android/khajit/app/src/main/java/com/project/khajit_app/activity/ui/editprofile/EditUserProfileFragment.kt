@@ -388,6 +388,7 @@ class EditUserProfileFragment : Fragment() {
             }
         })
 
+
     }
 
     // This will be used after all requests, THAT CHANGE ANY VARIABLE IN GLOBAL USER, to set Global User Class

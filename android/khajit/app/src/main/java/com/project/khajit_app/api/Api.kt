@@ -32,6 +32,14 @@ interface Api {
     fun followerList():Call<GeneralFollowModel>
 
     @Headers("Content-Type: application/json")
+    @GET("follow/listFollowingWithIdFront/{id}")
+    fun followingListID(@Path(value = "id", encoded = true) userId: String):Call<GeneralFollowModel>
+
+    @Headers("Content-Type: application/json")
+    @GET("follow/listFollowerWithIdFront/{id}")
+    fun followerListID(@Path(value = "id", encoded = true) userId: String):Call<GeneralFollowModel2>
+
+    @Headers("Content-Type: application/json")
     @PUT("user/updateuser/")
     fun updateUser(@Body body: UpdateUser):Call<UpdateUserResponse>
 
