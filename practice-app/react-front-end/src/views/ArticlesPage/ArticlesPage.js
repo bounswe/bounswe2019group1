@@ -77,13 +77,16 @@ export default function ArticlesPage(props) {
                   Author: {value.author.username}
                 </Typography>
                 <div style={{ float: "right" }}>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    href="#contained-buttons"
+                  <Link
+                    to={{
+                      pathname: "/article/" + value.id,
+                      state: { id: value.id }
+                    }}
                   >
-                    Read more
-                  </Button>
+                    <Button variant="contained" color="secondary">
+                      Read more
+                    </Button>
+                  </Link>
                 </div>
               </Grid>
             </Grid>

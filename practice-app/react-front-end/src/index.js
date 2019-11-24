@@ -14,11 +14,10 @@ import EditProfile from "./views/ProfilePage/EditProfile";
 import ArticlesPage from "./views/ArticlesPage/ArticlesPage";
 import WalletPage from "./views/WalletPage/WalletPage";
 import Article from "./views/ArticlesPage/Article";
-
 import AddArticle from "./views/AddArticle/AddArticle";
 import EditArticle from "./views/AddArticle/EditArticle";
 import PortfolioPage from "./views/PortfolioPage/Portfolio";
-
+import UserProfile from "./views/ProfilePage/UserProfile";
 var hist = createBrowserHistory();
 
 ReactDOM.render(
@@ -91,6 +90,36 @@ ReactDOM.render(
         render={() =>
           localStorage.getItem("currentUser") ? (
             <EditArticle history={hist} />
+          ) : (
+            <Redirect to="/login-page" />
+          )
+        }
+      />
+      <Route
+        path="/article/:id"
+        render={() =>
+          localStorage.getItem("currentUser") ? (
+            <Article history={hist} />
+          ) : (
+            <Redirect to="/login-page" />
+          )
+        }
+      />
+      <Route
+        path="/article/edit/:id"
+        render={() =>
+          localStorage.getItem("currentUser") ? (
+            <EditArticle history={hist} />
+          ) : (
+            <Redirect to="/login-page" />
+          )
+        }
+      />
+      <Route
+        path="/user/:id"
+        render={() =>
+          localStorage.getItem("currentUser") ? (
+            <UserProfile history={hist} />
           ) : (
             <Redirect to="/login-page" />
           )
