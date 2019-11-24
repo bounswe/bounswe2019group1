@@ -17,6 +17,7 @@ import com.project.khajit_app.activity.ui.notificationdetails.notificationDetail
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.FollowModel
 import com.project.khajit_app.data.models.GeneralFollowModel
+import com.project.khajit_app.data.models.GeneralFollowModel2
 import com.project.khajit_app.global.User
 import interfaces.fragmentOperationsInterface
 import retrofit2.Call
@@ -105,15 +106,15 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
         })
 
         RetrofitClient.instance.followerList().enqueue(object :
-            Callback<GeneralFollowModel> {
+            Callback<GeneralFollowModel2> {
             override fun onResponse(
-                call: Call<GeneralFollowModel>,
-                response: Response<GeneralFollowModel>
+                call: Call<GeneralFollowModel2>,
+                response: Response<GeneralFollowModel2>
             ) {
                 println(response.toString())
                 if(response.code() == 200 ){
                     if(response.body()?.detail != null){
-                        println("PROBLEM FOLLOWING LIST")
+                        println("PROBLEM FOLLOWER LIST")
                     }else{
                         followerBox.text = response.body()?.list?.size.toString()
                     }
@@ -121,10 +122,11 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
 
                 }
             }
-            override fun onFailure(call: Call<GeneralFollowModel>, t: Throwable) {
+            override fun onFailure(call: Call<GeneralFollowModel2>, t: Throwable) {
 
             }
         })
+
 
         if(User.type == true) {
             traderImage.alpha = 1F

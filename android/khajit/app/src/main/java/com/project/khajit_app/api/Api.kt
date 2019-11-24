@@ -29,7 +29,7 @@ interface Api {
 
     @Headers("Content-Type: application/json")
     @GET("follow/listFollower/")
-    fun followerList():Call<GeneralFollowModel>
+    fun followerList():Call<GeneralFollowModel2>
 
     @Headers("Content-Type: application/json")
     @GET("follow/listFollowingWithIdFront/{id}")
