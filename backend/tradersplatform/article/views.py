@@ -1,4 +1,5 @@
 from django.shortcuts import render
+
 import django.utils.timezone
 # Create your views here.
 from rest_framework.exceptions import ValidationError
@@ -47,7 +48,7 @@ class ListPublicArticleAPIView(ListAPIView):
 class ListArticleWithUserIdAPIView(ListAPIView):
 
     def get(self, request, *args, **kwargs):
-        id = request.data.get('id', None)
+        id = kwargs.get("pk")
         if id is None:
             raise ValidationError({"detail": "give id"})
         user = TemplateUser.objects.get(id=id)
@@ -93,7 +94,7 @@ class UpdateArticleAPIView(UpdateAPIView):
 class GetArticleAPIView(RetrieveAPIView):
 
     def get(self, request, *args, **kwargs):
-        article_id = request.data['id']
+        article_id = kwargs.get("pk")
         query = Article.objects.filter(id=article_id)
         if not query:
             raise ValidationError({"detail": 'article does not exist'})
