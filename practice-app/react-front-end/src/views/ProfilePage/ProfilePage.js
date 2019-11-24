@@ -9,7 +9,7 @@ import Camera from "@material-ui/icons/Camera";
 //import Button from "components/CustomButtons/Button.js";
 
 import Event from "@material-ui/icons/Event";
-import Favorite from "@material-ui/icons/Favorite";
+import Articles from "@material-ui/icons/Description";
 // core components
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
@@ -39,6 +39,11 @@ import { getProfileInfo } from "../../service/profileinformation.service";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
 import { Apps, CloudDownload } from "@material-ui/icons";
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
+import Typography from "@material-ui/core/Typography";
+import ButtonBase from "@material-ui/core/ButtonBase";
+import Button from "components/CustomButtons/Button.js";
+
+import articleThumbnail from "assets/img/examples/investor.jpeg";
 
 const useStyles = makeStyles(styles);
 
@@ -137,7 +142,7 @@ export default function ProfilePage(props) {
               <p>{profileValues.biography} </p>
             </div>
             <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={8} className={classes.navWrapper}>
+              <GridItem xs={12} sm={12} md={80} className={classes.navWrapper}>
                 <NavPills
                   alignCenter
                   color="primary"
@@ -217,34 +222,50 @@ export default function ProfilePage(props) {
                       )
                     },
                     {
-                      tabButton: "Likes",
-                      tabIcon: Favorite,
+                      tabButton: "Articles",
+                      tabIcon: Articles,
                       tabContent: (
                         <GridContainer justify="center">
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={event4}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={portfolio3}
-                              className={navImageClasses}
-                            />
-                          </GridItem>
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={event2}
-                              className={navImageClasses}
-                            />
-
-                            <img
-                              alt="..."
-                              src={portfolio1}
-                              className={navImageClasses}
-                            />
+                          <GridItem xs={12} sm={12} md={40}>
+                            <Paper className={classes.paper}>
+                              <Grid container spacing={2}>
+                                <Grid item>
+                                  <ButtonBase className={classes.image}>
+                                    <img
+                                      className={classes.img}
+                                      alt="complex"
+                                      src={articleThumbnail}
+                                    />
+                                  </ButtonBase>
+                                </Grid>
+                                <Grid item xs={120} sm container>
+                                  <Grid item xs container direction="column" spacing={2}>
+                                    <Grid item xs>
+                                      <Typography gutterBottom variant="subtitle1">
+                                        {"The Key Traits of Patient and Successful Investors"}
+                                      </Typography>
+                                      <Typography variant="body2" gutterBottom>
+                                        {"According to Entrepreneur Network partner Phil Town, one of the most valuable traits an investor can have is patience. If you are a patient investor and decide on good businesses, Town says there is virtually no scenario where you will not make money. Here are some of the traits of patient investors..."}
+                                      </Typography>
+                                    </Grid>
+                                    <Grid item>
+                                      <Typography variant="body2" style={{ cursor: "pointer" }}>
+                                        {"24 November, 2019"}
+                                      </Typography>
+                                      <div style={{ float: "right" }}>
+                                        <Button
+                                          variant="contained"
+                                          color="primary"
+                                          href="edit-article"
+                                        >
+                                          Edit Article
+                                        </Button>
+                                      </div>
+                                    </Grid>
+                                  </Grid>
+                                </Grid>
+                              </Grid>
+                            </Paper>
                           </GridItem>
                         </GridContainer>
                       )
