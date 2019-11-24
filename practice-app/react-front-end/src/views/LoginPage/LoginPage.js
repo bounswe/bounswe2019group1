@@ -96,6 +96,16 @@ export default function LoginPage(props) {
                     <h4>
                       <b>Login</b>
                     </h4>
+                    <div className={classes.socialLine}>
+                                            
+                      <GoogleLogin
+                      clientId="510505564353-67arm3s7fpa87aumuktnak7eto3kq4nc.apps.googleusercontent.com"
+                      //buttonText=""
+                      onSuccess={responseGoogleSuccess}
+                      onFailure={responseGoogleFailure}
+                      cookiePolicy={"single_host_origin"}
+                    />
+                    </div>
                   </CardHeader>
                   <CardBody>
                     <CustomInput
@@ -145,13 +155,7 @@ export default function LoginPage(props) {
                     >
                       Login
                     </Button>
-                    <GoogleLogin
-                      clientId="510505564353-67arm3s7fpa87aumuktnak7eto3kq4nc.apps.googleusercontent.com"
-                      buttonText="Login"
-                      onSuccess={responseGoogleSuccess}
-                      onFailure={responseGoogleFailure}
-                      cookiePolicy={"single_host_origin"}
-                    />
+                    
                   </CardFooter>
                   <CardFooter className={classes.cardFooter}>
                     New to Khaji-it?
