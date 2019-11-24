@@ -8,7 +8,6 @@ import { makeStyles } from "@material-ui/core/styles";
 //import Palette from "@material-ui/icons/Palette";
 //import Button from "components/CustomButtons/Button.js";
 
-
 // core components
 import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
@@ -24,14 +23,13 @@ import { getProfileInfo } from "../../service/profileinformation.service";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
 
 import Adding from "./section/Adding";
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import Typography from "@material-ui/core/Typography";
+import ButtonBase from "@material-ui/core/ButtonBase";
 
 import articleThumbnail from "assets/img/examples/investor.jpeg";
 //import Adding from "./section/Adding";
 
 const useStyles = makeStyles(styles);
-
 
 export default function ProfilePage(props) {
   const classes = useStyles();
@@ -74,15 +72,11 @@ export default function ProfilePage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <div className={classes.container}>
-
-          <div className={classNames(classes.main, classes.mainRaised)}>
-                         <div className={classes.container}>
-          
-                             <Adding />
-                         </div>
-                      </div>
-
-            
+            <div className={classNames(classes.main, classes.mainRaised)}>
+              <div className={classes.container}>
+                <Adding />
+              </div>
+            </div>
           </div>
         </div>
       </div>
