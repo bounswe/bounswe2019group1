@@ -23,18 +23,15 @@ export function getMyArticles() {
 
 export function getArticleById(article_id) {
   const requestOptions = {
-    method: "GET",
     headers: {
       Authorization: authHeader(),
       "Content-Type": "application/json"
-    },
-    body: {
-      id: article_id
     }
   };
-  return axios(`${environment.api_url}article/getById/`, requestOptions).then(
-    res => (res.status === 200 ? res.data : null)
-  );
+  return axios(
+    `${environment.api_url}article/getById/${article_id}`,
+    requestOptions
+  ).then(res => (res.status === 200 ? res.data : null));
 }
 
 export function getArticlesByUserId(userid) {
