@@ -26,8 +26,10 @@ urlpatterns = [
     url(r'^event/', include('event.urls')),
     url(r'^follow/', include('follow.urls')),
     url(r'^equipment/', include('equipment.urls')),
+    url(r'^wallet/', include('wallet.urls')),
     url(r'^article/', include('article.urls')),
     url(r'^article-like/', include('article_like.urls')),
+    url(r'^article-comment/', include('article_comment.urls')),
 ]
 if settings.DEBUG:
   urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

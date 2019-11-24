@@ -1,5 +1,6 @@
 package com.project.khajit_app.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -8,63 +9,62 @@ import android.widget.FrameLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.project.khajit_app.R
+import com.project.khajit_app.activity.ui.editprofile.EditUserProfileFragment
 import com.project.khajit_app.activity.ui.equipment.EquipmentFragment
-import com.project.khajit_app.activity.ui.equipment.LogoutFragment
 import com.project.khajit_app.activity.ui.home.HomeFragment
 import com.project.khajit_app.activity.ui.mailbox.MailboxFragment
 import com.project.khajit_app.activity.ui.notifications.NotificationsFragment
+import com.project.khajit_app.activity.ui.profile.UserProfile
 import com.project.khajit_app.activity.ui.search.SearchFragment
-import com.project.khajit_app.activity.ui.settings.SettingsFragment
+import com.project.khajit_app.global.User
 
 class HomeFeedPageActivity : AppCompatActivity() {
 
-    private var content: FrameLayout? = null
+    private var homePageContent: FrameLayout? = null
+    private var newFragment: Fragment? = null;//global variable
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_feed_page)
-
-        content = findViewById(R.id.content)
+        setSupportActionBar(findViewById(R.id.home_top_menu_options_bar))
+        homePageContent = findViewById(R.id.homePageContent)
         val navigation = findViewById<BottomNavigationView>(R.id.nav_view)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         val fragment = HomeFragment.Companion.newInstance()
         addFragment(fragment)
-
-        setSupportActionBar(findViewById(R.id.home_top_menu_options_bar))
-        //home navigation
-        //supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
     }
-
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
 
                 val fragment = HomeFragment.Companion.newInstance()
-                addFragment(fragment)
+                changeFragment(fragment)
 
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_search -> {
                 val fragment = SearchFragment()
-                addFragment(fragment)
+                changeFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_equipments -> {
                 val fragment = EquipmentFragment()
-                addFragment(fragment)
+                changeFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                val fragment = NotificationsFragment()
-                addFragment(fragment)
+                val fragment = NotificationsFragment.Companion.newInstance()
+                changeFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_messages -> {
                 val fragment = MailboxFragment()
-                addFragment(fragment)
+                changeFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -75,26 +75,72 @@ class HomeFeedPageActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
-            .replace(R.id.content, fragment, fragment.javaClass.simpleName)
+            .replace(R.id.homePageContent, fragment, fragment.javaClass.simpleName)
             .commit()
 
     }
+    fun changeFragment(fragment: Fragment){
+        val newFragment = fragment
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.homePageContent, newFragment,fragment.javaClass.simpleName)
+            .addToBackStack("")
+            .commit()
+    }
 
+    fun denemeFragment(
+        fragment: Fragment,
+        container: Int,
+        replace: Boolean,
+        addToBackStack: Boolean,
+        addAnimation: Boolean
+    ) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        if (addAnimation)
+            fragmentTransaction.setCustomAnimations(
+                R.anim.design_bottom_sheet_slide_in,
+                R.anim.design_bottom_sheet_slide_out
+
+            )
+        if (replace)
+            fragmentTransaction.replace(container, fragment, fragment.javaClass.name)
+        else
+            fragmentTransaction.add(container, fragment, fragment.javaClass.name)
+        if (addToBackStack)
+            fragmentTransaction.addToBackStack(fragment.javaClass.name)
+        fragmentTransaction.commit()
+    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_top, menu)
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.profile_top_menu_item -> {
+            val profileFragment = UserProfile.Companion.newInstance()
+            changeFragment(profileFragment)
+            true
+        }
         R.id.settings_top_menu_item -> {
-            val fragment = SettingsFragment()
-            addFragment(fragment)
-
+            val profileFragment = EditUserProfileFragment.Companion.newInstance()
+            changeFragment(profileFragment)
+            // do stuff
             true
         }
         R.id.logout_top_menu_item -> {
-            val fragment = LogoutFragment()
-            addFragment(fragment)
+
+            User.token = ""
+            User.id = 0
+            User.username = ""
+            User.email = ""
+            User.first_name = ""
+            User.last_name = ""
+            // if the user is trader type info will be true otherwise user is basic and type info will be false
+            User.type = false
+            User.title = "No title"
+            User.bio = "No bio"
+            User.whereIamAsId = 0 //it may be unnecessary to keep
+            startActivity(Intent(this, MainPageActivity::class.java))
+            // do stuff
             true
         }
         else -> super.onOptionsItemSelected(item)

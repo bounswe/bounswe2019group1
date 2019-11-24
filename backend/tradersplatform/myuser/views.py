@@ -27,7 +27,7 @@ class TempUserCreateAPIView(CreateAPIView):
 
     def post(self, request, *args, **kwargs):
         # make password with set password
-        data = request.data
+        data = request.data.copy()
         password = request.data.get('password', None)
         if password is None:
             raise ValidationError({"detail": "You need to give a password"})
@@ -97,8 +97,10 @@ class UserLoginAPIView(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
         serializer = TempUserLoginSerializer(data=data)
+        new_data={}
         if serializer.is_valid(raise_exception=True):
-            new_data = serializer.data
+            new_data['token'] = serializer.data['token']
+            new_data['user'] = TempUserCreateSerializer(TemplateUser.objects.get(username=data['username'])).data
             return Response(new_data, status=HTTP_200_OK)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
@@ -162,7 +164,8 @@ class SearchUserListAPIView(ListAPIView):
         name=username.split()
         if username is not None:
                 service_query_general = service_query_general.filter(first_name__contains=name[0])
-                service_query_general = service_query_general.filter(last_name__contains=name[1])
+                if len(name)>1:
+                    service_query_general = service_query_general.filter(last_name__contains=name[1])
         else:
             raise ValidationError({"detail": "give username"})
 

@@ -16,8 +16,8 @@ class ArticleCreateSerializer(ModelSerializer):
             'created_date',
         ]
 
-class ArticleListSerializer(ModelSerializer):
 
+class ArticleListSerializer(ModelSerializer):
     class Meta:
         model = Article
         fields = [
@@ -28,12 +28,14 @@ class ArticleListSerializer(ModelSerializer):
             'created_date',
         ]
 
-class PublicArticleListSerializer(ModelSerializer):
 
+class PublicArticleListSerializer(ModelSerializer):
     author = TempUserCreateSerializer()
+
     class Meta:
         model = Article
         fields = [
+            'id',
             'title',
             'content',
             'author',
@@ -67,3 +69,16 @@ class ArticleUpdateSerializer(ModelSerializer):
                         }
 
 
+class ArticleGetSerializer(ModelSerializer):
+    author = TempUserCreateSerializer()
+
+    class Meta:
+        model = Article
+        fields = [
+            'id',
+            'title',
+            'content',
+            'is_public',
+            'author',
+            'created_date',
+        ]
