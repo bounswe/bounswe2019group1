@@ -12,6 +12,7 @@ import App from "./App";
 import SignupPage from "views/SignupPage/SignupPage";
 import EditProfile from "./views/ProfilePage/EditProfile";
 import ArticlesPage from "./views/ArticlesPage/ArticlesPage";
+import Article from "./views/ArticlesPage/Article";
 
 import AddArticle from "./views/AddArticle/AddArticle";
 import PortfolioPage from "./views/PortfolioPage/Portfolio";
@@ -50,6 +51,16 @@ ReactDOM.render(
             <ArticlesPage />
           ) : (
             <Redirect to="/login-page" />
+          )
+        }
+      />
+      <Route
+        path="/article"
+        render={() =>
+          localStorage.getItem("currentUser") ? (
+            <Article />
+          ) : (
+            <Redirect to="/article" />
           )
         }
       />

@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^listArticleByUserId/', views.ListArticleWithUserIdAPIView.as_view(), name="list"),
     url(r'^delete/', views.DeleteArticleAPIView.as_view(), name="delete"),
     url(r'^update/', views.UpdateArticleAPIView.as_view(), name="update"),
+    url(r'^getById/', views.GetArticleAPIView.as_view(), name="get"),
 ]
