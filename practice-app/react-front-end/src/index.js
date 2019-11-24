@@ -16,6 +16,7 @@ import WalletPage from "./views/WalletPage/WalletPage";
 import Article from "./views/ArticlesPage/Article";
 
 import AddArticle from "./views/AddArticle/AddArticle";
+import EditArticle from "./views/AddArticle/EditArticle";
 import PortfolioPage from "./views/PortfolioPage/Portfolio";
 
 var hist = createBrowserHistory();
@@ -80,6 +81,12 @@ ReactDOM.render(
         render={() =>
           localStorage.getItem("currentUser") ? (
             <WalletPage />
+      />
+      <Route
+        path="/edit-article"
+        render={() =>
+          localStorage.getItem("currentUser") ? (
+            <EditArticle />
           ) : (
             <Redirect to="/login-page" />
           )
