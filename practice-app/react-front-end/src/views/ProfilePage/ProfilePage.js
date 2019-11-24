@@ -19,7 +19,11 @@ import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 import { Link } from "react-router-dom";
 import profile from "assets/img/faces/ai.jpg";
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 
+import DeleteIcon from '@material-ui/icons/Delete';
+import AlarmIcon from '@material-ui/icons/Alarm';
 import portfolio1 from "assets/img/examples/ppp1.jpeg";
 import portfolio2 from "assets/img/examples/po2.jpeg";
 import portfolio3 from "assets/img/examples/ppp3.jpg";
@@ -114,11 +118,19 @@ export default function ProfilePage(props) {
                       {profileValues.first_name} {profileValues.last_name}
                     </h3>
                     <h6>{profileValues.title}</h6>
+                   
+                    <Link to="/wallet-page">
+                          
+                        <Icon fontSize="large">account_balance_wallet</Icon>
+                          </Link>
+                    
+
                   </div>
                   <div className={classes.root}>
                     <Grid container spacing={3}>
                       <Grid item xs>
-                        <Paper className={classes.paper}>Followers</Paper>
+
+                       <Paper className={classes.paper}>Followers</Paper>
                       </Grid>
                       <Grid item xs></Grid>
                       <Grid item xs>
@@ -134,6 +146,7 @@ export default function ProfilePage(props) {
                         <Paper className={classes.paper}>34</Paper>
                       </Grid>
                     </Grid>
+                   
                   </div>
                 </div>
               </GridItem>
