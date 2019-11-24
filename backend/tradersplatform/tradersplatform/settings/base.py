@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'equipment',
     'wallet',
     'article',
+    'article_comment',
 ]
 
 MIDDLEWARE = [

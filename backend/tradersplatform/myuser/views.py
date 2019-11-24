@@ -164,7 +164,8 @@ class SearchUserListAPIView(ListAPIView):
         name=username.split()
         if username is not None:
                 service_query_general = service_query_general.filter(first_name__contains=name[0])
-                service_query_general = service_query_general.filter(last_name__contains=name[1])
+                if len(name)>1:
+                    service_query_general = service_query_general.filter(last_name__contains=name[1])
         else:
             raise ValidationError({"detail": "give username"})
 

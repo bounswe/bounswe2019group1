@@ -10,19 +10,19 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('article', '0001_initial'),
         ('myuser', '0005_templateuser_is_public'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Article',
+            name='ArticleComment',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=300, unique=True)),
-                ('content', models.CharField(max_length=5000)),
-                ('is_public', models.BooleanField(default=True)),
+                ('text', models.CharField(max_length=200)),
                 ('created_date', models.DateTimeField(default=django.utils.timezone.now)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='article', to='myuser.TemplateUser')),
+                ('article', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='article', to='article.Article')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='user', to='myuser.TemplateUser')),
             ],
         ),
     ]

@@ -2,12 +2,12 @@ from django.shortcuts import render
 import django.utils.timezone
 # Create your views here.
 from rest_framework.exceptions import ValidationError
-from rest_framework.generics import CreateAPIView, ListAPIView, DestroyAPIView, UpdateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, DestroyAPIView, UpdateAPIView, RetrieveAPIView
 from rest_framework.response import Response
 
 from article.models import Article
 from article.serializers import ArticleCreateSerializer, ArticleListSerializer, PublicArticleListSerializer, \
-    ArticleUpdateSerializer
+    ArticleUpdateSerializer, ArticleGetSerializer
 from myuser.models import TemplateUser
 
 
@@ -34,14 +34,14 @@ class ListArticleAPIView(ListAPIView):
         check_if_user(request)
         id = request.user.id
         user = TemplateUser.objects.get(id=id)
-        query = Article.objects.filter(author=user)
+        query = Article.objects.filter(author=user).order_by('-created_date')
         serializer = ArticleListSerializer(query, many=True)
         return Response(serializer.data, status=200)
 
 
 class ListPublicArticleAPIView(ListAPIView):
     serializer_class = PublicArticleListSerializer
-    queryset = Article.objects.filter(is_public=True)
+    queryset = Article.objects.filter(is_public=True).order_by('-created_date')
 
 
 class ListArticleWithUserIdAPIView(ListAPIView):
@@ -51,7 +51,7 @@ class ListArticleWithUserIdAPIView(ListAPIView):
         if id is None:
             raise ValidationError({"detail": "give id"})
         user = TemplateUser.objects.get(id=id)
-        query = Article.objects.filter(author=user)
+        query = Article.objects.filter(author=user).order_by('-created_date')
         serializer = PublicArticleListSerializer(query, many=True)
         return Response(serializer.data, status=200)
 
@@ -87,6 +87,18 @@ class UpdateArticleAPIView(UpdateAPIView):
         serializer = ArticleUpdateSerializer(article, data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        return Response(serializer.data, status=200)
+
+
+class GetArticleAPIView(RetrieveAPIView):
+
+    def get(self, request, *args, **kwargs):
+        article_id = request.data['id']
+        query = Article.objects.filter(id=article_id)
+        if not query:
+            raise ValidationError({"detail": 'article does not exist'})
+        article = query.first()
+        serializer = ArticleGetSerializer(article)
         return Response(serializer.data, status=200)
 
 

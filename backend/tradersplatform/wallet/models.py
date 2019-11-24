@@ -23,4 +23,6 @@ class Wallet(models.Model):
     SPY = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True, unique=False, default=0)
     IVV = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True, unique=False, default=0)
     VTI = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True, unique=False, default=0)
-
+    DJI = models.DecimalField(max_digits=20,decimal_places=10, blank=True,null=True, unique=False, default=0)
+    IXIC = models.DecimalField(max_digits=20,decimal_places=10, blank=True,null=True, unique=False, default=0)
+    INX = models.DecimalField(max_digits=20,decimal_places=10, blank=True,null=True, unique=False, default=0)
