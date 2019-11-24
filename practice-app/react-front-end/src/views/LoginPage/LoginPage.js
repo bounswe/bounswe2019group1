@@ -28,7 +28,7 @@ import GoogleLogin from "react-google-login";
 
 //altay
 const responseGoogleSuccess = response => {
-  window.location.href = "http://localhost:3000/profile-page";
+  window.location.href = "http://35.163.120.227/profile-page";
   console.log(response);
 };
 
@@ -97,7 +97,7 @@ export default function LoginPage(props) {
                       <b>Login</b>
                     </h4>
                     <div className={classes.socialLine}>
-                                            
+
                       <GoogleLogin
                       clientId="510505564353-67arm3s7fpa87aumuktnak7eto3kq4nc.apps.googleusercontent.com"
                       //buttonText=""
@@ -155,7 +155,7 @@ export default function LoginPage(props) {
                     >
                       Login
                     </Button>
-                    
+
                   </CardFooter>
                   <CardFooter className={classes.cardFooter}>
                     New to Khaji-it?

@@ -75,7 +75,7 @@ export default function ProfilePage(props) {
           <div className={classes.container}>
             <div className={classNames(classes.main, classes.mainRaised)}>
               <div className={classes.container}>
-                <Editing />
+                <Editing history={props.history}/>
               </div>
             </div>
           </div>
