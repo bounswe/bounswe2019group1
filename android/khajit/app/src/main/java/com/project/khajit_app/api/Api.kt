@@ -25,11 +25,11 @@ interface Api {
 
     @Headers("Content-Type: application/json")
     @GET("follow/listFollowing/")
-    fun followingList():Call<List<FollowingModel>>
+    fun followingList():Call<GeneralFollowModel>
 
     @Headers("Content-Type: application/json")
     @GET("follow/listFollower/")
-    fun followerList():Call<List<FollowerModel>>
+    fun followerList():Call<GeneralFollowModel>
 
     @Headers("Content-Type: application/json")
     @PUT("user/updateuser/")

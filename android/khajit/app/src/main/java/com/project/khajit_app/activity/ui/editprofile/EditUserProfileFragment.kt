@@ -93,12 +93,12 @@ class EditUserProfileFragment : Fragment() {
         else
             phone_number.setText(User.phone_number.toString())
 
-        if(User.iban_number.toString() == "0") {
-            iban.setText("")
-            button_upgrade_downgrade.setText("Upgrade To Trader")
-        } else {
+        if(User.iban_number.toString().length == 16) {
             iban.setText(User.iban_number.toString())
             button_upgrade_downgrade.setText("Downgrade To Basic")
+        } else {
+            iban.setText("")
+            button_upgrade_downgrade.setText("Upgrade To Trader")
         }
 
 
@@ -124,7 +124,7 @@ class EditUserProfileFragment : Fragment() {
 
     fun upgrade_downgrade(root: View?) {
         var trader = User.type!!
-        var iban_text = "0"
+        var iban_text = ""
         if(!trader) {
             iban_text = iban.text.toString()
         }
@@ -134,7 +134,7 @@ class EditUserProfileFragment : Fragment() {
             return
         }
 
-        val userInfo = UpgradeDowngrade(iban_text.toLong())
+        val userInfo = UpgradeDowngrade(iban_text)
         RetrofitClient.instance.changeIban(userInfo).enqueue(object :
             Callback<UpdateUserResponse> {
             override fun onResponse(
@@ -146,7 +146,7 @@ class EditUserProfileFragment : Fragment() {
                     if(response.body()?.detail != null){
                         println("NOT CHANGED")
                     }else{
-                        println("CHANGE IBAN")
+                        println("CHANGED IBAN")
 
                     }
                 }else{
@@ -302,7 +302,7 @@ class EditUserProfileFragment : Fragment() {
             return
         }
 
-        val userInfo = UpdateUser(first_name.text.toString(), last_name.text.toString(), title.text.toString(), bio.text.toString(), phone_number.text.toString().toLong())
+        val userInfo = UpdateUser(first_name.text.toString(), last_name.text.toString(), title.text.toString(), bio.text.toString(), phone_number.text.toString())
         RetrofitClient.instance.updateUser(userInfo).enqueue(object :
             Callback<UpdateUserResponse> {
             override fun onResponse(

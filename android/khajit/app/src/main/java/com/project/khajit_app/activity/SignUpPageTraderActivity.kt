@@ -54,11 +54,11 @@ class SignUpPageTraderActivity : AppCompatActivity() {
     fun goToMainTraderUserActivity(view : View) {
 
         trader_button.setOnClickListener {
-            var iban_information = iban_input.text.toString().toLongOrNull()
+            var iban_information = iban_input.text.toString()
             var citizen_id_information =
                 citizen_id_input.text.toString().trim() //int olsa daha iyi gibi
 
-            if (iban_information == null) {
+            if (iban_information.length != 16) {
                 iban_input.error = "IBAN is required."
                 iban_input.requestFocus()
                 return@setOnClickListener
