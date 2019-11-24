@@ -55,7 +55,7 @@ class ListFollowerAPIView(ListAPIView):
         user=TemplateUser.objects.get(id=id)
         query=Follow.objects.filter(following=user)
         serializer = FollowerListSerializer(query, many=True)
-        return Response(serializer.data, status=200)
+        return Response({"list":serializer.data}, status=200)
 
 
 class ListFollowerWithIdAPIView(ListAPIView):
@@ -68,7 +68,7 @@ class ListFollowerWithIdAPIView(ListAPIView):
         user=TemplateUser.objects.get(id=id)
         query=Follow.objects.filter(following=user)
         serializer = FollowerListSerializer(query, many=True)
-        return Response(serializer.data, status=200)
+        return Response({"list":serializer.data}, status=200)
 
 
 class ListFollowingAPIView(ListAPIView):
@@ -79,7 +79,7 @@ class ListFollowingAPIView(ListAPIView):
         user=TemplateUser.objects.get(id=id)
         query=Follow.objects.filter(follower=user)
         serializer = FollowingListSerializer(query, many=True)
-        return Response(serializer.data, status=200)
+        return Response({"list":serializer.data}, status=200)
 
 
 class IsFollowingAPIView(APIView):
@@ -113,7 +113,7 @@ class ListFollowingWithIdAPIView(ListAPIView):
         user=TemplateUser.objects.get(id=id)
         query=Follow.objects.filter(follower=user)
         serializer = FollowingListSerializer(query, many=True)
-        return Response(serializer.data, status=200)
+        return Response({"list":serializer.data}, status=200)
 
 
 def check_if_user(request):
