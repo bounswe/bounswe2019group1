@@ -30,7 +30,7 @@ ReactDOM.render(
         path="/edit-profile"
         render={() =>
           localStorage.getItem("currentUser") ? (
-            <EditProfile />
+            <EditProfile history={hist} />
           ) : (
             <Redirect to="/login-page" />
           )
@@ -40,7 +40,7 @@ ReactDOM.render(
         path="/profile-page"
         render={() =>
           localStorage.getItem("currentUser") ? (
-            <ProfilePage />
+            <ProfilePage history={hist} />
           ) : (
             <Redirect to="/login-page" />
           )
@@ -50,7 +50,7 @@ ReactDOM.render(
         path="/articles"
         render={() =>
           localStorage.getItem("currentUser") ? (
-            <ArticlesPage />
+            <ArticlesPage history={hist} />
           ) : (
             <Redirect to="/login-page" />
           )
@@ -60,7 +60,7 @@ ReactDOM.render(
         path="/article"
         render={() =>
           localStorage.getItem("currentUser") ? (
-            <Article />
+            <Article history={hist} />
           ) : (
             <Redirect to="/article" />
           )
@@ -70,7 +70,7 @@ ReactDOM.render(
         path="/add-article"
         render={() =>
           localStorage.getItem("currentUser") ? (
-            <AddArticle />
+            <AddArticle history={hist} />
           ) : (
             <Redirect to="/login-page" />
           )
@@ -80,13 +80,17 @@ ReactDOM.render(
         path="/wallet-page"
         render={() =>
           localStorage.getItem("currentUser") ? (
-            <WalletPage />
+            <WalletPage history={hist} />
+          ) : (
+            <Redirect to="/login-page" />
+          )
+        }
       />
       <Route
         path="/edit-article"
         render={() =>
           localStorage.getItem("currentUser") ? (
-            <EditArticle />
+            <EditArticle history={hist} />
           ) : (
             <Redirect to="/login-page" />
           )
@@ -96,7 +100,7 @@ ReactDOM.render(
         path="/portfolio"
         render={() =>
           localStorage.getItem("currentUser") ? (
-            <PortfolioPage />
+            <PortfolioPage history={hist} />
           ) : (
             <Redirect to="/login-page" />
           )
