@@ -14,7 +14,9 @@ import styles from "assets/jss/material-kit-react/views/landingPageSections/work
 
 const useStyles = makeStyles(styles);
 
-export default function Adding() {
+export default function Adding(props) {
+  var article_id = String(props.history.location.pathname);
+  article_id = Number(article_id.substr(article_id.lastIndexOf("/") + 1));
   const classes = useStyles();
   return (
     <div className={classes.section}>

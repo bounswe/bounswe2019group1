@@ -32,30 +32,9 @@ import articleThumbnail from "assets/img/examples/investor.jpeg";
 
 const useStyles = makeStyles(styles);
 
-export default function ProfilePage(props) {
+export default function EditArticle(props) {
   const classes = useStyles();
   const { ...rest } = props;
-  const [profileValues, setProfileValues] = useState({
-    username: "",
-    email: "",
-    first_name: "",
-    last_name: "",
-    location: ""
-  });
-  const imageClasses = classNames(
-    classes.imgRaised,
-    classes.imgRoundedCircle,
-    classes.imgFluid
-  );
-  getProfileInfo().then(res =>
-    setProfileValues({
-      username: res.username,
-      first_name: res.first_name,
-      last_name: res.last_name,
-      location: res.location
-    })
-  );
-  const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   return (
     <div>
       <Header
