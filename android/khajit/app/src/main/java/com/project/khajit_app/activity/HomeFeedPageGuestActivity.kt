@@ -51,7 +51,7 @@ class HomeFeedPageGuestActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_equipments_guest -> {
-                val fragment = EquipmentFragment()
+                val fragment = NotificationsFragment()
                 addFragment(fragment)
                 return@OnNavigationItemSelectedListener true
             }
