@@ -29,7 +29,7 @@ export default function Adding(props) {
         res.status === 200 ? props.history.push("/articles") : null
       )
       .then(function() {
-        props.history.push("/articles");
+        //props.history.push("/articles");
         swal("Good job!", "Created the article successfully.", "Success");
       })
       .catch(error => {

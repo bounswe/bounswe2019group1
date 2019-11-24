@@ -21,6 +21,7 @@ import Accessibility from "@material-ui/icons/Accessibility";
 import BugReport from "@material-ui/icons/BugReport";
 import Code from "@material-ui/icons/Code";
 import Cloud from "@material-ui/icons/Cloud";
+
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -43,6 +44,9 @@ import {
 } from "variables/charts.js";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import { Replay, Replay30 } from "@material-ui/icons";
+import { PlaylistAddCheck } from "@material-ui/icons";
+
 
 const useStyles = makeStyles(styles);
 
@@ -86,36 +90,15 @@ export default function Dashboard() {
       </GridContainer>
       
       <GridContainer>
-      <GridItem xs={12}>
-          <Card>
-            <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>Transactions</h4>
-              <p className={classes.cardCategoryWhite}>
-                Last transactions on 26th November, 2019
-              </p>
-            </CardHeader>
-            <CardBody>
-              <Table
-                tableHeaderColor="warning"
-                tableHead={["ID", "Currency", "Price", "Country"]}
-                tableData={[
-                  ["1", "TRY", "$36,738", "Niger"],
-                  ["2", "USD", "$23,789", "Curaçao"],
-                  ["3", "EUR", "$56,142", "Netherlands"],
-                  ["4", "BTC", "$38,735", "Korea, South"]
-                ]}
-              />
-            </CardBody>
-          </Card>
-        </GridItem>
+      
         <GridItem xs={12}>
           <CustomTabs
-            title="Tasks:"
+            title="Transactions:"
             headerColor="primary"
             tabs={[
               {
-                tabName: "Bugs",
-                tabIcon: BugReport,
+                tabName: "Today",
+                tabIcon: PlaylistAddCheck,
                 tabContent: (
                   <Tasks
                     checkedIndexes={[0, 3]}
@@ -125,8 +108,8 @@ export default function Dashboard() {
                 )
               },
               {
-                tabName: "Website",
-                tabIcon: Code,
+                tabName: "Last week",
+                tabIcon: Replay,
                 tabContent: (
                   <Tasks
                     checkedIndexes={[0]}
@@ -136,8 +119,8 @@ export default function Dashboard() {
                 )
               },
               {
-                tabName: "Server",
-                tabIcon: Cloud,
+                tabName: "Last month",
+                tabIcon: Replay30,
                 tabContent: (
                   <Tasks
                     checkedIndexes={[1]}
@@ -149,7 +132,7 @@ export default function Dashboard() {
             ]}
           />
         </GridItem>
-        
+       
       </GridContainer>
     </div>
   );
