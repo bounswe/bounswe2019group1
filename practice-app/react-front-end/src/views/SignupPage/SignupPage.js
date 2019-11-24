@@ -84,8 +84,8 @@ export default function SignupPage(props) {
   const [isTraderUserSelected, setIsTraderUserSelected] = React.useState({
     selected: false
   });
-
   const handleSubmit = event => {
+    event.preventDefault();
     // validate the inputs and then send the backend
     if (values.usertype === "Basic") {
       var validation_response = validateBasicRegister(values);
