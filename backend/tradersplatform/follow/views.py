@@ -71,6 +71,19 @@ class ListFollowerWithIdAPIView(ListAPIView):
         return Response({"list":serializer.data}, status=200)
 
 
+class ListFollowerWithIdFrontAPIView(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        check_if_user(request)
+        id = kwargs.get("pk")
+        user = TemplateUser.objects.filter(id=id).first()
+        if not user:
+            raise ValidationError({"detail": "user does not exist"})
+        query=Follow.objects.filter(following=user)
+        serializer = FollowerListSerializer(query, many=True)
+        return Response({"list":serializer.data}, status=200)
+
+
 class ListFollowingAPIView(ListAPIView):
 
     def get(self, request, *args, **kwargs):
@@ -111,6 +124,19 @@ class ListFollowingWithIdAPIView(ListAPIView):
         if id  is None:
             raise ValidationError({"detail": "give id"})
         user=TemplateUser.objects.get(id=id)
+        query=Follow.objects.filter(follower=user)
+        serializer = FollowingListSerializer(query, many=True)
+        return Response({"list":serializer.data}, status=200)
+
+
+class ListFollowingFrontWithIdAPIView(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        check_if_user(request)
+        id = kwargs.get("pk")
+        user=TemplateUser.objects.filter(id=id).first()
+        if not user:
+            raise ValidationError({"detail": "user does not exist"})
         query=Follow.objects.filter(follower=user)
         serializer = FollowingListSerializer(query, many=True)
         return Response({"list":serializer.data}, status=200)
