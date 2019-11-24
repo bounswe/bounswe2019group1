@@ -80,7 +80,7 @@ class TempUserLoginSerializer(ModelSerializer):
         if user.exists() and user.count() == 1:
             user_obj = user.first()
         else:
-            raise ValidationError({"detail":"Incorrect credential"})
+            raise ValidationError({"detail": "Incorrect credential"})
 
         if user_obj:
             if not user_obj.check_password(password):
@@ -97,7 +97,6 @@ class TempUserLoginSerializer(ModelSerializer):
 
 
 class UserUpdateSerializer(ModelSerializer):
-
     class Meta:
         model = TemplateUser
         fields = [
@@ -121,3 +120,14 @@ class UserUpdateSerializer(ModelSerializer):
                             {"required": False},
                         }
 
+
+class TempUserListSerializer(ModelSerializer):
+    class Meta:
+        model = TemplateUser
+        fields = [
+            'id',
+            'username',
+            'email',
+            'first_name',
+            'last_name'
+        ]

@@ -1,8 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 
 from article_comment.models import ArticleComment
-from myuser.serializers import TempUserCreateSerializer
-from article.serializers import ArticleCreateSerializer
+from myuser.serializers import TempUserListSerializer
 
 
 class ArticleCommentCreateSerializer(ModelSerializer):
@@ -40,11 +39,12 @@ class ArticleCommentUpdateSerializer(ModelSerializer):
 
 
 class ArticleCommentListSerializer(ModelSerializer):
-    user = TempUserCreateSerializer()
+    user = TempUserListSerializer()
 
     class Meta:
         model = ArticleComment
         fields = [
+            'id',
             'text',
             'user',
             'article',

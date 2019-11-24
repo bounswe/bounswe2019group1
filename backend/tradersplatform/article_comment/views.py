@@ -52,7 +52,7 @@ class UpdateArticleCommentAPIView(UpdateAPIView):
         id = request.user.id
         user = TemplateUser.objects.get(id=id)
         comment_id = request.data['id']
-        comment = ArticleComment.objects.get(id=comment_id, user=user)
+        comment = ArticleComment.objects.get(id=comment_id)
         if comment is None:
             raise ValidationError("Comment does not exist")
         query = ArticleComment.objects.filter(id=comment_id, user=user)
