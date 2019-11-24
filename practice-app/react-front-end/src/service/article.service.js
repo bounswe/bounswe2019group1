@@ -42,7 +42,7 @@ export function createArticle(values) {
   const requestOptions = {
     headers: {
       Authorization: authHeader(),
-      "Content-Type": "application/json" 
+      "Content-Type": "application/json"
     },
     body: {
       title: values.title,
@@ -50,11 +50,13 @@ export function createArticle(values) {
       is_public: values.is_public
     }
   };
-  return axios
-    .post(`${environment.api_url}article/create/`, requestOptions.body, {
+  return axios.post(
+    `${environment.api_url}article/create/`,
+    requestOptions.body,
+    {
       headers: requestOptions.headers
-    })
-    .then(res => (res.status === 200 ? res.data : null));
+    }
+  );
 }
 
 export function updateArticle(values) {
