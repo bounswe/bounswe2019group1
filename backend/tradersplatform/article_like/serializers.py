@@ -67,7 +67,7 @@ class ArticleDislikeListSerializer(ModelSerializer):
     user = TempUserCreateSerializer()
 
     class Meta:
-        model = ArticleLike
+        model = ArticleDislike
         fields = [
             'id',
             'user',

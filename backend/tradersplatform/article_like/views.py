@@ -22,6 +22,9 @@ class LikeArticleAPIView(CreateAPIView):
         article = Article.objects.filter(id=article_id).first()
         if not article or not article.is_public:
             return Response({"detail": "article not exist"}, status=400)
+        like_query = ArticleLike.objects.filter(article=article, user=user)
+        if like_query:
+            return Response({"You have already liked this article"}, status=400)
         query = ArticleDislike.objects.filter(article=article, user=user)
         if query:
             dislike = query.first()
@@ -43,11 +46,14 @@ class DislikeArticleAPIView(CreateAPIView):
         article = Article.objects.filter(id=article_id).first()
         if not article or not article.is_public:
             return Response({"detail": "article not exist"}, status=400)
+        dislike_query = ArticleDislike.objects.filter(article=article, user=user)
+        if dislike_query:
+            return Response({"You have already disliked this article"}, status=400)
         query = ArticleLike.objects.filter(article=article, user=user)
         if query:
             like = query.first()
             like.delete()
-        data = {"article": article_id, "user": user, "liked_date": django.utils.timezone.now()}
+        data = {"article": article_id, "user": user, "disliked_date": django.utils.timezone.now()}
         serializer = ArticleDislikeSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
