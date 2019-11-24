@@ -18,12 +18,11 @@ import Parallax from "components/Parallax/Parallax.js";
 import Button from "components/CustomButtons/Button.js";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import Icon from '@material-ui/core/Icon';
 import styles from "assets/jss/material-kit-react/views/articlePage.js";
 // import { getProfileInfo } from "../../service/profileinformation.service";
 import { getPublicArticles } from "service/article.service.js";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
-
+import Icon from "@material-ui/core/Icon";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 
@@ -78,21 +77,22 @@ export default function ArticlesPage(props) {
                   Author: {value.author.username}
                 </Typography>
                 <div style={{ float: "right" }}>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    href="#contained-buttons"
+                  <Link
+                    to={{
+                      pathname: "/article/" + value.id,
+                      state: { id: value.id }
+                    }}
                   >
-                    Read more
-                  </Button>
+                    <Button variant="contained" color="secondary">
+                      Read more
+                    </Button>
+                  </Link>
                 </div>
               </Grid>
             </Grid>
           </Grid>
-          
         </Grid>
       </Paper>
-      
       // <li key={index}>{value.title}</li>
     );
   }
@@ -115,23 +115,20 @@ export default function ArticlesPage(props) {
       <div className={classNames(classes.main, classes.mainRaised)}>
         <div>
           <div className={classes.container}>
-            
             <GridContainer justify="center">
-              
               <GridItem xs={12} sm={12} md={20}>
                 <div className={classes.root}>{items}</div>
               </GridItem>
-              <div style={{ float: "right" }}>              
-              <Link to="/add-article">
-                
+              <div style={{ float: "right" }}>
+                <Link to="/add-article">
                   <Button
-                      variant="contained"
-                      color="primary"
-                      className={classes.button}
-                      startIcon={<Icon>add_circle_outline</Icon>}
-                    >
-                      Add Article
-                    </Button>
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    startIcon={<Icon>add_circle_outline</Icon>}
+                  >
+                    Add Article
+                  </Button>
                 </Link>
               </div>
             </GridContainer>

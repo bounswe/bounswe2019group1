@@ -22,13 +22,15 @@ export default function Adding(props) {
     content: "",
     is_public: true
   });
+  console.log(JSON.stringify(props));
   const handleSubmit = event => {
     event.preventDefault();
     createArticle(values)
-      .then(res =>
-        res.status === 200 ? props.history.push("/articles") : null
-      )
+      .then(res => (res.status === 200 ? res : null))
       .then(function() {
+        if (localStorage.getItem("currentUser")) {
+          props.history.push("/articles");
+        }
         //props.history.push("/articles");
         swal("Good job!", "Created the article successfully.", "Success");
       })
@@ -82,7 +84,9 @@ export default function Adding(props) {
               />
               <GridContainer xs={12} justify="center">
                 <GridItem xs={12} sm={12} md={4} className={classes.textCenter}>
-                  <Button color="primary" onClick={handleSubmit}>Submit</Button>
+                  <Button color="primary" onClick={handleSubmit}>
+                    Submit
+                  </Button>
                 </GridItem>
               </GridContainer>
             </GridContainer>

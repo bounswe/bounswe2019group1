@@ -13,7 +13,6 @@ import Header from "components/Header/Header.js";
 import Footer from "components/Footer/Footer.js";
 import Parallax from "components/Parallax/Parallax.js";
 
-
 import styles from "assets/jss/material-kit-react/views/articlePage.js";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
 import Adding from "./section/Adding";
@@ -44,7 +43,7 @@ export default function AddArticle(props) {
           <div className={classes.container}>
             <div className={classNames(classes.main, classes.mainRaised)}>
               <div className={classes.container}>
-                <Adding />
+                <Adding history={props.history} />
               </div>
             </div>
           </div>

@@ -21,8 +21,25 @@ export function getMyArticles() {
     .then(res => (res.status === 200 ? res.data : null));
 }
 
-export function getArticleById(userid) {
+export function getArticleById(article_id) {
   const requestOptions = {
+    method: "GET",
+    headers: {
+      Authorization: authHeader(),
+      "Content-Type": "application/json"
+    },
+    body: {
+      id: article_id
+    }
+  };
+  return axios(`${environment.api_url}article/getById/`, requestOptions).then(
+    res => (res.status === 200 ? res.data : null)
+  );
+}
+
+export function getArticlesByUserId(userid) {
+  const requestOptions = {
+    method: "GET",
     headers: {
       ContentType: "application/json"
     },
@@ -42,7 +59,7 @@ export function createArticle(values) {
   const requestOptions = {
     headers: {
       Authorization: authHeader(),
-      "Content-Type": "application/json" 
+      "Content-Type": "application/json"
     },
     body: {
       title: values.title,
@@ -50,11 +67,13 @@ export function createArticle(values) {
       is_public: values.is_public
     }
   };
-  return axios
-    .post(`${environment.api_url}article/create/`, requestOptions.body, {
+  return axios.post(
+    `${environment.api_url}article/create/`,
+    requestOptions.body,
+    {
       headers: requestOptions.headers
-    })
-    .then(res => (res.status === 200 ? res.data : null));
+    }
+  );
 }
 
 export function updateArticle(values) {

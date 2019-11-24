@@ -2,11 +2,25 @@
 // // // Tasks for TasksCard - see Dashboard view
 // #############################
 
+
 var bugs = [
-  '... alındı',
-  "... satıldı",
-  "... alındı",
-  "Create 4 Invisible User Experiences you Never Knew About..."
+  'BTC',
+  "ETH ",
+  "LTC ",
+  "XAG ",
+  "XAU",
+  "GOOGL ",
+  "AAPL",
+  "GM ",
+  "EUR ",
+  "GBP ",
+  "TRY ",
+  "SPY ",
+  "IVV ",
+  "VTI ",
+  "DJI ",
+  "IXIC",
+  "INX"
 ];
 var website = [
   "Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit",
