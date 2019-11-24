@@ -114,15 +114,13 @@ export default function PheaderLinks(props) {
             inputProps={{ "aria-label": "search" }}
           />
         </div>
-        <Link to="/articles">
-          <Button className={classes.button} color="transparent" target="_self">
+        <Link to="/articles" color="transparent">
+          <Button className={classes.button} color="primary" target="_self">
             <CloudDownload className={classes.icons} /> Articles
           </Button>
         </Link>
-        
-
-        <Link to="/portfolio">
-          <Button className={classes.button} color="transparent" target="_self">
+        <Link to="/portfolio" className={classes.button} color="transparent">
+          <Button className={classes.button} color="primary" target="_self">
             <Assignment className={classes.icons} /> Portfolio
           </Button>
         </Link>
@@ -130,9 +128,10 @@ export default function PheaderLinks(props) {
         <CustomDropdown
           noLiPadding
           buttonText="Settings"
+          color="primary"
           buttonProps={{
             className: classes.navLink,
-            color: "transparent"
+            color:"primary"
           }}
           buttonIcon={Apps}
           dropdownList={[
