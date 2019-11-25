@@ -118,7 +118,6 @@ export default function ProfilePage(props) {
   useState(() =>
     getMyArticles().then(res => setArticleValues({ results: res }))
   );
-  console.log(articleValues.results);
   const items = [];
   if (articleValues.results) {
     for (const [index, value] of articleValues.results.entries()) {
@@ -141,7 +140,7 @@ export default function ProfilePage(props) {
                     {value.title}
                   </Typography>
                   <Typography variant="body2" gutterBottom>
-                    {value.content.substring(0,100) + "..."}
+                    {value.content.substring(0,150) + "..."}
                   </Typography>
                 </Grid>
                 <Grid item>
@@ -162,56 +161,6 @@ export default function ProfilePage(props) {
             </Grid>
           </Grid>
         </Paper>
-        // <Paper className={classes.paper}>
-        //   <Grid container spacing={2}>
-        //     <Grid item>
-        //       <ButtonBase className={classes.image}>
-        //         <img
-        //           className={classes.img}
-        //           alt="complex"
-        //           src={articleThumbnail}
-        //         />
-        //       </ButtonBase>
-        //     </Grid>
-        //     <Grid item xs={120} sm container>
-        //       <Grid item xs container direction="column" spacing={2}>
-        //         <Grid item xs>
-        //           <Typography gutterBottom variant="subtitle1">
-        //             {articleValues.title}
-        //           </Typography>
-        //           <Typography variant="body2" gutterBottom>
-        //             {articleValues.content}
-        //           </Typography>
-        //         </Grid>
-        //         <Grid item>
-        //           <Typography
-        //             variant="body2"
-        //             style={{ cursor: "pointer" }}
-        //           ></Typography>
-        //           <div style={{ float: "right" }}>
-        //             <Link
-        //               to={{
-        //                 pathname: "/article/" + articleValues.id,
-        //                 state: { id: articleValues.id }
-        //               }}
-        //             >
-        //               <Button variant="contained" color="secondary">
-        //                 Read more
-        //               </Button>
-        //             </Link>
-        //             {followValues.followersCount}
-        //
-        //             {followValues.followersCount}
-        //
-        //             {followValues.followersCount}
-        //           </div>
-        //         </Grid>
-        //       </Grid>
-        //     </Grid>
-        //     {followValues.followingsCount}
-        //   </Grid>
-        // </Paper>
-        // <li key={index}>{value.title}</li>
       );
     }
   }

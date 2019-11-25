@@ -36,20 +36,15 @@ export function getArticleById(article_id) {
 
 export function getArticlesByUserId(userid) {
   const requestOptions = {
-    method: "GET",
     headers: {
-      ContentType: "application/json"
-    },
-    body: {
-      id: userid
+      Authorization: authHeader(),
+      "Content-Type": "application/json"
     }
   };
-  return axios
-    .get(`${environment.api_url}article/listArticleByUserId/`, {
-      body: requestOptions.body,
-      headers: requestOptions.headers
-    })
-    .then(res => (res.status === 200 ? res.data : null));
+  return axios(
+    `${environment.api_url}article/listArticleByUserId/${userid}`,
+    requestOptions
+  ).then(res => (res.status === 200 ? res.data : null));
 }
 
 export function createArticle(values) {

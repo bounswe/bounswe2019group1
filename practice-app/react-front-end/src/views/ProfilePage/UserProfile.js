@@ -19,8 +19,8 @@ import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 import profile from "assets/img/faces/marc.jpg";
 import Icon from "@material-ui/core/Icon";
-import NewWindow from 'react-new-window'
-import Button from '@material-ui/core/Button';
+import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 import portfolio1 from "assets/img/examples/ppp1.jpeg";
 import portfolio2 from "assets/img/examples/po2.jpeg";
@@ -35,14 +35,15 @@ import event4 from "assets/img/examples/ev4.jpg";
 import event5 from "assets/img/examples/ev5.jpeg";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { userRetrieve } from "service/user.service.js";
 import {
   listFollowersById,
   listFollowingsById
 } from "service/follower.service.js";
+import { getArticlesByUserId } from "service/article.service.js";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
@@ -64,9 +65,6 @@ export default function UserProfilePage(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-
-  
 
   var user_id = String(props.history.location.pathname);
   user_id = Number(user_id.substr(user_id.lastIndexOf("/") + 1));
@@ -129,6 +127,61 @@ export default function UserProfilePage(props) {
       })
     );
   });
+
+  const [articleValues, setArticleValues] = useState({
+    results: []
+  });
+
+  useState(() =>
+    getArticlesByUserId(user_id).then(res => setArticleValues({ results: res }))
+  );
+  const items = [];
+  if (articleValues.results) {
+    for (const [index, value] of articleValues.results.entries()) {
+      items.push(
+        <Paper className={classes.paper}>
+          <Grid container spacing={2}>
+            <Grid item>
+              <ButtonBase className={classes.image}>
+                <img
+                  className={classes.img}
+                  alt="complex"
+                  src={articleThumbnail}
+                />
+              </ButtonBase>
+            </Grid>
+            <Grid item xs={120} sm container>
+              <Grid item xs container direction="column" spacing={2}>
+                <Grid item xs>
+                  <Typography gutterBottom variant="subtitle1">
+                    {value.title}
+                  </Typography>
+                  <Typography variant="body2" gutterBottom>
+                    {value.content.substring(0, 150) + "..."}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <div style={{ float: "right" }}>
+                    <Link
+                      to={{
+                        pathname: "/article/" + value.id,
+                        state: { id: value.id }
+                      }}
+                    >
+                      <Button variant="contained" color="secondary">
+                        Read more
+                      </Button>
+                    </Link>
+                  </div>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Paper>
+      );
+    }
+  }
+
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   return (
     <div>
@@ -155,28 +208,27 @@ export default function UserProfilePage(props) {
                   </div>
                   <div className={classes.name}>
                     <h3 className={classes.title}>
-                      {userProfileValues.first_name} {userProfileValues.last_name}
+                      {userProfileValues.first_name}{" "}
+                      {userProfileValues.last_name}
                     </h3>
                     <h6>{userProfileValues.title}</h6>
                     <div>
-                    <Icon fontSize="large">person_add</Icon>
-                    <Icon fontSize="large">how_to_reg</Icon>
-<<<<<<< HEAD
+                      <Icon fontSize="large">person_add</Icon>
+                      <Icon fontSize="large">how_to_reg</Icon>
                     </div>
-                      
-                  
-=======
-
->>>>>>> d7ec294e1ebb98395022f5bc7ffd40bf7c8d8994
                   </div>
                   <div className={classes.root}>
                     <Grid container spacing={3}>
                       <Grid item xs>
-                      <div>
-                      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                        Followers
-                      </Button>
-                      <Menu
+                        <div>
+                          <Button
+                            aria-controls="simple-menu"
+                            aria-haspopup="true"
+                            onClick={handleClick}
+                          >
+                            Followers
+                          </Button>
+                          <Menu
                             id="simple-menu"
                             anchorEl={anchorEl}
                             keepMounted
@@ -188,20 +240,19 @@ export default function UserProfilePage(props) {
                             <MenuItem onClick={handleClose}>User3</MenuItem>
                             <MenuItem onClick={handleClose}>User4</MenuItem>
                           </Menu>
-                        
-                        
-                        
                         </div>
-                      
                       </Grid>
                       <Grid item xs></Grid>
                       <Grid item xs>
-                      
-                      <div>
-                      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                        Following
-                      </Button>
-                      <Menu
+                        <div>
+                          <Button
+                            aria-controls="simple-menu"
+                            aria-haspopup="true"
+                            onClick={handleClick}
+                          >
+                            Following
+                          </Button>
+                          <Menu
                             id="simple-menu"
                             anchorEl={anchorEl}
                             keepMounted
@@ -213,11 +264,7 @@ export default function UserProfilePage(props) {
                             <MenuItem onClick={handleClose}>User3</MenuItem>
                             <MenuItem onClick={handleClose}>User4</MenuItem>
                           </Menu>
-                                              
-                        
                         </div>
-                      
-                     
                       </Grid>
                     </Grid>
                     <Grid container spacing={3}>
@@ -326,52 +373,7 @@ export default function UserProfilePage(props) {
                       tabContent: (
                         <GridContainer justify="center">
                           <GridItem xs={12} sm={12} md={40}>
-                            <Paper className={classes.paper}>
-                              <Grid container spacing={2}>
-                                <Grid item>
-                                  <ButtonBase className={classes.image}>
-                                    <img
-                                      className={classes.img}
-                                      alt="complex"
-                                      src={articleThumbnail}
-                                    />
-                                  </ButtonBase>
-                                </Grid>
-                                <Grid item xs={120} sm container>
-                                  <Grid
-                                    item
-                                    xs
-                                    container
-                                    direction="column"
-                                    spacing={2}
-                                  >
-                                    <Grid item xs>
-                                      <Typography
-                                        gutterBottom
-                                        variant="subtitle1"
-                                      >
-                                        {
-                                          "The Key Traits of Patient and Successful Investors"
-                                        }
-                                      </Typography>
-                                      <Typography variant="body2" gutterBottom>
-                                        {
-                                          "According to Entrepreneur Network partner Phil Town, one of the most valuable traits an investor can have is patience. If you are a patient investor and decide on good businesses, Town says there is virtually no scenario where you will not make money. Here are some of the traits of patient investors..."
-                                        }
-                                      </Typography>
-                                    </Grid>
-                                    <Grid item>
-                                      <Typography
-                                        variant="body2"
-                                        style={{ cursor: "pointer" }}
-                                      >
-                                        {"24 November, 2019"}
-                                      </Typography>
-                                    </Grid>
-                                  </Grid>
-                                </Grid>
-                              </Grid>
-                            </Paper>
+                            {items}
                           </GridItem>
                         </GridContainer>
                       )
