@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -30,6 +31,9 @@
         </activity>
         <activity android:name=".activity.LoginPageActivity" />
         <activity android:name=".activity.SignUpPageActivity" />
+        <service
+            android:name=".service.FetchAddressIntentService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

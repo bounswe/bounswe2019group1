@@ -58,7 +58,7 @@ class SignUpPageTraderActivity : AppCompatActivity() {
             var citizen_id_information =
                 citizen_id_input.text.toString().trim() //int olsa daha iyi gibi
 
-            if (iban_information.length != 16) {
+            if (iban_information == null) {
                 iban_input.error = "IBAN is required."
                 iban_input.requestFocus()
                 return@setOnClickListener
@@ -105,7 +105,10 @@ class SignUpPageTraderActivity : AppCompatActivity() {
 
                              */
                         }
-                    }else{
+                    } else if (response.code() == 400) {
+                        Log.e("Error code 400",response.toString())
+                        Toast.makeText(applicationContext,call.toString(),Toast.LENGTH_LONG).show()
+                    } else{
                         Toast.makeText(applicationContext,response.message(),Toast.LENGTH_LONG).show()
                         Log.d("error message:", response.message())
                     }
@@ -151,13 +154,17 @@ class SignUpPageTraderActivity : AppCompatActivity() {
 
                              */
                         }
-                    }else{
+                    } else if (response.code() == 400) {
+                        Log.e("Error code 400",response.toString())
+                        Log.e("The userInfo", userInfo.toString())
+                    } else {
                         Toast.makeText(applicationContext,response.message(),Toast.LENGTH_LONG).show()
                         Log.d("error message:", response.message())
                     }
                 }
 
                 override fun onFailure(call: Call<BasicRegisterResponse>, t: Throwable) {
+                    Log.d("failed message:", call.request().body().toString())
                     Toast.makeText(applicationContext,t.message,Toast.LENGTH_LONG).show()
                 }
 
