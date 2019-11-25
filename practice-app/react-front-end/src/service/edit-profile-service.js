@@ -1,33 +1,18 @@
 import { environment } from "../environments/environment.prod";
-// import { handleResponse } from "../utils/responseHandlers";
+import { authHeader } from "utils/auth-header";
+
 import axios from "axios";
 
-export function login(username, password) {
+export function editProfile(values) {
   const requestOptions = {
     headers: {
+      Authorization: authHeader(),
       "Content-Type": "application/json"
-    },
-    body: {
-      username: username,
-      password: password
     }
   };
-  return axios
-    .post(
-      `${environment.api_url}user/login/`,
-      requestOptions.body,
-      requestOptions.headers
-    )
-    .then(res => (res.status === 200 ? res.data.token : null))
-    .then(token => {
-      // store user details and jwt token in local storage to keep user logged in between page refreshes
-      if (token) {
-        localStorage.setItem("currentUser", JSON.stringify(token));
-      }
-      return token;
-    });
-}
-export function logout() {
-  // remove user from local storage to log user out
-  localStorage.removeItem("currentUser");
+  return axios.put(
+    `${environment.api_url}user/updateuser/`,
+    JSON.stringify(values),
+    requestOptions.headers
+  );
 }

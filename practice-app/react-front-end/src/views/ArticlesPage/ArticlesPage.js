@@ -43,7 +43,7 @@ export default function ArticlesPage(props) {
     results: []
   });
 
-  useState(
+  useState(() =>
     getPublicArticles().then(res =>
       setValues({ count: res.count, results: res.results })
     )

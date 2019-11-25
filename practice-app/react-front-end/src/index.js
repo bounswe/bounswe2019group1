@@ -18,6 +18,7 @@ import AddArticle from "./views/AddArticle/AddArticle";
 import EditArticle from "./views/AddArticle/EditArticle";
 import PortfolioPage from "./views/PortfolioPage/Portfolio";
 import UserProfile from "./views/ProfilePage/UserProfile";
+import ResetPassword from "views/ResetPassword/ResetPassword";
 var hist = createBrowserHistory();
 
 ReactDOM.render(
@@ -25,6 +26,8 @@ ReactDOM.render(
     <Switch>
       <Route path="/login-page" component={LoginPage} />
       <Route path="/sign-up" component={SignupPage} />
+      <Route path="/reset-password" component={ResetPassword} />
+
       <Route
         path="/edit-profile"
         render={() =>
@@ -125,6 +128,17 @@ ReactDOM.render(
           )
         }
       />
+      <Route
+        path="/market"
+        render={() =>
+          localStorage.getItem("currentUser") ? (
+            <PortfolioPage history={hist} />
+          ) : (
+            <Redirect to="/login-page" />
+          )
+        }
+      />
+      <Route path="/" component={App} />
       <Route
         path="/portfolio"
         render={() =>

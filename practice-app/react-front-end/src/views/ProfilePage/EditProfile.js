@@ -24,9 +24,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import avatar from "assets/img/faces/marc.jpg";
 import image from "assets/img/dollar-hd.jpg";
+import swal from "sweetalert";
 
 import { getProfileInfo } from "../../service/profileinformation.service";
-
+import { editProfile } from "service/edit-profile-service.js";
 const styles = {
   container: {
     "@media (min-width: 576px)": {
@@ -154,6 +155,18 @@ export default function EditProfile(props) {
   const [isLocationSelected, setIsLocationSelected] = React.useState({
     selected: false
   });
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    editProfile(profileValues).then(
+      function() {
+        props.history.push("/profile-page");
+      },
+      function() {
+        swal("Oops", "Incorrect username or password!", "error");
+      }
+    );
+  };
   let MapOrForm;
   if (isLocationSelected.selected) {
     MapOrForm = (
@@ -330,7 +343,9 @@ export default function EditProfile(props) {
               </FormControl>
             </CardBody>
             <CardFooter>
-              <Button color="primary">Update Profile</Button>
+              <Button color="primary" onClick={handleSubmit}>
+                Update Profile
+              </Button>
             </CardFooter>
           </Card>
         </GridItem>

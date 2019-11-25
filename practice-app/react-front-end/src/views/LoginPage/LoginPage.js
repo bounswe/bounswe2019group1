@@ -21,9 +21,6 @@ import styles from "assets/jss/material-kit-react/views/loginPage.js";
 import image from "assets/img/dollar-hd.jpg";
 import { login } from "../../service/authentication.service.js";
 import swal from "sweetalert";
-import { Redirect } from "react-router-dom";
-
-import ReactDOM from "react-dom";
 import GoogleLogin from "react-google-login";
 
 //altay
@@ -156,6 +153,10 @@ export default function LoginPage(props) {
                       Login
                     </Button>
 
+                  </CardFooter>
+                  <CardFooter className={classes.cardFooter}>
+
+                    <Link to="/reset-password">Reset Password</Link>
                   </CardFooter>
                   <CardFooter className={classes.cardFooter}>
                     New to Khaji-it?

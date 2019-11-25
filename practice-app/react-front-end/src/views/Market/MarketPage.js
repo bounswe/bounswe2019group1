@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // core components
@@ -19,7 +19,6 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
-//import { AnnotationCallout } from "react-annotation";
 
 const styles = {
   cardCategoryWhite: {
@@ -57,7 +56,7 @@ const styles = {
 
 const useStyles = makeStyles(styles);
 
-export default function TableList() {
+export default function MarketPage(props) {
   const classes = useStyles();
 
   const [state, setState] = React.useState({
@@ -74,38 +73,59 @@ export default function TableList() {
     AGTHX_USD: false
   });
 
-  const [list, setListState] = React.useState([
-    ["TRY/EUR", "Turkish Lira/Euro", "0.1574"],
-    ["USD/JPY", "United States Dollar/Japanese Yen", "108.7480"],
-    ["GBP/TRY", "British Pound Sterling/Turkish Lira", "7.4000"],
-    ["EUR/USD", "Euro/United States Dollar", "1.1074"],
-    ["USD/TRY", "United States Dollar/Turkish Lira", "5.7182"],
-    ["EUR/TRY", "Euro/Japanese Yen", "6.3329"],
-    ["GBP/USD", "British Pound Sterling / United States Dollar", "1.2952"],
-    ["BTC/TRY", "Bitcoin / Turkish Lira", "46235.9183"],
-    ["XMR/USD", "Monero / United States Dollar", "58.0200"],
-    ["GOOGL/USD", "Alphabet Inc. / United States Dollar", "1296.4000"],
-    [
-      "AGTHX/USD",
-      "American Funds The Growth Fund of America Class A / United States Dollar",
-      "52.4900"
-    ]
-  ]);
+  const [currency, setCurrency] = useState({
+    EUR: 0.1574,
+    GBP: 0.2133,
+    TRY: 7.4
+  });
+  const [cryptoCurrency, setCryptoCurrency] = useState({
+    BTC: 1.1074,
+    ETH: 5.7182,
+    LTC: 6.3329
+  });
+  const [stock, setStock] = useState({
+    GOOGL: "1308.0200000000",
+    AAPL: "265.2150000000",
+    GM: "35.7250000000"
+  });
+  const [tradeIndices, setTradeIndices] = useState({
+    DJI: "28024.8000000000",
+    IXIC: "7963.0000000000",
+    INX: "3131.0900000000"
+  });
+  const [etfs, setETFs] = useState({
+    SPY: {
+      id: 1,
+      price: "$310.96",
+      assets: "$281,588.21"
+    },
+    IVV: {
+      id: 2,
+      price: "$312.74",
+      assets: "$195,496.89"
+    },
+    VTI: {
+      id: 3,
+      price: "$158.14",
+      assets: "$131,664.40"
+    }
+  });
 
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });
   };
+
+
+
 
   const onApplyChange = event => {
     let altay = [];
     if (state.TRY_EUR) {
       altay.push(["TRY/EUR", "Turkish Lira/Euro", "0.1574"]);
     }
-
     if (state.USD_JPY) {
       altay.push(["USD/JPY", "United States Dollar/Japanese Yen", "108.7480"]);
     }
-
     if (state.GBP_TRY) {
       altay.push(["GBP/TRY", "British Pound Sterling/Turkish Lira", "7.4000"]);
     }
@@ -230,6 +250,29 @@ export default function TableList() {
                           <h4 className={classes.cardTitleWhite}>
                             Edit Your Portfolio
                           </h4>
+                          <AnnotationCallout
+                            x={150}
+                            y={170}
+                            dy={117}
+                            dx={162}
+                            color={"#9610ff"}
+                            className="show-bg"
+                            editMode={true}
+                            note={{
+                              title: "Annotations :)",
+                              label: "Longer text to show text wrapping",
+                              lineType: "horizontal",
+                              bgPadding: {
+                                top: 15,
+                                left: 10,
+                                right: 10,
+                                bottom: 10
+                              },
+                              padding: 15,
+                              titleColor: "#59039c"
+                            }}
+                          />
+
                           <p className={classes.cardCategoryWhite}>
                             Follow/Unfollow Equipments
                           </p>
