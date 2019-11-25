@@ -299,7 +299,7 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
             return
         }
         if(phone_number.text.length != 12) {
-            title.error = "Length of the phone number should be 12 (90532...)"
+            phone_number.error = "Length of the phone number should be 12 (90532...)"
             title.requestFocus()
             return
         }
