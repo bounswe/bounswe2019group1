@@ -174,7 +174,7 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                         }else{
                             println("UPGRADED")
                             updateAfterRequest(root)
-                            reloadFragment()
+                            goBackFragment()
                         }
                     }else{
 
@@ -200,7 +200,7 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                         }else{
                             println("DOWNGRADED")
                             updateAfterRequest(root)
-                            reloadFragment()
+                            goBackFragment()
                         }
                     }else{
 
@@ -241,7 +241,7 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                         }else{
                             println("CHANGED")
                             updateAfterRequest(root)
-                            reloadFragment()
+                            goBackFragment()
                         }
                     }else{
 
@@ -318,7 +318,7 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                     }else{
                         println("CHANGED")
                         updateAfterRequest(view)
-                        reloadFragment()
+                        goBackFragment()
                     }
                 }else{
 
@@ -431,18 +431,9 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
         })
     }
 
-    fun reloadFragment() {
+    fun goBackFragment() {
         var parentActivityManager: FragmentManager = activity?.supportFragmentManager as FragmentManager
         removeFragment(parentActivityManager)
-
-        fragmentTransaction(
-            parentActivityManager,
-            EditUserProfileFragment.newInstance(),
-            (containerId!!.id),
-            true,
-            true,
-            false
-        )
     }
 
     fun removeDetails() {
