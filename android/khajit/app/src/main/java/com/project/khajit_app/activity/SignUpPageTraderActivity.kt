@@ -21,7 +21,6 @@ import retrofit2.Response
 
 class SignUpPageTraderActivity : AppCompatActivity() {
     private lateinit var iban_input : EditText
-    private lateinit var citizen_id_input : EditText
     private lateinit var trader_button : Button
     private lateinit var basic_user_register :Button
     private lateinit var userInfo:BasicUser
@@ -47,7 +46,6 @@ class SignUpPageTraderActivity : AppCompatActivity() {
         }
         basic_user_register = findViewById(R.id.register_as_basic_button_second)
         iban_input = findViewById(R.id.input_iban)
-        citizen_id_input = findViewById(R.id.input_citizen_id)
         trader_button = findViewById(R.id.register_as_trader_button_first)
     }
 
@@ -55,29 +53,22 @@ class SignUpPageTraderActivity : AppCompatActivity() {
 
         trader_button.setOnClickListener {
             var iban_information = iban_input.text.toString()
-            var citizen_id_information =
-                citizen_id_input.text.toString().trim() //int olsa daha iyi gibi
 
-            if (iban_information == null) {
-                iban_input.error = "IBAN is required."
+            if (iban_information.length != 16) {
+                iban_input.error = "IBAN lenght should be 16."
                 iban_input.requestFocus()
-                return@setOnClickListener
-            }
-            if (citizen_id_information.isEmpty()) {
-                citizen_id_input.error = "Citizen ID is required."
-                citizen_id_input.requestFocus()
                 return@setOnClickListener
             }
 
             val traderUserInfo = TraderUser(
                 userInfo.username,
-                userInfo.email,
+                userInfo.username,
                 userInfo.first_name,
                 userInfo.last_name,
                 userInfo.password,
-                "locationInfo",
+                userInfo.location,
                 iban_information,
-                citizen_id_information
+                true
             )
 
             RetrofitClient.instance.createTraderUser(traderUserInfo).enqueue(object : Callback<BasicRegisterResponse>{
@@ -92,18 +83,10 @@ class SignUpPageTraderActivity : AppCompatActivity() {
                             //Toast.makeText(applicationContext,response.body()?.username.toString(), Toast.LENGTH_LONG).show()
 
                         }else{
-                            println(response)
-                            println(call)
-                            println(response.body()?.toString()?.trim())
-                            Toast.makeText(applicationContext,"User has been created",Toast.LENGTH_LONG).show()
+                           // Toast.makeText(applicationContext,"User has been created",Toast.LENGTH_LONG).show()
                             Log.d("success:", "" + response.body()?.user?.username)
+                            startActivity(Intent(this@SignUpPageTraderActivity, HomeFeedPageActivity::class.java))
 
-                            /*
-                            response.body()?.token.let {
-                                User.token = it
-                            }
-
-                             */
                         }
                     } else if (response.code() == 400) {
                         Log.e("Error code 400",response.toString())
@@ -120,10 +103,6 @@ class SignUpPageTraderActivity : AppCompatActivity() {
 
             }
             )
-            getLaunchIntent(this)
-            startActivity(Intent(this, MainPageActivity::class.java))
-
-
         }
     }
 
@@ -138,21 +117,10 @@ class SignUpPageTraderActivity : AppCompatActivity() {
                     println(response.toString())
                     if(response.code() == 200 ){
                         if(response.body()?.username != null){
-                            Toast.makeText(applicationContext, "interesting", Toast.LENGTH_LONG).show()
-                            //Toast.makeText(applicationContext,response.body()?.username.toString(), Toast.LENGTH_LONG).show()
 
                         }else{
-                            println(response)
-                            println(call)
-                            println(response.body()?.toString()?.trim())
-                            Toast.makeText(applicationContext,"User has been created",Toast.LENGTH_LONG).show()
                             Log.d("success:", "" + response.body()?.user?.username)
-                            /*
-                            response.body()?.token.let {
-                                User.token = it
-                            }
-
-                             */
+                            startActivity(Intent(this@SignUpPageTraderActivity, HomeFeedPageActivity::class.java))
                         }
                     } else if (response.code() == 400) {
                         Log.e("Error code 400",response.toString())
@@ -170,14 +138,6 @@ class SignUpPageTraderActivity : AppCompatActivity() {
 
             }
             )
-            getLaunchIntent(this)
-            startActivity(Intent(this, MainPageActivity::class.java))
-
-
-
-
-
-
     }
 
     companion object {

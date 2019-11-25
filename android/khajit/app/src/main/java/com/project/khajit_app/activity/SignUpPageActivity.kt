@@ -49,6 +49,7 @@ class SignUpPageActivity : AppCompatActivity() {
     lateinit var trader_button : Button
     lateinit var basic_user_register :Button
     lateinit var google_user_register : Button
+    lateinit var location_text : EditText
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var lastLocation: Location? = null
@@ -114,7 +115,7 @@ class SignUpPageActivity : AppCompatActivity() {
         google_user_register = findViewById(R.id.register_with_google_button)
         first_name_input =findViewById(R.id.input_first_name)
         last_name_input = findViewById(R.id.input_last_name)
-
+        location_text = findViewById(R.id.input_location)
 
         basic_user_register.setOnClickListener{
             var email_information = email_input.text.toString().trim()
@@ -123,6 +124,7 @@ class SignUpPageActivity : AppCompatActivity() {
             var repassword_information = repeat_password_input.text.toString().trim()
             var firstname_information = first_name_input.text.toString().trim()
             var lastname_information = last_name_input.text.toString().trim()
+            var location_information = location_text.text.toString().trim()
 
             if(email_information.isEmpty()){
                 email_input.error = "Email is required."
@@ -158,10 +160,12 @@ class SignUpPageActivity : AppCompatActivity() {
             username_information = email_information
             val userInfo = BasicUser(
                 username_information,
-                email_information,
+                username_information,
                 firstname_information,
                 lastname_information,
-                password_information)
+                password_information,
+                location_information,
+                true)
             intent.putExtra("userInfo", userInfo)
             intent.putExtra("googleUser",0)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -191,6 +195,7 @@ class SignUpPageActivity : AppCompatActivity() {
 
             val account = completedTask.getResult(ApiException::class.java)
             //Toast.makeText(this, "Signed in as: " + account?.displayName, Toast.LENGTH_SHORT).show()
+            var location_information = location_text.text.toString().trim()
 
             if (account != null) {
                 // send ID Token to server and register
@@ -199,7 +204,9 @@ class SignUpPageActivity : AppCompatActivity() {
                     account.email!!,
                     account.givenName!!,
                     account.familyName!!,
-                    "google11"
+                    "google11",
+                    location_information,
+                    true
                 )
                 val intent = Intent(this@SignUpPageActivity, SignUpPageTraderActivity::class.java)
 
