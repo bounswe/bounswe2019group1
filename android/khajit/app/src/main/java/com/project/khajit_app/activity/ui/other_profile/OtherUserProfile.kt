@@ -232,6 +232,7 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface {
                             isFollowing = false
                             follow_user.text = "FOLLOW"
                             follow_user.setBackgroundColor(Color.parseColor("#AA4AE608"))
+                            reloadFragment(other_id)
                         }
                     }else{
                     }
@@ -254,6 +255,7 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface {
                             isFollowing = true
                             follow_user.text = "UNFOLLOW"
                             follow_user.setBackgroundColor(Color.parseColor("#AAB80707"))
+                            reloadFragment(other_id)
                         }
                     }else{
 
@@ -273,6 +275,20 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface {
         fragmentTransaction(
             parentActivityManager,
             FollowListFragment.newInstance(request, other_id),
+            (containerId!!.id),
+            true,
+            true,
+            false
+        )
+    }
+
+    fun reloadFragment(other_id: Int) {
+        var parentActivityManager: FragmentManager = activity?.supportFragmentManager as FragmentManager
+        removeFragment(parentActivityManager)
+
+        fragmentTransaction(
+            parentActivityManager,
+            OtherUserProfile.newInstance(other_id),
             (containerId!!.id),
             true,
             true,
