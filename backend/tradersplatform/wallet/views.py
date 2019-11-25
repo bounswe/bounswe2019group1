@@ -3,10 +3,11 @@ import decimal
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, RetrieveAPIView
 
 from equipment.models import *
 from follow.views import check_if_user
+from myuser.models import TemplateUser
 from wallet.models import Wallet
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
@@ -31,6 +32,19 @@ class WalletCreateAPIView(CreateAPIView):
 class WalletListAPIView(ListAPIView):
     serializer_class = WalletListSerializer
     queryset = Wallet.objects.all()
+
+
+class WalletRetrieveAPIView(RetrieveAPIView):
+    serializer_class = WalletListSerializer
+    queryset = Wallet.objects.all()
+
+    def get_object(self):
+        request=self.request
+        check_if_user(request)
+        user=TemplateUser.objects.filter(id=request.user.id).first()
+        if not user:
+            raise ValidationError({"detail": "User does not exist"})
+        return Wallet.objects.filter(owner=user).first()
 
 
 class SendUSDAPIView(UpdateAPIView):
