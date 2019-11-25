@@ -137,6 +137,28 @@ class IsFollowingFrontAPIView(APIView):
                        content_type="application/json")
 
 
+class IsFollowerFrontAPIView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        check_if_user(request)
+        following_id=request.user.id
+        id=kwargs.get("pk")
+        if following_id is None:
+            raise ValidationError({"detail": "give following id"})
+        user=TemplateUser.objects.get(id=id)
+        following=TemplateUser.objects.filter(id=following_id).first()
+        if not following:
+            raise ValidationError({"detail": "User with this following id does not exist"})
+        query=Follow.objects.filter(follower=user,following=following).first()
+        if query:
+            return HttpResponse(json.dumps({'result': 'Found'}),
+                       content_type="application/json")
+        else:
+            return HttpResponse(json.dumps({'result': 'Not Found'}),
+                       content_type="application/json")
+
+
+
 class ListFollowingWithIdAPIView(ListAPIView):
 
     def get(self, request, *args, **kwargs):
