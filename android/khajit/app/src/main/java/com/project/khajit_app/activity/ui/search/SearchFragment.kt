@@ -2,8 +2,6 @@ package com.project.khajit_app.activity.ui.search
 
 
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,24 +10,24 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProviders
 import com.project.khajit_app.R
-import com.project.khajit_app.activity.HomeFeedPageActivity
-import com.project.khajit_app.activity.ListViewAdapter
 import com.project.khajit_app.activity.UserViewAdapter
-import com.project.khajit_app.activity.ui.home.HomeFragment
+import com.project.khajit_app.activity.ui.followlist.FollowListFragment
+import com.project.khajit_app.activity.ui.other_profile.OtherUserProfile
+import com.project.khajit_app.activity.ui.profile.UserProfile
 import com.project.khajit_app.api.RetrofitClient
-import com.project.khajit_app.data.models.FollowingModel
 import com.project.khajit_app.data.models.SearchRequest
 import com.project.khajit_app.data.models.SearchResponse
 import com.project.khajit_app.global.User
+import interfaces.fragmentOperationsInterface
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), fragmentOperationsInterface {
+    var containerId : ViewGroup? = null
 
     private lateinit var searchViewModel: SearchViewModel
 
@@ -49,7 +47,7 @@ class SearchFragment : Fragment() {
         searchViewModel =
             ViewModelProviders.of(this).get(SearchViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_search, container, false)
-
+        containerId = container
         var loader = root.findViewById(R.id.progress_loader) as ProgressBar
         loader.visibility = View.GONE
 
@@ -103,17 +101,35 @@ class SearchFragment : Fragment() {
 
         })
 
-        /*
         var listview = root.findViewById(R.id.list_users) as ListView
         listview.setOnItemClickListener{ parent, view, position, id ->
-            Toast.makeText(this.context, "text is " + " $position", Toast.LENGTH_LONG).show()
+            val element = ladapter.getItem(position)
             //<var ite = ladapter!!.getItem(position) as String
-            User.whereIamAsId = list_ids[position]
+            //User.whereIamAsId = list_ids[position]
+            var other_user_id = list_ids[position]
 
-            var intent = Intent(getActivity(), HomeFeedPageActivity::class.java)
-            startActivity(intent)
+            val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
+
+            if(other_user_id == User.id) {
+                fragmentTransaction(
+                    parentActivityManager,
+                    UserProfile.newInstance(),
+                    (containerId!!.id),
+                    true,
+                    true,
+                    false
+                )
+            } else {
+                fragmentTransaction(
+                    parentActivityManager,
+                    OtherUserProfile.newInstance(other_user_id),
+                    (containerId!!.id),
+                    true,
+                    true,
+                    false
+                )
+            }
         }
-        */
 
         return root
     }
