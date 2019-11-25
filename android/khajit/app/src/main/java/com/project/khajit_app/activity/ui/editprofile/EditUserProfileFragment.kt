@@ -172,6 +172,7 @@ class EditUserProfileFragment : Fragment() {
                             println("NOT Upgraded")
                         }else{
                             println("UPGRADED")
+                            removeDetails()
                             val intent = Intent (getActivity(), LoginPageActivity::class.java)
                             getActivity()?.startActivity(intent)
                         }
@@ -198,6 +199,7 @@ class EditUserProfileFragment : Fragment() {
                             println("NOT Downgraded")
                         }else{
                             println("DOWNGRADED")
+                            removeDetails()
                             val intent = Intent (getActivity(), LoginPageActivity::class.java)
                             getActivity()?.startActivity(intent)
                         }
@@ -376,6 +378,7 @@ class EditUserProfileFragment : Fragment() {
                         old_pw.requestFocus()
                     }else{
                         println("CHANGED")
+                        removeDetails()
                         val intent = Intent (getActivity(), LoginPageActivity::class.java)
                         getActivity()?.startActivity(intent)
                     }
@@ -427,6 +430,23 @@ class EditUserProfileFragment : Fragment() {
         })
     }
 
+    fun removeDetails() {
+        User.token = ""
+        User.id = 0
+        User.username = ""
+        User.email = ""
+        User.first_name = ""
+        User.last_name = ""
+        // if the user is trader type info will be true otherwise user is basic and type info will be false
+        User.type = false
+        User.title = "No title"
+        User.bio = "No bio"
+        User.location = ""
+        User.phone_number = ""
+        User.iban_number = ""
+        User.is_public = true
+        User.whereIamAsId = 0 //it may be unnecessary to keep
+    }
 
 }
 
