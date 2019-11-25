@@ -39,21 +39,6 @@ android:fitsSystemWindows="true">
             android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:background="#D3FFFFFF">
-
-        <EditText
-            android:id="@+id/input_citizen_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Citizen Number"
-            android:inputType="number" />
-    </com.google.android.material.textfield.TextInputLayout>
-
 
     <Button
         android:id="@+id/register_as_trader_button_first"
@@ -63,7 +48,6 @@ android:fitsSystemWindows="true">
         android:layout_marginRight="80dp"
         android:layout_marginBottom="30dp"
         android:background="#EEF2F5"
-        android:onClick="goToMainTraderUserActivity"
         android:text="Register as Trader" />
 
     <Button
@@ -74,7 +58,6 @@ android:fitsSystemWindows="true">
         android:layout_marginRight="80dp"
         android:layout_marginBottom="30dp"
         android:background="#EEF2F5"
-        android:onClick="goToMainBasicUserActivity"
         android:text="Skip this step and Continue as Basic User" />
 
     <TextView
