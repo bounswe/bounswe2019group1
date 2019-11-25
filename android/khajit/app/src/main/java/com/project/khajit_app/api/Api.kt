@@ -84,4 +84,31 @@ interface Api {
     @HTTP(method="DELETE", path="follow/delete/", hasBody=true)
     fun unfollowUser(@Body body: FollowIDModel?):Call<FollowIDModelResponse>
 
+    @Headers("Content-Type: application/json")
+    @GET("equipment/currency/")
+    fun currencyValues():Call<CurrencyResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("equipment/metalcurrency/")
+    fun commodityValues():Call<CommodityResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("equipment/cryptocurrency/")
+    fun cryptoValues():Call<CryptoResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("equipment/etfs/")
+    fun etfValues():Call<ETFResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("equipment/stock/")
+    fun stockValues():Call<List<Stock>>
+
+    @Headers("Content-Type: application/json")
+    @GET("equipment/traceindices/")
+    fun tradeValues():Call<TradeIndiceResponse>
+
+    @POST("user/search_user/")
+    fun createArticle(@Body body: CreateArticleModel):Call<SearchResponse>
+
 }

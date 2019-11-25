@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".activity.HomeFeedPageActivity"
     >
-
+    <item android:id="@+id/user_create_article_item"
+        app:showAsAction="ifRoom"
+        android:title="Create Article" />
     <item
         android:id="@+id/logout_top_menu_item"
         android:icon="@android:drawable/ic_lock_power_off"
