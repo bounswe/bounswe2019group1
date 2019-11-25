@@ -161,13 +161,7 @@ export default function UserProfilePage(props) {
                     <div>
                     <Icon fontSize="large">person_add</Icon>
                     <Icon fontSize="large">how_to_reg</Icon>
-<<<<<<< HEAD
-                    </div>
-                      
-                  
-=======
-
->>>>>>> d7ec294e1ebb98395022f5bc7ffd40bf7c8d8994
+                  </div>
                   </div>
                   <div className={classes.root}>
                     <Grid container spacing={3}>

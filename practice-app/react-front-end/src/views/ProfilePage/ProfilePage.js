@@ -179,80 +179,6 @@ export default function ProfilePage(props) {
                   color="primary"
                   tabs={[
                     {
-                      tabButton: "Portfolios",
-                      tabIcon: Camera,
-                      tabContent: (
-                        <GridContainer justify="center">
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={portfolio1}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={portfolio5}
-                              className={navImageClasses}
-                            />
-                          </GridItem>
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={portfolio4}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={portfolio2}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={portfolio3}
-                              className={navImageClasses}
-                            />
-                          </GridItem>
-                        </GridContainer>
-                      )
-                    },
-                    {
-                      tabButton: "Events",
-                      tabIcon: Event,
-                      tabContent: (
-                        <GridContainer justify="center">
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={event1}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={event2}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={event3}
-                              className={navImageClasses}
-                            />
-                          </GridItem>
-                          <GridItem xs={12} sm={12} md={4}>
-                            <img
-                              alt="..."
-                              src={event4}
-                              className={navImageClasses}
-                            />
-                            <img
-                              alt="..."
-                              src={event5}
-                              className={navImageClasses}
-                            />
-                          </GridItem>
-                        </GridContainer>
-                      )
-                    },
-                    {
                       tabButton: "Articles",
                       tabIcon: Articles,
                       tabContent: (
@@ -316,7 +242,83 @@ export default function ProfilePage(props) {
                           </GridItem>
                         </GridContainer>
                       )
+                    },
+                    {
+                      tabButton: "Portfolios",
+                      tabIcon: Camera,
+                      tabContent: (
+                        <GridContainer justify="center">
+                          <GridItem xs={12} sm={12} md={4}>
+                            <img
+                              alt="..."
+                              src={portfolio1}
+                              className={navImageClasses}
+                            />
+                            <img
+                              alt="..."
+                              src={portfolio5}
+                              className={navImageClasses}
+                            />
+                          </GridItem>
+                          <GridItem xs={12} sm={12} md={4}>
+                            <img
+                              alt="..."
+                              src={portfolio4}
+                              className={navImageClasses}
+                            />
+                            <img
+                              alt="..."
+                              src={portfolio2}
+                              className={navImageClasses}
+                            />
+                            <img
+                              alt="..."
+                              src={portfolio3}
+                              className={navImageClasses}
+                            />
+                          </GridItem>
+                        </GridContainer>
+                      )
+                    },
+                   
+                    {
+                      tabButton: "Events",
+                      tabIcon: Event,
+                      tabContent: (
+                        <GridContainer justify="center">
+                          <GridItem xs={12} sm={12} md={4}>
+                            <img
+                              alt="..."
+                              src={event1}
+                              className={navImageClasses}
+                            />
+                            <img
+                              alt="..."
+                              src={event2}
+                              className={navImageClasses}
+                            />
+                            <img
+                              alt="..."
+                              src={event3}
+                              className={navImageClasses}
+                            />
+                          </GridItem>
+                          <GridItem xs={12} sm={12} md={4}>
+                            <img
+                              alt="..."
+                              src={event4}
+                              className={navImageClasses}
+                            />
+                            <img
+                              alt="..."
+                              src={event5}
+                              className={navImageClasses}
+                            />
+                          </GridItem>
+                        </GridContainer>
+                      )
                     }
+                    
                   ]}
                 />
               </GridItem>
