@@ -1,4 +1,5 @@
 import django.utils.timezone
+
 # Create your views here.
 
 from rest_framework.exceptions import ValidationError
@@ -66,7 +67,7 @@ class UpdateArticleCommentAPIView(UpdateAPIView):
 
 class ListArticleCommentAPIView(DestroyAPIView):
     def get(self, request, *args, **kwargs):
-        article_id = request.data['article_id']
+        article_id = kwargs.get("pk")
         query = ArticleComment.objects.filter(article_id=article_id)
         serializer = ArticleCommentListSerializer(query, many=True)
         return Response(serializer.data, status=200)
