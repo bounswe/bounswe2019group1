@@ -22,9 +22,6 @@ import image from "assets/img/dollar-hd.jpg";
 import { login } from "../../service/authentication.service.js";
 import swal from "sweetalert";
 
-
-
-
 const useStyles = makeStyles(styles);
 export default function ResetPassword(props) {
   const [cardAnimaton, setCardAnimation] = useState("cardHidden");
@@ -48,14 +45,12 @@ export default function ResetPassword(props) {
     event.preventDefault();
     login(values.email).then(
       function(response) {
-            props.history.push("/login-page");
-            swal("Good job!", "Password successfully sent.", "success");
-
+        props.history.push("/login-page");
+        swal("Good job!", "Password successfully sent.", "success");
       },
       function() {
-        
-          props.history.push("/login-page");
-            swal("Good job!", "Password successfully sent.", "success");
+        props.history.push("/login-page");
+        swal("Good job!", "Password successfully sent.", "success");
       }
     );
   };
@@ -85,28 +80,25 @@ export default function ResetPassword(props) {
                     <h4>
                       <b>Reset Password</b>
                     </h4>
-                    
                   </CardHeader>
                   <CardBody>
-                  <CustomInput
-                  labelText="Email"
-                  id="email"
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  value={values.email}
-                  inputProps={{
-                    type: "email",
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <Email className={classes.inputIconsColor} />
-                      </InputAdornment>
-                    )
-                  }}
-                  onChange={handleChange}
-                />
-                    
-                    
+                    <CustomInput
+                      labelText="Email"
+                      id="email"
+                      formControlProps={{
+                        fullWidth: true
+                      }}
+                      value={values.email}
+                      inputProps={{
+                        type: "email",
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <Email className={classes.inputIconsColor} />
+                          </InputAdornment>
+                        )
+                      }}
+                      onChange={handleChange}
+                    />
                   </CardBody>
                   <CardFooter className={classes.cardFooter}>
                     <Button
@@ -117,9 +109,8 @@ export default function ResetPassword(props) {
                     >
                       Send
                     </Button>
-                        
                   </CardFooter>
-                  
+
                   <CardFooter className={classes.cardFooter}>
                     New to Khaji-it?
                     <Link to="/sign-up"> Sign up now</Link>
