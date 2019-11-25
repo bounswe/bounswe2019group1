@@ -93,33 +93,10 @@ export default function UserProfilePage(props) {
       setFollowValues(oldValues => ({
         ...oldValues,
         followers: res.list,
-        followiersCount: res.list.length
+        followersCount: res.list.length
       }))
     )
   );
-  // useState(() =>
-  //   listFollowingsById(user_id).then(res =>
-  //     setFollowValues(oldValues => ({
-  //         ...oldValues,
-  //         followings: res.list,
-  //         followingsCount: res.list.length
-  //       }
-  //     )
-  //   )
-  // ));
-  useState(() => {
-    listFollowersById(user_id).then(res =>
-      res.list.length
-        ? setFollowValues(oldValues => ({
-            ...oldValues,
-            followers: res.list,
-            followersCount: res.list.length
-          }))
-        : setFollowValues(oldValues => ({
-            ...oldValues, followers: [], followersCount: 0 }))
-    );
-  });
-
   useState(() => {
     userRetrieve(user_id).then(res =>
       setUserProfileValues({
