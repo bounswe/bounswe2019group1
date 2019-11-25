@@ -12,12 +12,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.ContentView
+import androidx.fragment.app.FragmentManager
 
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.FollowListViewAdapter
 import com.project.khajit_app.activity.ListViewAdapter
 import com.project.khajit_app.activity.LoginPageActivity
 import com.project.khajit_app.activity.UserViewAdapter
+import com.project.khajit_app.activity.ui.other_profile.OtherUserProfile
 import com.project.khajit_app.activity.ui.profile.UserProfile
 import com.project.khajit_app.activity.ui.profile.UserProfileViewModel
 import com.project.khajit_app.api.RetrofitClient
@@ -30,6 +32,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class FollowListFragment : Fragment(), fragmentOperationsInterface {
+    var containerId : ViewGroup? = null
 
     private lateinit var followlistModel: FollowListModel
 
@@ -52,6 +55,7 @@ class FollowListFragment : Fragment(), fragmentOperationsInterface {
             ViewModelProviders.of(this).get(FollowListModel::class.java)
 
         val root = inflater.inflate(R.layout.activity_followcommon, container, false)
+        containerId = container
         top_button = root.findViewById(R.id.button_flw) as Button
 
         var request = ""
@@ -146,7 +150,40 @@ class FollowListFragment : Fragment(), fragmentOperationsInterface {
 
         }
 
+        var listview = root.findViewById(R.id.list_users_follow) as ListView
+        listview.setOnItemClickListener{ parent, view, position, id ->
+            val element = ladapter.getItem(position)
+            var other_user_id = list_ids[position]
 
+            val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
+
+            if(other_user_id == User.id) {
+                fragmentTransaction(
+                    parentActivityManager,
+                    UserProfile.newInstance(),
+                    (containerId!!.id),
+                    true,
+                    true,
+                    false
+                )
+            } else {
+                fragmentTransaction(
+                    parentActivityManager,
+                    OtherUserProfile.newInstance(other_user_id),
+                    (containerId!!.id),
+                    true,
+                    true,
+                    false
+                )
+            }
+        }
+
+        var button_back = root.findViewById(R.id.follow_button_back) as Button
+        button_back.setOnClickListener { root ->
+            val parentActivityManager: FragmentManager =
+                activity?.supportFragmentManager as FragmentManager
+            removeFragment(parentActivityManager)
+        }
         return root
     }
 

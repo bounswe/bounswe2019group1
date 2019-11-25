@@ -1,5 +1,6 @@
 package com.project.khajit_app.activity.ui.other_profile
 
+import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 
 import com.project.khajit_app.R
@@ -16,10 +18,7 @@ import com.project.khajit_app.activity.OtherListViewAdapter
 import com.project.khajit_app.activity.ui.followlist.FollowListFragment
 import com.project.khajit_app.activity.ui.notificationdetails.notificationDetailFragment
 import com.project.khajit_app.api.RetrofitClient
-import com.project.khajit_app.data.models.FollowModel
-import com.project.khajit_app.data.models.GeneralFollowModel
-import com.project.khajit_app.data.models.GeneralFollowModel2
-import com.project.khajit_app.data.models.GenericUserModel
+import com.project.khajit_app.data.models.*
 import com.project.khajit_app.global.User
 import interfaces.fragmentOperationsInterface
 import retrofit2.Call
@@ -39,6 +38,9 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface {
 
     private lateinit var other_followerButton: Button
     private lateinit var other_followingButton: Button
+    private lateinit var follow_user: Button
+    private lateinit var private_part_layout: ConstraintLayout
+    private lateinit var public_private_ind: TextView
 
 
 
@@ -69,6 +71,9 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface {
         other_traderImage = root.findViewById(R.id.other_trader_image) as ImageView
         other_followerButton = root.findViewById(R.id.other_follower_button) as Button
         other_followingButton = root.findViewById(R.id.other_following_button) as Button
+        follow_user = root.findViewById(R.id.other_follow_button) as Button
+        private_part_layout = root.findViewById(R.id.private_part) as ConstraintLayout
+        public_private_ind = root.findViewById(R.id.other_public_private_text) as TextView
 
         var public = false
         var isFollowing = false
@@ -78,6 +83,40 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface {
         var ladapter = OtherListViewAdapter(this, equipments, rates)
         lview.adapter = ladapter
 
+
+        RetrofitClient.instance.isFollowing(other_id).enqueue(object :
+            Callback<isFollowingResponseModel> {
+            override fun onResponse(
+                call: Call<isFollowingResponseModel>,
+                response: Response<isFollowingResponseModel>
+            ) {
+                println(response.toString())
+                if(response.code() == 200 ){
+                    if(response.body()?.detail != null){
+                        println("PROBLEM")
+                    }else{
+                        if(response.body()?.result == "Found") {
+                            isFollowing = true
+                            follow_user.text = "UNFOLLOW"
+                            follow_user.setBackgroundColor(Color.parseColor("#AAB80707"))
+                            other_followerButton.isEnabled = true
+                            other_followerButton.isClickable = true
+                            other_followingButton.isEnabled = true
+                            other_followingButton.isClickable = true
+                            private_part_layout.visibility = View.VISIBLE
+                        } else {
+                            isFollowing = false
+                            follow_user.text = "FOLLOW"
+                            follow_user.setBackgroundColor(Color.parseColor("#AA4AE608"))
+                        }
+                    }
+                }else{
+                }
+            }
+            override fun onFailure(call: Call<isFollowingResponseModel>, t: Throwable) {
+
+            }
+        })
 
         RetrofitClient.instance.getInfo(other_id).enqueue(object :
             Callback<GenericUserModel> {
@@ -98,6 +137,10 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface {
 
                         if(isTrader == true) {
                             other_traderImage.alpha = 1F
+                        }
+
+                        if(public == true) {
+                            private_part_layout.visibility = View.VISIBLE
                         }
                     }
                 }else{

@@ -72,4 +72,8 @@ interface Api {
     @PUT("user/userdowngrade/")
     fun downgradeUser():Call<GenericUserModel>
 
+    @Headers("Content-Type: application/json")
+    @GET("follow/isFollowingFront/{id}/")
+    fun isFollowing(@Path(value = "id", encoded = true) userId: String):Call<isFollowingResponseModel>
+
 }
