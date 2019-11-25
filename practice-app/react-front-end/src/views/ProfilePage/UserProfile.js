@@ -37,6 +37,10 @@ import Grid from "@material-ui/core/Grid";
 
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { userRetrieve } from "service/user.service.js";
+import {
+  listFollowersById,
+  listFollowingsById
+} from "service/follower.service.js";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
@@ -46,7 +50,7 @@ import articleThumbnail from "assets/img/examples/investor.jpeg";
 
 const useStyles = makeStyles(styles);
 
-export default function ProfilePage(props) {
+export default function UserProfilePage(props) {
   const classes = useStyles();
   var user_id = String(props.history.location.pathname);
   user_id = Number(user_id.substr(user_id.lastIndexOf("/") + 1));
@@ -69,6 +73,53 @@ export default function ProfilePage(props) {
     classes.imgRoundedCircle,
     classes.imgFluid
   );
+  const [followValues, setFollowValues] = useState({
+    followings: {},
+    followingsCount: 0,
+    followers: {},
+    followersCount: 0
+  });
+  useState(() =>
+    listFollowingsById(user_id).then(res =>
+      setFollowValues(oldValues => ({
+        ...oldValues,
+        followings: res.list,
+        followingsCount: res.list.length
+      }))
+    )
+  );
+  useState(() =>
+    listFollowersById(user_id).then(res =>
+      setFollowValues(oldValues => ({
+        ...oldValues,
+        followers: res.list,
+        followiersCount: res.list.length
+      }))
+    )
+  );
+  // useState(() =>
+  //   listFollowingsById(user_id).then(res =>
+  //     setFollowValues(oldValues => ({
+  //         ...oldValues,
+  //         followings: res.list,
+  //         followingsCount: res.list.length
+  //       }
+  //     )
+  //   )
+  // ));
+  useState(() => {
+    listFollowersById(user_id).then(res =>
+      res.list.length
+        ? setFollowValues(oldValues => ({
+            ...oldValues,
+            followers: res.list,
+            followersCount: res.list.length
+          }))
+        : setFollowValues(oldValues => ({
+            ...oldValues, followers: [], followersCount: 0 }))
+    );
+  });
+
   useState(() => {
     userRetrieve(user_id).then(res =>
       setUserProfileValues({
@@ -118,7 +169,7 @@ export default function ProfilePage(props) {
                        <Icon fontSize="large">person_add</Icon>
                     </div>
                     <Icon fontSize="large">how_to_reg</Icon>
-                    
+
                   </div>
                   <div className={classes.root}>
                     <Grid container spacing={3}>
@@ -132,11 +183,15 @@ export default function ProfilePage(props) {
                     </Grid>
                     <Grid container spacing={3}>
                       <Grid item xs>
-                        <Paper className={classes.paper}>35</Paper>
+                        <Paper className={classes.paper}>
+                          {followValues.followersCount}
+                        </Paper>
                       </Grid>
                       <Grid item xs={6}></Grid>
                       <Grid item xs>
-                        <Paper className={classes.paper}>34</Paper>
+                        <Paper className={classes.paper}>
+                          {followValues.followingsCount}
+                        </Paper>
                       </Grid>
                     </Grid>
                   </div>
