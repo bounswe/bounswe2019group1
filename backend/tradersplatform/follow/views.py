@@ -47,7 +47,7 @@ class DeleteFollowAPIView(DestroyAPIView):
             raise ValidationError({"detail": 'You do not follow this person'})
         follow=query.first()
         follow.delete()
-        return Response(status=200)
+        return Response({},status=200)
 
 
 class ListFollowerAPIView(ListAPIView):
