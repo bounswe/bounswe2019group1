@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -13,9 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.activity_following"></activity>
-        <activity android:name=".activity.activity_follower" />
-        <activity android:name=".activity.EditingProfilePageActivity" />
+        <activity android:name=".activity.HomeFeedPageGuestActivity"></activity>
+
         <activity
             android:name=".activity.HomeFeedPageActivity"
             android:label="@string/title_activity_home_feed_page" />
@@ -31,7 +31,9 @@
         </activity>
         <activity android:name=".activity.LoginPageActivity" />
         <activity android:name=".activity.SignUpPageActivity" />
-        <activity android:name=".activity.ProfilePageActivity" />
+        <service
+            android:name=".service.FetchAddressIntentService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

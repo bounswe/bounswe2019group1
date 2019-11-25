@@ -18,6 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class EquipmentFragment : Fragment() {
 
     private lateinit var equipmentViewModel: EquipmentViewModel
@@ -51,10 +52,6 @@ class EquipmentFragment : Fragment() {
         val value_dji = root.findViewById(R.id.value_dji) as TextView
         val value_ixic = root.findViewById(R.id.value_ixic) as TextView
         val value_inx = root.findViewById(R.id.value_inx) as TextView
-
-        /*val value_btc = root.findViewById<TextView>(R.id.value_btc)
-        val value_eth = root.findViewById<TextView>(R.id.value_eth)
-        val value_ltc = root.findViewById<TextView>(R.id.value_ltc)*/
 
         val value_spy = root.findViewById(R.id.value_spy) as TextView
         val value_ivv = root.findViewById(R.id.value_ivv) as TextView

@@ -12,7 +12,8 @@ import com.project.khajit_app.activity.ui.search.SearchFragment
 // Adapter for prediction success ratios, NEVER CHANGE THIS FILE
 class UserViewAdapter(
     internal var context: SearchFragment,
-    internal var username: ArrayList<String>
+    internal var username: ArrayList<String>,
+    internal var title: ArrayList<String>
 ) : BaseAdapter() {
 
     override fun getCount(): Int {
@@ -29,6 +30,7 @@ class UserViewAdapter(
 
     private inner class ViewHolder {
         internal var txtViewUsername: TextView? = null
+        internal var txtViewTitle: TextView? = null
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -40,12 +42,14 @@ class UserViewAdapter(
             convertView = inflater.inflate(R.layout.activity_user, null)
             holder = ViewHolder()
             holder.txtViewUsername = convertView.findViewById(R.id.username) as TextView
+            holder.txtViewTitle = convertView.findViewById(R.id.title) as TextView
             convertView!!.tag = holder
         } else {
             holder = convertView!!.tag as ViewHolder
         }
 
         holder.txtViewUsername!!.text = username[position]
+        holder.txtViewTitle!!.text = title[position]
 
         return convertView
     }

@@ -61,14 +61,15 @@ export default function LoginPage(props) {
   const handleSubmit = event => {
     event.preventDefault();
     login(values.username, values.pass).then(
-      setTimeout(function(response) {
-        
-        localStorage.getItem('currentUser') && props.history.push("/profile-page");
+      function(response) {
+        if(localStorage.getItem('currentUser')){
+          props.history.push("/profile-page");
+        } 
+
       },
       function() {
         swal("Oops", "Incorrect username or password!", "error");
-      },3000)
-      
+      }
     );
   };
   return (

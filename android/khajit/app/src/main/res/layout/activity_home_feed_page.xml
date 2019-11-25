@@ -5,7 +5,7 @@
     android:id="@+id/root_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/big_picture_currency"
+    android:background="@drawable/transparent_background"
 
     >
     <androidx.appcompat.widget.Toolbar
@@ -36,7 +36,7 @@
         app:menu="@menu/bottom_nav_menu" />
 
     <FrameLayout
-        android:id="@+id/content"
+        android:id="@+id/homePageContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

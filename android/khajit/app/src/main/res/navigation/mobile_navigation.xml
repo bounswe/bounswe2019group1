@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_equipments"
-        android:name="com.project.khajit_app.activity.ui.equipment.LogoutFragment"
+        android:name="com.project.khajit_app.activity.ui.equipment.EquipmentFragment"
         android:label="@string/title_equipments"
         tools:layout="@layout/fragment_mailbox" />
 

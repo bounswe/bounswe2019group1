@@ -15,3 +15,6 @@ traders_virtualenv
 __pycache__
 __pycache__/*
 *.sqlite3
+
+android/khajit/.gradle
+android/khajit/.idea

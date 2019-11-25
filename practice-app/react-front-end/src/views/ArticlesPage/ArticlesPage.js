@@ -15,7 +15,7 @@ import Footer from "components/Footer/Footer.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import Parallax from "components/Parallax/Parallax.js";
-
+import Button from "components/CustomButtons/Button.js";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
@@ -101,6 +101,11 @@ export default function ProfilePage(props) {
                           <Typography variant="body2" style={{ cursor: 'pointer' }}>
                             Phil Town
                           </Typography>
+                          <div style={{float: 'right'}}>
+                          <Button  variant="contained" color="primary" href="#contained-buttons">
+                            Read more
+                          </Button>
+                          </div>
                         </Grid>
                       </Grid>
                     </Grid>
@@ -132,6 +137,11 @@ export default function ProfilePage(props) {
                           <Typography variant="body2" style={{ cursor: 'pointer' }}>
                             Phil Town
                           </Typography>
+                          <div style={{float: 'right'}}>
+                          <Button  variant="contained" color="primary" href="#contained-buttons">
+                            Read more
+                          </Button>
+                          </div>
                         </Grid>
                       </Grid>
                     </Grid>
