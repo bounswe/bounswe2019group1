@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:autofit="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_create_article_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.ui.article.createArticleFragment">
+
+    <ScrollView
+        android:id="@+id/root_scroll_create_article_fragment"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="24dp"
+            android:paddingTop="20dp"
+            android:paddingRight="24dp">
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="#D3FFFFFF">
+
+                <EditText
+                    android:id="@+id/createArticleFragmentTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Title"
+                    android:inputType="text" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <EditText
+                android:id="@+id/createArticleFragmentContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:singleLine="true"
+                android:hint="Content"
+                />
+
+            <CheckBox
+                android:id="@+id/createArticleFragmentCheckBox"
+                android:layout_width="363dp"
+                android:layout_height="wrap_content"
+                android:text="Private (Article will be public if it is not checked!)" />
+
+            <Button
+                android:id="@+id/createArticleFragmentPublishContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:layout_marginBottom="30dp"
+                android:background="#EEF2F5"
+                android:text="Publish Article" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</FrameLayout>
+
+
+

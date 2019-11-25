@@ -63,4 +63,8 @@ interface Api {
     @Headers("Content-Type: application/json")
     @PUT("user/userdowngrade/")
     fun downgradeUser():Call<GenericUserModel>
+
+    @Headers("Content-Type: application/json")
+    @POST("user/search_user/")
+    fun createArticle(@Body body: CreateArticleModel):Call<SearchResponse>
 }
