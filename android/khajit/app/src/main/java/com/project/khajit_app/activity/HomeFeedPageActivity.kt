@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.project.khajit_app.R
+import com.project.khajit_app.activity.ui.article.createArticleFragment
 import com.project.khajit_app.activity.ui.editprofile.EditUserProfileFragment
 import com.project.khajit_app.activity.ui.equipment.EquipmentFragment
 import com.project.khajit_app.activity.ui.home.HomeFragment
@@ -19,8 +20,9 @@ import com.project.khajit_app.activity.ui.notifications.NotificationsFragment
 import com.project.khajit_app.activity.ui.profile.UserProfile
 import com.project.khajit_app.activity.ui.search.SearchFragment
 import com.project.khajit_app.global.User
+import interfaces.fragmentOperationsInterface
 
-class HomeFeedPageActivity : AppCompatActivity() {
+class HomeFeedPageActivity : AppCompatActivity() , fragmentOperationsInterface{
 
     private var homePageContent: FrameLayout? = null
     private var newFragment: Fragment? = null;//global variable
@@ -115,6 +117,18 @@ class HomeFeedPageActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.user_create_article_item -> {
+            val create_article_fragment = createArticleFragment.Companion.newInstance()
+            fragmentTransaction(
+                supportFragmentManager,
+                create_article_fragment,
+                R.id.homePageContent,
+                true,
+                true,
+                false
+            )
+            true
+        }
         R.id.profile_top_menu_item -> {
             val profileFragment = UserProfile.Companion.newInstance()
             changeFragment(profileFragment)

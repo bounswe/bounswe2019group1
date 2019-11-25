@@ -108,4 +108,7 @@ interface Api {
     @GET("equipment/traceindices/")
     fun tradeValues():Call<TradeIndiceResponse>
 
+    @POST("user/search_user/")
+    fun createArticle(@Body body: CreateArticleModel):Call<SearchResponse>
+
 }
