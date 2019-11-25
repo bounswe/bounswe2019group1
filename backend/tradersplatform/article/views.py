@@ -69,7 +69,7 @@ class DeleteArticleAPIView(DestroyAPIView):
             raise ValidationError({"detail": 'You do not have an article with this id'})
         article = query.first()
         article.delete()
-        return Response(status=200)
+        return Response({},status=200)
 
 
 class UpdateArticleAPIView(UpdateAPIView):
