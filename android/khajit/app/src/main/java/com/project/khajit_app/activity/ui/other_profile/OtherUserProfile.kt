@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -42,6 +43,9 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface {
     private lateinit var private_part_layout: ConstraintLayout
     private lateinit var public_private_ind: TextView
 
+    private var public = false
+    private var isFollowing = false
+
 
 
     var equipments = arrayOf(
@@ -74,9 +78,6 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface {
         follow_user = root.findViewById(R.id.other_follow_button) as Button
         private_part_layout = root.findViewById(R.id.private_part) as ConstraintLayout
         public_private_ind = root.findViewById(R.id.other_public_private_text) as TextView
-
-        var public = false
-        var isFollowing = false
 
         // This will be used for further methods in order to set prediction rates
         var lview =  root.findViewById(R.id.other_list_prediction_name) as ListView
@@ -208,9 +209,62 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface {
             followList(root, "following", other_id.toInt())
         }
 
+        follow_user.setOnClickListener { root ->
+            follow_unfollow_user(root, other_id.toInt())
+        }
+
         return root
     }
 
+    fun follow_unfollow_user(view: View, other_id : Int) {
+        if(isFollowing) {
+            val follow_type = FollowIDModel(other_id)
+            RetrofitClient.instance.unfollowUser(follow_type).enqueue(object :
+                Callback<FollowIDModelResponse> {
+                override fun onResponse(
+                    call: Call<FollowIDModelResponse>,
+                    response: Response<FollowIDModelResponse>
+                ) {
+                    println(response.toString())
+                    if(response.code() == 200 ){
+                        if(response.body()?.detail != null){
+                        }else{
+                            isFollowing = false
+                            follow_user.text = "FOLLOW"
+                            follow_user.setBackgroundColor(Color.parseColor("#AA4AE608"))
+                        }
+                    }else{
+                    }
+                }
+                override fun onFailure(call: Call<FollowIDModelResponse>, t: Throwable) {
+                }
+            })
+        } else {
+            val follow_type = FollowIDModel(other_id)
+            RetrofitClient.instance.followUser(follow_type).enqueue(object :
+                Callback<FollowIDModelResponse> {
+                override fun onResponse(
+                    call: Call<FollowIDModelResponse>,
+                    response: Response<FollowIDModelResponse>
+                ) {
+                    println(response.toString())
+                    if(response.code() == 200 ){
+                        if(response.body()?.detail != null){
+                        }else{
+                            isFollowing = true
+                            follow_user.text = "UNFOLLOW"
+                            follow_user.setBackgroundColor(Color.parseColor("#AAB80707"))
+                        }
+                    }else{
+
+                    }
+                }
+                override fun onFailure(call: Call<FollowIDModelResponse>, t: Throwable) {
+
+                }
+            })
+        }
+    }
 
     fun followList(view: View, request: String, other_id: Int) {
         val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager

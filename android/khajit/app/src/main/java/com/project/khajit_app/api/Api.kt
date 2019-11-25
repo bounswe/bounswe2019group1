@@ -76,4 +76,12 @@ interface Api {
     @GET("follow/isFollowingFront/{id}/")
     fun isFollowing(@Path(value = "id", encoded = true) userId: String):Call<isFollowingResponseModel>
 
+    @Headers("Content-Type: application/json")
+    @POST("follow/follow/")
+    fun followUser(@Body body: FollowIDModel?):Call<FollowIDModelResponse>
+
+    @Headers("Content-Type: application/json")
+    @HTTP(method="DELETE", path="follow/delete/", hasBody=true)
+    fun unfollowUser(@Body body: FollowIDModel?):Call<FollowIDModelResponse>
+
 }
