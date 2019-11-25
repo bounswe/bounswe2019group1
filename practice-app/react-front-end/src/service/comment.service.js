@@ -22,7 +22,17 @@ export function createComment(values) {
     headers: {
       Authorization: authHeader(),
       "Content-Type": "application/json"
+    },
+    body: {
+      text: values.text,
+      article_id: values.article_id
     }
   };
-  return axios();
+  return axios.post(
+    `${environment.api_url}article-comment/create/`,
+    requestOptions.body,
+    {
+      headers: requestOptions.headers
+    }
+  );
 }

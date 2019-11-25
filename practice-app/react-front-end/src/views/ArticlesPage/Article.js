@@ -117,7 +117,9 @@ export default function Article(props) {
           <div className={classes.note}>{value.user.created_date}</div>
           <Quote
             text={value.text}
-            author={value.user.first_name + value.user.last_name}
+            author={
+              "Author: " + value.user.first_name + " " + value.user.last_name
+            }
           />
         </div>
       );
@@ -137,8 +139,9 @@ export default function Article(props) {
       .then(res => (res.status === 200 ? res : null))
       .then(function() {
         if (localStorage.getItem("currentUser")) {
-          props.history.push("/article/" + article_id);
+          props.history.push(`/article/${article_id}`);
         }
+        //location.reload();
         swal("Good job!", "Comment is successfully created.", "Success");
       })
       .catch(error => {
@@ -159,7 +162,7 @@ export default function Article(props) {
           </CardAvatar>
           <CardBody profile>
             <h3 className={classes.cardTitle}>
-              {articleValues.author.first_name} {articleValues.author.last_name}
+              Author: {articleValues.author.first_name} {articleValues.author.last_name}
             </h3>
             <h3 className={classes.cardTitle}>{articleValues.author.title}</h3>
 

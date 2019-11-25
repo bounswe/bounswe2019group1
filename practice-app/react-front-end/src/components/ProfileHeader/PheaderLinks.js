@@ -119,9 +119,9 @@ export default function PheaderLinks(props) {
             <CloudDownload className={classes.icons} /> Articles
           </Button>
         </Link>
-        <Link to="/portfolio" className={classes.button} color="transparent">
+        <Link to="/market" className={classes.button} color="transparent">
           <Button className={classes.button} color="primary" target="_self">
-            <Assignment className={classes.icons} /> Portfolio
+            <Assignment className={classes.icons} /> Market
           </Button>
         </Link>
 
@@ -131,12 +131,15 @@ export default function PheaderLinks(props) {
           color="primary"
           buttonProps={{
             className: classes.navLink,
-            color:"primary"
+            color: "primary"
           }}
           buttonIcon={Apps}
           dropdownList={[
             <Link to="/profile-page" key="" className={classes.dropdownLink}>
               Profile
+            </Link>,
+            <Link to="/edit-profile" className={classes.dropdownLink} key="">
+              Edit Profile
             </Link>,
             <Link
               to="/"
