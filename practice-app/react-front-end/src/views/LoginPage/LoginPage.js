@@ -155,7 +155,11 @@ export default function LoginPage(props) {
                     >
                       Login
                     </Button>
-
+                        
+                  </CardFooter>
+                  <CardFooter className={classes.cardFooter}>
+                    
+                    <Link to="/reset-password">Reset Password</Link>
                   </CardFooter>
                   <CardFooter className={classes.cardFooter}>
                     New to Khaji-it?
