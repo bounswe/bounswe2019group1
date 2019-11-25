@@ -17,8 +17,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
-import profile from "assets/img/faces/ai.jpg";
-import { Link } from "react-router-dom";
+import profile from "assets/img/faces/marc.jpg";
 import Icon from "@material-ui/core/Icon";
 
 import portfolio1 from "assets/img/examples/ppp1.jpeg";

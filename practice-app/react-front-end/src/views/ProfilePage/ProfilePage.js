@@ -36,6 +36,10 @@ import Grid from "@material-ui/core/Grid";
 import Icon from "@material-ui/core/Icon";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { getProfileInfo } from "../../service/profileinformation.service";
+import {
+  listUserFollowers,
+  listUserFollowings
+} from "service/follower.service.js";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
@@ -82,6 +86,31 @@ export default function ProfilePage(props) {
       })
     );
   });
+  const [followValues, setFollowValues] = useState({
+    followings: {},
+    followingsCount: 0,
+    followers: {},
+    followersCount: 0
+  });
+  useState(() =>
+    listUserFollowings().then(res =>
+      setFollowValues(oldValues => ({
+        ...oldValues,
+        followings: res.list,
+        followingsCount: res.list.length
+      }))
+    )
+  );
+  useState(() =>
+    listUserFollowers().then(res =>
+      setFollowValues(oldValues => ({
+        ...oldValues,
+        followers: res.list,
+        followersCount: res.list.length
+      }))
+    )
+  );
+
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   return (
     <div>
@@ -129,11 +158,11 @@ export default function ProfilePage(props) {
                     </Grid>
                     <Grid container spacing={3}>
                       <Grid item xs>
-                        <Paper className={classes.paper}>35</Paper>
+                        <Paper className={classes.paper}>{followValues.followersCount}</Paper>
                       </Grid>
                       <Grid item xs={6}></Grid>
                       <Grid item xs>
-                        <Paper className={classes.paper}>34</Paper>
+                        <Paper className={classes.paper}>{followValues.followingsCount}</Paper>
                       </Grid>
                     </Grid>
                   </div>
