@@ -4,5 +4,5 @@ from . import views
 
 
 urlpatterns = [
-  url(r'^events/', views.EventCalendar.as_view(), name="update_de"),
+  url(r'^event/', views.EventCalendar.as_view(), name="update_de"),
 ]

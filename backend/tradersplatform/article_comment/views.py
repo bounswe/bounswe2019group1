@@ -1,4 +1,5 @@
 import django.utils.timezone
+
 # Create your views here.
 
 from rest_framework.exceptions import ValidationError
@@ -42,7 +43,7 @@ class DeleteArticleCommentAPIView(DestroyAPIView):
             raise ValidationError({"detail": 'You do not have a comment with this id'})
         article_comment = query.first()
         article_comment.delete()
-        return Response(status=200)
+        return Response({},status=200)
 
 
 class UpdateArticleCommentAPIView(UpdateAPIView):
@@ -54,7 +55,7 @@ class UpdateArticleCommentAPIView(UpdateAPIView):
         comment_id = request.data['id']
         comment = ArticleComment.objects.get(id=comment_id)
         if comment is None:
-            raise ValidationError("Comment does not exist")
+            raise ValidationError({"detail": "Comment does not exist"})
         query = ArticleComment.objects.filter(id=comment_id, user=user)
         if not query:
             raise ValidationError({"detail": 'You do not have a comment with this id'})
@@ -66,7 +67,7 @@ class UpdateArticleCommentAPIView(UpdateAPIView):
 
 class ListArticleCommentAPIView(DestroyAPIView):
     def get(self, request, *args, **kwargs):
-        article_id = request.data['article_id']
+        article_id = kwargs.get("pk")
         query = ArticleComment.objects.filter(article_id=article_id)
         serializer = ArticleCommentListSerializer(query, many=True)
         return Response(serializer.data, status=200)
