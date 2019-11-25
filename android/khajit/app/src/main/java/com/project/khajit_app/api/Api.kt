@@ -71,4 +71,5 @@ interface Api {
     @Headers("Content-Type: application/json")
     @PUT("user/userdowngrade/")
     fun downgradeUser():Call<GenericUserModel>
+
 }

@@ -94,7 +94,7 @@ class SearchFragment : Fragment() {
 
         })
 
-        /*
+    /*
         var listview = root.findViewById(R.id.list_users) as ListView
         listview.setOnItemClickListener{ parent, view, position, id ->
             Toast.makeText(this.context, "text is " + " $position", Toast.LENGTH_LONG).show()
@@ -104,7 +104,7 @@ class SearchFragment : Fragment() {
             var intent = Intent(getActivity(), HomeFeedPageActivity::class.java)
             startActivity(intent)
         }
-        */
+*/
 
         return root
     }

@@ -17,6 +17,18 @@
         android:layout_height="match_parent"
         android:id="@+id/root_profile">
 
+        <Button
+            android:id="@+id/other_follow_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="#AA4AE608"
+            android:text="Follow"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/other_trader_image" />
+
         <ProgressBar
             android:id="@+id/progress_loader"
             style="?android:attr/progressBarStyle"
@@ -30,7 +42,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/following_button"
+            android:id="@+id/other_following_button"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_gravity="start"
@@ -41,11 +53,11 @@
             android:textSize="12sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/profile_pic"
-            app:layout_constraintTop_toTopOf="@+id/profile_pic" />
+            app:layout_constraintStart_toEndOf="@+id/other_profile_pic"
+            app:layout_constraintTop_toTopOf="@+id/other_profile_pic" />
 
         <com.mikhaellopez.circularimageview.CircularImageView
-            android:id="@+id/profile_pic"
+            android:id="@+id/other_profile_pic"
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:layout_marginStart="20dp"
@@ -61,7 +73,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/follower_button"
+            android:id="@+id/other_follower_button"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_gravity="start"
@@ -72,13 +84,13 @@
             android:textColor="#FFFFFF"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/profile_pic"
+            app:layout_constraintEnd_toStartOf="@+id/other_profile_pic"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/profile_pic" />
+            app:layout_constraintTop_toTopOf="@+id/other_profile_pic" />
 
         <TextView
-            android:id="@+id/follower_number"
+            android:id="@+id/other_follower_number"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:height="20dp"
@@ -91,12 +103,12 @@
             android:textStyle="bold"
             app:autoSizeMinTextSize="1sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintEnd_toStartOf="@+id/profile_pic"
+            app:layout_constraintEnd_toStartOf="@+id/other_profile_pic"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/follower_button" />
+            app:layout_constraintTop_toBottomOf="@+id/other_follower_button" />
 
         <TextView
-            android:id="@+id/following_number"
+            android:id="@+id/other_following_number"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:height="20dp"
@@ -110,11 +122,11 @@
             app:autoSizeMinTextSize="1sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/profile_pic"
-            app:layout_constraintTop_toBottomOf="@+id/following_button" />
+            app:layout_constraintStart_toEndOf="@+id/other_profile_pic"
+            app:layout_constraintTop_toBottomOf="@+id/other_following_button" />
 
         <TextView
-            android:id="@+id/user_real_name"
+            android:id="@+id/other_user_real_name"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_marginStart="2dp"
@@ -131,12 +143,12 @@
             android:textStyle="bold"
             app:autoSizeMinTextSize="1sp"
             app:autoSizeTextType="uniform"
-            app:layout_constraintEnd_toStartOf="@+id/trader_image"
+            app:layout_constraintEnd_toStartOf="@+id/other_trader_image"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_pic" />
+            app:layout_constraintTop_toBottomOf="@+id/other_profile_pic" />
 
         <ImageView
-            android:id="@+id/trader_image"
+            android:id="@+id/other_trader_image"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginTop="5dp"
@@ -145,10 +157,10 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_pic" />
+            app:layout_constraintTop_toBottomOf="@+id/other_profile_pic" />
 
         <TextView
-            android:id="@+id/user_title"
+            android:id="@+id/other_user_title"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_marginStart="5dp"
@@ -166,22 +178,24 @@
             app:autoSizeMinTextSize="1sp"
             app:autoSizeTextType="uniform"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/trader_image"
-            app:layout_constraintTop_toBottomOf="@+id/profile_pic" />
+            app:layout_constraintStart_toEndOf="@+id/other_trader_image"
+            app:layout_constraintTop_toBottomOf="@+id/other_profile_pic" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/private_part"
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:layout_marginTop="20dp"
             android:background="#CCFFFFFF"
             android:orientation="vertical"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/trader_image">
+            app:layout_constraintTop_toBottomOf="@+id/other_trader_image">
 
             <Button
-                android:id="@+id/button_about"
+                android:id="@+id/other_button_about"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"
@@ -192,7 +206,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_bio"
+                android:id="@+id/other_text_bio"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginStart="5dp"
@@ -206,10 +220,10 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_about" />
+                app:layout_constraintTop_toBottomOf="@+id/other_button_about" />
 
             <Button
-                android:id="@+id/button_predictions"
+                android:id="@+id/other_button_predictions"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginStart="5dp"
@@ -217,27 +231,27 @@
                 android:text="Prediction Success Ratios"
                 android:textSize="10sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_bio" />
+                app:layout_constraintTop_toBottomOf="@+id/other_text_bio" />
 
             <ListView
-                android:id="@+id/list_prediction_name"
+                android:id="@+id/other_list_prediction_name"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="5dp"
-                app:layout_constraintEnd_toStartOf="@+id/scroll_features"
+                app:layout_constraintEnd_toStartOf="@+id/other_scroll_features"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_predictions" />
+                app:layout_constraintTop_toBottomOf="@+id/other_button_predictions" />
 
             <androidx.core.widget.NestedScrollView
-                android:id="@+id/scroll_features"
+                android:id="@+id/other_scroll_features"
                 android:layout_width="200dp"
                 android:layout_height="120dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="20dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_predictions">
+                app:layout_constraintTop_toBottomOf="@+id/other_button_predictions">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -245,7 +259,7 @@
                     android:orientation="vertical">
 
                     <Button
-                        android:id="@+id/button_portfolio_page"
+                        android:id="@+id/other_button_portfolio_page"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginLeft="2dp"
@@ -257,7 +271,7 @@
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/button_article_page"
+                        android:id="@+id/other_button_article_page"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginLeft="2dp"
@@ -269,7 +283,7 @@
                         android:textStyle="bold" />
 
                     <Button
-                        android:id="@+id/button_prediction_page"
+                        android:id="@+id/other_button_prediction_page"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginLeft="2dp"
