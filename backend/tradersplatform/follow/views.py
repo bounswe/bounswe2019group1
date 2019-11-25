@@ -20,6 +20,9 @@ class CreateFollowAPIView(CreateAPIView):
         id=request.user.id
         user=TemplateUser.objects.get(id=id)
         following = request.data['following']
+        query = Follow.objects.filter(following=following, follower=user)
+        if query:
+            raise ValidationError({"detail": 'You have already follow this person'})
         data = {"follower": user, "following": following}
         serializer=FollowCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
