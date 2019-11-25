@@ -20,9 +20,13 @@ import image from "assets/img/dollar-hd.jpg";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Quote from "components/Typography/Quote.js";
+import swal from "sweetalert";
 
 import { getArticleById } from "service/article.service.js";
-
+import {
+  createComment,
+  listCommentByArticleId
+} from "service/comment.service.js";
 const styles = {
   container: {
     "@media (min-width: 576px)": {
@@ -75,13 +79,6 @@ const useStyles = makeStyles(styles);
 export default function Article(props) {
   const classes = useStyles();
   const { ...rest } = props;
-  // const handleChange = event => {
-  //   event.persist();
-  //   setProfileValues(oldValues => ({
-  //     ...oldValues,
-  //     [event.target.id]: event.target.value
-  //   }));
-  // };
   var article_id = String(props.history.location.pathname);
   article_id = Number(article_id.substr(article_id.lastIndexOf("/") + 1));
 
@@ -103,6 +100,52 @@ export default function Article(props) {
       })
     );
   });
+
+  const [values, setValues] = useState({
+    comments: [],
+    addcomment: ""
+  });
+
+  useState(() =>
+    listCommentByArticleId(article_id).then(res => setValues({ comments: res }))
+  );
+  const items = [];
+  if (values.comments) {
+    for (const [index, value] of values.comments.entries()) {
+      items.push(
+        <div className={classes.typo}>
+          <div className={classes.note}>{value.user.created_date}</div>
+          <Quote
+            text={value.text}
+            author={value.user.first_name + value.user.last_name}
+          />
+        </div>
+      );
+    }
+  }
+
+  const handleChange = event => {
+    event.persist();
+    setValues(oldValues => ({
+      ...oldValues,
+      [event.target.id]: event.target.value
+    }));
+  };
+  const handleSubmit = event => {
+    event.preventDefault();
+    createComment({ text: values.addcomment, article_id: article_id })
+      .then(res => (res.status === 200 ? res : null))
+      .then(function() {
+        if (localStorage.getItem("currentUser")) {
+          props.history.push("/article/" + article_id);
+        }
+        swal("Good job!", "Comment is successfully created.", "Success");
+      })
+      .catch(error => {
+        swal("Oops: ", error.message, "error");
+      });
+  };
+
   let MapOrForm;
 
   MapOrForm = (
@@ -141,23 +184,7 @@ export default function Article(props) {
             <h4 className={classes.cardTitleWhite}>Comments</h4>
           </CardHeader>
           <CardBody profile>
-            <Paper className={classes.root}>
-              <div className={classes.typo}>
-                <div className={classes.note}></div>
-                <Quote text="Amazing." author=" NY Times" />
-              </div>
-              <div className={classes.typo}>
-                <div className={classes.note}></div>
-                <Quote text="Unforgettable." author=" NY Times" />
-              </div>
-              <div className={classes.typo}>
-                <div className={classes.note}></div>
-                <Quote
-                  text="Once in a life-time experience."
-                  author=" NY Times"
-                />
-              </div>
-            </Paper>
+            <Paper className={classes.root}>{items}</Paper>
           </CardBody>
         </Card>
       </GridItem>
@@ -172,8 +199,8 @@ export default function Article(props) {
               <GridItem xs={12} sm={12} md={12}>
                 <InputLabel style={{ color: "#AAAAAA" }}>Be polite!</InputLabel>
                 <CustomInput
-                  id="biography"
-                  value="biography"
+                  id="addcomment"
+                  value={values.addcomment}
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -181,12 +208,15 @@ export default function Article(props) {
                     multiline: true,
                     rows: 5
                   }}
+                  onChange={handleChange}
                 />
               </GridItem>
             </GridContainer>
           </CardBody>
           <CardFooter>
-            <Button color="primary">Send comment</Button>
+            <Button color="primary" onClick={handleSubmit}>
+              Send comment
+            </Button>
           </CardFooter>
         </Card>
       </GridItem>
