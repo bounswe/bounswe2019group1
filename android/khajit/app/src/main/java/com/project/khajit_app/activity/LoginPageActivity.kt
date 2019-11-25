@@ -156,6 +156,8 @@ class LoginPageActivity : AppCompatActivity() {
 
     }
 
+    override fun onBackPressed() {}
+
 
     fun forgetPassword(view: View) {
         // startActivity(Intent(this, SignUpPageActivity::class.java))
