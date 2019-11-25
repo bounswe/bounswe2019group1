@@ -54,7 +54,7 @@ class SignUpPageTraderActivity : AppCompatActivity() {
     fun goToMainTraderUserActivity(view : View) {
 
         trader_button.setOnClickListener {
-            var iban_information = iban_input.text.toString().toLongOrNull()
+            var iban_information = iban_input.text.toString()
             var citizen_id_information =
                 citizen_id_input.text.toString().trim() //int olsa daha iyi gibi
 

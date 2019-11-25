@@ -161,8 +161,7 @@ class SignUpPageActivity : AppCompatActivity() {
                 email_information,
                 firstname_information,
                 lastname_information,
-                password_information,
-                true)
+                password_information)
             intent.putExtra("userInfo", userInfo)
             intent.putExtra("googleUser",0)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -200,8 +199,7 @@ class SignUpPageActivity : AppCompatActivity() {
                     account.email!!,
                     account.givenName!!,
                     account.familyName!!,
-                    "google11",
-                    true
+                    "google11"
                 )
                 val intent = Intent(this@SignUpPageActivity, SignUpPageTraderActivity::class.java)
 
