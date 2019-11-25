@@ -14,5 +14,6 @@ urlpatterns = [
     url(r'^listFollowing/', views.ListFollowingAPIView.as_view(), name="list"),
     url(r'^isFollowing/', views.IsFollowingAPIView.as_view(), name="list"),
     url(r'^isFollowingFront/(?P<pk>[0-9_]+)/', views.IsFollowingFrontAPIView.as_view(), name="list"),
+    url(r'^isFollowerFront/(?P<pk>[0-9_]+)/', views.IsFollowerFrontAPIView.as_view(), name="list"),
     url(r'^delete/', views.DeleteFollowAPIView.as_view(), name="list"),
 ]
