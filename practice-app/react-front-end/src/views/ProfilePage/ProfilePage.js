@@ -40,6 +40,7 @@ import {
   listUserFollowers,
   listUserFollowings
 } from "service/follower.service.js";
+import { getMyArticles } from "service/article.service";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
@@ -110,7 +111,110 @@ export default function ProfilePage(props) {
       }))
     )
   );
+  const [articleValues, setArticleValues] = useState({
+    results: []
+  });
 
+  useState(() =>
+    getMyArticles().then(res => setArticleValues({ results: res }))
+  );
+  console.log(articleValues.results);
+  const items = [];
+  if (articleValues.results) {
+    for (const [index, value] of articleValues.results.entries()) {
+      items.push(
+        <Paper className={classes.paper}>
+          <Grid container spacing={2}>
+            <Grid item>
+              <ButtonBase className={classes.image}>
+                <img
+                  className={classes.img}
+                  alt="complex"
+                  src={articleThumbnail}
+                />
+              </ButtonBase>
+            </Grid>
+            <Grid item xs={120} sm container>
+              <Grid item xs container direction="column" spacing={2}>
+                <Grid item xs>
+                  <Typography gutterBottom variant="subtitle1">
+                    {value.title}
+                  </Typography>
+                  <Typography variant="body2" gutterBottom>
+                    {value.content.substring(0,100) + "..."}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <div style={{ float: "right" }}>
+                    <Link
+                      to={{
+                        pathname: "/article/" + value.id,
+                        state: { id: value.id }
+                      }}
+                    >
+                      <Button variant="contained" color="secondary">
+                        Read more
+                      </Button>
+                    </Link>
+                  </div>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Paper>
+        // <Paper className={classes.paper}>
+        //   <Grid container spacing={2}>
+        //     <Grid item>
+        //       <ButtonBase className={classes.image}>
+        //         <img
+        //           className={classes.img}
+        //           alt="complex"
+        //           src={articleThumbnail}
+        //         />
+        //       </ButtonBase>
+        //     </Grid>
+        //     <Grid item xs={120} sm container>
+        //       <Grid item xs container direction="column" spacing={2}>
+        //         <Grid item xs>
+        //           <Typography gutterBottom variant="subtitle1">
+        //             {articleValues.title}
+        //           </Typography>
+        //           <Typography variant="body2" gutterBottom>
+        //             {articleValues.content}
+        //           </Typography>
+        //         </Grid>
+        //         <Grid item>
+        //           <Typography
+        //             variant="body2"
+        //             style={{ cursor: "pointer" }}
+        //           ></Typography>
+        //           <div style={{ float: "right" }}>
+        //             <Link
+        //               to={{
+        //                 pathname: "/article/" + articleValues.id,
+        //                 state: { id: articleValues.id }
+        //               }}
+        //             >
+        //               <Button variant="contained" color="secondary">
+        //                 Read more
+        //               </Button>
+        //             </Link>
+        //             {followValues.followersCount}
+        //
+        //             {followValues.followersCount}
+        //
+        //             {followValues.followersCount}
+        //           </div>
+        //         </Grid>
+        //       </Grid>
+        //     </Grid>
+        //     {followValues.followingsCount}
+        //   </Grid>
+        // </Paper>
+        // <li key={index}>{value.title}</li>
+      );
+    }
+  }
   const navImageClasses = classNames(classes.imgRounded, classes.imgGallery);
   return (
     <div>
@@ -158,11 +262,15 @@ export default function ProfilePage(props) {
                     </Grid>
                     <Grid container spacing={3}>
                       <Grid item xs>
-                        <Paper className={classes.paper}>{followValues.followersCount}</Paper>
+                        <Paper className={classes.paper}>
+                          {followValues.followersCount}
+                        </Paper>
                       </Grid>
                       <Grid item xs={6}></Grid>
                       <Grid item xs>
-                        <Paper className={classes.paper}>{followValues.followingsCount}</Paper>
+                        <Paper className={classes.paper}>
+                          {followValues.followingsCount}
+                        </Paper>
                       </Grid>
                     </Grid>
                   </div>
@@ -258,61 +366,7 @@ export default function ProfilePage(props) {
                       tabContent: (
                         <GridContainer justify="center">
                           <GridItem xs={12} sm={12} md={40}>
-                            <Paper className={classes.paper}>
-                              <Grid container spacing={2}>
-                                <Grid item>
-                                  <ButtonBase className={classes.image}>
-                                    <img
-                                      className={classes.img}
-                                      alt="complex"
-                                      src={articleThumbnail}
-                                    />
-                                  </ButtonBase>
-                                </Grid>
-                                <Grid item xs={120} sm container>
-                                  <Grid
-                                    item
-                                    xs
-                                    container
-                                    direction="column"
-                                    spacing={2}
-                                  >
-                                    <Grid item xs>
-                                      <Typography
-                                        gutterBottom
-                                        variant="subtitle1"
-                                      >
-                                        {
-                                          "The Key Traits of Patient and Successful Investors"
-                                        }
-                                      </Typography>
-                                      <Typography variant="body2" gutterBottom>
-                                        {
-                                          "According to Entrepreneur Network partner Phil Town, one of the most valuable traits an investor can have is patience. If you are a patient investor and decide on good businesses, Town says there is virtually no scenario where you will not make money. Here are some of the traits of patient investors..."
-                                        }
-                                      </Typography>
-                                    </Grid>
-                                    <Grid item>
-                                      <Typography
-                                        variant="body2"
-                                        style={{ cursor: "pointer" }}
-                                      >
-                                        {"24 November, 2019"}
-                                      </Typography>
-                                      <div style={{ float: "right" }}>
-                                        <Button
-                                          variant="contained"
-                                          color="primary"
-                                          href="edit-article"
-                                        >
-                                          Edit Article
-                                        </Button>
-                                      </div>
-                                    </Grid>
-                                  </Grid>
-                                </Grid>
-                              </Grid>
-                            </Paper>
+                            {items}
                           </GridItem>
                         </GridContainer>
                       )
