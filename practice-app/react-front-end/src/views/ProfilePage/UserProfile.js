@@ -19,6 +19,8 @@ import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 import profile from "assets/img/faces/marc.jpg";
 import Icon from "@material-ui/core/Icon";
+import NewWindow from 'react-new-window'
+import Button from '@material-ui/core/Button';
 
 import portfolio1 from "assets/img/examples/ppp1.jpeg";
 import portfolio2 from "assets/img/examples/po2.jpeg";
@@ -33,7 +35,8 @@ import event4 from "assets/img/examples/ev4.jpg";
 import event5 from "assets/img/examples/ev5.jpeg";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { userRetrieve } from "service/user.service.js";
 import {
@@ -51,6 +54,20 @@ const useStyles = makeStyles(styles);
 
 export default function UserProfilePage(props) {
   const classes = useStyles();
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+
+  
+
   var user_id = String(props.history.location.pathname);
   user_id = Number(user_id.substr(user_id.lastIndexOf("/") + 1));
   const { ...rest } = props;
@@ -142,19 +159,65 @@ export default function UserProfilePage(props) {
                     </h3>
                     <h6>{userProfileValues.title}</h6>
                     <div>
-                       <Icon fontSize="large">person_add</Icon>
-                    </div>
+                    <Icon fontSize="large">person_add</Icon>
                     <Icon fontSize="large">how_to_reg</Icon>
+<<<<<<< HEAD
+                    </div>
+                      
+                  
+=======
 
+>>>>>>> d7ec294e1ebb98395022f5bc7ffd40bf7c8d8994
                   </div>
                   <div className={classes.root}>
                     <Grid container spacing={3}>
                       <Grid item xs>
-                        <Paper className={classes.paper}>Followers</Paper>
+                      <div>
+                      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                        Followers
+                      </Button>
+                      <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                          >
+                            <MenuItem onClick={handleClose}>User1</MenuItem>
+                            <MenuItem onClick={handleClose}>User2</MenuItem>
+                            <MenuItem onClick={handleClose}>User3</MenuItem>
+                            <MenuItem onClick={handleClose}>User4</MenuItem>
+                          </Menu>
+                        
+                        
+                        
+                        </div>
+                      
                       </Grid>
                       <Grid item xs></Grid>
                       <Grid item xs>
-                        <Paper className={classes.paper}>Following</Paper>
+                      
+                      <div>
+                      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                        Following
+                      </Button>
+                      <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                          >
+                            <MenuItem onClick={handleClose}>User1</MenuItem>
+                            <MenuItem onClick={handleClose}>User2</MenuItem>
+                            <MenuItem onClick={handleClose}>User3</MenuItem>
+                            <MenuItem onClick={handleClose}>User4</MenuItem>
+                          </Menu>
+                                              
+                        
+                        </div>
+                      
+                     
                       </Grid>
                     </Grid>
                     <Grid container spacing={3}>
