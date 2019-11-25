@@ -142,6 +142,7 @@ export default function Article(props) {
           props.history.push(`/article/${article_id}`);
         }
         //location.reload();
+        window.location.reload();
         swal("Good job!", "Comment is successfully created.", "Success");
       })
       .catch(error => {

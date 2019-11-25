@@ -18,6 +18,8 @@ import GridItem from "components/Grid/GridItem.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 import profile from "assets/img/faces/ai.jpg";
+import { Link } from "react-router-dom";
+import Icon from "@material-ui/core/Icon";
 
 import portfolio1 from "assets/img/examples/ppp1.jpeg";
 import portfolio2 from "assets/img/examples/po2.jpeg";
@@ -112,6 +114,11 @@ export default function ProfilePage(props) {
                       {userProfileValues.first_name} {userProfileValues.last_name}
                     </h3>
                     <h6>{userProfileValues.title}</h6>
+                    <div>
+                       <Icon fontSize="large">person_add</Icon>
+                    </div>
+                    <Icon fontSize="large">how_to_reg</Icon>
+                    
                   </div>
                   <div className={classes.root}>
                     <Grid container spacing={3}>

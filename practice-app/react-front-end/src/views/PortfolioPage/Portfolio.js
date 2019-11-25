@@ -19,7 +19,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
-import { AnnotationCallout } from "react-annotation";
+//import { AnnotationCallout } from "react-annotation";
 
 const styles = {
   cardCategoryWhite: {
