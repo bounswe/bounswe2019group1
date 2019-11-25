@@ -30,14 +30,24 @@
     <ListView
         android:id="@+id/list_users_follow"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="300dp"
         android:layout_marginTop="50dp"
         android:background="#BBFFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_flw" />
 
-
+    <Button
+        android:id="@+id/follow_button_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#521C6370"
+        android:enabled="true"
+        android:text="Back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_users_follow" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

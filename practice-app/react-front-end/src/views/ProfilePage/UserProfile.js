@@ -17,8 +17,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import GridItem from "components/Grid/GridItem.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
-import profile from "assets/img/faces/ai.jpg";
-import { Link } from "react-router-dom";
+import profile from "assets/img/faces/marc.jpg";
 import Icon from "@material-ui/core/Icon";
 import NewWindow from 'react-new-window'
 import Button from '@material-ui/core/Button';
@@ -40,6 +39,10 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { userRetrieve } from "service/user.service.js";
+import {
+  listFollowersById,
+  listFollowingsById
+} from "service/follower.service.js";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
@@ -49,7 +52,7 @@ import articleThumbnail from "assets/img/examples/investor.jpeg";
 
 const useStyles = makeStyles(styles);
 
-export default function ProfilePage(props) {
+export default function UserProfilePage(props) {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -85,6 +88,30 @@ export default function ProfilePage(props) {
     classes.imgRaised,
     classes.imgRoundedCircle,
     classes.imgFluid
+  );
+  const [followValues, setFollowValues] = useState({
+    followings: {},
+    followingsCount: 0,
+    followers: {},
+    followersCount: 0
+  });
+  useState(() =>
+    listFollowingsById(user_id).then(res =>
+      setFollowValues(oldValues => ({
+        ...oldValues,
+        followings: res.list,
+        followingsCount: res.list.length
+      }))
+    )
+  );
+  useState(() =>
+    listFollowersById(user_id).then(res =>
+      setFollowValues(oldValues => ({
+        ...oldValues,
+        followers: res.list,
+        followersCount: res.list.length
+      }))
+    )
   );
   useState(() => {
     userRetrieve(user_id).then(res =>
@@ -134,9 +161,13 @@ export default function ProfilePage(props) {
                     <div>
                     <Icon fontSize="large">person_add</Icon>
                     <Icon fontSize="large">how_to_reg</Icon>
+<<<<<<< HEAD
                     </div>
                       
                   
+=======
+
+>>>>>>> d7ec294e1ebb98395022f5bc7ffd40bf7c8d8994
                   </div>
                   <div className={classes.root}>
                     <Grid container spacing={3}>
@@ -191,11 +222,15 @@ export default function ProfilePage(props) {
                     </Grid>
                     <Grid container spacing={3}>
                       <Grid item xs>
-                        <Paper className={classes.paper}>35</Paper>
+                        <Paper className={classes.paper}>
+                          {followValues.followersCount}
+                        </Paper>
                       </Grid>
                       <Grid item xs={6}></Grid>
                       <Grid item xs>
-                        <Paper className={classes.paper}>34</Paper>
+                        <Paper className={classes.paper}>
+                          {followValues.followingsCount}
+                        </Paper>
                       </Grid>
                     </Grid>
                   </div>
