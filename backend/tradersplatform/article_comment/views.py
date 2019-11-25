@@ -43,7 +43,7 @@ class DeleteArticleCommentAPIView(DestroyAPIView):
             raise ValidationError({"detail": 'You do not have a comment with this id'})
         article_comment = query.first()
         article_comment.delete()
-        return Response(status=200)
+        return Response({},status=200)
 
 
 class UpdateArticleCommentAPIView(UpdateAPIView):
@@ -55,7 +55,7 @@ class UpdateArticleCommentAPIView(UpdateAPIView):
         comment_id = request.data['id']
         comment = ArticleComment.objects.get(id=comment_id)
         if comment is None:
-            raise ValidationError("Comment does not exist")
+            raise ValidationError({"detail": "Comment does not exist"})
         query = ArticleComment.objects.filter(id=comment_id, user=user)
         if not query:
             raise ValidationError({"detail": 'You do not have a comment with this id'})
