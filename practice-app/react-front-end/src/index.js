@@ -129,6 +129,17 @@ ReactDOM.render(
         }
       />
       <Route
+        path="/market"
+        render={() =>
+          localStorage.getItem("currentUser") ? (
+            <PortfolioPage history={hist} />
+          ) : (
+            <Redirect to="/login-page" />
+          )
+        }
+      />
+      <Route path="/" component={App} />
+      <Route
         path="/portfolio"
         render={() =>
           localStorage.getItem("currentUser") ? (
