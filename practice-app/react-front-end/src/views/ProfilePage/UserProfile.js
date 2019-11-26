@@ -213,7 +213,7 @@ export default function UserProfilePage(props) {
                     </h3>
                     <h6>{userProfileValues.title}</h6>
                     <div>
-                      <Icon fontSize="large">person_add</Icon>
+                      <Icon  fontSize="large">person_add</Icon>
                       <Icon fontSize="large">how_to_reg</Icon>
                     </div>
                   </div>
