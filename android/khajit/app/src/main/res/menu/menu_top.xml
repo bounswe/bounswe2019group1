@@ -23,5 +23,11 @@
         app:showAsAction="never"
         android:title="Profile" />
 
+    <item
+        android:id="@+id/deposit_top_menu_item"
+        android:icon="@android:drawable/ic_menu_preferences"
+        app:showAsAction="never"
+        android:title="Deposit Funds" />
+
 
 </menu>

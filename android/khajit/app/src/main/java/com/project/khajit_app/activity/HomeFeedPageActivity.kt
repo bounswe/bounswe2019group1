@@ -129,6 +129,11 @@ class HomeFeedPageActivity : AppCompatActivity() , fragmentOperationsInterface{
             )
             true
         }
+        R.id.deposit_top_menu_item -> {
+            val profileFragment = UserProfile.Companion.newInstance()
+            changeFragment(profileFragment)
+            true
+        }
         R.id.profile_top_menu_item -> {
             val profileFragment = UserProfile.Companion.newInstance()
             changeFragment(profileFragment)
