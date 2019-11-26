@@ -40,8 +40,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { userRetrieve } from "service/user.service.js";
 import {
+  follow,
   listFollowersById,
-  listFollowingsById
+  listFollowingsById,
+  haveIFollowing
 } from "service/follower.service.js";
 import { getArticlesByUserId } from "service/article.service.js";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
@@ -55,25 +57,23 @@ const useStyles = makeStyles(styles);
 
 export default function UserProfilePage(props) {
   const classes = useStyles();
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const [isFollowing,setIsFollowing] = useState(false)
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
-  };
-  const iconClick = () => {
- setIsFollowing(true);
- followValues.followersCount++;
-  };
-  
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   var user_id = String(props.history.location.pathname);
   user_id = Number(user_id.substr(user_id.lastIndexOf("/") + 1));
+
+  const [isFollowing, setIsFollowing] = useState(false);
+
+  useState(() =>
+    haveIFollowing(user_id).then(
+      res => setIsFollowing(res.result === "Found")
+      // res.result === "Found" ? setIsFollowing(true) : setIsFollowing(false)
+    )
+  );
+  const iconClick = () => {
+    setIsFollowing(true);
+    followValues.followersCount++;
+    follow(user_id);
+  };
+
   const { ...rest } = props;
   const [userProfileValues, setUserProfileValues] = useState({
     username: "",
@@ -222,7 +222,7 @@ export default function UserProfilePage(props) {
                     <Button onClick={iconClick} variant="contained" color="primary">
                         {isFollowing?"Following":"Follow"}
                       </Button>
-                  
+
                     </div>
                   </div>
                   <div className={classes.root}>
@@ -234,13 +234,13 @@ export default function UserProfilePage(props) {
                           Followers
                         </Paper>
                       </Grid>
-                          
+
                         </div>
                       </Grid>
                       <Grid item xs></Grid>
                       <Grid item xs>
                         <div>
-                          
+
                           <Grid item xs>
                         <Paper className={classes.paper}>
                           Following
