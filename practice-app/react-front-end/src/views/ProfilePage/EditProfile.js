@@ -88,6 +88,9 @@ export default function EditProfile(props) {
     location: {
       address: ""
     },
+    old_password: "",
+    new_password: "",
+    new_password2: "",
     phone_number: 0,
     usertype: "Trader",
     biography: "",
@@ -96,6 +99,42 @@ export default function EditProfile(props) {
     is_public: "",
     groups: []
   });
+  const [oldProfileValues, setOldProfileValues] = useState({
+    username: "",
+    email: "",
+    first_name: "",
+    last_name: "",
+    location: {
+      address: ""
+    },
+    phone_number: 0,
+    usertype: "Trader",
+    biography: "",
+    title: "",
+    photo: "",
+    is_public: "",
+    groups: []
+  });
+  useState(() => {
+    // Update the document title using the browser API
+    getProfileInfo().then(res =>
+      setOldProfileValues({
+        username: res.username,
+        email: res.email,
+        first_name: res.first_name,
+        last_name: res.last_name,
+        location: { address: res.location },
+        phone_number: res.phone_number,
+        biography: res.biography,
+        usertype: res.groups[0],
+        title: res.title,
+        photo: res.photo,
+        is_public: res.is_public,
+        groups: res.groups
+      })
+    );
+  });
+
   useState(() => {
     // Update the document title using the browser API
     getProfileInfo().then(res =>
@@ -157,7 +196,6 @@ export default function EditProfile(props) {
   });
   const handleSubmit = event => {
     event.preventDefault();
-
     editProfile(profileValues).then(
       function() {
         props.history.push("/profile-page");
@@ -187,13 +225,13 @@ export default function EditProfile(props) {
               </a>
             </CardAvatar>
             <CardBody profile>
-              <h6 className={classes.cardCategory}>{profileValues.title}</h6>
               <h3 className={classes.cardTitle}>
-                {profileValues.first_name} {profileValues.last_name}
+                {oldProfileValues.first_name} {oldProfileValues.last_name}
               </h3>
+              <h6 className={classes.cardTitle}>{oldProfileValues.title}</h6>
               <h5 className={classes.description}>
                 <b>Biography:</b>
-                {profileValues.biography}
+                {oldProfileValues.biography}
               </h5>
             </CardBody>
           </Card>
@@ -270,6 +308,75 @@ export default function EditProfile(props) {
                 </GridItem>
               </GridContainer>
               <GridContainer>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="Old Password"
+                    id="old_password"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    value={profileValues.pass}
+                    inputProps={{
+                      type: "password",
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <Icon className={classes.inputIconsColor}>
+                            lock_outline
+                          </Icon>
+                        </InputAdornment>
+                      ),
+                      autoComplete: "off"
+                    }}
+                    onChange={handleChange}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="New Password"
+                    id="new_password"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    value={profileValues.pass}
+                    inputProps={{
+                      type: "password",
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <Icon className={classes.inputIconsColor}>
+                            lock_outline
+                          </Icon>
+                        </InputAdornment>
+                      ),
+                      autoComplete: "off"
+                    }}
+                    onChange={handleChange}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={4}>
+                  <CustomInput
+                    labelText="Reenter New Password"
+                    id="new_password2"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    value={profileValues.pass}
+                    inputProps={{
+                      type: "password",
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <Icon className={classes.inputIconsColor}>
+                            lock_outline
+                          </Icon>
+                        </InputAdornment>
+                      ),
+                      autoComplete: "off"
+                    }}
+                    onChange={handleChange}
+                  />
+                </GridItem>
+              </GridContainer>
+
+              <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                   <CustomInput
                     labelText="Location"
@@ -322,8 +429,8 @@ export default function EditProfile(props) {
                   }}
                   onChange={handleChangeForm}
                 >
-                  <MenuItem value={"Basic"}>Basic</MenuItem>
-                  <MenuItem value={"Trading"}>Trading</MenuItem>
+                  <MenuItem value={"basic"}>Basic</MenuItem>
+                  <MenuItem value={"trading"}>Trading</MenuItem>
                 </Select>
                 <FormHelperText>Select User Type</FormHelperText>
               </FormControl>
