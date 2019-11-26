@@ -58,9 +58,15 @@ export default function UserProfilePage(props) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
+  const [isFollowing,setIsFollowing] = useState(false)
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
+  const iconClick = () => {
+ setIsFollowing(true);
+ followValues.followersCount++;
+  };
+  
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -213,57 +219,33 @@ export default function UserProfilePage(props) {
                     </h3>
                     <h6>{userProfileValues.title}</h6>
                     <div>
-                      <Icon  fontSize="large">person_add</Icon>
-                      <Icon fontSize="large">how_to_reg</Icon>
+                    <Button onClick={iconClick} variant="contained" color="primary">
+                        {isFollowing?"Following":"Follow"}
+                      </Button>
+                  
                     </div>
                   </div>
                   <div className={classes.root}>
                     <Grid container spacing={3}>
                       <Grid item xs>
                         <div>
-                          <Button
-                            aria-controls="simple-menu"
-                            aria-haspopup="true"
-                            onClick={handleClick}
-                          >
-                            Followers
-                          </Button>
-                          <Menu
-                            id="simple-menu"
-                            anchorEl={anchorEl}
-                            keepMounted
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
-                          >
-                            <MenuItem onClick={handleClose}>User1</MenuItem>
-                            <MenuItem onClick={handleClose}>User2</MenuItem>
-                            <MenuItem onClick={handleClose}>User3</MenuItem>
-                            <MenuItem onClick={handleClose}>User4</MenuItem>
-                          </Menu>
+                        <Grid item xs>
+                        <Paper className={classes.paper}>
+                          Followers
+                        </Paper>
+                      </Grid>
+                          
                         </div>
                       </Grid>
                       <Grid item xs></Grid>
                       <Grid item xs>
                         <div>
-                          <Button
-                            aria-controls="simple-menu"
-                            aria-haspopup="true"
-                            onClick={handleClick}
-                          >
-                            Following
-                          </Button>
-                          <Menu
-                            id="simple-menu"
-                            anchorEl={anchorEl}
-                            keepMounted
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
-                          >
-                            <MenuItem onClick={handleClose}>User1</MenuItem>
-                            <MenuItem onClick={handleClose}>User2</MenuItem>
-                            <MenuItem onClick={handleClose}>User3</MenuItem>
-                            <MenuItem onClick={handleClose}>User4</MenuItem>
-                          </Menu>
+                          
+                          <Grid item xs>
+                        <Paper className={classes.paper}>
+                          Following
+                        </Paper>
+                      </Grid>
                         </div>
                       </Grid>
                     </Grid>
