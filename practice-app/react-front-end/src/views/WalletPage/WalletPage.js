@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // react plugin for creating charts
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
@@ -25,17 +25,34 @@ import CardHeader from "components/Card2/CardHeader.js";
 import CardIcon from "components/Card2/CardIcon.js";
 import CardBody from "components/Card2/CardBody.js";
 import CardFooter from "components/Card2/CardFooter.js";
-
+import { getMyWallet} from "service/wallet.service.js";
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 const useStyles = makeStyles(styles);
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   const classes = useStyles();
   const [values, setValues] = React.useState({
     amount: "0",
     temp_amount: ""
   });
+  var user_id = String(props.history.location.pathname);
+
+  user_id = Number(user_id.substr(user_id.lastIndexOf("/") + 1));
+  const [followValues, setWalletValue] = useState({
+    wealth: {},
+    wealthCount: 0
+    
+  });
+  useState(() =>
+    getMyWallet().then(res =>
+      setWalletValue(oldValues => ({
+        ...oldValues,
+        wealth: res.Wealth_USD,
+        wealthCount: res.list
+      }))
+    )
+  );
   const handleChange = prop => event => {
     setValues({ ...values, [prop]: event.target.value });
   };
@@ -43,7 +60,7 @@ export default function Dashboard() {
     event.preventDefault();
     setValues({ ...values, [prop]: values.temp_amount });
   };
-  
+  console.log(values.wealth)
   return (
     <div>
       <Header
