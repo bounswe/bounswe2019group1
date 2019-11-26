@@ -33,7 +33,7 @@ const useStyles = makeStyles(styles);
 export default function Dashboard() {
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    amount: "",
+    amount: "0",
     temp_amount: ""
   });
   const handleChange = prop => event => {
@@ -43,7 +43,7 @@ export default function Dashboard() {
     event.preventDefault();
     setValues({ ...values, [prop]: values.temp_amount });
   };
-
+  
   return (
     <div>
       <Header
@@ -66,7 +66,7 @@ export default function Dashboard() {
                 <Store />
               </CardIcon>
               <p className={classes.cardCategory}>Total</p>
-              <h3 className={classes.cardTitle}>$34,245</h3>
+              <h3 className={classes.cardTitle}>${values.amount}</h3>
             </CardHeader>
             <CardFooter stats>
               <div className={classes.stats}>
