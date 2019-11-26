@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+
 import InputLabel from "@material-ui/core/InputLabel";
 // core components
 import GridItem from "components/Grid/GridItem.js";
@@ -115,12 +117,19 @@ export default function Article(props) {
       items.push(
         <div className={classes.typo}>
           <div className={classes.note}>{value.user.created_date}</div>
-          <Quote
-            text={value.text}
-            author={
-              "Author: " + value.user.first_name + " " + value.user.last_name
-            }
-          />
+          <Link
+            to={{
+              pathname: "/user/" + value.user.id,
+              state: { id: value.user.id }
+            }}
+          >
+            <Quote
+              text={value.text}
+              author={
+                "Author: " + value.user.first_name + " " + value.user.last_name
+              }
+            />
+          </Link>
         </div>
       );
     }
@@ -162,9 +171,17 @@ export default function Article(props) {
             </a>
           </CardAvatar>
           <CardBody profile>
-            <h3 className={classes.cardTitle}>
-              Author: {articleValues.author.first_name} {articleValues.author.last_name}
-            </h3>
+            <Link
+              to={{
+                pathname: "/user/" + articleValues.author.id,
+                state: { id: articleValues.author.id }
+              }}
+            >
+              <h3 className={classes.cardTitle}>
+                Author: {articleValues.author.first_name}{" "}
+                {articleValues.author.last_name}
+              </h3>
+            </Link>
             <h3 className={classes.cardTitle}>{articleValues.author.title}</h3>
 
             <h5>
