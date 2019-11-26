@@ -2,6 +2,36 @@ import { environment } from "environments/environment.prod";
 import { authHeader } from "utils/auth-header";
 import axios from "axios";
 
+export function follow(following_id) {
+  const requestOptions = {
+    headers: {
+      Authorization: authHeader(),
+      "Content-Type": "application/json"
+    },
+    body: {
+      following: following_id
+    }
+  };
+  return axios.post(
+    `${environment.api_url}follow/follow/`,
+    requestOptions.body,
+    {
+      headers: requestOptions.headers
+    }
+  );
+}
+export function haveIFollowing(following_id) {
+  const requestOptions = {
+    headers: {
+      Authorization: authHeader(),
+      "Content-Type": "application/json"
+    }
+  };
+  return axios(
+    `${environment.api_url}follow/isFollowingFront/${following_id}`,
+    requestOptions
+  ).then(res => (res.status === 200 ? res.data : null));
+}
 export function listUserFollowers() {
   const requestOptions = {
     headers: {
