@@ -27,11 +27,11 @@
             android:text="Currencies" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_eur_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:layout_weight="1"
-            android:onClick="currencyEUR"
             android:backgroundTint="@color/lightGray">
 
             <LinearLayout
@@ -61,11 +61,11 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_gbp_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:layout_weight="1"
-            android:onClick="currencyGBP"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -95,11 +95,11 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_try_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:layout_weight="1"
-            android:onClick="currencyTRY"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -138,11 +138,11 @@
             android:text="Crypto-Currencies" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_btc_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:layout_weight="1"
-            android:onClick="cryptoBTC"
             android:backgroundTint="@color/lightGray">
 
             <LinearLayout
@@ -172,11 +172,11 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_eth_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:layout_weight="1"
-            android:onClick="cryptoETH"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -207,11 +207,11 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_ltc_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:layout_weight="1"
-            android:onClick="cryptoLTC"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 

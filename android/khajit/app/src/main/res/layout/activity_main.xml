@@ -5,7 +5,7 @@
     android:id="@+id/root_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/big_picture_currency"
+    android:background="@drawable/transparent_background"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
