@@ -61,7 +61,7 @@ class EquipmentDetailsFragment : Fragment(), fragmentOperationsInterface {
 
         fragmentTransaction(
             parentActivityManager,
-            EquipmentBuyFragment.newInstance(equipment, value),
+            EquipmentSellFragment.newInstance(equipment, value),
             (containerId!!.id),
             false,
             true,

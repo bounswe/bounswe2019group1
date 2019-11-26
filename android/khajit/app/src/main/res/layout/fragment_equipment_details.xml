@@ -38,7 +38,6 @@
             android:textSize="18sp" />
 
         <ImageView
-            android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
@@ -89,7 +88,6 @@
                 android:padding="8dp">
 
                 <TextView
-                    android:id="@+id/textView4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
