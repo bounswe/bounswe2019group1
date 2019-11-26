@@ -3,12 +3,10 @@ package com.project.khajit_app.data.models
 import com.google.gson.annotations.SerializedName
 
 data class StockResponse (
-    val stockList: List<Stock?>
-)
-
-data class Stock (
-    @SerializedName("symbol")
-    val symbol: String,
-    @SerializedName("price")
-    val price: String
+    @SerializedName("GOOGL")
+    val value_googl: String,
+    @SerializedName("AAPL")
+    val value_aapl: String,
+    @SerializedName("GM")
+    val value_gm: String
 )
