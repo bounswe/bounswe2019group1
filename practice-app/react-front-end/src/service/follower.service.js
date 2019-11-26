@@ -20,7 +20,18 @@ export function follow(following_id) {
     }
   );
 }
-
+export function haveIFollowing(following_id) {
+  const requestOptions = {
+    headers: {
+      Authorization: authHeader(),
+      "Content-Type": "application/json"
+    }
+  };
+  return axios(
+    `${environment.api_url}follow/isFollowingFront/${following_id}`,
+    requestOptions
+  ).then(res => (res.status === 200 ? res.data : null));
+}
 export function listUserFollowers() {
   const requestOptions = {
     headers: {
