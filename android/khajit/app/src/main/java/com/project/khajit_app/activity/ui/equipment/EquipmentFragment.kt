@@ -39,6 +39,8 @@ class EquipmentFragment : Fragment(), fragmentOperationsInterface {
         val root = inflater.inflate(R.layout.fragment_equipment, container, false)
         containerId = container
 
+        // define variables for equipment textviews
+
         val value_eur = root.findViewById(R.id.value_eur) as TextView
         val value_gbp = root.findViewById(R.id.value_gbp) as TextView
         val value_try = root.findViewById(R.id.value_try) as TextView
@@ -62,6 +64,8 @@ class EquipmentFragment : Fragment(), fragmentOperationsInterface {
         val value_spy = root.findViewById(R.id.value_spy) as TextView
         val value_ivv = root.findViewById(R.id.value_ivv) as TextView
         val value_vti = root.findViewById(R.id.value_vti) as TextView
+
+        // request current values of equipments from the backend
 
         RetrofitClient.instance.currencyValues()
             .enqueue(object : Callback<CurrencyResponse> {
@@ -165,6 +169,7 @@ class EquipmentFragment : Fragment(), fragmentOperationsInterface {
 
             })
 
+        // define variables for card views
         val eurCard = root.findViewById(R.id.equipment_fragment_eur_card) as CardView
         val gbpCard = root.findViewById(R.id.equipment_fragment_gbp_card) as CardView
         val tryCard = root.findViewById(R.id.equipment_fragment_try_card) as CardView
@@ -172,7 +177,7 @@ class EquipmentFragment : Fragment(), fragmentOperationsInterface {
         val ethCard = root.findViewById(R.id.equipment_fragment_eth_card) as CardView
         val ltcCard = root.findViewById(R.id.equipment_fragment_ltc_card) as CardView
 
-        //add listeners to the equipment cards
+        // add listeners to the equipment cards
         eurCard.setOnClickListener { goToEquipmentDetails("EUR", value_eur.text.toString()) }
         gbpCard.setOnClickListener { goToEquipmentDetails("GBP", value_gbp.text.toString()) }
         tryCard.setOnClickListener { goToEquipmentDetails("TRY", value_try.text.toString()) }

@@ -54,7 +54,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/details_equipment_sell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
@@ -65,7 +65,7 @@
                 android:textColor="@android:color/white"/>
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/details_equipment_buy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
