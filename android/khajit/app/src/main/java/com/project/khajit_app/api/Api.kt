@@ -128,4 +128,12 @@ interface Api {
     @GET("wallet/retrieve/")
     fun myWallet():Call<WalletResponse>
 
+    @Headers("Content-Type: application/json")
+    @GET("article/listPublicArticles/" )
+    fun getPublicArticles():Call<PublicArticleListResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("article/listArticleByUserId/{id}/")
+    fun getArticlesByUserId(@Path(value = "id", encoded = true) userId: Int):Call<PublicArticleListResponse>
+
 }
