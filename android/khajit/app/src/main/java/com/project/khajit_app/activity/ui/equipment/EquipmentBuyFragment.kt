@@ -7,9 +7,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.project.khajit_app.R
+import com.project.khajit_app.api.RetrofitClient
+import com.project.khajit_app.data.models.DepositFundsResponse
+import com.project.khajit_app.data.models.EquipmentBSModel
 import interfaces.fragmentOperationsInterface
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class EquipmentBuyFragment : Fragment(), fragmentOperationsInterface {
 
@@ -36,6 +43,21 @@ class EquipmentBuyFragment : Fragment(), fragmentOperationsInterface {
 
         buyButton.setOnClickListener {
             // send a request to the api to buy buyAmount.text amount of equipment.
+            val buyModel = EquipmentBSModel(arguments?.getString("equipment")!!, buyAmount.text.toString().toInt())
+            RetrofitClient.instance.buyEquipment(buyModel)
+                .enqueue(object : Callback<DepositFundsResponse> {
+                    override fun onResponse(
+                        call: Call<DepositFundsResponse>?,
+                        response: Response<DepositFundsResponse>?
+                    ) {
+                        Toast.makeText(context, "Current wallet balance: " + response?.body()?.current_wallet_balance, Toast.LENGTH_SHORT).show()
+                    }
+
+                    override fun onFailure(call: Call<DepositFundsResponse>, t: Throwable) {
+                        Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                    }
+
+                })
         }
 
         return root

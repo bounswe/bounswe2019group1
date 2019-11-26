@@ -111,4 +111,16 @@ interface Api {
     @POST("user/search_user/")
     fun createArticle(@Body body: CreateArticleModel):Call<SearchResponse>
 
+    @Headers("Content-Type: application/json")
+    @PUT("wallet/sendUSD/")
+    fun depositFunds(@Body body: DepositFundsModel):Call<DepositFundsResponse>
+
+    @Headers("Content-Type: application/json")
+    @PUT("wallet/takeequipment/")
+    fun buyEquipment(@Body body: EquipmentBSModel):Call<DepositFundsResponse>
+
+    @Headers("Content-Type: application/json")
+    @PUT("wallet/sellequipment/")
+    fun sellEquipment(@Body body: EquipmentBSModel):Call<DepositFundsResponse>
+
 }

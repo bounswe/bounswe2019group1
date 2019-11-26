@@ -224,5 +224,5 @@ class EquipmentFragment : Fragment(), fragmentOperationsInterface {
             false
         )
     }
-    
+
 }
