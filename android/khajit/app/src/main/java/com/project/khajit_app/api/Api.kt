@@ -108,8 +108,9 @@ interface Api {
     @GET("equipment/traceindices/")
     fun tradeValues():Call<TradeIndiceResponse>
 
-    @POST("user/search_user/")
-    fun createArticle(@Body body: CreateArticleModel):Call<SearchResponse>
+    @Headers("Content-Type: application/json")
+    @POST("article/create/")
+    fun createArticle(@Body body: CreateArticleModel?):Call<CreateArticleResponseModel>
 
     @Headers("Content-Type: application/json")
     @PUT("wallet/sendUSD/")
@@ -122,5 +123,9 @@ interface Api {
     @Headers("Content-Type: application/json")
     @PUT("wallet/sellequipment/")
     fun sellEquipment(@Body body: EquipmentBSModel):Call<DepositFundsResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("wallet/retrieve/")
+    fun myWallet():Call<WalletResponse>
 
 }

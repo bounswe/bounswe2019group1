@@ -5,6 +5,7 @@
     >
     <item android:id="@+id/user_create_article_item"
         app:showAsAction="ifRoom"
+        android:icon="@mipmap/ic_create_article_icon"
         android:title="Create Article" />
     <item
         android:id="@+id/logout_top_menu_item"

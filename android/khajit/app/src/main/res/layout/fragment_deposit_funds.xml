@@ -27,8 +27,38 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginHorizontal="12dp"
         android:gravity="center_horizontal"
-        android:text="current: $12.87"
-        android:textSize="12sp"/>
+        android:text="Current: $"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/wealth_funds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="12dp"
+        android:gravity="center_horizontal"
+        android:text="My wealth: $"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/sent_funds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="12dp"
+        android:gravity="center_horizontal"
+        android:text="Total load: $"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/networth_funds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="12dp"
+        android:gravity="center_horizontal"
+        android:text="Current networth: $"
+        android:textSize="12sp" />
 
     <EditText
         android:id="@+id/funds_deposit_amount"

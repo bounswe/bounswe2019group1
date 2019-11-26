@@ -9,15 +9,13 @@ import android.widget.FrameLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.project.khajit_app.R
-import com.project.khajit_app.activity.ui.article.createArticleFragment
+import com.project.khajit_app.activity.ui.article.CreateArticleFragment
 import com.project.khajit_app.activity.ui.editprofile.EditUserProfileFragment
 import com.project.khajit_app.activity.ui.equipment.EquipmentFragment
 import com.project.khajit_app.activity.ui.home.HomeFragment
 import com.project.khajit_app.activity.ui.mailbox.MailboxFragment
 import com.project.khajit_app.activity.ui.notifications.NotificationsFragment
-import com.project.khajit_app.activity.ui.profile.DepositFundsFragment
 import com.project.khajit_app.activity.ui.profile.UserProfile
 import com.project.khajit_app.activity.ui.search.SearchFragment
 import com.project.khajit_app.global.User
@@ -119,7 +117,7 @@ class HomeFeedPageActivity : AppCompatActivity() , fragmentOperationsInterface{
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.user_create_article_item -> {
-            val create_article_fragment = createArticleFragment.Companion.newInstance()
+            val create_article_fragment = CreateArticleFragment.Companion.newInstance()
             fragmentTransaction(
                 supportFragmentManager,
                 create_article_fragment,
@@ -136,7 +134,7 @@ class HomeFeedPageActivity : AppCompatActivity() , fragmentOperationsInterface{
                 supportFragmentManager,
                 depositFragment,
                 R.id.homePageContent,
-                false,
+                true,
                 true,
                 false
             )
