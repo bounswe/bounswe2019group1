@@ -152,6 +152,10 @@ class HomeFeedPageActivity : AppCompatActivity() , fragmentOperationsInterface{
             User.type = false
             User.title = "No title"
             User.bio = "No bio"
+            User.location = ""
+            User.phone_number = ""
+            User.iban_number = ""
+            User.is_public = true
             User.whereIamAsId = 0 //it may be unnecessary to keep
             startActivity(Intent(this, MainPageActivity::class.java))
             // do stuff

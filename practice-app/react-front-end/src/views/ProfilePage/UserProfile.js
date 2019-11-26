@@ -294,6 +294,17 @@ export default function UserProfilePage(props) {
                   color="primary"
                   tabs={[
                     {
+                      tabButton: "Articles",
+                      tabIcon: Articles,
+                      tabContent: (
+                        <GridContainer justify="center">
+                          <GridItem xs={12} sm={12} md={40}>
+                            {items}
+                          </GridItem>
+                        </GridContainer>
+                      )
+                    },
+                    {
                       tabButton: "Portfolios",
                       tabIcon: Camera,
                       tabContent: (
@@ -363,17 +374,6 @@ export default function UserProfilePage(props) {
                               src={event5}
                               className={navImageClasses}
                             />
-                          </GridItem>
-                        </GridContainer>
-                      )
-                    },
-                    {
-                      tabButton: "Articles",
-                      tabIcon: Articles,
-                      tabContent: (
-                        <GridContainer justify="center">
-                          <GridItem xs={12} sm={12} md={40}>
-                            {items}
                           </GridItem>
                         </GridContainer>
                       )

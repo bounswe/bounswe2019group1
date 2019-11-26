@@ -1,7 +1,6 @@
 package com.project.khajit_app.activity
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -11,7 +10,6 @@ import android.os.ResultReceiver
 import android.text.InputType
 import android.util.Log
 import android.view.View
-import android.view.View.OnClickListener
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -25,46 +23,46 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 import com.project.khajit_app.R
-import com.project.khajit_app.api.RetrofitClient
-import com.project.khajit_app.data.models.BasicRegisterResponse
 import com.project.khajit_app.data.models.BasicUser
-import com.project.khajit_app.global.User
 import com.project.khajit_app.service.FetchAddressIntentService
 import kotlinx.android.synthetic.main.activity_signup.*
-import okhttp3.ResponseBody
-import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class SignUpPageActivity : AppCompatActivity() {
 
 
-    lateinit var email_input : EditText
-    lateinit var password_input : EditText
-    lateinit var repeat_password_input : EditText
-    lateinit var first_name_input : EditText
-    lateinit var last_name_input : EditText
-    lateinit var trader_button : Button
-    lateinit var basic_user_register :Button
-    lateinit var google_user_register : Button
+    lateinit var email_input: EditText
+    lateinit var password_input: EditText
+    lateinit var repeat_password_input: EditText
+    lateinit var first_name_input: EditText
+    lateinit var last_name_input: EditText
+    lateinit var trader_button: Button
+    lateinit var basic_user_register: Button
+    lateinit var google_user_register: Button
+    lateinit var location_text: EditText
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var lastLocation: Location? = null
     private var resultReceiver: AddressResultReceiver = AddressResultReceiver(Handler())
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             // Access_Fine_Location permission is not granted
 
             // Request the permission.
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1212)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                1212
+            )
 
         } else {
             // Permission has  been granted
@@ -75,6 +73,11 @@ class SignUpPageActivity : AppCompatActivity() {
         try {
             this.supportActionBar?.hide()
         } catch (e: NullPointerException) {
+        }
+
+        basic_user_register = findViewById(R.id.register_as_basic_button)
+        basic_user_register.setOnClickListener { root ->
+            goToSignUpPageTraderActivity(root)
         }
 
         // [ [ [ Google Sign In ] ] ]
@@ -102,75 +105,77 @@ class SignUpPageActivity : AppCompatActivity() {
 
     }
 
-    fun goToSignUpPageTraderActivity(view : View) {
+    fun goToSignUpPageTraderActivity(view: View) {
 
-        val intent = Intent(this@SignUpPageActivity,SignUpPageTraderActivity::class.java)
-
+        val intent = Intent(this@SignUpPageActivity, SignUpPageTraderActivity::class.java)
 
         email_input = findViewById(R.id.input_email)
         password_input = findViewById(R.id.input_password)
         repeat_password_input = findViewById(R.id.input_repassword)
         basic_user_register = findViewById(R.id.register_as_basic_button)
         google_user_register = findViewById(R.id.register_with_google_button)
-        first_name_input =findViewById(R.id.input_first_name)
+        first_name_input = findViewById(R.id.input_first_name)
         last_name_input = findViewById(R.id.input_last_name)
+        location_text = findViewById(R.id.input_location)
 
+        var email_information = email_input.text.toString().trim()
+        var username_information = ""
+        var password_information = password_input.text.toString().trim()
+        var repassword_information = repeat_password_input.text.toString().trim()
+        var firstname_information = first_name_input.text.toString().trim()
+        var lastname_information = last_name_input.text.toString().trim()
+        var location_information = location_text.text.toString().trim()
 
-        basic_user_register.setOnClickListener{
-            var email_information = email_input.text.toString().trim()
-            var username_information = ""
-            var password_information = password_input.text.toString().trim()
-            var repassword_information = repeat_password_input.text.toString().trim()
-            var firstname_information = first_name_input.text.toString().trim()
-            var lastname_information = last_name_input.text.toString().trim()
-
-            if(email_information.isEmpty()){
-                email_input.error = "Email is required."
-                email_input.requestFocus()
-                return@setOnClickListener
-            }
-            if(password_information.isEmpty()){
-                password_input.error = "Email is required."
-                password_input.requestFocus()
-                return@setOnClickListener
-            }
-            if(repassword_information.isEmpty()){
-                repeat_password_input.error = "Email is required."
-                repeat_password_input.requestFocus()
-                return@setOnClickListener
-            }
-            if(firstname_information.isEmpty()){
-                first_name_input.error = "Fİrst name is required."
-                first_name_input.requestFocus()
-                return@setOnClickListener
-            }
-            if(lastname_information.isEmpty()){
-                last_name_input.error = "Last name is required."
-                last_name_input.requestFocus()
-                return@setOnClickListener
-            }
-            if(!password_information.equals(repassword_information)){
-                repeat_password_input.error = "Passwords are not the same."
-                repeat_password_input.requestFocus()
-                return@setOnClickListener
-            }
-
-            username_information = email_information
-            val userInfo = BasicUser(
-                username_information,
-                email_information,
-                firstname_information,
-                lastname_information,
-                password_information)
-            intent.putExtra("userInfo", userInfo)
-            intent.putExtra("googleUser",0)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            startActivity(intent)
-            finish()
+        if (email_information.isEmpty()) {
+            email_input.error = "Email is required."
+            email_input.requestFocus()
+            return
+        }
+        if (password_information.isEmpty()) {
+            password_input.error = "Email is required."
+            password_input.requestFocus()
+            return
+        }
+        if (repassword_information.isEmpty()) {
+            repeat_password_input.error = "Email is required."
+            repeat_password_input.requestFocus()
+            return
+        }
+        if (firstname_information.isEmpty()) {
+            first_name_input.error = "Fİrst name is required."
+            first_name_input.requestFocus()
+            return
+        }
+        if (lastname_information.isEmpty()) {
+            last_name_input.error = "Last name is required."
+            last_name_input.requestFocus()
+            return
+        }
+        if (!password_information.equals(repassword_information)) {
+            repeat_password_input.error = "Passwords are not the same."
+            repeat_password_input.requestFocus()
+            return
         }
 
+        username_information = email_information
+        val userInfo = BasicUser(
+            username_information,
+            username_information,
+            firstname_information,
+            lastname_information,
+            password_information,
+            location_information,
+            true
+        )
+        intent.putExtra("userInfo", userInfo)
+        intent.putExtra("googleUser", 0)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
+        finish()
+
     }
-    fun goToLoginFromRegister(view : View) {
+
+    fun goToLoginFromRegister(view: View) {
         startActivity(Intent(this, LoginPageActivity::class.java))
     }
 
@@ -186,11 +191,12 @@ class SignUpPageActivity : AppCompatActivity() {
 
     }
 
-    private fun handleSignInResult(completedTask : Task<GoogleSignInAccount>) {
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
 
             val account = completedTask.getResult(ApiException::class.java)
             //Toast.makeText(this, "Signed in as: " + account?.displayName, Toast.LENGTH_SHORT).show()
+            var location_information = location_text.text.toString().trim()
 
             if (account != null) {
                 // send ID Token to server and register
@@ -199,7 +205,9 @@ class SignUpPageActivity : AppCompatActivity() {
                     account.email!!,
                     account.givenName!!,
                     account.familyName!!,
-                    "google11"
+                    "google11",
+                    location_information,
+                    true
                 )
                 val intent = Intent(this@SignUpPageActivity, SignUpPageTraderActivity::class.java)
 
@@ -214,7 +222,7 @@ class SignUpPageActivity : AppCompatActivity() {
             // TODO : Check BasicRegisterResponse to see if the backend server has registered and validated
 
 
-        } catch (e : ApiException) {
+        } catch (e: ApiException) {
 
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -238,7 +246,8 @@ class SignUpPageActivity : AppCompatActivity() {
         override fun onReceiveResult(resultCode: Int, resultData: Bundle?) {
             // Display the address string
             // or an error message sent from the intent service.
-            val addressOutput = resultData?.getString(FetchAddressIntentService.Constants.RESULT_DATA_KEY) ?: ""
+            val addressOutput =
+                resultData?.getString(FetchAddressIntentService.Constants.RESULT_DATA_KEY) ?: ""
 
             // If an address was found.
             if (resultCode == FetchAddressIntentService.Constants.SUCCESS_RESULT) {
@@ -256,12 +265,12 @@ class SignUpPageActivity : AppCompatActivity() {
         }
     }
 
-    private fun setLocation(addr : String) {
+    private fun setLocation(addr: String) {
         // Set the input_location text box to show the retrieved address
         input_location.setText(addr)
     }
 
-    private fun showToast(msg : String) {
+    private fun showToast(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
@@ -271,19 +280,28 @@ class SignUpPageActivity : AppCompatActivity() {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
-        fusedLocationClient.lastLocation.addOnSuccessListener { location : Location? ->
+        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
             // Got last known location. In some rare situations this can be null.
             if (location == null) {
 
                 // Allow user to manually enter an address
-                Toast.makeText(this, "Please enable GPS for address retrieval", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enable GPS for address retrieval", Toast.LENGTH_SHORT)
+                    .show()
                 input_location.inputType = InputType.TYPE_TEXT_VARIATION_POSTAL_ADDRESS
 
-                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
                     // Access_Fine_Location permission is granted
                     // Request location updates
                     val mLocationRequest = LocationRequest()
-                    fusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null)
+                    fusedLocationClient.requestLocationUpdates(
+                        mLocationRequest,
+                        mLocationCallback,
+                        null
+                    )
                 }
 
             } else {
@@ -296,7 +314,11 @@ class SignUpPageActivity : AppCompatActivity() {
 
         fusedLocationClient.lastLocation.addOnFailureListener {
 
-            Toast.makeText(this, "Please allow access to location services for address retrieval", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                this,
+                "Please allow access to location services for address retrieval",
+                Toast.LENGTH_LONG
+            ).show()
 
         }
     }
@@ -308,7 +330,11 @@ class SignUpPageActivity : AppCompatActivity() {
     }
 
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         getLocationAddress()
     }

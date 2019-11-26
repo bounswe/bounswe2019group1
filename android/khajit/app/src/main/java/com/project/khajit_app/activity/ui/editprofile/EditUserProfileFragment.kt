@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.ContentView
+import androidx.fragment.app.FragmentManager
 
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.ListViewAdapter
@@ -21,14 +22,15 @@ import com.project.khajit_app.activity.ui.profile.UserProfileViewModel
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.*
 import com.project.khajit_app.global.User
+import interfaces.fragmentOperationsInterface
 import kotlinx.android.synthetic.main.edit_user_profile_fragment.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class EditUserProfileFragment : Fragment() {
+class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
 
-
+    var containerId : ViewGroup? = null
 
     private lateinit var viewModel: EditUserProfileViewModel
     private lateinit var first_name: EditText
@@ -59,7 +61,7 @@ class EditUserProfileFragment : Fragment() {
         viewModel =
             ViewModelProviders.of(this).get(EditUserProfileViewModel::class.java)
         val root = inflater.inflate(R.layout.edit_user_profile_fragment, container, false)
-
+        containerId = container
 
         val bio_tex = root.findViewById(R.id.text_bio_edit) as TextView
         bio_tex.movementMethod = ScrollingMovementMethod()
@@ -122,7 +124,7 @@ class EditUserProfileFragment : Fragment() {
         return root
     }
 
-    fun upgrade_downgrade(root: View?) {
+    fun upgrade_downgrade(root: View) {
         var trader = User.type!!
         var iban_text = ""
         if(!trader) {
@@ -147,7 +149,6 @@ class EditUserProfileFragment : Fragment() {
                         println("NOT CHANGED")
                     }else{
                         println("CHANGED IBAN")
-
                     }
                 }else{
 
@@ -172,8 +173,8 @@ class EditUserProfileFragment : Fragment() {
                             println("NOT Upgraded")
                         }else{
                             println("UPGRADED")
-                            val intent = Intent (getActivity(), LoginPageActivity::class.java)
-                            getActivity()?.startActivity(intent)
+                            updateAfterRequest(root)
+                            goBackFragment()
                         }
                     }else{
 
@@ -198,8 +199,8 @@ class EditUserProfileFragment : Fragment() {
                             println("NOT Downgraded")
                         }else{
                             println("DOWNGRADED")
-                            val intent = Intent (getActivity(), LoginPageActivity::class.java)
-                            getActivity()?.startActivity(intent)
+                            updateAfterRequest(root)
+                            goBackFragment()
                         }
                     }else{
 
@@ -213,7 +214,7 @@ class EditUserProfileFragment : Fragment() {
         }
     }
 
-    fun changePrivacyMode(root: View?) {
+    fun changePrivacyMode(root: View) {
         val builder = AlertDialog.Builder(this.context)
         var priv_change = "Do you want to set your privacy mode as public (People can see your profile details without following you)"
         if(User.is_public == true){
@@ -239,7 +240,8 @@ class EditUserProfileFragment : Fragment() {
                             println("NOT CHANGED")
                         }else{
                             println("CHANGED")
-                            User.is_public = !public!!
+                            updateAfterRequest(root)
+                            goBackFragment()
                         }
                     }else{
 
@@ -297,8 +299,8 @@ class EditUserProfileFragment : Fragment() {
             return
         }
         if(phone_number.text.length != 12) {
-            title.error = "Length of the phone number should be 12 (90532...)"
-            title.requestFocus()
+            phone_number.error = "Length of the phone number should be 12 (90532...)"
+            phone_number.requestFocus()
             return
         }
 
@@ -316,6 +318,7 @@ class EditUserProfileFragment : Fragment() {
                     }else{
                         println("CHANGED")
                         updateAfterRequest(view)
+                        goBackFragment()
                     }
                 }else{
 
@@ -376,6 +379,7 @@ class EditUserProfileFragment : Fragment() {
                         old_pw.requestFocus()
                     }else{
                         println("CHANGED")
+                        removeDetails()
                         val intent = Intent (getActivity(), LoginPageActivity::class.java)
                         getActivity()?.startActivity(intent)
                     }
@@ -427,6 +431,28 @@ class EditUserProfileFragment : Fragment() {
         })
     }
 
+    fun goBackFragment() {
+        var parentActivityManager: FragmentManager = activity?.supportFragmentManager as FragmentManager
+        removeFragment(parentActivityManager)
+    }
+
+    fun removeDetails() {
+        User.token = ""
+        User.id = 0
+        User.username = ""
+        User.email = ""
+        User.first_name = ""
+        User.last_name = ""
+        // if the user is trader type info will be true otherwise user is basic and type info will be false
+        User.type = false
+        User.title = "No title"
+        User.bio = "No bio"
+        User.location = ""
+        User.phone_number = ""
+        User.iban_number = ""
+        User.is_public = true
+        User.whereIamAsId = 0 //it may be unnecessary to keep
+    }
 
 }
 
