@@ -74,7 +74,7 @@ export default function ArticlesPage(props) {
               </Grid>
               <Grid item>
                 <Typography variant="body2" style={{ cursor: "pointer" }}>
-                  Author: {value.author.username}
+                  Author: {value.author.first_name + " " + value.author.last_name}
                 </Typography>
                 <div style={{ float: "right" }}>
                   <Link
