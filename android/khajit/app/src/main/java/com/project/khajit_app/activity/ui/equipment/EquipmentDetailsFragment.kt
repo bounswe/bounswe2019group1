@@ -30,7 +30,7 @@ class EquipmentDetailsFragment : Fragment(), fragmentOperationsInterface {
         equipmentName.text = arguments?.getString("equipment")
 
         val equipmentValue = root.findViewById(R.id.details_equipment_value) as TextView
-        equipmentValue.text = "$ " + arguments?.getString("value")
+        equipmentValue.text = arguments?.getString("value")
 
         val equipmentBuy = root.findViewById(R.id.details_equipment_buy) as Button
         val equipmentSell = root.findViewById(R.id.details_equipment_sell) as Button

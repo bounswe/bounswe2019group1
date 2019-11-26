@@ -17,6 +17,7 @@ import com.project.khajit_app.activity.ui.equipment.EquipmentFragment
 import com.project.khajit_app.activity.ui.home.HomeFragment
 import com.project.khajit_app.activity.ui.mailbox.MailboxFragment
 import com.project.khajit_app.activity.ui.notifications.NotificationsFragment
+import com.project.khajit_app.activity.ui.profile.DepositFundsFragment
 import com.project.khajit_app.activity.ui.profile.UserProfile
 import com.project.khajit_app.activity.ui.search.SearchFragment
 import com.project.khajit_app.global.User
@@ -130,8 +131,15 @@ class HomeFeedPageActivity : AppCompatActivity() , fragmentOperationsInterface{
             true
         }
         R.id.deposit_top_menu_item -> {
-            val profileFragment = UserProfile.Companion.newInstance()
-            changeFragment(profileFragment)
+            val depositFragment = DepositFundsFragment.newInstance()
+            fragmentTransaction(
+                supportFragmentManager,
+                depositFragment,
+                R.id.homePageContent,
+                false,
+                true,
+                false
+            )
             true
         }
         R.id.profile_top_menu_item -> {

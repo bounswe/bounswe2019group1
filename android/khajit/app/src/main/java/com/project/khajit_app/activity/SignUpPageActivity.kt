@@ -49,6 +49,7 @@ class SignUpPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
+        location_text = findViewById(R.id.input_location)
 
         if (ContextCompat.checkSelfPermission(
                 this,

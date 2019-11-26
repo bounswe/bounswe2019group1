@@ -271,12 +271,12 @@
             android:text="Commodities" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_xau_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
             android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="commodityXAU"
             android:backgroundTint="@color/lightGray">
 
             <LinearLayout
@@ -307,12 +307,12 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_xag_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
             android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="commodityXAG"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -343,43 +343,6 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
-            android:layout_marginHorizontal="24dp"
-            android:layout_weight="1"
-            android:onClick="commodityXRH"
-            android:shadowColor="@color/darkGray"
-            android:backgroundTint="@color/lightGray" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/commodity_rhenium"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_horizontal"
-                    android:padding="12dp"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:text="Rhenium (XRH)" />
-
-                <TextView
-                    android:id="@+id/value_rhenium"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="12dp"
-                    android:layout_weight="1"
-                    android:text="-" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -390,12 +353,12 @@
             android:text="Stocks" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_googl_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
             android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="stockGOOGL"
             android:backgroundTint="@color/lightGray">
 
             <LinearLayout
@@ -426,12 +389,12 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_aapl_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
             android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="stockAAPL"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -464,12 +427,12 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_gm_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
             android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="stockGM"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -511,12 +474,12 @@
             android:text="Trade Indices" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_dji_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
             android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="tradeDJI"
             android:backgroundTint="@color/lightGray">
 
             <LinearLayout
@@ -548,12 +511,12 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_ixic_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
             android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="tradeIXIC"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -586,12 +549,12 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_inx_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
             android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="tradeINX"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -633,12 +596,12 @@
             android:text="ETFs" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_spy_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
             android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="etfSPY"
             android:backgroundTint="@color/lightGray">
 
             <LinearLayout
@@ -669,12 +632,12 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_ivv_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
             android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="etfIVV"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -706,12 +669,12 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_vti_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="8dp"
             android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="etfVTI"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 

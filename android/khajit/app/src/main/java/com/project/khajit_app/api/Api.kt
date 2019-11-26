@@ -102,7 +102,7 @@ interface Api {
 
     @Headers("Content-Type: application/json")
     @GET("equipment/stock/")
-    fun stockValues():Call<List<Stock>>
+    fun stockValues():Call<StockResponse>
 
     @Headers("Content-Type: application/json")
     @GET("equipment/traceindices/")

@@ -29,7 +29,7 @@ class EquipmentBuyFragment : Fragment(), fragmentOperationsInterface {
         equipmentName.text = "BUY: " + arguments?.getString("equipment")
 
         val equipmentValue = root.findViewById(R.id.buy_equipment_value) as TextView
-        equipmentValue.text = "from: $" + arguments?.getString("value")
+        equipmentValue.text = "from: " + arguments?.getString("value")
 
         val buyAmount = root.findViewById(R.id.equipment_buy_amount) as EditText
         val buyButton = root.findViewById(R.id.equipment_buy_button) as Button
