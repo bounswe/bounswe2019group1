@@ -3,6 +3,7 @@ from django.shortcuts import render
 import json
 from rest_framework.response import Response
 from datetime import datetime, timedelta
+from collections import OrderedDict
 
 
 from rest_framework.exceptions import ValidationError
@@ -35,6 +36,29 @@ class CurrencyAPI(ListAPIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, 200)
+
+
+class CurrencyAPILastMonth(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        '''
+        find this request in
+        https://www.exchangerate-api.com sign up and read the documentation
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        '''
+        start_date = datetime.now() - timedelta(days=30)
+        one_month=start_date.strftime('%Y-%m-%d')
+        today=datetime.today().strftime('%Y-%m-%d')
+        url = 'https://api.exchangeratesapi.io/history?start_at='+one_month+'&end_at='+today+'&symbols=EUR,GBP,TRY&base=USD'
+        headers = {}
+        response = requests.request('GET', url, headers=headers, allow_redirects=False)
+        ret=json.loads(response.text)
+        ser = ret['rates']
+        ser=OrderedDict(sorted(ser.items(), key=lambda t: t[0]))
+        return Response(ser, 200)
 
 
 class CurrencyConverterAPI(ListAPIView):
@@ -79,6 +103,46 @@ class CryptoCurrencyAPI(ListAPIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, 200)
+
+
+class CryptoCurrencyHistoricalAPI(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        '''
+        find this request in
+        https://coinlayer.com/ sign up and read the documentation
+        :param request:
+        :param args:
+        :param kwargs:
+        :return:
+        '''
+        url = 'https://min-api.cryptocompare.com/data/v2/histoday?fsym=ETH&tsym=USD&limit=30'
+        headers = {}
+        response = requests.request('GET', url, headers=headers, allow_redirects=False)
+        ret = json.loads(response.text)
+        data=ret['Data']['Data']
+        ret_arr_eth=[]
+        for i in range (0,30):
+            ret_arr_eth.append(data[i]['close'])
+        url = 'https://min-api.cryptocompare.com/data/v2/histoday?fsym=LTC&tsym=USD&limit=30'
+        headers = {}
+        response = requests.request('GET', url, headers=headers, allow_redirects=False)
+        ret = json.loads(response.text)
+        data=ret['Data']['Data']
+        ret_arr_ltc=[]
+        for i in range (0,30):
+            ret_arr_ltc.append(data[i]['close'])
+        url = 'https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=USD&limit=30'
+        headers = {}
+        response = requests.request('GET', url, headers=headers, allow_redirects=False)
+        ret = json.loads(response.text)
+        data = ret['Data']['Data']
+        ret_arr_btc = []
+        for i in range(0, 30):
+            ret_arr_btc.append(data[i]['close'])
+
+        ret_dict={'LTC':ret_arr_ltc,'BTC':ret_arr_btc,'ETH':ret_arr_eth}
+        return Response(ret_dict, 200)
 
 
 class MetalCurrencyAPI(ListAPIView):
