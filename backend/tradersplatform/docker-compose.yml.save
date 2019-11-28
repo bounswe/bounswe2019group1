@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  web:
+    build: .
+    restart: always
+    image: registry.docker.dev/traders
+    command: >
+      bash -c "python /app/manage.py makemigrations 
+&& python /app/manage.py migrate && python /app/manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app/
+
+  db:
+    image: postgres
+    restart: always
+    container_name: "my_postgres"
+    ports:
+      - "54320:5432"
+    environment:
+      POSTGRES_PASSWORD: traders.com
+      POSTGRES_USER: trader
+      POSTGRES_DB: traderdb
+    volumes:
+      - my_dbdata:/var/lib/postgresql/data
+volumes:
+  my_dbdata:

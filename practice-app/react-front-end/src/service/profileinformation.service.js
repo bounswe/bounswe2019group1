@@ -16,3 +16,9 @@ export function getProfileInfo() {
     })
     .then(res => (res.status === 200 ? res.data : null));
 }
+
+export function getProfilePhoto(image_path) {
+  return axios
+    .get(`${image_path}`)
+    .then(res => (res.status === 200 ? res.data : null));
+}
