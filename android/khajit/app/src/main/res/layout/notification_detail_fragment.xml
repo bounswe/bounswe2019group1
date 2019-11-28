@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_notification_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ui.notificationdetails.notificationDetailFragment">
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".activity.ui.notifications.NotificationsFragment">
 
 
     <ImageView
@@ -12,8 +17,64 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/notification_example" />
 
-</FrameLayout>
+
+    <EditText
+        android:id="@+id/notificationDetailTestEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Deneme"
+        android:inputType="text"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageNotificationDetail"
+        app:layout_constraintVertical_bias="0.109" />
+
+    <Button
+        android:id="@+id/buttonNotificationDetailTest"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_gravity="start"
+        android:layout_marginBottom="100dp"
+        android:backgroundTint="#B5A33535"
+        android:enabled="true"
+        android:text="TEST -REMOVE"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notificationDetailTestEditText"
+        app:layout_constraintVertical_bias="0.109" />
+
+    <Button
+        android:id="@+id/buttonNotificationDetailTest2"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:layout_gravity="start"
+        android:layout_marginBottom="100dp"
+        android:backgroundTint="#B5A33535"
+        android:enabled="true"
+        android:text="TEST2 - DEATTACH"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonNotificationDetailTest"
+        app:layout_constraintVertical_bias="0.109" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

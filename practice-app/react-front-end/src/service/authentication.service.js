@@ -2,7 +2,6 @@ import { environment } from "../environments/environment.prod";
 // import { handleResponse } from "../utils/responseHandlers";
 import axios from "axios";
 
-
 export function login(username, password) {
   const requestOptions = {
     headers: {
