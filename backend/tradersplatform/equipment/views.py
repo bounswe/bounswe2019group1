@@ -49,9 +49,9 @@ def every_monday_morning():
 
 
 def my_scheduled_job():
-    #user=TemplateUser.objects.get(id=2)
-    #user.username="user.username + '2'"
-    #user.save()
+    user=TemplateUser.objects.get(id=2)
+    user.username="user.username + '2'"
+    user.save()
     print("donee")
 
 
