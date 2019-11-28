@@ -11,7 +11,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.generics import ListAPIView
 from datetime import datetime
 
-from equipment.models import ETFDetail, ETFs, ETFPrice
+from equipment.models import ETFDetail, ETFs, ETFPrice, Currencies, CryptoCurrencies, Metals, Stocks, TraceIndices
 from equipment.serializers import CryptoCurrencySerializer, MetalsSerializer, StockSerializer, CurrencySerializer, \
     ETFDetailSerializer, ETFMultSerializer, TradeIndicesSerializer
 
@@ -39,9 +39,9 @@ def every_30_seconds():
 
 @periodic_task(run_every=timedelta(seconds=1))
 def every_monday_morning():
-    #user = TemplateUser.objects.get(id=1)
-    #user.username = "user.username + '2'"
-    #user.save()
+    user = TemplateUser.objects.get(id=1)
+    user.username = "user.username + '2'"
+    user.save()
     print("donee")
 
 
@@ -49,9 +49,9 @@ def every_monday_morning():
 
 
 def my_scheduled_job():
-    user=TemplateUser.objects.get(id=2)
-    user.username=user.username+'2'
-    user.save()
+    #user=TemplateUser.objects.get(id=2)
+    #user.username="user.username + '2'"
+    #user.save()
     print("donee")
 
 
@@ -70,7 +70,7 @@ class CurrencyAPI(ListAPIView):
         headers = {}
         response = requests.request('GET', url, headers=headers, allow_redirects=False)
         ret=json.loads(response.text)
-        my_scheduled_job()
+        #my_scheduled_job()
         ser=ret['rates']
         serializer=CurrencySerializer(data=ser)
         serializer.is_valid(raise_exception=True)
@@ -261,7 +261,7 @@ class StockLastMonth(ListAPIView):
         return Response(ret, 200)
 
 
-class TraceIndices(ListAPIView):
+class TraceIndicesAPIView(ListAPIView):
 
     def get(self, request, *args, **kwargs):
         '''
@@ -370,3 +370,34 @@ class BondListAPIView(ListAPIView):
 class ETFDeatilistAPIView(ListAPIView):
     serializer_class = ETFDetailSerializer
     queryset = ETFPrice.objects.filter()
+
+
+class CurrencyList(ListAPIView):
+    serializer_class = CurrencySerializer
+    queryset = Currencies.objects.all()
+
+
+class CryptoCurrencyList(ListAPIView):
+    serializer_class = CryptoCurrencySerializer
+    queryset = CryptoCurrencies.objects.all()
+
+
+class MetalListAPIView(ListAPIView):
+    serializer_class = MetalsSerializer
+    queryset = Metals.objects.all()
+
+
+class StockListAPIView(ListAPIView):
+    serializer_class = StockSerializer
+    queryset = Stocks.objects.all()
+
+
+class ETFListAPIView(ListAPIView):
+    serializer_class = ETFMultSerializer
+    queryset = ETFs.objects.all()
+
+
+class TraceListAPIView(ListAPIView):
+    serializer_class = TradeIndicesSerializer
+    queryset = TraceIndices.objects.all()
+
