@@ -39,9 +39,9 @@ def every_30_seconds():
 
 @periodic_task(run_every=timedelta(seconds=1))
 def every_monday_morning():
-    user = TemplateUser.objects.get(id=1)
-    user.username = "user.username + '2'"
-    user.save()
+    #user = TemplateUser.objects.get(id=1)
+    #user.username = "user.username + '2'"
+    #user.save()
     print("donee")
 
 
