@@ -219,21 +219,6 @@ def update_wealth(wallet):
 
 
 
-    '''        if name == 'BTC':
-                last=CryptoCurrencies.objects.all().last()
-                currency=last.BTC
-                subtract_usd=currency*amount
-                curr_usd=curr_wallet.USD
-                if curr_usd < subtract_usd:
-                    raise ValidationError({"detail": "You can not afford this amount"})
-                else:
-                    curr_wallet.USD=curr_usd-subtract_usd
-                    curr_wallet.BTC=amount
-                    curr_wallet.save()
-                print("")
-            else:
-                print("as")'''
-
 
 
 

@@ -11,6 +11,10 @@ backend/tradersplatform/APPNAME.log
 .idea
 traders_virtualenv
 
+/*dbdata
+dbdata*/
+backend/tradersplatform/dbdata
+backend/tradersplatform/dbdata/
 /*__pycache__
 __pycache__
 __pycache__/*
