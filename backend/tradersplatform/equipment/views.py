@@ -15,6 +15,45 @@ from equipment.models import ETFDetail, ETFs, ETFPrice
 from equipment.serializers import CryptoCurrencySerializer, MetalsSerializer, StockSerializer, CurrencySerializer, \
     ETFDetailSerializer, ETFMultSerializer, TradeIndicesSerializer
 
+from celery.schedules import crontab
+from celery.task import periodic_task
+
+from myuser.models import TemplateUser
+
+from django_cron import CronJobBase, Schedule
+
+
+class MyCronJob(CronJobBase):
+    RUN_EVERY_MINS = 120 # every 2 hours
+
+    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
+    code = 'my_app.my_cron_job'    # a unique code
+
+    def do(self):
+        pass    # do your thing here
+
+@periodic_task(run_every=timedelta(seconds=30))
+def every_30_seconds():
+    print("Running periodic task!")
+
+
+@periodic_task(run_every=timedelta(seconds=1))
+def every_monday_morning():
+    user = TemplateUser.objects.get(id=1)
+    user.username = "user.username + '2'"
+    user.save()
+    print("donee")
+
+
+
+
+
+def my_scheduled_job():
+    user=TemplateUser.objects.get(id=2)
+    user.username=user.username+'2'
+    user.save()
+    print("donee")
+
 
 class CurrencyAPI(ListAPIView):
 
@@ -31,6 +70,7 @@ class CurrencyAPI(ListAPIView):
         headers = {}
         response = requests.request('GET', url, headers=headers, allow_redirects=False)
         ret=json.loads(response.text)
+        my_scheduled_job()
         ser=ret['rates']
         serializer=CurrencySerializer(data=ser)
         serializer.is_valid(raise_exception=True)
@@ -50,6 +90,7 @@ class CurrencyAPILastMonth(ListAPIView):
         :return:
         '''
         start_date = datetime.now() - timedelta(days=30)
+        print(datetime.now())
         one_month=start_date.strftime('%Y-%m-%d')
         today=datetime.today().strftime('%Y-%m-%d')
         url = 'https://api.exchangeratesapi.io/history?start_at='+one_month+'&end_at='+today+'&symbols=EUR,GBP,TRY&base=USD'

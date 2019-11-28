@@ -54,6 +54,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_results',
+    'django_crontab',
+    'django_cron',
     'corsheaders',
     'rest_framework',
     'myuser',
@@ -64,6 +67,18 @@ INSTALLED_APPS = [
     'article',
     'article_comment',
 ]
+
+CRON_CLASSES = [
+    "equipment.views.MyCronJob",
+    # ...
+]
+
+
+CRONJOBS = [
+    ('*/1 * * * *', 'equipment.views.my_scheduled_job')
+]
+
+CELERY_RESULT_BACKEND = 'traderdb'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
