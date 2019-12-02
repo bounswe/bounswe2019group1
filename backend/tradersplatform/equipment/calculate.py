@@ -44,6 +44,7 @@ def calculate_cryptocurrency():
     :param kwargs:
     :return:
     '''
+    print("aaaaaa")
     url = 'http://api.coinlayer.com/api/live?access_key=9fdc61fa75c3cfce8e1e5fd50f362113'
     headers = {}
     response = requests.request('GET', url, headers=headers, allow_redirects=False)

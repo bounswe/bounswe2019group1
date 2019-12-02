@@ -1,3 +1,4 @@
+from __future__ import absolute_import, unicode_literals
 import requests
 from django.shortcuts import render
 import json
@@ -17,11 +18,22 @@ from equipment.serializers import CryptoCurrencySerializer, MetalsSerializer, St
 
 from celery.schedules import crontab
 from celery.task import periodic_task
+from celery import shared_task
 
 from myuser.models import TemplateUser
 
-from django_cron import CronJobBase, Schedule
 
+'''from django_cron import CronJobBase, Schedule
+
+
+from celery import task
+'''
+'''@task()
+def task_number_one():
+    user = TemplateUser.objects.get(id=1)
+    user.username = "sonuncu deneme"
+    user.save()
+    print("donee")
 
 class MyCronJob(CronJobBase):
     RUN_EVERY_MINS = 120 # every 2 hours
@@ -32,17 +44,17 @@ class MyCronJob(CronJobBase):
     def do(self):
         pass    # do your thing here
 
-@periodic_task(run_every=timedelta(seconds=30))
+@shared_task(run_every=timedelta(seconds=30))
 def every_30_seconds():
     print("Running periodic task!")
 
 
-@periodic_task(run_every=timedelta(seconds=1))
+@shared_task(run_every=timedelta(seconds=1))
 def every_monday_morning():
     user = TemplateUser.objects.get(id=1)
     user.username = "user.username + '2'"
     user.save()
-    print("donee")
+    print("donee")'''
 
 
 
@@ -50,7 +62,7 @@ def every_monday_morning():
 
 def my_scheduled_job():
     user=TemplateUser.objects.get(id=2)
-    user.username="user.username + '2'"
+    user.username=user.username+"1"
     user.save()
     print("donee")
 
@@ -70,7 +82,7 @@ class CurrencyAPI(ListAPIView):
         headers = {}
         response = requests.request('GET', url, headers=headers, allow_redirects=False)
         ret=json.loads(response.text)
-        #my_scheduled_job()
+        my_scheduled_job()
         ser=ret['rates']
         serializer=CurrencySerializer(data=ser)
         serializer.is_valid(raise_exception=True)
