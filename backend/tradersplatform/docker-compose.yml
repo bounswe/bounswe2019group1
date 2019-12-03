@@ -14,11 +14,13 @@ services:
       - .:/app/
 
   backendcron:
-    build: .
+    image: registry.docker.dev/traderscron
     command: bash -c "sh /app/cron.sh"
     restart: always
     environment:
       DJANGO_SETTINGS_MODULE: tradersplatform.settings.base
+    volumes:
+      - .:/app/
 
 
   db:
