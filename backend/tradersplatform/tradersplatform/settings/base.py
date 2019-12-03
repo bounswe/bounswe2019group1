@@ -11,10 +11,11 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 import datetime
 import os
+from datetime import timedelta
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
+from celery.schedules import crontab
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -22,6 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'q^4h&mi0ldly58-!5_ttj(&^o008ux6z%o9f69e1w3^6n@q$1f'
 
+# SECURITY WARNING: don't run with debug turned on in production!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -69,23 +71,6 @@ INSTALLED_APPS = [
     'article_comment',
 ]
 
-CRON_CLASSES = [
-    "equipment.views.MyCronJob",
-    # ...
-]
-
-#    ('*/1 * * * *', 'equipment.calculate.calculate_metal_currency'),
-CRONJOBS = [
-    ('0 */2 * * *', 'equipment.calculate.calculate_metal_currency'),
-    ('*/1 * * * *', 'equipment.views.my_scheduled_job'),
-    ('0 */2 * * *', 'equipment.calculate.calculate_etf'),
-    ('0 */2 * * *', 'equipment.calculate.calculate_trace_indices'),
-    ('0 */2 * * *', 'equipment.calculate.calculate_stock_currency'),
-    ('0 */2 * * *', 'equipment.calculate.calculate_cryptocurrency'),
-    ('0 */2 * * *', 'equipment.calculate.calculate_currency')
-]
-
-CELERY_RESULT_BACKEND = 'traderdb'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -119,9 +104,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'tradersplatform.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
     'default': {

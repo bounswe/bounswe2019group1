@@ -5,4 +5,3 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-CELERY_RESULT_BACKEND = 'db.sqlite3'

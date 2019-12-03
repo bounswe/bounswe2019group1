@@ -7,11 +7,21 @@ services:
     restart: always
     image: registry.docker.dev/traders
     command: >
-      bash -c "python manage.py crontab add && python /app/manage.py makemigrations && python /app/manage.py migrate && python /app/manage.py runserver 0.0.0.0:8000"
+      bash -c "python /app/manage.py makemigrations && python /app/manage.py migrate && python /app/manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
     volumes:
       - .:/app/
+
+  backendcron:
+    image: registry.docker.dev/traderscron
+    command: bash -c "sh /app/cron.sh"
+    restart: always
+    environment:
+      DJANGO_SETTINGS_MODULE: tradersplatform.settings.base
+    volumes:
+      - .:/app/
+
 
   db:
     image: postgres
@@ -28,3 +38,4 @@ services:
 
 volumes:
   dbdata:
+

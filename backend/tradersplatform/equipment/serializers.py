@@ -1,37 +1,25 @@
 from rest_framework.serializers import ModelSerializer
 
-from equipment.models import CryptoCurrencies, Metals, Stocks, Currencies, ETFs, ETFDetail, TraceIndices, ETFPrice
+from equipment.models import CryptoCurrencies, Metals, Stocks, Currencies, ETFs, ETFDetail, TraceIndices, ETFPrice, \
+    ETFInformation
 
 
 class CryptoCurrencySerializer(ModelSerializer):
     class Meta:
         model = CryptoCurrencies
-        fields = [
-            "BTC",
-            "ETH",
-            "LTC"
-        ]
+        fields = '__all__'
 
 
 class MetalsSerializer(ModelSerializer):
     class Meta:
         model = Metals
-        fields = [
-            "id",
-            "XAG",
-            "XAU"
-        ]
+        fields = '__all__'
 
 
 class StockSerializer(ModelSerializer):
     class Meta:
         model = Stocks
-        fields = [
-            "id",
-            "GOOGL",
-            "AAPL",
-            "GM"
-        ]
+        fields = '__all__'
 
 
 class CurrencySerializer(ModelSerializer):
@@ -65,4 +53,11 @@ class ETFMultSerializer(ModelSerializer):
 
     class Meta:
         model = ETFs
+        fields = '__all__'
+
+
+class ETFInfoSerializer(ModelSerializer):
+
+    class Meta:
+        model = ETFInformation
         fields = '__all__'
