@@ -72,17 +72,6 @@ INSTALLED_APPS = [
 ]
 
 
-CRONJOBS = [
-    ('0 */2 * * *', 'equipment.calculate.calculate_metal_currency'),
-    ('*/1 * * * *', 'equipment.views.my_scheduled_job'),
-    ('0 */2 * * *', 'equipment.calculate.calculate_etf'),
-    ('0 */2 * * *', 'equipment.calculate.calculate_trace_indices'),
-    ('0 */2 * * *', 'equipment.calculate.calculate_stock_currency'),
-    ('0 */2 * * *', 'equipment.calculate.calculate_cryptocurrency'),
-    ('0 */2 * * *', 'equipment.calculate.calculate_currency')
-]
-
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

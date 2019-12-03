@@ -7,7 +7,7 @@ services:
     restart: always
     image: registry.docker.dev/traders
     command: >
-      bash -c "python /app/manage.py crontab add && python /app/manage.py makemigrations && python /app/manage.py migrate && python /app/manage.py runserver 0.0.0.0:8000"
+      bash -c "python /app/manage.py makemigrations && python /app/manage.py migrate && python /app/manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
     volumes:

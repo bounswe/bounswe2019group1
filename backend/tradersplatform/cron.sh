@@ -3,5 +3,5 @@
 while :
 do
 	python equipmentupdate.py
-	sleep 10;
+	sleep 3600;
 done
