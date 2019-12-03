@@ -2,6 +2,6 @@
 
 while :
 do
-  sleep 3600;
+  sleep 21600;
 	python equipmentupdate.py
 done

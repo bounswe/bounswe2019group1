@@ -6,6 +6,7 @@ backend/tradersplatform/db.sqlite3
 backend/tradersplatform/media
 backend/tradersplatform/media/profile
 backend/tradersplatform/APPNAME.log
+backend/tradersplatform/docker-compose.yml
 .DS_Store
 ./.DS_Store
 .idea
