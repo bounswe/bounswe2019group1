@@ -17,4 +17,4 @@ python manage.py makemigrations --settings=mobilfuar.settings.sqlite
 python manage.py migrate --settings=mobilfuar.settings.sqlite
 After that you can run the project:
 python manage.py runserver --settings=mobilfuar.settings.sqlite
-*settins in manage.py actually for docker run so setting should be given by hand when running locally
+*settings in manage.py actually for docker run so setting should be given by hand when running locally
