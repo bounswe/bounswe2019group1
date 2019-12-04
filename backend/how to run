@@ -13,8 +13,8 @@ You should create virtual environment for only first time but activate every tim
 Then you should install packages in requirements if any new package was added to project :
 pip install -r requirements.txt
 Then the project is ready to go. To create or update database:
-python manage.py makemigrations --settings=mobilfuar.settings.sqlite
-python manage.py migrate --settings=mobilfuar.settings.sqlite
+python manage.py makemigrations --settings=mobilfuar.settings.local
+python manage.py migrate --settings=mobilfuar.settings.local
 After that you can run the project:
-python manage.py runserver --settings=mobilfuar.settings.sqlite
+python manage.py runserver --settings=mobilfuar.settings.local
 *settings in manage.py actually for docker run so setting should be given by hand when running locally
