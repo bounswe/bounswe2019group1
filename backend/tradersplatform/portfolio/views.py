@@ -1,13 +1,13 @@
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework.generics import CreateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView
 from rest_framework.views import APIView
 
 from follow.views import check_if_user
 from myuser.models import TemplateUser
 from portfolio.models import Portfolio
-from portfolio.serializers import PortfolioSerializer
+from portfolio.serializers import PortfolioSerializer, PortfolioListSerializer
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 from django.apps import apps
@@ -56,3 +56,10 @@ class RetrievePortfolioAPIView(APIView):
                 last = equipment.objects.all().last()
                 dict[list_currencies[i]]=getattr(last, list_currencies[i])
         return Response(dict,status=200)
+
+
+class ListPortfolioAPIView(ListAPIView):
+    serializer_class = PortfolioListSerializer
+
+    def get_queryset(self):
+        return Portfolio.objects.filter(owner__id=self.kwargs.get("pk"))
