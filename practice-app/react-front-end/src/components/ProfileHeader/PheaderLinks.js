@@ -200,22 +200,23 @@ export default function PheaderLinks() {
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
         <div className={classes.search}>
-          <Autocomplete
-              freeSolo
-              id="free-solo-2-demo"
-              disableClearable
-              options={top100Films.map(option => option.title)}
-              style={{ width: 300 }}
-              renderInput={params => (
-                <TextField
-                  {...params}
-                  label="Search..."
-                  variant="outlined"
-                  fullWidth
-                  InputProps={{ ...params.InputProps, type: 'search' }}
-                />
-              )}
+        <Autocomplete
+          freeSolo
+          id="free-solo-2-demo"
+          disableClearable
+          options={top100Films.map(option => option.title)}
+          style = {{width:300}}
+          renderInput={params => (
+            <TextField
+              {...params}
+              label="Search input"
+              margin="normal"
+              variant="outlined"
+              fullWidth
+              InputProps={{ ...params.InputProps, type: 'search' }}
             />
+          )}
+        />
         </div>
         <Link to="/articles" color="transparent">
           <Button className={classes.button} color="primary" target="_self">
@@ -243,6 +244,9 @@ export default function PheaderLinks() {
             </Link>,
             <Link to="/edit-profile" className={classes.dropdownLink} key="">
               Edit Profile
+            </Link>,
+            <Link to="/Notifications" className={classes.dropdownLink} key="">
+              Notifications
             </Link>,
             <Link
               to="/"
