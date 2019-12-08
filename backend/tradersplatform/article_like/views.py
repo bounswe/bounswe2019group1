@@ -64,7 +64,7 @@ class ListLikedArticlesAPIView(ListAPIView):
 
     def get(self, request, *args, **kwargs):
         check_if_user(request)
-        user_id = request.data['user_id']
+        user_id = kwargs.get("pk")
         user = TemplateUser.objects.get(id=user_id)
         query = ArticleLike.objects.filter(user=user)
         serializer = LikedArticleListSerializer(query, many=True)
@@ -75,7 +75,7 @@ class ListDislikedArticlesAPIView(ListAPIView):
 
     def get(self, request, *args, **kwargs):
         check_if_user(request)
-        user_id = request.data['user_id']
+        user_id = kwargs.get("pk")
         user = TemplateUser.objects.get(id=user_id)
         query = ArticleDislike.objects.filter(user=user)
         serializer = DislikedArticleListSerializer(query, many=True)
@@ -86,7 +86,7 @@ class ArticleLikesAPIView(ListAPIView):
 
     def get(self, request, *args, **kwargs):
         check_if_user(request)
-        article_id = request.data['article_id']
+        article_id = kwargs.get("pk")
         article = Article.objects.get(id=article_id)
         query = ArticleLike.objects.filter(article=article)
         serializer = ArticleLikeListSerializer(query, many=True)
@@ -97,7 +97,7 @@ class ArticleDislikesAPIView(ListAPIView):
 
     def get(self, request, *args, **kwargs):
         check_if_user(request)
-        article_id = request.data['article_id']
+        article_id = kwargs.get("pk")
         article = Article.objects.get(id=article_id)
         query = ArticleDislike.objects.filter(article=article)
         serializer = ArticleDislikeListSerializer(query, many=True)
@@ -108,7 +108,7 @@ class CountArticleLikeAPIView(DestroyAPIView):
 
     def get(self, request, *args, **kwargs):
         check_if_user(request)
-        article_id = request.data['article_id']
+        article_id = kwargs.get("pk")
         article = Article.objects.get(id=article_id)
         count = ArticleLike.objects.filter(article=article).count()
         return Response(data=count, status=200)
@@ -118,7 +118,7 @@ class CountArticleDislikeAPIView(UpdateAPIView):
 
     def get(self, request, *args, **kwargs):
         check_if_user(request)
-        article_id = request.data['article_id']
+        article_id = kwargs.get("pk")
         article = Article.objects.get(id=article_id)
         count = ArticleDislike.objects.filter(article=article).count()
         return Response(data=count, status=200)
