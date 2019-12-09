@@ -23,9 +23,6 @@ import logging
 import time
 
 
-
-
-
 class TempUserCreateAPIView(CreateAPIView):
     serializer_class = TempUserCreateSerializer
     queryset = TemplateUser.objects.filter()
