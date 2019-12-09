@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'event',
     'follow',
     'equipment',
+    'portfolio',
     'wallet',
     'article',
     'article_like',
