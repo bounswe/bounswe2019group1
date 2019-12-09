@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'follow',
     'equipment',
     'portfolio',
+    'notification',
     'wallet',
     'article',
     'article_like',
