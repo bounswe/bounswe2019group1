@@ -27,6 +27,25 @@ class CreatePortfolioAPIView(CreateAPIView):
         return Response(serializer.data, status=200)
 
 
+class UpdatePortfolioAPIView(CreateAPIView):
+
+    def put(self, request, *args, **kwargs):
+        check_if_user(request)
+        id = kwargs.get("pk")
+        owner_id=request.user.id
+        portfolio=Portfolio.objects.filter().first()
+        if not portfolio:
+            raise ValidationError({"detail": "Portfolit does not exist"})
+        user_id = portfolio.owner.id
+        if user_id != owner_id:
+            raise ValidationError({"detail": "Portfolio does not belong to you"})
+        print("")
+        serializer=PortfolioSerializer(portfolio,data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=200)
+
+
 class RetrievePortfolioAPIView(APIView):
 
     def get(self, request, *args, **kwargs):
