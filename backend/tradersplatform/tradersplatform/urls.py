@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^wallet/', include('wallet.urls')),
     url(r'^portfolio/', include('portfolio.urls')),
     url(r'^notification/', include('notification.urls')),
+    url(r'^prediction/', include('prediction.urls')),
     url(r'^article/', include('article.urls')),
     url(r'^article-comment/', include('article_comment.urls')),
 ]

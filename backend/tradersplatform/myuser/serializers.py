@@ -130,6 +130,12 @@ class UserUpdateSerializer(ModelSerializer):
                         }
 
 
+class UserDetailSerializer(ModelSerializer):
+    class Meta:
+        model = TemplateUser
+        fields =  '__all__'
+
+
 class TempUserListSerializer(ModelSerializer):
     class Meta:
         model = TemplateUser
