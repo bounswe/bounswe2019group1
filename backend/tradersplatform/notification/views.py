@@ -10,9 +10,10 @@ from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 from django.apps import apps
 
-from notification.functions import set_notification
+from notification.functions import set_notification, buy_order, sell_order
 from notification.models import Notification, SetNotification
-from notification.serializers import NotificationSerializer, SetNotificationSerializer
+from notification.serializers import NotificationSerializer, SetNotificationSerializer, BuyOrderSerializer, \
+    SellOrderSerializer
 from datetime import datetime,timedelta
 
 
@@ -39,6 +40,31 @@ class SetNotificationAPIView(CreateAPIView):
         return Response(serializer.data, status=200)
 
 
+class BuyOrderAPIView(CreateAPIView):
+
+    def post(self, request, *args, **kwargs):
+        check_if_user(request)
+        request_data = request.data
+        request_data['owner']=request.user.id
+        serializer=BuyOrderSerializer(data=request_data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=200)
+
+
+class SellOrderAPIView(CreateAPIView):
+
+    def post(self, request, *args, **kwargs):
+        check_if_user(request)
+        request_data = request.data
+        request_data['owner']=request.user.id
+        serializer=SellOrderSerializer(data=request_data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=200)
+
+
+
 class ListNotificationAPIView(ListAPIView):
     serializer_class = NotificationSerializer
     queryset = Notification.objects.filter()
@@ -55,7 +81,7 @@ class ListSetNotificationAPIView(ListAPIView):
     queryset = SetNotification.objects.filter()
 
     def get_queryset(self, *args, **kwargs):
-        set_notification()
+        sell_order()
         check_if_user(self.request)
         user_id=self.request.user.id
         a=Notification.objects.filter(owner__id=user_id)

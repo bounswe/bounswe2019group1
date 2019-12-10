@@ -19,3 +19,17 @@ class SetNotification(models.Model):
     currency = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')
     amount = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True, unique=False, default=0)
     is_bigger= models.BooleanField(default=True)
+
+
+class BuyOrder(models.Model):
+    owner = models.ForeignKey(TemplateUser, on_delete=models.CASCADE, default='',related_name='buy_order')
+    currency = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')
+    amount = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True, unique=False, default=0)
+    buy_amount = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True, unique=False, default=0)
+
+
+class SellOrder(models.Model):
+    owner = models.ForeignKey(TemplateUser, on_delete=models.CASCADE, default='',related_name='sell_order')
+    currency = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')
+    amount = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True, unique=False, default=0)
+    sell_amount = models.DecimalField(max_digits=20, decimal_places=10, blank=True, null=True, unique=False, default=0)
