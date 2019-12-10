@@ -5,6 +5,7 @@ from django.apps import apps
 from rest_framework.exceptions import ValidationError
 from datetime import datetime
 
+from prediction.models import Prediction
 from wallet.models import Wallet
 from wallet.views import update_wealth
 
@@ -61,6 +62,7 @@ def buy_order():
                 setattr(curr_wallet, currency, (wallet_amount + buy_amount))
                 update_wealth(curr_wallet)
                 curr_wallet.save()
+                buy_order.delete()
 
 
 def sell_order():
@@ -86,6 +88,29 @@ def sell_order():
                 setattr(curr_wallet, currency, (wallet_amount - sell_amount))
                 update_wealth(curr_wallet)
                 curr_wallet.save()
+                sell_order.delete()
+
+
+def predict():
+    query = Prediction.objects.all()
+    for prediction in query:
+        user = prediction.user
+        user.prediction_counter += 1
+        currency = prediction.tradingEquipment
+        equipment = get_equipment(currency)
+        last = equipment.objects.all().last()
+        one_before_last = equipment.objects.all().reverse()[0]
+        last_value = getattr(last, currency)
+        one_before_last_value = getattr(one_before_last, currency)
+        if prediction.is_Rising:
+            if last_value > one_before_last_value:
+                user.correct_prediction_counter+=1
+        else:
+            if last_value < one_before_last_value:
+                user.correct_prediction_counter += 1
+        user.save()
+        prediction.delete()
+
 
 
 def get_equipment(value):

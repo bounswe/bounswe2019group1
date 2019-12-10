@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 from django.apps import apps
 
-from notification.functions import set_notification, buy_order, sell_order
+from notification.functions import set_notification, buy_order, sell_order, predict
 from notification.models import Notification, SetNotification
 from notification.serializers import NotificationSerializer, SetNotificationSerializer, BuyOrderSerializer, \
     SellOrderSerializer
@@ -81,7 +81,7 @@ class ListSetNotificationAPIView(ListAPIView):
     queryset = SetNotification.objects.filter()
 
     def get_queryset(self, *args, **kwargs):
-        sell_order()
+        predict()
         check_if_user(self.request)
         user_id=self.request.user.id
         a=Notification.objects.filter(owner__id=user_id)

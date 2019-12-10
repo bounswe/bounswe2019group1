@@ -10,7 +10,8 @@ import requests
 from follow.views import check_if_user, check_if_basic, check_if_trader
 from myuser.functions import send_email
 from myuser.models import TemplateUser
-from myuser.serializers import TempUserCreateSerializer, TempUserLoginSerializer, UserUpdateSerializer
+from myuser.serializers import TempUserCreateSerializer, TempUserLoginSerializer, UserUpdateSerializer, \
+    UserDetailSerializer
 from django.contrib.auth.models import Group
 from rest_framework.exceptions import ValidationError
 from django.contrib.auth.models import User
@@ -138,7 +139,7 @@ class NoParsingFilter(logging.Filter):
 
 
 class UserRetrieveAPI(RetrieveAPIView):
-    serializer_class = TempUserCreateSerializer
+    serializer_class = UserDetailSerializer
     queryset = TemplateUser.objects.filter()
 
 
@@ -151,7 +152,7 @@ class UserRetrieveMobileAPI(RetrieveAPIView):
             if not query:
                 raise ValidationError({"detail": " User does not exist "})
             query=query.first()
-            serializer = TempUserCreateSerializer(query)
+            serializer = UserDetailSerializer(query)
             return Response(serializer.data)
         else:
             raise ValidationError({"detail": "Give user id"})

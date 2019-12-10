@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'equipment',
     'portfolio',
     'notification',
+    'prediction',
     'wallet',
     'article',
     'article_like',
