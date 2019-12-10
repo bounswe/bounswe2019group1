@@ -63,7 +63,8 @@ const useStyles = makeStyles(theme => ({
     pointerEvents: "none",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "flex-end",
+    marginLeft : theme.spacing(25)
   },
   inputRoot: {
     color: "inherit"
@@ -103,6 +104,9 @@ export default function PheaderLinks() {
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
         <div className={classes.search}>
+          <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
           <Autocomplete
             id="free-solo-2-demo"
             {...defaultProps}
