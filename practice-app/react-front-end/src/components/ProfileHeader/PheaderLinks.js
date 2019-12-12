@@ -8,25 +8,23 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import { getAllUsers } from "service/user.service.js";
 import SearchIcon from "@material-ui/icons/Search";
-import Tooltip from "@material-ui/core/Tooltip";
-import Autocomplete from "@material-ui/lab/Autocomplete";
+import Autosuggest from 'react-autosuggest';
 
 // @material-ui/icons
 import { Apps, CloudDownload, Assignment } from "@material-ui/icons";
-
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
 import { logout } from "service/authentication.service.js";
 import { fade } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 
-// const handleSearchChange = event => {
-//   event.persist();
-//   setSearchValues({
-//     input: event.target.value
-//   });
-// };
+
+
+
+const handleSubmit = event => {
+  event.preventDefault();
+  
+};
 
 const useStyles = makeStyles(theme => ({
   grow: {
@@ -57,14 +55,13 @@ const useStyles = makeStyles(theme => ({
     }
   },
   searchIcon: {
-    width: theme.spacing(7),
-    height: "100%",
+    width: theme.spacing(16),
+    height: "10%",
     position: "absolute",
-    pointerEvents: "none",
     display: "flex",
-    alignItems: "center",
+    alignItems: "flex-end",
     justifyContent: "flex-end",
-    marginLeft : theme.spacing(25)
+    marginLeft : theme.spacing(5)
   },
   inputRoot: {
     color: "inherit"
@@ -91,6 +88,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
 export default function PheaderLinks() {
   const [value, setValue] = useState(null);
   const classes = useStyles();
@@ -104,24 +102,15 @@ export default function PheaderLinks() {
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
         <div className={classes.search}>
-          <div className={classes.searchIcon}>
+        
+        <Searchh/>
+            
+          
+            <Link to="/search-results">
+              <div className={classes.searchIcon}>
               <SearchIcon />
-            </div>
-          <Autocomplete
-            id="free-solo-2-demo"
-            {...defaultProps}
-            onChange={event => setValue(event.target.value)}
-            style={{ width: 300 }}
-            renderInput={params => (
-              <TextField
-                {...params}
-                variant="outlined"
-                fullWidth
-                value={value}
-                InputProps={{ ...params.InputProps, type: "search" }}
-              />
-            )}
-          />
+              </div>
+            </Link>
         </div>
         <Link to="/articles" color="transparent">
           <Button className={classes.button} color="primary" target="_self">
@@ -166,4 +155,138 @@ export default function PheaderLinks() {
       </ListItem>
     </List>
   );
+}
+
+
+// Imagine you have a list of languages that you'd like to autosuggest.
+const languages = [
+  {
+    name: 'mete',
+    year: 1972
+  },
+  {
+    name: 'ufuk',
+    year: 1972
+  },
+  {
+    name: 'altay',
+    year: 1972
+  },
+
+  {
+    name: 'emirhan',
+    year: 2012
+  },
+  {
+    name: 'abdullah',
+    year: 1972
+  },
+  {
+    name: 'eray',
+    year: 1972
+  },
+  {
+    name: 'irem',
+    year: 1972
+  },
+  {
+    name: 'ceren',
+    year: 1972
+  },
+  {
+    name: 'omer',
+    year: 1972
+  },
+  {
+    name: 'ilker',
+    year: 1972
+  },
+  
+];
+
+// Teach Autosuggest how to calculate suggestions for any given input value.
+const getSuggestions = value => {
+  const inputValue = value.trim().toLowerCase();
+  const inputLength = inputValue.length;
+
+  return inputLength === 0 ? [] : languages.filter(lang =>
+    lang.name.toLowerCase().slice(0, inputLength) === inputValue
+  );
+};
+
+// When suggestion is clicked, Autosuggest needs to populate the input
+// based on the clicked suggestion. Teach Autosuggest how to calculate the
+// input value for every given suggestion.
+const getSuggestionValue = suggestion => suggestion.name;
+
+// Use your imagination to render suggestions.
+const renderSuggestion = suggestion => (
+  <div>
+   
+    {suggestion.name}
+    
+  </div>
+);
+
+class Searchh extends React.Component {
+  constructor() {
+    super();
+
+    // Autosuggest is a controlled component.
+    // This means that you need to provide an input value
+    // and an onChange handler that updates this value (see below).
+    // Suggestions also need to be provided to the Autosuggest,
+    // and they are initially empty because the Autosuggest is closed.
+    this.state = {
+      value: '',
+      suggestions: []
+    };
+  }
+
+  onChange = (event, { newValue }) => {
+    this.setState({
+      value: newValue
+    });
+  };
+  
+  // Autosuggest will call this function every time you need to update suggestions.
+  // You already implemented this logic above, so just use it.
+  onSuggestionsFetchRequested = ({ value }) => {
+    this.setState({
+      suggestions: getSuggestions(value)
+    });
+  };
+
+
+  // Autosuggest will call this function every time you need to clear suggestions.
+  onSuggestionsClearRequested = () => {
+    this.setState({
+      suggestions: []
+    });
+  };
+
+  render() {
+    const { value, suggestions } = this.state;
+    
+    // Autosuggest will pass through all these props to the input.
+    const inputProps = {
+      placeholder: 'Search Users',
+      value,
+      onChange: this.onChange
+    };
+    
+
+    // Finally, render it!
+    return (
+      <Autosuggest
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+        getSuggestionValue={getSuggestionValue}
+        renderSuggestion={renderSuggestion}
+        inputProps={inputProps}
+      />
+      
+    );
+  }
 }
