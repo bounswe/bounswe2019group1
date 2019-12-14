@@ -8,6 +8,7 @@ from datetime import datetime
 from prediction.models import Prediction
 from wallet.models import Wallet
 from wallet.views import update_wealth
+import os
 
 
 def set_notification():
@@ -55,13 +56,27 @@ def buy_order():
             subtract_usd = currency_value * buy_amount
             curr_usd = curr_wallet.USD
             if curr_usd < subtract_usd:
-                raise ValidationError({"detail": "You can not afford this amount"})
+                owner=buy_order.owner
+                notif = Notification(
+                    owner=owner,
+                    text="You can not afford this amount",
+                    date=datetime.now()
+                )
+                notif.save()
+                buy_order.delete()
             else:
                 wallet_amount = getattr(curr_wallet, currency)
                 curr_wallet.USD = curr_usd - subtract_usd
                 setattr(curr_wallet, currency, (wallet_amount + buy_amount))
                 update_wealth(curr_wallet)
                 curr_wallet.save()
+                owner = buy_order.owner
+                notif = Notification(
+                    owner=owner,
+                    text="Your buy order about "+currency+" has successfully done",
+                    date=datetime.now()
+                )
+                notif.save()
                 buy_order.delete()
 
 
@@ -77,17 +92,29 @@ def sell_order():
         curr_wallet = Wallet.objects.filter(owner=sell_order.owner).first()
         if not curr_wallet:
             raise ValidationError({"detail": "You don't have wallet"})
-        if amount>currency_value:
+        if amount<currency_value:
             wallet_amount = getattr(curr_wallet, currency)
             addition_usd = currency_value * sell_amount
             curr_usd = curr_wallet.USD
             if wallet_amount < sell_amount:
-                raise ValidationError({"detail": "You don't have this much equipment"})
+                notif = Notification(
+                    owner=sell_order.owner,
+                    text="You don't have this much equipment",
+                    date=datetime.now()
+                )
+                notif.save()
+                sell_order.delete()
             else:
                 curr_wallet.USD = curr_usd + addition_usd
                 setattr(curr_wallet, currency, (wallet_amount - sell_amount))
                 update_wealth(curr_wallet)
                 curr_wallet.save()
+                notif = Notification(
+                    owner=sell_order.owner,
+                    text="Your sell order about "+currency+" has successfully done",
+                    date=datetime.now()
+                )
+                notif.save()
                 sell_order.delete()
 
 

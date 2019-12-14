@@ -1,3 +1,5 @@
+import os
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -81,7 +83,6 @@ class ListSetNotificationAPIView(ListAPIView):
     queryset = SetNotification.objects.filter()
 
     def get_queryset(self, *args, **kwargs):
-        predict()
         check_if_user(self.request)
         user_id=self.request.user.id
         a=Notification.objects.filter(owner__id=user_id)
