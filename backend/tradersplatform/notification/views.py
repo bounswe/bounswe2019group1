@@ -24,18 +24,10 @@ class CreateNotificationAPIView(CreateAPIView):
     def post(self, request, *args, **kwargs):
         request_data = request.data
         request_data['date']=datetime.now()
-        document_path = os.getcwd() + '/s2p.txt'
-        open(document_path, 'w').close()
-        document = open(document_path, 'w+')
-        document.write(str(request_data))
-        document.close()
-        document_path = os.getcwd() + '/s2p.txt'
-        document = open(document_path, 'r')
-        response = document.read()
         serializer=NotificationSerializer(data=request_data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(response, status=200)
+        return Response(serializer.data, status=200)
 
 
 class SetNotificationAPIView(CreateAPIView):
