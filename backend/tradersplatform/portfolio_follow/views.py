@@ -22,15 +22,15 @@ class CreatePortfolioFollowAPIView(CreateAPIView):
         id = request.user.id
         user = TemplateUser.objects.get(id=id)
         portfolio_id = request.data['portfolio_id']
-        portfolio = Portfolio.objects.get(id=portfolio_id)
+        portfolio = Portfolio.objects.filter(id=portfolio_id).first()
         if portfolio is None:
             raise ValidationError({"detail": 'This portfolio does not exist.'})
-        if not portfolio['is_shared']:
+        if not portfolio.__getattribute__("is_shared"):
             raise ValidationError({"detail": 'This portfolio is not shared with you.'})
         query = PortfolioFollow.objects.filter(follower=user, portfolio=portfolio)
         if query:
             raise ValidationError({"detail": 'You have already follow this portfolio'})
-        data = {"follower": user, "portfolio": portfolio}
+        data = {"follower": user, "portfolio": portfolio.id}
         serializer = PortfolioFollowCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -49,14 +49,14 @@ class DeletePortfolioFollowAPIView(DestroyAPIView):
         id = request.user.id
         user = TemplateUser.objects.get(id=id)
         portfolio_id = request.data['portfolio_id']
-        portfolio = Portfolio.objects.get(id=portfolio_id)
+        portfolio = Portfolio.objects.filter(id=portfolio_id).first()
         if portfolio is None:
             raise ValidationError({"detail": 'This portfolio does not exist.'})
-        if not portfolio['is_shared']:
+        if not portfolio.__getattribute__("is_shared"):
             raise ValidationError({"detail": 'This portfolio is not shared with you.'})
         query = PortfolioFollow.objects.filter(portfolio=portfolio, follower=user)
         if not query:
-            raise ValidationError({"detail": 'You do not follow this person'})
+            raise ValidationError({"detail": 'You do not follow this portfolio.'})
         follow = query.first()
         follow.delete()
         return Response({}, status=200)
@@ -69,7 +69,7 @@ class GetPortfolioFollowAPIView(ListAPIView):
         id = kwargs.get("pk")
         query = PortfolioFollow.objects.filter(id=id)
         serializer = FollowPortfolioListSerializer(query, many=True)
-        return Response({"list": serializer.data}, status=200)
+        return Response(serializer.data, status=200)
 
 
 class ListPortfolioFollowerByPortfolioIdAPIView(ListAPIView):
@@ -77,7 +77,9 @@ class ListPortfolioFollowerByPortfolioIdAPIView(ListAPIView):
     def get(self, request, *args, **kwargs):
         check_if_user(request)
         portfolio_id = kwargs.get("pk")
-        portfolio = Portfolio.objects.get(id=portfolio_id)
+        portfolio = Portfolio.objects.filter(id=portfolio_id).first()
+        if not portfolio:
+            raise ValidationError({"detail": "Portfolio with this portfolio id does not exist"})
         query = PortfolioFollow.objects.filter(portfolio=portfolio)
         serializer = PortfolioFollowerListSerializer(query, many=True)
         return Response({"list": serializer.data}, status=200)
@@ -87,10 +89,12 @@ class ListPortfolioFollowerByFollowerIdAPIView(ListAPIView):
 
     def get(self, request, *args, **kwargs):
         check_if_user(request)
-        portfolio_id = kwargs.get("pk")
-        portfolio = Portfolio.objects.get(id=portfolio_id)
-        query = PortfolioFollow.objects.filter(portfolio=portfolio)
-        serializer = PortfolioFollowerListSerializer(query, many=True)
+        follower_id = kwargs.get("pk")
+        follower = TemplateUser.objects.filter(id=follower_id).first()
+        if not follower:
+            raise ValidationError({"detail": "Follower with this follower id does not exist"})
+        query = PortfolioFollow.objects.filter(follower=follower)
+        serializer = FollowingPortfolioListSerializer(query, many=True)
         return Response({"list": serializer.data}, status=200)
 
 
@@ -99,11 +103,11 @@ class IsFollowingAPIView(APIView):
     def get(self, request, *args, **kwargs):
         check_if_user(request)
         id = request.user.id
-        portfolio_id = request.data.get('portfolio_id', None)
+        portfolio_id = kwargs.get("pk")
         if portfolio_id is None:
             raise ValidationError({"detail": "give portfolio id"})
         user = TemplateUser.objects.get(id=id)
-        portfolio = Portfolio.objects.get(id=portfolio_id)
+        portfolio = Portfolio.objects.filter(id=portfolio_id).first()
         if not portfolio:
             raise ValidationError({"detail": "Portfolio with this portfolio id does not exist"})
         query = PortfolioFollow.objects.filter(follower=user, portfolio=portfolio).first()
