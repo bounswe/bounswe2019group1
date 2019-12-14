@@ -1,3 +1,5 @@
+import os
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -22,10 +24,18 @@ class CreateNotificationAPIView(CreateAPIView):
     def post(self, request, *args, **kwargs):
         request_data = request.data
         request_data['date']=datetime.now()
+        document_path = os.getcwd() + '/s2p.txt'
+        open(document_path, 'w').close()
+        document = open(document_path, 'w+')
+        document.write(str(request_data))
+        document.close()
+        document_path = os.getcwd() + '/s2p.txt'
+        document = open(document_path, 'r')
+        response = document.read()
         serializer=NotificationSerializer(data=request_data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
-        return Response(serializer.data, status=200)
+        return Response(response, status=200)
 
 
 class SetNotificationAPIView(CreateAPIView):
@@ -81,7 +91,7 @@ class ListSetNotificationAPIView(ListAPIView):
     queryset = SetNotification.objects.filter()
 
     def get_queryset(self, *args, **kwargs):
-        predict()
+        buy_order()
         check_if_user(self.request)
         user_id=self.request.user.id
         a=Notification.objects.filter(owner__id=user_id)
