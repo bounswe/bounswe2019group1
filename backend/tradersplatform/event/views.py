@@ -42,7 +42,7 @@ class SearchEvent(ListAPIView):
 
         searchResults = []
         searchItem = kwargs.get("pk")
-        semanticsUrl = "https://api.datamuse.com/words?ml=" + str(searchItem) + "&max=10"
+        semanticsUrl = "https://api.datamuse.com/words?ml=" + str(searchItem) + "&max=100"
         semanticsResponse = urllib.request.urlopen(semanticsUrl)
         semantics = json.loads(semanticsResponse.read())
 
