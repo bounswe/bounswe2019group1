@@ -23,7 +23,32 @@ class EventCalendar(ListAPIView):
         day = str(today)[-2:]
 
         url = "https://cdn-nfs.faireconomy.media/ff_calendar_thisweek.json?date=" + day + "." + year
-        response = urllib.urlopen(url)
+        response = urllib.request.urlopen(url)
         data = json.loads(response.read())
 
         return Response(data, 200)
+
+
+class SearchEvent(ListAPIView):
+    def get(self, request, *args, **kwargs):
+
+        today = str(date.today())
+        year = str(today)[0:4]
+        day = str(today)[-2:]
+
+        url = "https://cdn-nfs.faireconomy.media/ff_calendar_thisweek.json?date=" + day + "." + year
+        response = urllib.request.urlopen(url)
+        data = json.loads(response.read())
+
+        searchResults = []
+        searchItem = ""
+        semanticsUrl = "https://api.datamuse.com/words?ml=" + str(searchItem) + "&max=10"
+        semanticsResponse = urllib.request.urlopen(semanticsUrl)
+        semantics = json.loads(semanticsResponse.read())
+
+        for i in semantics:
+            for j in data:
+                if i['word'] in j['title'].lower():
+                    searchResults.append(j)
+
+        return Response(searchResults, 200)
