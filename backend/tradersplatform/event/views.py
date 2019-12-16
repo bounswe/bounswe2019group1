@@ -46,9 +46,9 @@ class SearchEvent(ListAPIView):
         semanticsResponse = urllib.request.urlopen(semanticsUrl)
         semantics = json.loads(semanticsResponse.read())
 
-        for i in semantics:
-            for j in data:
-                if i['word'] in j['title'].lower():
+        for word in semantics:
+            for event in data:
+                if word['word'] in event['title'].lower():
                     searchResults.append(j)
 
         return Response(searchResults, 200)
