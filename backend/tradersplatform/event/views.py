@@ -41,7 +41,7 @@ class SearchEvent(ListAPIView):
         data = json.loads(response.read())
 
         searchResults = []
-        searchItem = ""
+        searchItem = request.data.get('searchItem',None)
         semanticsUrl = "https://api.datamuse.com/words?ml=" + str(searchItem) + "&max=10"
         semanticsResponse = urllib.request.urlopen(semanticsUrl)
         semantics = json.loads(semanticsResponse.read())
