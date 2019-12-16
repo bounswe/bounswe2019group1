@@ -23,7 +23,7 @@ class EventCalendar(ListAPIView):
         day = str(today)[-2:]
 
         url = "https://cdn-nfs.faireconomy.media/ff_calendar_thisweek.json?date=" + day + "." + year
-        response = urllib.urlopen(url)
+        response = urllib.request.urlopen(url)
         data = json.loads(response.read())
 
         return Response(data, 200)
