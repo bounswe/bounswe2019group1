@@ -58,6 +58,9 @@ class MyPortfolioFragment : Fragment(), fragmentOperationsInterface {
                         println("NOT CHANGED")
                     }else{
                         println("CHANGED")
+                        list_titles.clear()
+                        list_ids.clear()
+
                         var count = 0
                         count = response.body()?.results?.count()!!
 
@@ -80,6 +83,23 @@ class MyPortfolioFragment : Fragment(), fragmentOperationsInterface {
             }
         })
 
+        var listview = root.findViewById(R.id.list_my_portfolio) as ListView
+        listview.setOnItemClickListener{ parent, view, position, id ->
+            val element = ladapter.getItem(position)
+            var other_user_id = list_ids[position]
+
+            val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
+
+            fragmentTransaction(
+                parentActivityManager,
+                OneMyPortfolioFragment.newInstance(list_titles[position], list_ids[position]),
+                (containerId!!.id),
+                true,
+                true,
+                false
+            )
+
+        }
 
 
         var button_back = root.findViewById(R.id.myportfolio_button_back) as Button
