@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from rest_framework.exceptions import ValidationError
-from rest_framework.generics import CreateAPIView, ListAPIView, DestroyAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, DestroyAPIView, UpdateAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 import json
@@ -23,11 +23,26 @@ class CreateFollowAPIView(CreateAPIView):
         query = Follow.objects.filter(following=following, follower=user)
         if query:
             raise ValidationError({"detail": 'You have already follow this person'})
-        data = {"follower": user, "following": following}
+        data = {"follower": user, "following": following,"is_active" : False}
         serializer=FollowCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=200)
+
+
+class ApproveFollowAPIView(UpdateAPIView):
+
+    def put(self, request, *args, **kwargs):
+        check_if_user(request)
+        id = kwargs.get("pk")
+        user_id = request.user.id
+        query = Follow.objects.filter(id=id,following=user_id).first()
+        if not query:
+            raise ValidationError({"detail": 'This Follow does not exist or you are not follower of this request'})
+        query.is_active=True
+        query.save()
+        serializer=FollowerListSerializer(query)
+        return Response(serializer.data,status=200)
 
 
 class ListFollowAPIView(ListAPIView):

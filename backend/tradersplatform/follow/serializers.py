@@ -23,7 +23,8 @@ class FollowerListSerializer(ModelSerializer):
         fields = [
             "id",
             "follower",
-            "following"
+            "following",
+            "is_active"
         ]
 
 
@@ -36,5 +37,6 @@ class FollowingListSerializer(ModelSerializer):
         fields = [
             "id",
             "follower",
-            "following"
+            "following",
+            "is_active"
         ]

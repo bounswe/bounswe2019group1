@@ -10,3 +10,4 @@ from myuser.models import TemplateUser
 class Follow(models.Model):
     follower = models.ForeignKey(TemplateUser, on_delete=models.CASCADE, default='',related_name='follower')
     following = models.ForeignKey(TemplateUser, on_delete=models.CASCADE, default='',related_name='following')
+    is_active = models.BooleanField(default=False)
