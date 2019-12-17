@@ -60,6 +60,19 @@ class ApproveFollowAPIView(UpdateAPIView):
         return Response(serializer.data,status=200)
 
 
+class RejectFollowAPIView(UpdateAPIView):
+
+    def put(self, request, *args, **kwargs):
+        check_if_user(request)
+        id = kwargs.get("pk")
+        user_id = request.user.id
+        query = Follow.objects.filter(id=id,following=user_id).first()
+        if not query:
+            raise ValidationError({"detail": 'This Follow does not exist or you are not follower of this request'})
+        query.delete()
+        return Response({},status=200)
+
+
 class ListFollowAPIView(ListAPIView):
     serializer_class = FollowCreateSerializer
     queryset = Follow.objects.all()
@@ -86,7 +99,18 @@ class ListFollowerAPIView(ListAPIView):
         check_if_user(request)
         id=request.user.id
         user=TemplateUser.objects.get(id=id)
-        query=Follow.objects.filter(following=user)
+        query=Follow.objects.filter(following=user,is_active=True)
+        serializer = FollowerListSerializer(query, many=True)
+        return Response({"list":serializer.data}, status=200)
+
+
+class ListFollowerPendingAPIView(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        check_if_user(request)
+        id=request.user.id
+        user=TemplateUser.objects.get(id=id)
+        query=Follow.objects.filter(following=user,is_active=False)
         serializer = FollowerListSerializer(query, many=True)
         return Response({"list":serializer.data}, status=200)
 
@@ -99,7 +123,7 @@ class ListFollowerWithIdAPIView(ListAPIView):
         if id  is None:
             raise ValidationError({"detail": "give id"})
         user=TemplateUser.objects.get(id=id)
-        query=Follow.objects.filter(following=user)
+        query=Follow.objects.filter(following=user,is_active=True)
         serializer = FollowerListSerializer(query, many=True)
         return Response({"list":serializer.data}, status=200)
 
@@ -112,7 +136,7 @@ class ListFollowerWithIdFrontAPIView(ListAPIView):
         user = TemplateUser.objects.filter(id=id).first()
         if not user:
             raise ValidationError({"detail": "user does not exist"})
-        query=Follow.objects.filter(following=user)
+        query=Follow.objects.filter(following=user,is_active=True)
         serializer = FollowerListSerializer(query, many=True)
         return Response({"list":serializer.data}, status=200)
 
@@ -123,7 +147,18 @@ class ListFollowingAPIView(ListAPIView):
         check_if_user(request)
         id=request.user.id
         user=TemplateUser.objects.get(id=id)
-        query=Follow.objects.filter(follower=user)
+        query=Follow.objects.filter(follower=user,is_active=True)
+        serializer = FollowingListSerializer(query, many=True)
+        return Response({"list":serializer.data}, status=200)
+
+
+class ListFollowingPendingAPIView(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        check_if_user(request)
+        id=request.user.id
+        user=TemplateUser.objects.get(id=id)
+        query=Follow.objects.filter(follower=user,is_active=False)
         serializer = FollowingListSerializer(query, many=True)
         return Response({"list":serializer.data}, status=200)
 
@@ -140,7 +175,7 @@ class IsFollowingAPIView(APIView):
         following=TemplateUser.objects.filter(id=following_id).first()
         if not following:
             raise ValidationError({"detail": "User with this following id does not exist"})
-        query=Follow.objects.filter(follower=user,following=following).first()
+        query=Follow.objects.filter(follower=user,following=following,is_active=True).first()
         if query:
             return HttpResponse(json.dumps({'result': 'Found'}),
                        content_type="application/json")
@@ -161,7 +196,7 @@ class IsFollowingFrontAPIView(APIView):
         following=TemplateUser.objects.filter(id=following_id).first()
         if not following:
             raise ValidationError({"detail": "User with this following id does not exist"})
-        query=Follow.objects.filter(follower=user,following=following).first()
+        query=Follow.objects.filter(follower=user,following=following,is_active=True).first()
         if query:
             return HttpResponse(json.dumps({'result': 'Found'}),
                        content_type="application/json")
@@ -182,7 +217,7 @@ class IsFollowerFrontAPIView(APIView):
         following=TemplateUser.objects.filter(id=following_id).first()
         if not following:
             raise ValidationError({"detail": "User with this following id does not exist"})
-        query=Follow.objects.filter(follower=user,following=following).first()
+        query=Follow.objects.filter(follower=user,following=following,is_active=True).first()
         if query:
             return HttpResponse(json.dumps({'result': 'Found'}),
                        content_type="application/json")
@@ -200,7 +235,7 @@ class ListFollowingWithIdAPIView(ListAPIView):
         if id  is None:
             raise ValidationError({"detail": "give id"})
         user=TemplateUser.objects.get(id=id)
-        query=Follow.objects.filter(follower=user)
+        query=Follow.objects.filter(follower=user,is_active=True)
         serializer = FollowingListSerializer(query, many=True)
         return Response({"list":serializer.data}, status=200)
 
@@ -213,7 +248,7 @@ class ListFollowingFrontWithIdAPIView(ListAPIView):
         user=TemplateUser.objects.filter(id=id).first()
         if not user:
             raise ValidationError({"detail": "user does not exist"})
-        query=Follow.objects.filter(follower=user)
+        query=Follow.objects.filter(follower=user,is_active=True)
         serializer = FollowingListSerializer(query, many=True)
         return Response({"list":serializer.data}, status=200)
 
