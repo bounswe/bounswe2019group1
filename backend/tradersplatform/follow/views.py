@@ -11,6 +11,8 @@ import json
 from follow.models import Follow
 from follow.serializers import FollowCreateSerializer, FollowerListSerializer, FollowingListSerializer
 from myuser.models import TemplateUser
+from notification.models import Notification
+from datetime import datetime
 
 
 class CreateFollowAPIView(CreateAPIView):
@@ -23,10 +25,23 @@ class CreateFollowAPIView(CreateAPIView):
         query = Follow.objects.filter(following=following, follower=user)
         if query:
             raise ValidationError({"detail": 'You have already follow this person'})
-        data = {"follower": user, "following": following,"is_active" : False}
+        user_following=TemplateUser.objects.filter(id=following).first()
+        if not user_following:
+            raise ValidationError({"detail": 'User does not exist'})
+        if user_following.is_public:
+            data= {"follower": user, "following": following,"is_active" : True}
+        else:
+            data = {"follower": user, "following": following,"is_active" : False}
         serializer=FollowCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        if not user_following.is_public:
+            new_notif=Notification(
+                owner=user_following,
+                text=request.user.username+" wants to follow you",
+                date=datetime.now()
+            )
+            new_notif.save()
         return Response(serializer.data, status=200)
 
 
