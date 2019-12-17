@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.ListViewAdapter
 import com.project.khajit_app.activity.OtherListViewAdapter
+import com.project.khajit_app.activity.ui.article.ListArticleFragment
 import com.project.khajit_app.activity.ui.followlist.FollowListFragment
 import com.project.khajit_app.activity.ui.notificationdetails.notificationDetailFragment
 import com.project.khajit_app.api.RetrofitClient
@@ -26,7 +27,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class OtherUserProfile : Fragment(), fragmentOperationsInterface {
+class OtherUserProfile : Fragment(), fragmentOperationsInterface{
     var containerId : ViewGroup? = null
 
     private lateinit var viewModel: OtherUserProfileViewModel
@@ -42,11 +43,27 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface {
     private lateinit var follow_user: Button
     private lateinit var private_part_layout: ConstraintLayout
     private lateinit var public_private_ind: TextView
+    private lateinit var other_user_article_button :Button
 
     private var public = false
     private var isFollowing = false
 
+    /*override fun onClick(v: View?) {
+        if isFollowing
+        // Add stack fragment
+        val parentActivityManager: FragmentManager =
+            activity?.supportFragmentManager as FragmentManager
+        val fragment = ListArticleFragment.Companion.newInstance(0, 1, 0, 0, -1)
 
+        fragmentTransaction(
+            parentActivityManager,
+            fragment,
+            containerId!!.id,
+            true,
+            true,
+            false
+        )
+    }*/
 
     var equipments = arrayOf(
         "Android", "IPhone", "WindowsMobile", "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X", "Max OS X", "Max OS X")
@@ -78,13 +95,15 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface {
         follow_user = root.findViewById(R.id.other_follow_button) as Button
         private_part_layout = root.findViewById(R.id.private_part) as ConstraintLayout
         public_private_ind = root.findViewById(R.id.other_public_private_text) as TextView
+        other_user_article_button = root.findViewById(R.id.other_button_article_page) as Button
+
 
         // This will be used for further methods in order to set prediction rates
         var lview =  root.findViewById(R.id.other_list_prediction_name) as ListView
         var ladapter = OtherListViewAdapter(this, equipments, rates)
         lview.adapter = ladapter
 
-
+        //other_user_article_button.setOnClickListener(this)
         RetrofitClient.instance.isFollowing(other_id).enqueue(object :
             Callback<isFollowingResponseModel> {
             override fun onResponse(

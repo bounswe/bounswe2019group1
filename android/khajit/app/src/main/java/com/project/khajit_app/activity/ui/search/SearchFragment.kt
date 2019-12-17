@@ -38,6 +38,8 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
     lateinit var ladapter: UserViewAdapter
     lateinit var lview: ListView
 
+    private var search_type = 0 // 0 --> User search, 1 --> Article search, 2 --> Event search
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,6 +53,27 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
         var loader = root.findViewById(R.id.progress_loader) as ProgressBar
         loader.visibility = View.GONE
 
+        var spinner = root.findViewById(R.id.spinner2) as Spinner
+        var items = arrayOf("User Search", "Article Search", "Event Search")
+        var adapter = ArrayAdapter(this.context!!,android.R.layout.simple_spinner_dropdown_item, items)
+        spinner.adapter = adapter
+        spinner.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View, position: Int, id: Long
+            ) {
+                list_usernames.clear()
+                list_titles.clear()
+                list_ids.clear()
+                search_type = position
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // write code to perform some action
+            }
+        }
+
+
         var searchview = root.findViewById(R.id.search) as SearchView
         searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
@@ -59,43 +82,57 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                var search_query = SearchRequest(query)
-                RetrofitClient.instance.searchUsername(search_query).enqueue(object :
-                    Callback<SearchResponse> {
-                    override fun onResponse(
-                        call: Call<SearchResponse>,
-                        response: Response<SearchResponse>
-                    ) {
-                        println(response.toString())
-                        if(response.code() == 200 ){
+                list_usernames.clear()
+                list_titles.clear()
+                list_ids.clear()
+                if(search_type == 0) {
 
-                            list_usernames.clear()
-                            list_titles.clear()
-                            list_ids.clear()
+                    var search_query = SearchRequest(query)
+                    RetrofitClient.instance.searchUsername(search_query).enqueue(object :
+                        Callback<SearchResponse> {
+                        override fun onResponse(
+                            call: Call<SearchResponse>,
+                            response: Response<SearchResponse>
+                        ) {
+                            println(response.toString())
+                            if (response.code() == 200) {
+                                var count = response.body()?.count
 
-                            var count = response.body()?.count
+                                for (a in 1..count!!) {
+                                    list_usernames.add(
+                                        response.body()?.results?.get(a - 1)!!.first_name + " " + response.body()?.results?.get(
+                                            a - 1
+                                        )!!.last_name
+                                    )
+                                    list_titles.add(response.body()?.results?.get(a - 1)!!.title)
+                                    list_ids.add(response.body()?.results?.get(a - 1)!!.id)
+                                }
 
-                            for (a in 1..count!!) {
-                                list_usernames.add(response.body()?.results?.get(a-1)!!.first_name + " " + response.body()?.results?.get(a-1)!!.last_name)
-                                list_titles.add(response.body()?.results?.get(a-1)!!.title)
-                                list_ids.add(response.body()?.results?.get(a-1)!!.id)
+                                // This will be used for further methods in order to set prediction rates
+                                lview = root.findViewById(R.id.list_users) as ListView
+                                ladapter = UserViewAdapter(
+                                    this@SearchFragment,
+                                    list_usernames,
+                                    list_titles
+                                )
+                                lview.adapter = ladapter
+
+                            } else {
+                                Log.d("error message:", response.message())
                             }
-
-                            // This will be used for further methods in order to set prediction rates
-                            lview =  root.findViewById(R.id.list_users) as ListView
-                            ladapter = UserViewAdapter(this@SearchFragment, list_usernames, list_titles)
-                            lview.adapter = ladapter
-
-                        }else{
-                            Log.d("error message:", response.message())
                         }
-                    }
-                    override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
-                        println(t.message)
-                        println(t)
-                        Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
-                    }
-                })
+
+                        override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
+                            println(t.message)
+                            println(t)
+                            Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                        }
+                    })
+                }else if(search_type == 1) {
+
+                }else{
+
+                }
                 return false
             }
 

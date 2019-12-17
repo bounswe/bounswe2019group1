@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentManager
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.ListViewAdapter
 import com.project.khajit_app.activity.ui.followlist.FollowListFragment
+import com.project.khajit_app.activity.ui.myportfolio.MyPortfolioFragment
 import com.project.khajit_app.activity.ui.notificationdetails.notificationDetailFragment
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.FollowModel
@@ -37,8 +38,7 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
 
     private lateinit var followerButton: Button
     private lateinit var followingButton: Button
-
-
+    private lateinit var myportfolioButton: Button
 
     var equipments = arrayOf(
         "Android", "IPhone", "WindowsMobile", "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X", "Max OS X", "Max OS X")
@@ -78,6 +78,8 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
 
         followerButton = root.findViewById(R.id.follower_button) as Button
         followingButton = root.findViewById(R.id.following_button) as Button
+        myportfolioButton = root.findViewById(R.id.button_portfolio_page) as Button
+
 
         nameBox.text = User.first_name + " " + User.last_name
         titleBox.text = User.title
@@ -140,9 +142,25 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
             followList(root, "following")
         }
 
+        myportfolioButton.setOnClickListener { root ->
+            myPortfolio(root)
+        }
+
         return root
     }
 
+    fun myPortfolio(view: View) {
+        val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
+
+        fragmentTransaction(
+            parentActivityManager,
+            MyPortfolioFragment.newInstance(User.id),
+            (containerId!!.id),
+            true,
+            true,
+            false
+        )
+    }
 
     fun followList(view: View, request: String) {
         val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
