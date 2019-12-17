@@ -14,6 +14,7 @@ class ArticleCreateSerializer(ModelSerializer):
             'is_public',
             'author',
             'created_date',
+            'image',
         ]
 
 
@@ -26,6 +27,7 @@ class ArticleListSerializer(ModelSerializer):
             'content',
             'is_public',
             'created_date',
+            'image',
         ]
 
 
@@ -41,6 +43,7 @@ class PublicArticleListSerializer(ModelSerializer):
             'author',
             'is_public',
             'created_date',
+            'image',
         ]
 
 
@@ -54,6 +57,7 @@ class ArticleUpdateSerializer(ModelSerializer):
             'is_public',
             'author',
             'created_date',
+            'image',
         ]
 
         extra_kwargs = {"title":
@@ -81,4 +85,5 @@ class ArticleGetSerializer(ModelSerializer):
             'is_public',
             'author',
             'created_date',
+            'image',
         ]
