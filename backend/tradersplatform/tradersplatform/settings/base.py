@@ -73,6 +73,7 @@ INSTALLED_APPS = [
     'article',
     'article_like',
     'article_comment',
+    'portfolio_follow',
 ]
 
 

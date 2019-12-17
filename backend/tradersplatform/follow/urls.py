@@ -5,6 +5,7 @@ from . import views
 
 urlpatterns = [
     url(r'^follow/', views.CreateFollowAPIView.as_view(), name="register"),
+    url(r'^approvefollow/(?P<pk>[0-9_]+)/', views.ApproveFollowAPIView.as_view(), name="register"),
     url(r'^followList/', views.ListFollowAPIView.as_view(), name="list"),
     url(r'^listFollower/', views.ListFollowerAPIView.as_view(), name="list"),
     url(r'^listFollowerWithId/', views.ListFollowerWithIdAPIView.as_view(), name="list"),
