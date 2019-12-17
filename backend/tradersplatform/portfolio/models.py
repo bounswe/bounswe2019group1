@@ -7,6 +7,7 @@ from myuser.models import TemplateUser
 class Portfolio(models.Model):
     owner = models.ForeignKey(TemplateUser, on_delete=models.CASCADE, default='')
     name = models.CharField(max_length=300, blank=True, null=True, unique=False, default='default')
+    is_shared = models.BooleanField(default=True)
     BTC = models.BooleanField(default=False)
     ETH = models.BooleanField(default=False)
     LTC = models.BooleanField(default=False)

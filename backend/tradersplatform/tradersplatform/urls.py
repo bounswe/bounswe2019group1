@@ -31,7 +31,9 @@ urlpatterns = [
     url(r'^notification/', include('notification.urls')),
     url(r'^prediction/', include('prediction.urls')),
     url(r'^article/', include('article.urls')),
+    url(r'^article-like/', include('article_like.urls')),
     url(r'^article-comment/', include('article_comment.urls')),
+    url(r'^portfolio-follow/', include('portfolio_follow.urls')),
 ]
 if settings.DEBUG:
   urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

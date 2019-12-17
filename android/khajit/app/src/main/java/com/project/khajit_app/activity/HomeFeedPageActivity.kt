@@ -9,9 +9,9 @@ import android.widget.FrameLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.project.khajit_app.R
-import com.project.khajit_app.activity.ui.article.createArticleFragment
+import com.project.khajit_app.activity.ui.article.CreateArticleFragment
+import com.project.khajit_app.activity.ui.article.ListArticleFragment
 import com.project.khajit_app.activity.ui.editprofile.EditUserProfileFragment
 import com.project.khajit_app.activity.ui.equipment.EquipmentFragment
 import com.project.khajit_app.activity.ui.home.HomeFragment
@@ -37,36 +37,111 @@ class HomeFeedPageActivity : AppCompatActivity() , fragmentOperationsInterface{
         val navigation = findViewById<BottomNavigationView>(R.id.nav_view)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        val fragment = HomeFragment.Companion.newInstance()
-        addFragment(fragment)
+        //val fragment = HomeFragmentGuest.Companion.newInstance()
+        val fragment = ListArticleFragment.Companion.newInstance(1,0,1,0,-1)
+        /*val user = UserAllInfo(        listOf("1","2"), 9,
+        "cer3d@hotmail.com",
+
+        "cer3",
+        "dardi",
+             "cer3d@hotmail.com",
+             "locationInfo",
+         "905086395214",
+        "0",
+         "",
+         "I am para babasi.",
+         "para baba",
+"2019-11-24T14:31:15.031985Z")*/
+        //val article = GeneralArticleModel(1," DENEME TITLE", "ASLJFGHKLJFG",user,true,"2 mayıs")
+        //val fragment = displayArticleFragment.Companion.newInstance(article,1,0,1,0,-1)
+        fragmentTransaction(
+            supportFragmentManager,
+            fragment,
+            homePageContent!!.id,
+            true,
+            true,
+            false
+        )
     }
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
 
-                val fragment = HomeFragment.Companion.newInstance()
-                changeFragment(fragment)
+
+                //val fragment = HomeFragmentGuest.Companion.newInstance()
+                val fragment = ListArticleFragment.Companion.newInstance(1,0,1,0,-1)
+                /*val user = UserAllInfo(        listOf("1","2"), 9,
+                "cer3d@hotmail.com",
+
+                "cer3",
+                "dardi",
+                     "cer3d@hotmail.com",
+                     "locationInfo",
+                 "905086395214",
+                "0",
+                 "",
+                 "I am para babasi.",
+                 "para baba",
+        "2019-11-24T14:31:15.031985Z")*/
+                //val article = GeneralArticleModel(1," DENEME TITLE", "ASLJFGHKLJFG",user,true,"2 mayıs")
+                //val fragment = displayArticleFragment.Companion.newInstance(article,1,0,1,0,-1)
+                fragmentTransaction(
+                    supportFragmentManager,
+                    fragment,
+                    homePageContent!!.id,
+                    true,
+                    true,
+                    false
+                )
 
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_search -> {
                 val fragment = SearchFragment()
-                changeFragment(fragment)
+                fragmentTransaction(
+                    supportFragmentManager,
+                    fragment,
+                    homePageContent!!.id,
+                    true,
+                    true,
+                    false
+                )
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_equipments -> {
                 val fragment = EquipmentFragment()
-                changeFragment(fragment)
+                fragmentTransaction(
+                    supportFragmentManager,
+                    fragment,
+                    homePageContent!!.id,
+                    true,
+                    true,
+                    false
+                )
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
                 val fragment = NotificationsFragment.Companion.newInstance()
-                changeFragment(fragment)
+                fragmentTransaction(
+                    supportFragmentManager,
+                    fragment,
+                    homePageContent!!.id,
+                    true,
+                    true,
+                    false
+                )
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_messages -> {
                 val fragment = MailboxFragment()
-                changeFragment(fragment)
+                fragmentTransaction(
+                    supportFragmentManager,
+                    fragment,
+                    homePageContent!!.id,
+                    true,
+                    true,
+                    false
+                )
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -89,28 +164,7 @@ class HomeFeedPageActivity : AppCompatActivity() , fragmentOperationsInterface{
             .commit()
     }
 
-    fun denemeFragment(
-        fragment: Fragment,
-        container: Int,
-        replace: Boolean,
-        addToBackStack: Boolean,
-        addAnimation: Boolean
-    ) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        if (addAnimation)
-            fragmentTransaction.setCustomAnimations(
-                R.anim.design_bottom_sheet_slide_in,
-                R.anim.design_bottom_sheet_slide_out
 
-            )
-        if (replace)
-            fragmentTransaction.replace(container, fragment, fragment.javaClass.name)
-        else
-            fragmentTransaction.add(container, fragment, fragment.javaClass.name)
-        if (addToBackStack)
-            fragmentTransaction.addToBackStack(fragment.javaClass.name)
-        fragmentTransaction.commit()
-    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_top, menu)
         return true
@@ -118,7 +172,7 @@ class HomeFeedPageActivity : AppCompatActivity() , fragmentOperationsInterface{
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.user_create_article_item -> {
-            val create_article_fragment = createArticleFragment.Companion.newInstance()
+            val create_article_fragment = CreateArticleFragment.Companion.newInstance()
             fragmentTransaction(
                 supportFragmentManager,
                 create_article_fragment,
@@ -129,14 +183,40 @@ class HomeFeedPageActivity : AppCompatActivity() , fragmentOperationsInterface{
             )
             true
         }
+        R.id.deposit_top_menu_item -> {
+            val depositFragment = DepositFundsFragment.newInstance()
+            fragmentTransaction(
+                supportFragmentManager,
+                depositFragment,
+                R.id.homePageContent,
+                true,
+                true,
+                false
+            )
+            true
+        }
         R.id.profile_top_menu_item -> {
             val profileFragment = UserProfile.Companion.newInstance()
-            changeFragment(profileFragment)
+            fragmentTransaction(
+                supportFragmentManager,
+                profileFragment,
+                homePageContent!!.id,
+                true,
+                true,
+                false
+            )
             true
         }
         R.id.settings_top_menu_item -> {
             val profileFragment = EditUserProfileFragment.Companion.newInstance()
-            changeFragment(profileFragment)
+            fragmentTransaction(
+                supportFragmentManager,
+                profileFragment,
+                homePageContent!!.id,
+                true,
+                true,
+                false
+            )
             // do stuff
             true
         }

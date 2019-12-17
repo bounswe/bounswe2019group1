@@ -12,14 +12,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.project.khajit_app.R
+import com.project.khajit_app.activity.ui.article.ListArticleFragment
 import com.project.khajit_app.activity.ui.equipment.EquipmentFragment
 import com.project.khajit_app.activity.ui.home.HomeFragment
 import com.project.khajit_app.activity.ui.home.HomeFragmentGuest
 import com.project.khajit_app.activity.ui.mailbox.MailboxFragment
 import com.project.khajit_app.activity.ui.notifications.NotificationsFragment
 import com.project.khajit_app.activity.ui.search.SearchFragment
+import interfaces.fragmentOperationsInterface
 
-class HomeFeedPageGuestActivity : AppCompatActivity() {
+class HomeFeedPageGuestActivity : AppCompatActivity() , fragmentOperationsInterface {
 
     private var content: FrameLayout? = null
 
@@ -33,26 +35,88 @@ class HomeFeedPageGuestActivity : AppCompatActivity() {
         val navigation = findViewById<BottomNavigationView>(R.id.nav_view_guest)
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        val fragment = HomeFragmentGuest.Companion.newInstance()
-        addFragment(fragment)
+        //val fragment = HomeFragmentGuest.Companion.newInstance()
+        val fragment = ListArticleFragment.Companion.newInstance(1,0,1,0,-1)
+        /*val user = UserAllInfo(        listOf("1","2"), 9,
+        "cer3d@hotmail.com",
+
+        "cer3",
+        "dardi",
+             "cer3d@hotmail.com",
+             "locationInfo",
+         "905086395214",
+        "0",
+         "",
+         "I am para babasi.",
+         "para baba",
+"2019-11-24T14:31:15.031985Z")*/
+        //val article = GeneralArticleModel(1," DENEME TITLE", "ASLJFGHKLJFG",user,true,"2 mayıs")
+        //val fragment = displayArticleFragment.Companion.newInstance(article,1,0,1,0,-1)
+        fragmentTransaction(
+            supportFragmentManager,
+            fragment,
+            content!!.id,
+            true,
+            true,
+            false
+        )
+
     }
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home_guest -> {
 
-                val fragment = HomeFragmentGuest.Companion.newInstance()
-                addFragment(fragment)
+                //val fragment = HomeFragmentGuest.Companion.newInstance()
+                val fragment = ListArticleFragment.Companion.newInstance(1,0,1,0,-1)
+                /*val user = UserAllInfo(        listOf("1","2"), 9,
+                "cer3d@hotmail.com",
+
+                "cer3",
+                "dardi",
+                     "cer3d@hotmail.com",
+                     "locationInfo",
+                 "905086395214",
+                "0",
+                 "",
+                 "I am para babasi.",
+                 "para baba",
+       "2019-11-24T14:31:15.031985Z")*/
+                //val article = GeneralArticleModel(1," DENEME TITLE", "ASLJFGHKLJFG",user,true,"2 mayıs")
+                //val fragment = displayArticleFragment.Companion.newInstance(article,1,0,1,0,-1)
+                fragmentTransaction(
+                    supportFragmentManager,
+                    fragment,
+                    content!!.id,
+                    true,
+                    true,
+                    false
+                )
+
 
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_search_guest -> {
                 val fragment = SearchFragment()
-                addFragment(fragment)
+                fragmentTransaction(
+                    supportFragmentManager,
+                    fragment,
+                    content!!.id,
+                    true,
+                    true,
+                    false
+                )
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_equipments_guest -> {
                 val fragment = NotificationsFragment()
-                addFragment(fragment)
+                fragmentTransaction(
+                    supportFragmentManager,
+                    fragment,
+                    content!!.id,
+                    true,
+                    true,
+                    false
+                )
                 return@OnNavigationItemSelectedListener true
             }
 
@@ -60,14 +124,7 @@ class HomeFeedPageGuestActivity : AppCompatActivity() {
         false
     }
 
-    private fun addFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .setCustomAnimations(R.anim.design_bottom_sheet_slide_in, R.anim.design_bottom_sheet_slide_out)
-            .replace(R.id.content_guest, fragment, fragment.javaClass.simpleName)
-            .commit()
 
-    }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_top_guest, menu)
 

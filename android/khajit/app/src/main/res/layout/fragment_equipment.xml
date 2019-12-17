@@ -24,14 +24,16 @@
             android:gravity="center_horizontal"
             android:textColor="@color/darkGray"
             android:layout_weight="0.5"
+            android:textStyle="bold"
             android:text="Currencies" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_eur_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="currencyEUR"
             android:backgroundTint="@color/lightGray">
 
             <LinearLayout
@@ -43,8 +45,10 @@
                     android:id="@+id/currency_eur"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="EUR" />
 
                 <TextView
@@ -61,11 +65,12 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_gbp_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="currencyGBP"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -78,8 +83,10 @@
                     android:id="@+id/currency_gbp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="GBP" />
 
                 <TextView
@@ -95,11 +102,12 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_try_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="currencyTRY"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -112,8 +120,10 @@
                     android:id="@+id/currency_try"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="TRY" />
 
                 <TextView
@@ -135,14 +145,16 @@
             android:gravity="center_horizontal"
             android:layout_weight="0.5"
             android:textColor="@color/darkGray"
+            android:textStyle="bold"
             android:text="Crypto-Currencies" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_btc_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="cryptoBTC"
             android:backgroundTint="@color/lightGray">
 
             <LinearLayout
@@ -154,8 +166,10 @@
                     android:id="@+id/crypto_btc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="BTC" />
 
                 <TextView
@@ -172,11 +186,12 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_eth_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="cryptoETH"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -189,8 +204,10 @@
                     android:id="@+id/crypto_eth"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="ETH" />
 
                 <TextView
@@ -207,11 +224,12 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_ltc_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="cryptoLTC"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -224,8 +242,10 @@
                     android:id="@+id/crypto_ltc"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="LTC" />
 
                 <TextView
@@ -247,14 +267,16 @@
             android:gravity="center_horizontal"
             android:layout_weight="0.5"
             android:textColor="@color/darkGray"
+            android:textStyle="bold"
             android:text="Commodities" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_xau_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="commodityXAU"
             android:backgroundTint="@color/lightGray">
 
             <LinearLayout
@@ -266,8 +288,10 @@
                     android:id="@+id/commodity_gold"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="Gold (XAU)" />
 
                 <TextView
@@ -283,11 +307,12 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_xag_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="commodityXAG"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -300,46 +325,14 @@
                     android:id="@+id/commodity_silver"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="Silver (XAG)" />
 
                 <TextView
                     android:id="@+id/value_silver"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="12dp"
-                    android:layout_weight="1"
-                    android:text="-" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:layout_weight="1"
-            android:onClick="commodityXRH"
-            android:shadowColor="@color/darkGray"
-            android:backgroundTint="@color/lightGray" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/commodity_rhenium"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="12dp"
-                    android:layout_weight="1"
-                    android:text="Rhenium (XRH)" />
-
-                <TextView
-                    android:id="@+id/value_rhenium"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="12dp"
@@ -360,11 +353,12 @@
             android:text="Stocks" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_googl_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="stockGOOGL"
             android:backgroundTint="@color/lightGray">
 
             <LinearLayout
@@ -376,8 +370,10 @@
                     android:id="@+id/stock_googl"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="GOOGL" />
 
                 <TextView
@@ -393,11 +389,12 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_aapl_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="stockAAPL"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -410,8 +407,10 @@
                     android:id="@+id/stock_aapl"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="AAPL" />
 
                 <TextView
@@ -428,11 +427,12 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_gm_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="stockGM"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -445,8 +445,10 @@
                     android:id="@+id/stock_gm"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="GM" />
 
                 <TextView
@@ -468,14 +470,16 @@
             android:gravity="center_horizontal"
             android:layout_weight="0.5"
             android:textColor="@color/darkGray"
+            android:textStyle="bold"
             android:text="Trade Indices" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_dji_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="tradeDJI"
             android:backgroundTint="@color/lightGray">
 
             <LinearLayout
@@ -487,8 +491,10 @@
                     android:id="@+id/trade_dji"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="DJI" />
 
                 <TextView
@@ -505,11 +511,12 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_ixic_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="tradeIXIC"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -522,8 +529,10 @@
                     android:id="@+id/trade_ixic"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="IXIC" />
 
                 <TextView
@@ -540,11 +549,12 @@
 
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_inx_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="tradeINX"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -557,8 +567,10 @@
                     android:id="@+id/trade_inx"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="INX" />
 
                 <TextView
@@ -580,14 +592,16 @@
             android:gravity="center_horizontal"
             android:layout_weight="0.5"
             android:textColor="@color/darkGray"
+            android:textStyle="bold"
             android:text="ETFs" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_spy_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="etfSPY"
             android:backgroundTint="@color/lightGray">
 
             <LinearLayout
@@ -599,8 +613,10 @@
                     android:id="@+id/etf_spy"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="SPY" />
 
                 <TextView
@@ -616,11 +632,12 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_ivv_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="etfIVV"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -633,8 +650,10 @@
                     android:id="@+id/etf_ivv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="IVV" />
 
                 <TextView
@@ -650,11 +669,12 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/equipment_fragment_vti_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_weight="1"
-            android:onClick="etfVTI"
             android:shadowColor="@color/darkGray"
             android:backgroundTint="@color/lightGray" >
 
@@ -667,8 +687,10 @@
                     android:id="@+id/etf_vti"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
                     android:padding="12dp"
                     android:layout_weight="1"
+                    android:textStyle="bold"
                     android:text="VTI" />
 
                 <TextView

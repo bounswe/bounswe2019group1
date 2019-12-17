@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+<data>
+
+    <variable
+        name="generalArticleModel"
+        type="com.project.khajit_app.data.models.GeneralArticleModel" />
+</data>
+
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="80dp">
+
+    <ImageView
+        android:id="@+id/dog_image"
+        imageResource="@drawable/app_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:contentDescription="@null"
+        android:scaleType="centerInside" />
+
+    <TextView
+        android:id="@+id/name"
+        style="@style/TextAppearance.AppCompat.Subhead.Inverse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimaryDark"
+        android:minHeight="@dimen/recycler_item_footer_height_min"
+        android:paddingLeft="@dimen/recycler_item_footer_padding"
+        android:paddingTop="@dimen/recycler_item_footer_padding"
+        android:paddingRight="@dimen/recycler_item_footer_padding"
+        android:paddingBottom="@dimen/recycler_item_footer_padding"
+        tools:text="@{generalArticleModel.title}" />
+
+</RelativeLayout>
+</layout>

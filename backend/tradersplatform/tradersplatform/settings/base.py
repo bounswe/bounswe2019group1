@@ -71,7 +71,9 @@ INSTALLED_APPS = [
     'prediction',
     'wallet',
     'article',
+    'article_like',
     'article_comment',
+    'portfolio_follow',
 ]
 
 

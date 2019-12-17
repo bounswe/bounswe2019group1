@@ -3,6 +3,7 @@ package com.project.khajit_app.api
 import com.project.khajit_app.global.User
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.Inet4Address
 import java.net.InetAddress.getByAddress
@@ -44,6 +45,7 @@ object RetrofitClient {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(okHttpClient)
             .build()
 
