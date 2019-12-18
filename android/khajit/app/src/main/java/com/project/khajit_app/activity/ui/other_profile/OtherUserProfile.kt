@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
+import com.mikhaellopez.circularimageview.CircularImageView
 
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.ListViewAdapter
@@ -23,6 +24,7 @@ import com.project.khajit_app.activity.ui.otherportfolio.OtherPortfolioFragment
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.*
 import com.project.khajit_app.global.User
+import com.squareup.picasso.Picasso
 import interfaces.fragmentOperationsInterface
 import retrofit2.Call
 import retrofit2.Callback
@@ -52,6 +54,7 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
 
     private lateinit var other_id: String
     private lateinit var other_name: String
+    private lateinit var profile_pic: CircularImageView
 
     /*override fun onClick(v: View?) {
         if isFollowing
@@ -102,6 +105,7 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
         public_private_ind = root.findViewById(R.id.other_public_private_text) as TextView
         other_user_article_button = root.findViewById(R.id.other_button_article_page) as Button
         other_portfolioButton = root.findViewById(R.id.other_button_portfolio_page) as Button
+        profile_pic = root.findViewById(R.id.other_profile_pic) as CircularImageView
 
         // This will be used for further methods in order to set prediction rates
         var lview =  root.findViewById(R.id.other_list_prediction_name) as ListView
@@ -160,6 +164,11 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
                         other_aboutBox.text = response.body()?.biography
                         public = response.body()?.is_public!!
                         var isTrader = response.body()?.groups?.get(0).equals("trader")
+
+                        var photo_pic_other = response.body()?.photo
+                        if(photo_pic_other != null) {
+                            Picasso.get().load("http://35.163.120.227:8000" + photo_pic_other).into(profile_pic)
+                        }
 
                         if(isTrader == true) {
                             other_traderImage.alpha = 1F

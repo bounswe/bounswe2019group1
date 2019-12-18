@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.FragmentManager
+import com.mikhaellopez.circularimageview.CircularImageView
 
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.ListViewAdapter
@@ -20,6 +21,7 @@ import com.project.khajit_app.data.models.FollowModel
 import com.project.khajit_app.data.models.GeneralFollowModel
 import com.project.khajit_app.data.models.GeneralFollowModel2
 import com.project.khajit_app.global.User
+import com.squareup.picasso.Picasso
 import interfaces.fragmentOperationsInterface
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,6 +41,8 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
     private lateinit var followerButton: Button
     private lateinit var followingButton: Button
     private lateinit var myportfolioButton: Button
+
+    private lateinit var profile_pic: CircularImageView
 
     var equipments = arrayOf(
         "Android", "IPhone", "WindowsMobile", "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X", "Max OS X", "Max OS X")
@@ -79,11 +83,15 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
         followerButton = root.findViewById(R.id.follower_button) as Button
         followingButton = root.findViewById(R.id.following_button) as Button
         myportfolioButton = root.findViewById(R.id.button_portfolio_page) as Button
-
+        profile_pic = root.findViewById(R.id.profile_pic) as CircularImageView
 
         nameBox.text = User.first_name + " " + User.last_name
         titleBox.text = User.title
         aboutBox.text = User.bio
+
+        if(User.photo != null) {
+            Picasso.get().load("http://35.163.120.227:8000" + User.photo).into(profile_pic)
+        }
 
         RetrofitClient.instance.followingList().enqueue(object :
             Callback<GeneralFollowModel> {

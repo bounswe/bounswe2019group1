@@ -122,6 +122,7 @@ class LoginPageActivity : AppCompatActivity() {
                         User.bio = response.body()?.user?.biography
                         User.title = response.body()?.user?.title
                         User.is_public = response.body()?.user?.is_public
+                        User.photo = response.body()?.user?.photo
                         // if the user is trader type info will be true otherwise user is basic and type info will be false
                         User.type = (response.body()?.user?.groups?.get(0).equals("trader"))
 
@@ -223,6 +224,7 @@ class LoginPageActivity : AppCompatActivity() {
                             User.bio = response.body()?.user?.biography
                             User.title = response.body()?.user?.title
                             User.is_public = response.body()?.user?.is_public
+                            User.photo = response.body()?.user?.photo
                             // if the user is trader type info will be true otherwise user is basic and type info will be false
                             User.type = (response.body()?.user?.groups?.get(0).equals("trader"))
 
