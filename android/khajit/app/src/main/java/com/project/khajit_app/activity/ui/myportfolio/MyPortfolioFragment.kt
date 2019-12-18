@@ -33,6 +33,8 @@ class MyPortfolioFragment : Fragment(), fragmentOperationsInterface {
     private lateinit var ladapter: PortfolioListAdapter
     private lateinit var lview: ListView
 
+    private lateinit var create_port_but: Button
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -107,6 +109,20 @@ class MyPortfolioFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager: FragmentManager =
                 activity?.supportFragmentManager as FragmentManager
             removeFragment(parentActivityManager)
+        }
+
+        create_port_but = root.findViewById(R.id.myportfolio_button_add) as Button
+        create_port_but.setOnClickListener { root->
+            val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
+
+            fragmentTransaction(
+                parentActivityManager,
+                AddMyPortfolioFragment.newInstance(),
+                (containerId!!.id),
+                true,
+                true,
+                false
+            )
         }
         return root
     }

@@ -149,6 +149,10 @@ interface Api {
     fun deletePortfolio(@Path(value = "id", encoded = true) userId: String):Call<PortfolioDeleteResponseModel>
 
     @Headers("Content-Type: application/json")
+    @POST("portfolio/createportfolio/")
+    fun createPortfolio(@Body body: PortfolioEditRequestModel):Call<PortfolioEditResponseModel>
+
+    @Headers("Content-Type: application/json")
     @GET("article/listArticleByUserId/{id}/")
     fun getArticlesByUserId(@Path(value = "id", encoded = true) userId: Int):Call<PublicArticleListResponse>
 
