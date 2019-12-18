@@ -153,6 +153,18 @@ interface Api {
     fun createPortfolio(@Body body: PortfolioEditRequestModel):Call<PortfolioEditResponseModel>
 
     @Headers("Content-Type: application/json")
+    @GET("portfolio-follow/isFollowing/{id}/")
+    fun isFollowingThisPortfolio(@Path(value = "id", encoded = true) userId: String):Call<isFollowingPortfolioResponse>
+
+    @Headers("Content-Type: application/json")
+    @POST("portfolio-follow/follow/")
+    fun followPortfolio(@Body body: FollowUnfollowModel):Call<FollowUnfollowResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @HTTP(method="DELETE", path="portfolio-follow/unfollow/", hasBody=true)
+    fun unfollowPortfolio(@Body body: FollowUnfollowModel):Call<FollowUnfollowResponseModel>
+
+    @Headers("Content-Type: application/json")
     @GET("article/listArticleByUserId/{id}/")
     fun getArticlesByUserId(@Path(value = "id", encoded = true) userId: Int):Call<PublicArticleListResponse>
 

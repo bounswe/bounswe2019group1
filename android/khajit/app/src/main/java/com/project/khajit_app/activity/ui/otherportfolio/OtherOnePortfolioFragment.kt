@@ -1,5 +1,6 @@
 package com.project.khajit_app.activity.ui.otherportfolio
 
+import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -38,6 +39,9 @@ class OtherOnePortfolioFragment : Fragment(), fragmentOperationsInterface {
     private lateinit var ladapter: OtherOnePortfolioViewAdapter
     private lateinit var lview: ListView
 
+    var isFollowing = false
+    private lateinit var followPortfolioButton: Button
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -57,6 +61,8 @@ class OtherOnePortfolioFragment : Fragment(), fragmentOperationsInterface {
 
         top_button = root.findViewById(R.id.button_other_portfolio_name) as Button
         top_button.text = name
+
+        followPortfolioButton = root.findViewById(R.id.other_portfolio_button_follow) as Button
 
         RetrofitClient.instance.retrievePortfolio(id.toString()).enqueue(object :
             Callback<OnePortfolioResponse> {
@@ -164,7 +170,44 @@ class OtherOnePortfolioFragment : Fragment(), fragmentOperationsInterface {
             }
         })
 
+        RetrofitClient.instance.isFollowingThisPortfolio(id.toString()).enqueue(object :
+            Callback<isFollowingPortfolioResponse> {
+            override fun onResponse(
+                call: Call<isFollowingPortfolioResponse>,
+                response: Response<isFollowingPortfolioResponse>
+            ) {
+                println(response.toString())
+                if(response.code() == 200 ){
+                    if(response.body()?.detail != null){
+                        println("NOT CHANGED")
+                    }else{
+                        println("CHANGED")
+                        if(response.body()?.result == "Found") {
+                            isFollowing = true
+                            followPortfolioButton.text = "UNFOLLOW"
+                            followPortfolioButton.setBackgroundColor(Color.parseColor("#AAB80707"))
+                        }else {
+                            isFollowing = false
+                            followPortfolioButton.text = "FOLLOw"
+                            followPortfolioButton.setBackgroundColor(Color.parseColor("#AA4AE608"))
+                        }
+                    }
+                }else{
 
+                }
+            }
+            override fun onFailure(call: Call<isFollowingPortfolioResponse>, t: Throwable) {
+
+            }
+        })
+
+        followPortfolioButton.setOnClickListener { root->
+            if(isFollowing == true) {
+                unfollowPortfolio(root, id)
+            }else {
+                followPortfolio(root, id)
+            }
+        }
         var button_back = root.findViewById(R.id.other_portfolio_button_back_one) as Button
         button_back.setOnClickListener { root ->
             val parentActivityManager: FragmentManager =
@@ -172,6 +215,66 @@ class OtherOnePortfolioFragment : Fragment(), fragmentOperationsInterface {
             removeFragment(parentActivityManager)
         }
         return root
+    }
+
+    fun followPortfolio(view: View, id: String) {
+
+        var obj = FollowUnfollowModel(id.toInt())
+        RetrofitClient.instance.followPortfolio(obj).enqueue(object :
+            Callback<FollowUnfollowResponseModel> {
+            override fun onResponse(
+                call: Call<FollowUnfollowResponseModel>,
+                response: Response<FollowUnfollowResponseModel>
+            ) {
+                println(response.toString())
+                if(response.code() == 200 ){
+                    if(response.body()?.detail != null){
+                        println("NOT CHANGED")
+                    }else{
+                        println("CHANGED")
+                    }
+                }else{
+
+                }
+            }
+            override fun onFailure(call: Call<FollowUnfollowResponseModel>, t: Throwable) {
+
+            }
+        })
+
+        val parentActivityManager: FragmentManager =
+            activity?.supportFragmentManager as FragmentManager
+        removeFragment(parentActivityManager)
+    }
+
+    fun unfollowPortfolio(view: View, id: String) {
+
+        var obj = FollowUnfollowModel(id.toInt())
+        RetrofitClient.instance.unfollowPortfolio(obj).enqueue(object :
+            Callback<FollowUnfollowResponseModel> {
+            override fun onResponse(
+                call: Call<FollowUnfollowResponseModel>,
+                response: Response<FollowUnfollowResponseModel>
+            ) {
+                println(response.toString())
+                if(response.code() == 200 ){
+                    if(response.body()?.detail != null){
+                        println("NOT CHANGED")
+                    }else{
+                        println("CHANGED")
+                    }
+                }else{
+
+                }
+            }
+            override fun onFailure(call: Call<FollowUnfollowResponseModel>, t: Throwable) {
+
+            }
+        })
+
+        val parentActivityManager: FragmentManager =
+            activity?.supportFragmentManager as FragmentManager
+        removeFragment(parentActivityManager)
     }
 
     companion object {
