@@ -10,7 +10,8 @@ class FollowCreateSerializer(ModelSerializer):
         fields = [
             "id",
             "follower",
-            "following"
+            "following",
+            "is_active"
         ]
 
 
