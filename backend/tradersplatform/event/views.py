@@ -49,6 +49,6 @@ class SearchEvent(ListAPIView):
         for word in semantics:
             for event in data:
                 if word['word'] in event['title'].lower():
-                    searchResults.append(j)
+                    searchResults.append(event)
 
         return Response(searchResults, 200)
