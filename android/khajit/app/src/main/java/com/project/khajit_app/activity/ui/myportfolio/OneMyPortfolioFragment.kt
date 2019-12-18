@@ -164,6 +164,20 @@ class OneMyPortfolioFragment : Fragment(), fragmentOperationsInterface {
         })
 
 
+        var button_edit = root.findViewById(R.id.myportfolio_button_edit) as Button
+        button_edit.setOnClickListener { root ->
+            val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
+
+            fragmentTransaction(
+                parentActivityManager,
+                EditMyPortfolioFragment.newInstance(name, id),
+                (containerId!!.id),
+                true,
+                true,
+                false
+            )
+        }
+
         var button_back = root.findViewById(R.id.myportfolio_button_back_one) as Button
         button_back.setOnClickListener { root ->
             val parentActivityManager: FragmentManager =
