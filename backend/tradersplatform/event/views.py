@@ -40,15 +40,17 @@ class SearchEvent(ListAPIView):
         response = urllib.request.urlopen(url)
         data = json.loads(response.read())
 
-        searchResults = []
-        searchItem = kwargs.get("pk")
-        semanticsUrl = "https://api.datamuse.com/words?ml=" + str(searchItem) + "&max=100"
-        semanticsResponse = urllib.request.urlopen(semanticsUrl)
-        semantics = json.loads(semanticsResponse.read())
+        search_item = kwargs.get("pk")
+        semantics_url = "https://api.datamuse.com/words?ml=" + str(search_item) + "&max=100"
+        semantics_response = urllib.request.urlopen(semantics_url)
+        semantics = json.loads(semantics_response.read())
+        semantics.insert(0, {"word": str(search_item), "score": 1000000, "tags": []})
 
+        search_results = {"count": 0,
+                          "results": []}
         for word in semantics:
             for event in data:
                 if word['word'] in event['title'].lower():
-                    searchResults.append(j)
-
-        return Response(searchResults, 200)
+                    search_results['results'].append(event)
+                    search_results['count'] += 1
+        return Response(search_results, 200)
