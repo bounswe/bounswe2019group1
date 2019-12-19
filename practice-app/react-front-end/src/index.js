@@ -21,6 +21,7 @@ import SearchResults from "./views/SearchResults/SearchResults";
 import NotificationPage from "./views/PortfolioPage/Notification";
 import UserProfile from "./views/ProfilePage/UserProfile";
 import ResetPassword from "views/ResetPassword/ResetPassword";
+import Equipments from "views/Equipment/Equipment";
 var hist = createBrowserHistory();
 
 ReactDOM.render(
@@ -55,6 +56,16 @@ ReactDOM.render(
         render={() =>
           localStorage.getItem("currentUser") ? (
             <SearchResults history={hist} />
+          ) : (
+            <Redirect to="/login-page" />
+          )
+        }
+      />
+      <Route
+        path="/equipments"
+        render={() =>
+          localStorage.getItem("currentUser") ? (
+            <Equipments history={hist} />
           ) : (
             <Redirect to="/login-page" />
           )
