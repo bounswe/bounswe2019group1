@@ -69,4 +69,5 @@ dependencies {
     implementation 'com.google.android.material:material:1.1.0-beta01'
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
     implementation 'com.github.kittinunf.fuel:fuel-android:1.15.1'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }
