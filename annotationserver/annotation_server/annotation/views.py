@@ -118,3 +118,16 @@ class AnnotationListAPIView(APIView):
             annotation_query=annotation_query | query
         serializer= AnnotationViewSerializer(annotation_query,many=True)
         return Response(serializer.data, status=200)
+
+
+class DeleteAnnotation(APIView):
+
+    def delete(self, request, *args, **kwargs):
+        id=request.data.get('id',None)
+        if id is None:
+            raise ValidationError({"detail": "Give id of annotation"})
+        annot=Annotation.objects.filter(id=id).first()
+        if not annot:
+            raise ValidationError({"detail": "This annotation does not exist"})
+        annot.delete()
+        return Response({}, status=200)
