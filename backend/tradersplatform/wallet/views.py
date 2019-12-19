@@ -47,6 +47,24 @@ class WalletRetrieveAPIView(RetrieveAPIView):
         return Wallet.objects.filter(owner=user).first()
 
 
+class WalletDeleteAPIView(RetrieveAPIView):
+    serializer_class = WalletListSerializer
+    queryset = Wallet.objects.all()
+
+    def delete(self, request, *args, **kwargs):
+        check_if_user(request)
+        user=TemplateUser.objects.filter(id=request.user.id).first()
+        if not user:
+            raise ValidationError({"detail": "User does not exist"})
+        wallet=Wallet.objects.filter(owner=user).first()
+        if not wallet:
+            raise ValidationError({"detail": "wallet does not exist"})
+        wallet.delete()
+        return Response({}, status=200)
+
+
+
+
 class SendUSDAPIView(UpdateAPIView):
 
     def put(self, request, *args, **kwargs):
