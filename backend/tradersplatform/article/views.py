@@ -47,16 +47,36 @@ class ListPublicArticleAPIView(ListAPIView):
     queryset = Article.objects.filter(is_public=True).order_by('-created_date')
 
 
-class ListArticleWithUserIdAPIView(ListAPIView):
+class ListPublicArticleWithUserIdAPIView(ListAPIView):
 
     def get(self, request, *args, **kwargs):
         id = kwargs.get("pk")
         if id is None:
             raise ValidationError({"detail": "give id"})
         user = TemplateUser.objects.get(id=id)
-        query = Article.objects.filter(author=user).order_by('-created_date')
+        query = Article.objects.filter(author=user, is_public=True).order_by('-created_date')
         serializer = PublicArticleListSerializer(query, many=True)
         return Response(serializer.data, status=200)
+
+
+class ListArticleWithUserIdAPIView(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        request_id = request.user.id
+        current_user = TemplateUser.objects.get(id=request_id)
+        id = kwargs.get("pk")
+        if id is None:
+            raise ValidationError({"detail": "give id"})
+        user = TemplateUser.objects.get(id=id)
+        follow_query = Follow.objects.filter(follower=current_user, following=user).first()
+        if follow_query:
+            query = Article.objects.filter(author=user).order_by('-created_date')
+            serializer = PublicArticleListSerializer(query, many=True)
+            return Response(serializer.data, status=200)
+        else:
+            query = Article.objects.filter(author=user, is_public=True).order_by('-created_date')
+            serializer = PublicArticleListSerializer(query, many=True)
+            return Response(serializer.data, status=200)
 
 
 class ListArticleOfFollowingUsersAPIView(ListAPIView):
@@ -68,6 +88,20 @@ class ListArticleOfFollowingUsersAPIView(ListAPIView):
         following_query = Follow.objects.filter(follower=user, is_active=True).values('following')
         query = Article.objects.filter(author__in=following_query).order_by('-created_date')
         serializer = PublicArticleListSerializer(query, many=True)
+        return Response(serializer.data, status=200)
+
+
+class FeedAPIView(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        check_if_user(request)
+        id = request.user.id;
+        user = TemplateUser.objects.get(id=id)
+        following_query = Follow.objects.filter(follower=user, is_active=True).values('following')
+        query = Article.objects.filter(author__in=following_query).order_by('-created_date')
+        queryset = Article.objects.filter(is_public=True).order_by('-created_date')
+        feed = query | queryset
+        serializer = PublicArticleListSerializer(feed.order_by('-created_date'), many=True)
         return Response(serializer.data, status=200)
 
 
