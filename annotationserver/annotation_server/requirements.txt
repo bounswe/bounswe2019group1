@@ -3,7 +3,7 @@ anyjson==0.3.3
 asgiref==3.2.3
 certifi==2019.11.28
 chardet==3.0.4
-Django==2.2.6
+Django==2.2.8
 django-common-helpers==0.9.2
 django-cors-headers==3.1.1
 django-fcm==0.1.1
