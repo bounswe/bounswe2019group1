@@ -48,6 +48,7 @@ class SearchEvent(ListAPIView):
         for word in semantics:
             for event in data:
                 if word['word'] in event['title'].lower():
+
                     search_results['results'].append(event)
                     search_results['count'] += 1
         

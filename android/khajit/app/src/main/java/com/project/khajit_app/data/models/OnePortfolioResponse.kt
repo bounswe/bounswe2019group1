@@ -1,0 +1,20 @@
+package com.project.khajit_app.data.models
+
+data class OnePortfolioResponse (val detail: String?,
+                                 val BTC: Double?,
+                                 val LTC: Double?,
+                                 val ETH: Double?,
+                                 val XAG: Double?,
+                                 val XAU: Double?,
+                                 val GOOGL: Double?,
+                                 val AAPL: Double?,
+                                 val GM: Double?,
+                                 val EUR: Double?,
+                                 val GBP: Double?,
+                                 val TRY: Double?,
+                                 val DJI: Double?,
+                                 val IXIC: Double?,
+                                 val INX: Double?,
+                                 val SPY: String?,
+                                 val IVV: String?,
+                                 val VTI: String?)

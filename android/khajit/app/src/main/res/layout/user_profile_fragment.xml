@@ -253,6 +253,8 @@
                         android:layout_marginRight="2dp"
                         android:layout_marginBottom="2dp"
                         android:background="#B5A33535"
+                        android:clickable="true"
+                        android:enabled="true"
                         android:text="Portfolios"
                         android:textStyle="bold" />
 
