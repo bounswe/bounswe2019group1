@@ -6,6 +6,8 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.generics import CreateAPIView, ListAPIView, DestroyAPIView, UpdateAPIView, RetrieveAPIView
 from rest_framework.response import Response
 
+from article_like.models import ArticleLike
+from follow.models import Follow
 from article.models import Article
 from article.serializers import ArticleCreateSerializer, ArticleListSerializer, PublicArticleListSerializer, \
     ArticleUpdateSerializer, ArticleGetSerializer
@@ -57,6 +59,18 @@ class ListArticleWithUserIdAPIView(ListAPIView):
         return Response(serializer.data, status=200)
 
 
+class ListArticleOfFollowingUsersAPIView(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        check_if_user(request)
+        id = request.user.id;
+        user = TemplateUser.objects.get(id=id)
+        following_query = Follow.objects.filter(follower=user, is_active=True).values('following')
+        query = Article.objects.filter(author__in=following_query).order_by('-created_date')
+        serializer = PublicArticleListSerializer(query, many=True)
+        return Response(serializer.data, status=200)
+
+
 class DeleteArticleAPIView(DestroyAPIView):
 
     def delete(self, request, *args, **kwargs):
@@ -69,7 +83,7 @@ class DeleteArticleAPIView(DestroyAPIView):
             raise ValidationError({"detail": 'You do not have an article with this id'})
         article = query.first()
         article.delete()
-        return Response({},status=200)
+        return Response({}, status=200)
 
 
 class UpdateArticleAPIView(UpdateAPIView):
