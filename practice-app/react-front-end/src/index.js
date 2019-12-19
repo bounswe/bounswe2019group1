@@ -17,6 +17,7 @@ import Article from "./views/ArticlesPage/Article";
 import AddArticle from "./views/AddArticle/AddArticle";
 import EditArticle from "./views/AddArticle/EditArticle";
 import PortfolioPage from "./views/PortfolioPage/Portfolio";
+import SearchResults from "./views/SearchResults/SearchResults";
 import NotificationPage from "./views/PortfolioPage/Notification";
 import UserProfile from "./views/ProfilePage/UserProfile";
 import ResetPassword from "views/ResetPassword/ResetPassword";
@@ -44,6 +45,16 @@ ReactDOM.render(
         render={() =>
           localStorage.getItem("currentUser") ? (
             <ProfilePage history={hist} />
+          ) : (
+            <Redirect to="/login-page" />
+          )
+        }
+      />
+      <Route
+        path="/search-results"
+        render={() =>
+          localStorage.getItem("currentUser") ? (
+            <SearchResults history={hist} />
           ) : (
             <Redirect to="/login-page" />
           )

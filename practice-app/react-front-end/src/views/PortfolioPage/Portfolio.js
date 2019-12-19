@@ -67,11 +67,11 @@ export default function TableList() {
     EUR_USD: true,
     USD_TRY: true,
     EUR_TRY: true,
-    GBP_USD: false,
-    BTC_TRY: false,
-    XMR_USD: false,
-    GOOGL_USD: false,
-    AGTHX_USD: false
+    GBP_USD: true,
+    BTC_TRY: true,
+    XMR_USD: true,
+    GOOGL_USD: true,
+    AGTHX_USD: true
   });
 
   const [list, setListState] = React.useState([
@@ -206,9 +206,9 @@ export default function TableList() {
                     <GridItem item xs={120} sm container>
                       <Card>
                         <CardHeader color="primary">
-                          <h4 className={classes.cardTitleWhite}>Portfolio</h4>
+                          <h4 className={classes.cardTitleWhite}>Market</h4>
                           <p className={classes.cardCategoryWhite}>
-                            Equipments you follow
+                            Equipments that is listed
                           </p>
                         </CardHeader>
                         <CardBody>
@@ -227,11 +227,9 @@ export default function TableList() {
                     <GridItem xs={12} sm={12} md={12}>
                       <Card plain>
                         <CardHeader plain color="primary">
-                          <h4 className={classes.cardTitleWhite}>
-                            Edit Your Portfolio
-                          </h4>
+                          <h4 className={classes.cardTitleWhite}></h4>
                           <p className={classes.cardCategoryWhite}>
-                            Follow/Unfollow Equipments
+                            List/Unlist Equipments
                           </p>
                         </CardHeader>
                         <CardBody>
