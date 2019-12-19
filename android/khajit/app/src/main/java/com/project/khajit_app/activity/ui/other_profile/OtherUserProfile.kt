@@ -55,6 +55,7 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
     private lateinit var other_id: String
     private lateinit var other_name: String
     private lateinit var profile_pic: CircularImageView
+    var profile_pic_url: String? = ""
 
     /*override fun onClick(v: View?) {
         if isFollowing
@@ -165,10 +166,8 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
                         public = response.body()?.is_public!!
                         var isTrader = response.body()?.groups?.get(0).equals("trader")
 
-                        var photo_pic_other = response.body()?.photo
-                        if(photo_pic_other != null) {
-                            Picasso.get().load("http://35.163.120.227:8000" + photo_pic_other).into(profile_pic)
-                        }
+                        profile_pic_url = response.body()?.photo
+                        Picasso.get().load(profile_pic_url).into(profile_pic)
 
                         if(isTrader == true) {
                             other_traderImage.alpha = 1F

@@ -52,7 +52,7 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
         containerId = container
         var loader = root.findViewById(R.id.progress_loader) as ProgressBar
         loader.visibility = View.GONE
-
+        println("STATE1")
         var spinner = root.findViewById(R.id.spinner2) as Spinner
         var items = arrayOf("User Search", "Article Search", "Event Search")
         var adapter = ArrayAdapter(this.context!!,android.R.layout.simple_spinner_dropdown_item, items)
@@ -72,7 +72,7 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
                 // write code to perform some action
             }
         }
-
+        println("STATE2")
 
         var searchview = root.findViewById(R.id.search) as SearchView
         searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -137,7 +137,7 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
             }
 
         })
-
+        println("STATE3")
         var listview = root.findViewById(R.id.list_users) as ListView
         listview.setOnItemClickListener{ parent, view, position, id ->
             val element = ladapter.getItem(position)
@@ -167,7 +167,7 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
                 )
             }
         }
-
+        println("STATE4")
         return root
     }
 
