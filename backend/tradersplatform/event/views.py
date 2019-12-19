@@ -1,12 +1,9 @@
 import urllib
 import json
 from datetime import date
-
 from rest_framework.response import Response
 from rest_framework.generics import ListAPIView
 
-
-# Create your views here.
 
 class EventCalendar(ListAPIView):
     def get(self, request, *args, **kwargs):
@@ -53,4 +50,5 @@ class SearchEvent(ListAPIView):
                 if word['word'] in event['title'].lower():
                     search_results['results'].append(event)
                     search_results['count'] += 1
+        
         return Response(search_results, 200)
