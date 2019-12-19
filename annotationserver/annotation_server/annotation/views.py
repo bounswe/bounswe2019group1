@@ -13,7 +13,7 @@ from datetime import datetime
 
 from rest_framework.views import APIView
 
-from annotation.models import Annotation, Body
+from annotation.models import Annotation, Body, Creator
 from annotation.serializers import RefinedBySerializer, SelectorSerializer, TargetSerializer, CreatorSerializer, \
     BodySerializer, AnnotationSerializer, AnnotationViewSerializer
 
@@ -45,10 +45,15 @@ class AnnotationCreate(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         target_id = serializer.data["id"]
-        serializer = CreatorSerializer(data=creator)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        creator_id = serializer.data["id"]
+        if isinstance(creator,str):
+            creator_id=creator
+        elif isinstance(creator,dict):
+            serializer = CreatorSerializer(data=creator)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            creator_id = serializer.data["id"]
+        else :
+            raise ValidationError({"detail": "You should either give an existing creators id or give credentials to create new user"})
         serializer = BodySerializer(data=body,many=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -71,4 +76,28 @@ class AnnotationCreate(APIView):
             annotation.body.add(body_list[i])
         annotation.save()
         serializer=AnnotationViewSerializer(annotation)
+        return Response(serializer.data, status=200)
+
+
+class AddBody(APIView):
+
+    def put(self, request, *args, **kwargs):
+        id=request.data.get('id',None)
+        if id is None:
+            raise ValidationError({"detail": "Give id of annotation"})
+        annot=Annotation.objects.filter(id=id).first()
+        if not annot:
+            raise ValidationError({"detail": "This annotation does not exist"})
+        body = request.data.get('body', None)
+        if body is None:
+            raise ValidationError({"detail": "Give id of annotation"})
+        serializer = BodySerializer(data=body, many=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        body_id = serializer.data
+        body_list = [0] * len(body_id)
+        for i in range(0, len(body_id)):
+            annot.body.add(body_id[i]['id'])
+        annot.save()
+        serializer = AnnotationViewSerializer(annot)
         return Response(serializer.data, status=200)
