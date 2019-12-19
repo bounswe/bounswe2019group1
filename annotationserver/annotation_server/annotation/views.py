@@ -13,7 +13,7 @@ from datetime import datetime
 
 from rest_framework.views import APIView
 
-from annotation.models import Annotation, Body, Creator
+from annotation.models import Annotation, Body, Creator, Target
 from annotation.serializers import RefinedBySerializer, SelectorSerializer, TargetSerializer, CreatorSerializer, \
     BodySerializer, AnnotationSerializer, AnnotationViewSerializer
 
@@ -100,4 +100,21 @@ class AddBody(APIView):
             annot.body.add(body_id[i]['id'])
         annot.save()
         serializer = AnnotationViewSerializer(annot)
+        return Response(serializer.data, status=200)
+
+
+class AnnotationListAPIView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        source = request.GET.get('source', None)
+        if source is None:
+            raise ValidationError({"detail": "Give id of annotation"})
+        query_target=Target.objects.filter(source=source)
+        annotation_query=Annotation.objects.none()
+        query = Annotation.objects.filter(target=43)
+        for target in query_target:
+            id=target.id
+            query=Annotation.objects.filter(target=target.id)
+            annotation_query=annotation_query | query
+        serializer= AnnotationViewSerializer(annotation_query,many=True)
         return Response(serializer.data, status=200)

@@ -16,10 +16,9 @@ class Selector(models.Model):
 
 
 class Target(models.Model):
-    id_image = models.URLField(max_length=300, unique=False,blank=True, null=True)
     type = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')
     styleClass = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')
-    source = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')
+    source = models.URLField(max_length=300, blank=True, null=True, unique=False, default='')
     selector = models.ForeignKey(Selector, on_delete=models.CASCADE, default='',related_name='Selector')
 
 
