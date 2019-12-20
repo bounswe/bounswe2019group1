@@ -14,6 +14,7 @@ object User {
     var phone_number: String? = ""
     var iban_number: String? = ""
     var is_public: Boolean? = true
+    var photo: String? = ""
 
     var whereIamAsId: Int? = 0  // DONT USE THIS
 }

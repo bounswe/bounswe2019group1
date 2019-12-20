@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^delete/', views.DeleteArticleAPIView.as_view(), name="delete"),
     url(r'^update/', views.UpdateArticleAPIView.as_view(), name="update"),
     url(r'^getById/(?P<pk>[0-9_]+)/', views.GetArticleAPIView.as_view(), name="get"),
+    url(r'^search/(?P<pk>[a-zA-Z]+)/', views.SearchArticle.as_view(), name="update_de"),
 ]
