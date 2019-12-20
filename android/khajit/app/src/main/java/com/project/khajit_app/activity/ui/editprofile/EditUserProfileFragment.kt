@@ -161,6 +161,8 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
 
         if(!trader) { // If basic --> trader
 
+            User.type = true
+
             RetrofitClient.instance.upgradeUser().enqueue(object :
                 Callback<GenericUserModel> {
                 override fun onResponse(
@@ -174,7 +176,7 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                         }else{
                             println("UPGRADED")
                             updateAfterRequest(root)
-                            goBackFragment()
+
                         }
                     }else{
 
@@ -207,10 +209,10 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                 }
             })
 
-            User.type = true
 
         } else {    // If trader --> basic
 
+            User.type = false
             RetrofitClient.instance.downgradeUser().enqueue(object :
                 Callback<GenericUserModel> {
                 override fun onResponse(
@@ -224,7 +226,7 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                         }else{
                             println("DOWNGRADED")
                             updateAfterRequest(root)
-                            goBackFragment()
+
                         }
                     }else{
 
@@ -257,7 +259,6 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                 }
             })
 
-            User.type = false
         }
     }
 
@@ -288,7 +289,7 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                         }else{
                             println("CHANGED")
                             updateAfterRequest(root)
-                            goBackFragment()
+
                         }
                     }else{
 
@@ -365,7 +366,6 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                     }else{
                         println("CHANGED")
                         updateAfterRequest(view)
-                        goBackFragment()
                     }
                 }else{
 
@@ -466,7 +466,14 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                         User.is_public = response.body()?.is_public
                         User.bio = response.body()?.biography
                         User.title = response.body()?.title
-                        User.type = response.body()?.groups?.get(0).equals("trader")
+                        //User.type = response.body()?.groups?.get(0).equals("trader")
+
+                        println()
+                        println()
+                        println(User.type.toString() + "    <<<<---- TYPE")
+                        println()
+                        println()
+                        goBackFragment()
                     }
                 }else{
 

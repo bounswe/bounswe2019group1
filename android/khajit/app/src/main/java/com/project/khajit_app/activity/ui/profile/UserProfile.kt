@@ -137,6 +137,9 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
             }
         })
 
+        println()
+        println(User.type.toString() + " --------->")
+        println()
 
         if(User.type == true) {
             traderImage.alpha = 1F

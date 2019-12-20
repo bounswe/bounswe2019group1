@@ -45,6 +45,14 @@ class DepositFundsFragment : Fragment(), fragmentOperationsInterface {
         val sent_usd = root.findViewById(R.id.sent_funds) as TextView
         val balance = root.findViewById(R.id.networth_funds) as TextView
 
+        if(!User.type!!) {
+            val parentActivityManager: FragmentManager =
+                activity?.supportFragmentManager as FragmentManager
+            removeFragment(parentActivityManager)
+            Toast.makeText(context, "Only Traders can access my wallet", Toast.LENGTH_LONG).show()
+            return root
+        }
+
         RetrofitClient.instance.myWallet().enqueue(object :
             Callback<WalletResponse> {
             override fun onResponse(
