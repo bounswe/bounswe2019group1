@@ -173,6 +173,10 @@ interface Api {
     fun deleteWallet():Call<createWalletResponse>
 
     @Headers("Content-Type: application/json")
+    @GET("follow/listFollowingPending/" )
+    fun getFollowingPending():Call<FollowingPendingResponseModel>
+
+    @Headers("Content-Type: application/json")
     @GET("article/listArticleByUserId/{id}/")
     fun getArticlesByUserId(@Path(value = "id", encoded = true) userId: Int):Call<PublicArticleListResponse>
 

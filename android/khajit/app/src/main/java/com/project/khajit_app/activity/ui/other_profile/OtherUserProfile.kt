@@ -51,12 +51,14 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
     private lateinit var other_portfolioButton: Button
 
     private var public = false
-    private var isFollowing = false
+    private var isFollowing = 0 // 0 --> Not following, 1 --> Following, 2 --> Pending
 
     private lateinit var other_id: String
     private lateinit var other_name: String
     private lateinit var profile_pic: CircularImageView
     var profile_pic_url: String? = ""
+
+    var other_user_public = true
 
     /*override fun onClick(v: View?) {
         if isFollowing
@@ -127,7 +129,7 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
                         println("PROBLEM")
                     }else{
                         if(response.body()?.result == "Found") {
-                            isFollowing = true
+                            isFollowing = 1
                             follow_user.text = "UNFOLLOW"
                             follow_user.setBackgroundColor(Color.parseColor("#AAB80707"))
                             other_followerButton.isEnabled = true
@@ -136,9 +138,47 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
                             other_followingButton.isClickable = true
                             private_part_layout.visibility = View.VISIBLE
                         } else {
-                            isFollowing = false
-                            follow_user.text = "FOLLOW"
-                            follow_user.setBackgroundColor(Color.parseColor("#AA4AE608"))
+
+                            RetrofitClient.instance.getFollowingPending().enqueue(object :
+                                Callback<FollowingPendingResponseModel> {
+                                override fun onResponse(
+                                    call: Call<FollowingPendingResponseModel>,
+                                    response: Response<FollowingPendingResponseModel>
+                                ) {
+                                    println(response.toString())
+                                    if(response.code() == 200 ){
+                                        if(response.body()?.detail != null){
+                                            println("NOT CHANGED")
+                                        }else{
+                                            var count = response.body()?.list!!.count()
+                                            var found_bff = false
+                                            for (a in 1..count!!) {
+                                                if(response.body()?.list!!.get(a-1).following.id.toString() == other_id) {
+                                                    found_bff = true
+                                                    break
+                                                }
+                                            }
+
+                                            if(found_bff == false) {
+                                                isFollowing = 0
+                                                follow_user.text = "FOLLOW"
+                                                follow_user.setBackgroundColor(Color.parseColor("#AA4AE608"))
+                                            }else {
+                                                isFollowing = 2
+                                                follow_user.text = "PENDING"
+                                                follow_user.setBackgroundColor(Color.parseColor("#AA976419"))
+                                            }
+                                        }
+                                    }else{
+
+                                    }
+                                }
+                                override fun onFailure(call: Call<FollowingPendingResponseModel>, t: Throwable) {
+
+                                }
+                            })
+
+
                         }
                     }
                 }else{
@@ -165,6 +205,7 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
                         other_titleBox.text = response.body()?.title
                         other_aboutBox.text = response.body()?.biography
                         public = response.body()?.is_public!!
+                        other_user_public = public
                         var isTrader = response.body()?.groups?.get(0).equals("trader")
 
                         profile_pic_url = response.body()?.photo
@@ -270,7 +311,7 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
     }
 
     fun follow_unfollow_user(view: View, other_id : Int) {
-        if(isFollowing) {
+        if((isFollowing == 1) or (isFollowing == 2)) {
             val follow_type = FollowIDModel(other_id)
             RetrofitClient.instance.unfollowUser(follow_type).enqueue(object :
                 Callback<FollowIDModelResponse> {
@@ -282,7 +323,7 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
                     if(response.code() == 200 ){
                         if(response.body()?.detail != null){
                         }else{
-                            isFollowing = false
+                            isFollowing = 0
                             follow_user.text = "FOLLOW"
                             follow_user.setBackgroundColor(Color.parseColor("#AA4AE608"))
                             reloadFragment(other_id)
@@ -293,7 +334,7 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
                 override fun onFailure(call: Call<FollowIDModelResponse>, t: Throwable) {
                 }
             })
-        } else {
+        } else{
             val follow_type = FollowIDModel(other_id)
             RetrofitClient.instance.followUser(follow_type).enqueue(object :
                 Callback<FollowIDModelResponse> {
@@ -305,10 +346,17 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
                     if(response.code() == 200 ){
                         if(response.body()?.detail != null){
                         }else{
-                            isFollowing = true
-                            follow_user.text = "UNFOLLOW"
-                            follow_user.setBackgroundColor(Color.parseColor("#AAB80707"))
-                            reloadFragment(other_id)
+                            if(other_user_public) {
+                                isFollowing = 1
+                                follow_user.text = "UNFOLLOW"
+                                follow_user.setBackgroundColor(Color.parseColor("#AAB80707"))
+                                reloadFragment(other_id)
+                            }else {
+                                isFollowing = 2
+                                follow_user.text = "PENDING"
+                                follow_user.setBackgroundColor(Color.parseColor("#AA976419"))
+                                reloadFragment(other_id)
+                            }
                         }
                     }else{
 
