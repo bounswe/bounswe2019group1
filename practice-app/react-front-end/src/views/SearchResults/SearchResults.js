@@ -14,6 +14,14 @@ import Parallax from "components/Parallax/Parallax.js";
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
 import Button from "components/CustomButtons/Button.js";
+import CustomTabs from "components/CustomTabs/CustomTabs.js";
+import BugReport from "@material-ui/icons/BugReport";
+import Tasks from "components/Tasks/Tasks.js";
+import { bugs, website, server } from "variables/general.js";
+import Code from "@material-ui/icons/Code";
+import Cloud from "@material-ui/icons/Cloud";
+import Table from "components/Table/Table.js";
+
 import SnackbarContent from "components/Snackbar/SnackbarContent.js";
 import Snackbar from "components/Snackbar/Snackbar.js";
 import Card from "components/Card/Card.js";
@@ -160,26 +168,55 @@ export default function SearchResults() {
       </CardHeader>
       
       <CardBody>
-        <GridContainer>
-          <GridItem xs={12} sm={12} md={6}>
-            <h5>Advanced Search</h5>
-            <br />
-            <SnackbarContent message={"User1"} />
-            <SnackbarContent message={"User2"} />
-            <SnackbarContent message={"Article1"} />
-            <SnackbarContent message={"Article2"} />
-            <SnackbarContent message={"Article3"} />
-            <SnackbarContent message={"Article4"} />
-          </GridItem>
-          
-        </GridContainer>
-        <br />
-        <br />
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={6}>
+          <CustomTabs
+            title="Advanced Search:"
+            headerColor="primary"
+            tabs={[
+              {
+                tabName: "Users",
+                tabIcon: BugReport,
+                tabContent: (
+                  
+                  <Tasks
+                    checkedIndexes={[0, 3]}
+                    tasksIndexes={[0, 1, 2, 3]}
+                    tasks={bugs}
+                  />
+                )
+              },
+              {
+                tabName: "Articles",
+                tabIcon: Code,
+                tabContent: (
+                  <Tasks
+                    checkedIndexes={[0]}
+                    tasksIndexes={[0, 1]}
+                    tasks={website}
+                  />
+                )
+              },
+              {
+                tabName: "Events",
+                tabIcon: Cloud,
+                tabContent: (
+                  <Tasks
+                    checkedIndexes={[1]}
+                    tasksIndexes={[0, 1, 2]}
+                    tasks={server}
+                  />
+                )
+              }
+            ]}
+          />
+        </GridItem>
         
+      </GridContainer>
        
+               
       </CardBody>
-      <Footer />
-    
+         
     </div>
   );
 }

@@ -270,7 +270,7 @@ class Searchh extends React.Component {
     
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
-      placeholder: 'Search Users',
+      placeholder: 'Type to search',
       value,
       onChange: this.onChange
     };
