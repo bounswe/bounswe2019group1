@@ -41,6 +41,13 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
     lateinit var ladapter: UserViewAdapter
     lateinit var lview: ListView
 
+    private lateinit var radio_group: RadioGroup
+    private lateinit var radio1: RadioButton
+    private lateinit var radio2: RadioButton
+    private lateinit var radio3: RadioButton
+
+
+
     private var search_type = 0 // 0 --> User search, 1 --> Article search, 2 --> Event search
 
     override fun onCreateView(
@@ -56,26 +63,25 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
         var loader = root.findViewById(R.id.progress_loader) as ProgressBar
         loader.visibility = View.GONE
 
-        var spinner = root.findViewById(R.id.spinner2) as Spinner
-        var items = list_search_types
-        var adapter = ArrayAdapter(root.context, android.R.layout.simple_spinner_dropdown_item, items)
-        spinner.adapter = adapter
-        spinner.setSelection(0)
-        spinner.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View, position: Int, id: Long
-            ) {
-                list_usernames.clear()
-                list_titles.clear()
-                list_ids.clear()
-                search_type = position
+        radio_group = root.findViewById(R.id.radio_group) as RadioGroup
+        radio1 = root.findViewById(R.id.radio1) as RadioButton
+        radio2 = root.findViewById(R.id.radio2) as RadioButton
+        radio3 = root.findViewById(R.id.radio3) as RadioButton
+
+        radio1.isChecked = true
+        radio2.isChecked = false
+        radio3.isChecked = false
+
+        radio_group.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { radio_group, checkedId ->
+            val radio: RadioButton = radio_group.findViewById(checkedId) as RadioButton
+            if(radio.text.toString() == "User") {
+                search_type = 0
+            }else if(radio.text.toString() == "Article") {
+                search_type = 1
+            }else {
+                search_type = 2
             }
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // write code to perform some action
-            }
-        }
+        })
 
 
         /*
