@@ -63,8 +63,6 @@ class WalletDeleteAPIView(RetrieveAPIView):
         return Response({}, status=200)
 
 
-
-
 class SendUSDAPIView(UpdateAPIView):
 
     def put(self, request, *args, **kwargs):
@@ -81,6 +79,7 @@ class SendUSDAPIView(UpdateAPIView):
         curr_wallet.USD=curr_wallet.USD+decimal.Decimal(dollar)
         curr_wallet.Sent_USD=curr_wallet.Sent_USD+decimal.Decimal(dollar)
         curr_wallet.save()
+        update_wealth(curr_wallet)
         serializer=WalletListSerializer(curr_wallet)
         return Response(serializer.data, status=200)
 

@@ -28,43 +28,6 @@ from celery import shared_task
 from myuser.models import TemplateUser
 
 
-'''from django_cron import CronJobBase, Schedule
-
-
-from celery import task
-'''
-'''@task()
-def task_number_one():
-    user = TemplateUser.objects.get(id=1)
-    user.username = "sonuncu deneme"
-    user.save()
-    print("donee")
-
-class MyCronJob(CronJobBase):
-    RUN_EVERY_MINS = 120 # every 2 hours
-
-    schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
-    code = 'my_app.my_cron_job'    # a unique code
-
-    def do(self):
-        pass    # do your thing here
-
-@shared_task(run_every=timedelta(seconds=30))
-def every_30_seconds():
-    print("Running periodic task!")
-
-
-@shared_task(run_every=timedelta(seconds=1))
-def every_monday_morning():
-    user = TemplateUser.objects.get(id=1)
-    user.username = "user.username + '2'"
-    user.save()
-    print("donee")'''
-
-
-
-
-
 def my_scheduled_job():
     user=TemplateUser.objects.get(id=2)
     user.username=user.username+"1"
@@ -79,25 +42,7 @@ class CurrencyAPI(APIView):
         serializer=CurrencySerializer(Currencies.objects.last())
         return Response(serializer.data, 200)
 
-'''    def get(self, request, *args, **kwargs):
-        
-        find this request in
-        https://www.exchangerate-api.com sign up and read the documentation
-        :param request:
-        :param args:
-        :param kwargs:
-        :return:
-        
-        url = 'https://api.exchangerate-api.com/v4/latest/USD'
-        headers = {}
-        response = requests.request('GET', url, headers=headers, allow_redirects=False)
-        ret=json.loads(response.text)
-        my_scheduled_job()
-        ser=ret['rates']
-        serializer=CurrencySerializer(data=ser)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, 200)'''
+
 
 
 class CurrencyAPILastMonth(ListAPIView):
