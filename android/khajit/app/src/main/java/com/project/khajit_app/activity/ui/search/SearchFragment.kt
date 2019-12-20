@@ -21,6 +21,7 @@ import com.project.khajit_app.data.models.SearchRequest
 import com.project.khajit_app.data.models.SearchResponse
 import com.project.khajit_app.global.User
 import interfaces.fragmentOperationsInterface
+import kotlinx.android.synthetic.main.fragment_search.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,6 +35,8 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
     private var list_usernames = arrayListOf<String>()
     private var list_titles = arrayListOf<String>()
     private var list_ids = arrayListOf<Int>()
+
+    private var list_search_types = arrayOf("User Search", "Article Search", "Event Search")
 
     lateinit var ladapter: UserViewAdapter
     lateinit var lview: ListView
@@ -52,11 +55,12 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
         containerId = container
         var loader = root.findViewById(R.id.progress_loader) as ProgressBar
         loader.visibility = View.GONE
-        println("STATE1")
+
         var spinner = root.findViewById(R.id.spinner2) as Spinner
-        var items = arrayOf("User Search", "Article Search", "Event Search")
-        var adapter = ArrayAdapter(this.context!!,android.R.layout.simple_spinner_dropdown_item, items)
+        var items = list_search_types
+        var adapter = ArrayAdapter(root.context, android.R.layout.simple_spinner_dropdown_item, items)
         spinner.adapter = adapter
+        spinner.setSelection(0)
         spinner.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -72,8 +76,9 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
                 // write code to perform some action
             }
         }
-        println("STATE2")
 
+
+        /*
         var searchview = root.findViewById(R.id.search) as SearchView
         searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
@@ -82,9 +87,57 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                list_usernames.clear()
-                list_titles.clear()
-                list_ids.clear()
+                var search_query = SearchRequest(query)
+                RetrofitClient.instance.searchUsername(search_query).enqueue(object :
+                    Callback<SearchResponse> {
+                    override fun onResponse(
+                        call: Call<SearchResponse>,
+                        response: Response<SearchResponse>
+                    ) {
+                        println(response.toString())
+                        if(response.code() == 200 ){
+
+                            list_usernames.clear()
+                            list_titles.clear()
+                            list_ids.clear()
+
+                            var count = response.body()?.count
+
+                            for (a in 1..count!!) {
+                                list_usernames.add(response.body()?.results?.get(a-1)!!.first_name + " " + response.body()?.results?.get(a-1)!!.last_name)
+                                list_titles.add(response.body()?.results?.get(a-1)!!.title)
+                                list_ids.add(response.body()?.results?.get(a-1)!!.id)
+                            }
+
+                            // This will be used for further methods in order to set prediction rates
+                            lview =  root.findViewById(R.id.list_users) as ListView
+                            ladapter = UserViewAdapter(this@SearchFragment, list_usernames, list_titles)
+                            lview.adapter = ladapter
+
+                        }else{
+                            Log.d("error message:", response.message())
+                        }
+                    }
+                    override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
+                        println(t.message)
+                        println(t)
+                        Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
+                    }
+                })
+                return false
+            }
+
+        })
+         */
+        var searchview = root.findViewById(R.id.search) as SearchView
+        searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+
                 if(search_type == 0) {
 
                     var search_query = SearchRequest(query)
@@ -96,6 +149,9 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
                         ) {
                             println(response.toString())
                             if (response.code() == 200) {
+                                list_usernames.clear()
+                                list_titles.clear()
+                                list_ids.clear()
                                 var count = response.body()?.count
 
                                 for (a in 1..count!!) {
@@ -137,7 +193,7 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
             }
 
         })
-        println("STATE3")
+
         var listview = root.findViewById(R.id.list_users) as ListView
         listview.setOnItemClickListener{ parent, view, position, id ->
             val element = ladapter.getItem(position)
@@ -167,7 +223,8 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
                 )
             }
         }
-        println("STATE4")
+
+
         return root
     }
 

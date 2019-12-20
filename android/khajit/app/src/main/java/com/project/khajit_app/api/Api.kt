@@ -165,6 +165,14 @@ interface Api {
     fun unfollowPortfolio(@Body body: FollowUnfollowModel):Call<FollowUnfollowResponseModel>
 
     @Headers("Content-Type: application/json")
+    @POST("wallet/createWallet/")
+    fun createWallet():Call<createWalletResponse>
+
+    @Headers("Content-Type: application/json")
+    @DELETE("wallet/delete/")
+    fun deleteWallet():Call<createWalletResponse>
+
+    @Headers("Content-Type: application/json")
     @GET("article/listArticleByUserId/{id}/")
     fun getArticlesByUserId(@Path(value = "id", encoded = true) userId: Int):Call<PublicArticleListResponse>
 

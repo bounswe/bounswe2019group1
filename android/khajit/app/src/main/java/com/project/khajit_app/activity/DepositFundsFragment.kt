@@ -9,11 +9,15 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.project.khajit_app.R
+import com.project.khajit_app.activity.ui.followlist.FollowListFragment
+import com.project.khajit_app.activity.ui.mywallet.MyWalletFragment
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.DepositFundsModel
 import com.project.khajit_app.data.models.DepositFundsResponse
 import com.project.khajit_app.data.models.WalletResponse
+import com.project.khajit_app.global.User
 import interfaces.fragmentOperationsInterface
 import retrofit2.Call
 import retrofit2.Callback
@@ -92,6 +96,19 @@ class DepositFundsFragment : Fragment(), fragmentOperationsInterface {
                     }
 
                 })
+        }
+
+        var wallet_btn = root.findViewById(R.id.mywallet_button) as Button
+        wallet_btn.setOnClickListener { root ->
+            val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
+            fragmentTransaction(
+                parentActivityManager,
+                MyWalletFragment.newInstance(),
+                (containerId!!.id),
+                true,
+                true,
+                false
+            )
         }
 
         return root

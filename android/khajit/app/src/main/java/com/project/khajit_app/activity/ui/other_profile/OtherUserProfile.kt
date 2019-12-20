@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -167,7 +168,9 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
                         var isTrader = response.body()?.groups?.get(0).equals("trader")
 
                         profile_pic_url = response.body()?.photo
-                        Picasso.get().load(profile_pic_url).into(profile_pic)
+                        if(profile_pic_url != null) {
+                            Picasso.get().load(profile_pic_url).into(profile_pic)
+                        }
 
                         if(isTrader == true) {
                             other_traderImage.alpha = 1F

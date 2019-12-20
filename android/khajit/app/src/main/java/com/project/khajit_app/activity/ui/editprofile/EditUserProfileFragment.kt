@@ -185,6 +185,30 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                 }
             })
 
+            RetrofitClient.instance.createWallet().enqueue(object :
+                Callback<createWalletResponse> {
+                override fun onResponse(
+                    call: Call<createWalletResponse>,
+                    response: Response<createWalletResponse>
+                ) {
+                    println(response.toString())
+                    if(response.code() == 200 ){
+                        if(response.body()?.detail != null){
+                            println("NOT Upgraded")
+                        }else{
+                            println("UPGRADED")
+                        }
+                    }else{
+
+                    }
+                }
+                override fun onFailure(call: Call<createWalletResponse>, t: Throwable) {
+
+                }
+            })
+
+            User.type = true
+
         } else {    // If trader --> basic
 
             RetrofitClient.instance.downgradeUser().enqueue(object :
@@ -211,6 +235,29 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                 }
             })
 
+            RetrofitClient.instance.deleteWallet().enqueue(object :
+                Callback<createWalletResponse> {
+                override fun onResponse(
+                    call: Call<createWalletResponse>,
+                    response: Response<createWalletResponse>
+                ) {
+                    println(response.toString())
+                    if(response.code() == 200 ){
+                        if(response.body()?.detail != null){
+                            println("NOT Upgraded")
+                        }else{
+                            println("UPGRADED")
+                        }
+                    }else{
+
+                    }
+                }
+                override fun onFailure(call: Call<createWalletResponse>, t: Throwable) {
+
+                }
+            })
+
+            User.type = false
         }
     }
 
