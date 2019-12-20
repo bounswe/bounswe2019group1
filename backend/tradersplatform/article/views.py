@@ -59,7 +59,8 @@ class SearchArticle(ListAPIView):
         semantics = json.loads(response.read())
 
         semantics.insert(0, {"word": str(search_item), "score": 1000000, "tags": []})
-        search_results = {"results": []}
+        search_results = {"count":0,
+                          "results": []}
         for word in semantics:
             for article in queryset.all():
                 if word['word'] in article.title.lower() or word['word'] in article.content.lower():
@@ -72,6 +73,7 @@ class SearchArticle(ListAPIView):
                                                       "is_public": True,
                                                       "created_date": article.created_date,
                                                       "image": None})
+                    search_results['count] += 1
 
         return Response(search_results, 200)
 
