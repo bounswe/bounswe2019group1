@@ -45,11 +45,13 @@ class SearchEvent(ListAPIView):
 
         search_results = {"count": 0,
                           "results": []}
+        titles = []
         for word in semantics:
             for event in data:
                 if word['word'] in event['title'].lower():
-
-                    search_results['results'].append(event)
-                    search_results['count'] += 1
+                    if event['title'] not in titles:
+                        titles.append(event['title'])
+                        search_results['results'].append(event)
+                        search_results['count'] += 1        
         
         return Response(search_results, 200)
