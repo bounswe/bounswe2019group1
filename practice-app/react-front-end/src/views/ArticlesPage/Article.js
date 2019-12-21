@@ -29,6 +29,9 @@ import {
   createComment,
   listCommentByArticleId
 } from "service/comment.service.js";
+import {TokenAnnotator, TextAnnotator} from 'react-text-annotate'
+
+
 const styles = {
   container: {
     "@media (min-width: 576px)": {
@@ -193,7 +196,23 @@ export default function Article(props) {
               <Typography variant="h5" component="h3">
                 <center>{articleValues.title}</center>
               </Typography>
-              <Typography component="p">{articleValues.content}</Typography>
+              <Typography component="p">
+
+                <TextAnnotator
+                    style={{
+                      maxWidth: 500,
+                      lineHeight: 1.5,
+                    }}
+                    content= {articleValues.content}
+                    value={[{ start: 18, end: 28 }]}
+                    getSpan={span => ({
+                      ...span,
+                      color: "#AAAAAA"
+                    })}
+                />
+
+
+              </Typography>
             </Paper>
           </CardBody>
         </Card>
