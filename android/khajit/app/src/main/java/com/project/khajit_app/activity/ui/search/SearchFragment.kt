@@ -17,6 +17,8 @@ import com.project.khajit_app.activity.ui.followlist.FollowListFragment
 import com.project.khajit_app.activity.ui.other_profile.OtherUserProfile
 import com.project.khajit_app.activity.ui.profile.UserProfile
 import com.project.khajit_app.api.RetrofitClient
+import com.project.khajit_app.data.models.ArticleSearchResponse
+import com.project.khajit_app.data.models.ListPortfolioResponse
 import com.project.khajit_app.data.models.SearchRequest
 import com.project.khajit_app.data.models.SearchResponse
 import com.project.khajit_app.global.User
@@ -74,6 +76,16 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
 
         radio_group.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { radio_group, checkedId ->
             val radio: RadioButton = radio_group.findViewById(checkedId) as RadioButton
+            list_usernames.clear()
+            list_titles.clear()
+            list_ids.clear()
+            lview = root.findViewById(R.id.list_users) as ListView
+            ladapter = UserViewAdapter(
+                this@SearchFragment,
+                list_usernames,
+                list_titles
+            )
+            lview.adapter = ladapter
             if(radio.text.toString() == "User") {
                 search_type = 0
             }else if(radio.text.toString() == "Article") {
@@ -191,7 +203,53 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
                         }
                     })
                 }else if(search_type == 1) {
+                    RetrofitClient.instance.searchArticle(query).enqueue(object :
+                        Callback<ArticleSearchResponse> {
+                        override fun onResponse(
+                            call: Call<ArticleSearchResponse>,
+                            response: Response<ArticleSearchResponse>
+                        ) {
+                            println(response.toString())
+                            if (response.code() == 200) {
+                                list_usernames.clear()
+                                list_titles.clear()
+                                list_ids.clear()
+                                var count = response.body()?.results?.count()
 
+                                for (a in 1..count!!) {
+                                    list_usernames.add(
+                                        response.body()?.results?.get(a - 1)!!.title!!
+                                    )
+                                    var author = response.body()?.results?.get(a - 1)!!.author!!
+                                    if (author == "") {
+                                        list_titles.add("Anonymous")
+                                    }else {
+                                        list_titles.add(author)
+                                    }
+
+                                    list_ids.add(response.body()?.results?.get(a - 1)!!.id!!)
+                                }
+
+                                // This will be used for further methods in order to set prediction rates
+                                lview = root.findViewById(R.id.list_users) as ListView
+                                ladapter = UserViewAdapter(
+                                    this@SearchFragment,
+                                    list_usernames,
+                                    list_titles
+                                )
+                                lview.adapter = ladapter
+
+                            } else {
+                                Log.d("error message:", response.message())
+                            }
+                        }
+
+                        override fun onFailure(call: Call<ArticleSearchResponse>, t: Throwable) {
+                            println(t.message)
+                            println(t)
+                            Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                        }
+                    })
                 }else{
 
                 }

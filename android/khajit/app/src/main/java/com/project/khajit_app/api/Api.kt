@@ -55,6 +55,10 @@ interface Api {
     @POST("user/search_user/")
     fun searchUsername(@Body body: SearchRequest):Call<SearchResponse>
 
+    @Headers("Content-Type: application/json")
+    @GET("article/search/{key}/")
+    fun searchArticle(@Path(value = "key", encoded = true) key: String):Call<ArticleSearchResponse>
+
     // TODO
     @Headers("Content-Type: application/json")
     @PUT("user/updatepass/")
