@@ -1,82 +1,83 @@
-import React, { Component } from 'react';
-import Paragraph from 'react-annotated-paragraph'
-import CloseButton from 'react-icons/lib/ti/times';
-import Input from '@material-ui/core/Input';
-import Button from '@material-ui/core/Button';
+import React, { Component } from "react";
+import Paragraph from "react-annotated-paragraph";
+import { TiTimes as CloseButton} from "react-icons/ti";
+import Input from "@material-ui/core/Input";
+import Button from "@material-ui/core/Button";
 
-import connect from "react-redux/es/connect/connect";
-import { tryCreateAnnotation, createAnnotationReset } from "redux/project/Actions.js";
+export class TextAnnotation extends Component {
+  constructor(props) {
+    super(props);
 
-class AnnotatedText extends Component {
-    constructor(props) {
-        super(props);
+    this.state = {
+      annotationInput: {
+        open: false,
+        text: "",
+        start: 0,
+        end: 0,
+        boxX: 0,
+        boxY: 0
+      }
+    };
+    this.createAnnotation = this.createAnnotation.bind(this);
+    this.showSelectedText = this.showSelectedText.bind(this);
+    this.getCaretCharacterOffsetWithin = this.getCaretCharacterOffsetWithin.bind(
+      this
+    );
+  }
 
-        this.state = {
-            annotationInput : {
-                open: false,
-                text: "",
-                start: 0,
-                end: 0,
-                boxX: 0,
-                boxY: 0
-            }
-        }
-
-        this.createAnnotation = this.createAnnotation.bind(this);
-        this.showSelectedText = this.showSelectedText.bind(this);
-        this.getCaretCharacterOffsetWithin = this.getCaretCharacterOffsetWithin.bind(this);
+  getCaretCharacterOffsetWithin(element) {
+    var caretOffset = 0;
+    var document = element.ownerDocument || element.document;
+    var win = document.defaultView || document.parentWindow;
+    var selection;
+    if (typeof win.getSelection != "undefined") {
+      selection = win.getSelection();
+      if (selection.rangeCount > 0) {
+        var range = win.getSelection().getRangeAt(0);
+        var preCaretRange = range.cloneRange();
+        preCaretRange.selectNodeContents(element);
+        preCaretRange.setEnd(range.endContainer, range.endOffset);
+        caretOffset = preCaretRange.toString().length;
+      }
+    } else if (
+      (selection = document.selection) &&
+      selection.type !== "Control"
+    ) {
+      var textRange = selection.createRange();
+      var preCaretTextRange = document.body.createTextRange();
+      preCaretTextRange.moveToElementText(element);
+      preCaretTextRange.setEndPoint("EndToEnd", textRange);
+      caretOffset = preCaretTextRange.text.length;
     }
+    return caretOffset;
+  }
 
-    getCaretCharacterOffsetWithin(element) {
-        var caretOffset = 0;
-        var doc = element.ownerDocument || element.document;
-        var win = doc.defaultView || doc.parentWindow;
-        var sel;
-        if (typeof win.getSelection != "undefined") {
-            sel = win.getSelection();
-            if (sel.rangeCount > 0) {
-                var range = win.getSelection().getRangeAt(0);
-                var preCaretRange = range.cloneRange();
-                preCaretRange.selectNodeContents(element);
-                preCaretRange.setEnd(range.endContainer, range.endOffset);
-                caretOffset = preCaretRange.toString().length;
-            }
-        } else if ((sel = doc.selection) && sel.type !== "Control") {
-            var textRange = sel.createRange();
-            var preCaretTextRange = doc.body.createTextRange();
-            preCaretTextRange.moveToElementText(element);
-            preCaretTextRange.setEndPoint("EndToEnd", textRange);
-            caretOffset = preCaretTextRange.text.length;
-        }
-        return caretOffset;
+  showSelectedText(e) {
+    var text = "";
+    if (window.getSelection) {
+      text = window.getSelection();
+    } else if (document.getSelection) {
+      text = document.getSelection();
+    } else if (document.selection) {
+      text = document.selection.createRange().text;
     }
+    const caretPos = this.getCaretCharacterOffsetWithin(e.target);
+    const length_ = text.focusOffset - text.anchorOffset;
+    const length = length_ > 0 ? length_ : -length_;
+    const start = caretPos - length;
 
-    showSelectedText(e) {
-        var text = '';
-        if (window.getSelection) {
-            text = window.getSelection();
-        } else if (document.getSelection) {
-            text = document.getSelection();
-        } else if (document.selection) {
-            text = document.selection.createRange().text;
+    if (text.toString() !== "")
+      this.setState({
+        annotationInput: {
+          ...this.props.annotationInput,
+          open: true,
+          start,
+          end: start + length,
+          boxX: e.nativeEvent.offsetX,
+          boxY: e.nativeEvent.offsetY
         }
-        const caretPos = this.getCaretCharacterOffsetWithin(e.target)
-        const length_ = text.focusOffset - text.anchorOffset
-        const length = length_ > 0 ? length_ : -length_;
-        const start = caretPos - length
-
-        if (text.toString() !== "")
-            this.setState({annotationInput:
-                    {
-                        ...this.props.annotationInput,
-                        open: true,
-                        start,
-                        end: start + length,
-                        boxX: e.nativeEvent.offsetX,
-                        boxY: e.nativeEvent.offsetY
-                    }});
-
-    }
+      });
+  }
 
     mySimpleRenderer (text, annotation){
         let explanation = annotation.tooltip
@@ -161,6 +162,7 @@ class AnnotatedText extends Component {
         )
     }
 }
+export default TextAnnotation;
 
 function bindAction(dispatch) {
     return {
