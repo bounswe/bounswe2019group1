@@ -1,0 +1,22 @@
+Create virtual environment inside of this directory or some else directory which is not inside of project. 
+But if you want to create virtual environment inside of project you should name it venv(I already add venv
+to .gitignore no matter the directory of it. To create virtual environment the command should be :
+virtualenv venv
+then to activate:
+for windows:
+source env/bin/activate
+for mac:
+. venv/bin/activate
+
+Then you should install packages in requirements if any new package was added to project :
+pip install -r requirements.txt
+
+Then the project is ready to go. To create or update database:
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver 0.0.0.0:8020
+(8020 is the serve port for annotation backend is served in 8000 in same AWS machine)
+if that does not work try with python3 like:
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py runserver 0.0.0.0:8020 (sometimes virtualenv needs to specified version of python)
