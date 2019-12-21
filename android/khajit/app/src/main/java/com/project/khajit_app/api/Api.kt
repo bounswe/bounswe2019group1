@@ -59,6 +59,10 @@ interface Api {
     @GET("article/search/{key}/")
     fun searchArticle(@Path(value = "key", encoded = true) key: String):Call<ArticleSearchResponse>
 
+    @Headers("Content-Type: application/json")
+    @GET("event/search/{key}/")
+    fun searchEvent(@Path(value = "key", encoded = true) key: String):Call<ListEventResponse>
+
     // TODO
     @Headers("Content-Type: application/json")
     @PUT("user/updatepass/")

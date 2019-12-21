@@ -13,14 +13,12 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProviders
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.UserViewAdapter
+import com.project.khajit_app.activity.ui.article.displayArticleFragment
 import com.project.khajit_app.activity.ui.followlist.FollowListFragment
 import com.project.khajit_app.activity.ui.other_profile.OtherUserProfile
 import com.project.khajit_app.activity.ui.profile.UserProfile
 import com.project.khajit_app.api.RetrofitClient
-import com.project.khajit_app.data.models.ArticleSearchResponse
-import com.project.khajit_app.data.models.ListPortfolioResponse
-import com.project.khajit_app.data.models.SearchRequest
-import com.project.khajit_app.data.models.SearchResponse
+import com.project.khajit_app.data.models.*
 import com.project.khajit_app.global.User
 import interfaces.fragmentOperationsInterface
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -37,6 +35,15 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
     private var list_usernames = arrayListOf<String>()
     private var list_titles = arrayListOf<String>()
     private var list_ids = arrayListOf<Int>()
+
+    private var articleIds = arrayListOf<Int>()
+    private var titles = arrayListOf<String>()
+    private var contents = arrayListOf<String>()
+    private var authors = arrayListOf<UserAllInfo>()
+    private var is_public_info = arrayListOf<Boolean>()
+    private var created_dates = arrayListOf<String>()
+    private var images = arrayListOf<String?>()
+
 
     private var list_search_types = arrayOf("User Search", "Article Search", "Event Search")
 
@@ -79,6 +86,15 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
             list_usernames.clear()
             list_titles.clear()
             list_ids.clear()
+
+            articleIds.clear()
+            titles.clear()
+            contents.clear()
+            authors.clear()
+            is_public_info.clear()
+            created_dates.clear()
+            images.clear()
+
             lview = root.findViewById(R.id.list_users) as ListView
             ladapter = UserViewAdapter(
                 this@SearchFragment,
@@ -94,59 +110,6 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
                 search_type = 2
             }
         })
-
-
-        /*
-        var searchview = root.findViewById(R.id.search) as SearchView
-        searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-
-            override fun onQueryTextChange(newText: String): Boolean {
-                return false
-            }
-
-            override fun onQueryTextSubmit(query: String): Boolean {
-                var search_query = SearchRequest(query)
-                RetrofitClient.instance.searchUsername(search_query).enqueue(object :
-                    Callback<SearchResponse> {
-                    override fun onResponse(
-                        call: Call<SearchResponse>,
-                        response: Response<SearchResponse>
-                    ) {
-                        println(response.toString())
-                        if(response.code() == 200 ){
-
-                            list_usernames.clear()
-                            list_titles.clear()
-                            list_ids.clear()
-
-                            var count = response.body()?.count
-
-                            for (a in 1..count!!) {
-                                list_usernames.add(response.body()?.results?.get(a-1)!!.first_name + " " + response.body()?.results?.get(a-1)!!.last_name)
-                                list_titles.add(response.body()?.results?.get(a-1)!!.title)
-                                list_ids.add(response.body()?.results?.get(a-1)!!.id)
-                            }
-
-                            // This will be used for further methods in order to set prediction rates
-                            lview =  root.findViewById(R.id.list_users) as ListView
-                            ladapter = UserViewAdapter(this@SearchFragment, list_usernames, list_titles)
-                            lview.adapter = ladapter
-
-                        }else{
-                            Log.d("error message:", response.message())
-                        }
-                    }
-                    override fun onFailure(call: Call<SearchResponse>, t: Throwable) {
-                        println(t.message)
-                        println(t)
-                        Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
-                    }
-                })
-                return false
-            }
-
-        })
-         */
         var searchview = root.findViewById(R.id.search) as SearchView
         searchview.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
@@ -170,6 +133,14 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
                                 list_usernames.clear()
                                 list_titles.clear()
                                 list_ids.clear()
+
+                                articleIds.clear()
+                                titles.clear()
+                                contents.clear()
+                                authors.clear()
+                                is_public_info.clear()
+                                created_dates.clear()
+                                images.clear()
                                 var count = response.body()?.count
 
                                 for (a in 1..count!!) {
@@ -214,6 +185,14 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
                                 list_usernames.clear()
                                 list_titles.clear()
                                 list_ids.clear()
+
+                                articleIds.clear()
+                                titles.clear()
+                                contents.clear()
+                                authors.clear()
+                                is_public_info.clear()
+                                created_dates.clear()
+                                images.clear()
                                 var count = response.body()?.results?.count()
 
                                 for (a in 1..count!!) {
@@ -228,6 +207,17 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
                                     }
 
                                     list_ids.add(response.body()?.results?.get(a - 1)!!.id!!)
+                                }
+
+                                var results = response.body()?.results as List<ArticleSearchModelResponse>
+                                for (article in results) {
+                                    articleIds.add(article.id as Int)
+                                    titles.add(article.title as String)
+                                    contents.add(article.content as String)
+                                    authors.add(UserAllInfo(null, 0, "", "", "", "", "", "", "", "", "", "", ""))
+                                    is_public_info.add(article.is_public as Boolean)
+                                    created_dates.add(article.created_date as String)
+                                    images.add(article.image)
                                 }
 
                                 // This will be used for further methods in order to set prediction rates
@@ -251,7 +241,55 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
                         }
                     })
                 }else{
+                    RetrofitClient.instance.searchEvent(query).enqueue(object :
+                        Callback<ListEventResponse> {
+                        override fun onResponse(
+                            call: Call<ListEventResponse>,
+                            response: Response<ListEventResponse>
+                        ) {
+                            println(response.toString())
+                            if (response.code() == 200) {
+                                list_usernames.clear()
+                                list_titles.clear()
+                                list_ids.clear()
 
+                                articleIds.clear()
+                                titles.clear()
+                                contents.clear()
+                                authors.clear()
+                                is_public_info.clear()
+                                created_dates.clear()
+                                images.clear()
+                                var count = response.body()?.results?.count()
+
+                                for (a in 1..count!!) {
+                                    list_usernames.add(
+                                        response.body()?.results?.get(a - 1)!!.title!!
+                                    )
+                                    list_titles.add(response.body()?.results?.get(a - 1)!!.country!!)
+                                    list_ids.add(0)
+                                }
+
+                                // This will be used for further methods in order to set prediction rates
+                                lview = root.findViewById(R.id.list_users) as ListView
+                                ladapter = UserViewAdapter(
+                                    this@SearchFragment,
+                                    list_usernames,
+                                    list_titles
+                                )
+                                lview.adapter = ladapter
+
+                            } else {
+                                Log.d("error message:", response.message())
+                            }
+                        }
+
+                        override fun onFailure(call: Call<ListEventResponse>, t: Throwable) {
+                            println(t.message)
+                            println(t)
+                            Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                        }
+                    })
                 }
                 return false
             }
@@ -261,30 +299,46 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
         var listview = root.findViewById(R.id.list_users) as ListView
         listview.setOnItemClickListener{ parent, view, position, id ->
             val element = ladapter.getItem(position)
-            //<var ite = ladapter!!.getItem(position) as String
-            //User.whereIamAsId = list_ids[position]
             var other_user_id = list_ids[position]
+
+
 
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
 
-            if(other_user_id == User.id) {
+            if(search_type == 0) {
+                if (other_user_id == User.id) {
+                    fragmentTransaction(
+                        parentActivityManager,
+                        UserProfile.newInstance(),
+                        (containerId!!.id),
+                        true,
+                        true,
+                        false
+                    )
+                } else {
+                    fragmentTransaction(
+                        parentActivityManager,
+                        OtherUserProfile.newInstance(other_user_id),
+                        (containerId!!.id),
+                        true,
+                        true,
+                        false
+                    )
+                }
+            } else if(search_type == 1) {
+
+                val article = GeneralArticleModel(articleIds[position], titles[position],
+                    contents[position], authors[position],is_public_info[position],created_dates[position])
+
                 fragmentTransaction(
                     parentActivityManager,
-                    UserProfile.newInstance(),
+                    displayArticleFragment.newInstance(article,0,1,0,1,User.id!!),
                     (containerId!!.id),
                     true,
                     true,
-                    false
-                )
+                    false)
             } else {
-                fragmentTransaction(
-                    parentActivityManager,
-                    OtherUserProfile.newInstance(other_user_id),
-                    (containerId!!.id),
-                    true,
-                    true,
-                    false
-                )
+
             }
         }
 
