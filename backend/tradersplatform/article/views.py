@@ -61,20 +61,23 @@ class SearchArticle(ListAPIView):
         semantics.insert(0, {"word": str(search_item), "score": 1000000, "tags": []})
         search_results = {"count":0,
                           "results": []}
+        
+        ids =[]
         for word in semantics:
             for article in queryset.all():
                 if word['word'] in article.title.lower() or word['word'] in article.content.lower():
                     # deserialized_article = json.loads(PublicArticleListSerializer(data=article))
-
-                    search_results['results'].append({"id": article.id,
-                                                      "title": article.title,
-                                                      "content": article.content,
-                                                      "author": "",
-                                                      "is_public": True,
-                                                      "created_date": article.created_date,
-                                                      "image": None})
-                    search_results['count] += 1
-
+                    if article.id not in ids:
+                        ids.append(article.id)
+                        search_results['results'].append({"id": article.id,
+                                                          "title": article.title,
+                                                          "content": article.content,
+                                                          "author": "",
+                                                          "is_public": True,
+                                                          "created_date": article.created_date,
+                                                          "image": None})
+                        
+                    
         return Response(search_results, 200)
 
 
