@@ -1,0 +1,861 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/transparent_background">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <Button
+            android:id="@+id/wallet_type"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#B535A38D"
+            android:clickable="false"
+            android:text="EQUIPMENT"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/wallet_type_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#B535A38D"
+            android:text="AMOUNT"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_type"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/wallet_type_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="#B535A38D"
+            android:enabled="true"
+            android:text="WEALTH"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_type_amount"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/wallet_btc"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="BTC"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_type" />
+
+        <Button
+            android:id="@+id/wallet_btc_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_btc"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_type_amount" />
+
+        <Button
+            android:id="@+id/wallet_btc_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_btc_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_type_wealth" />
+
+        <Button
+            android:id="@+id/wallet_eth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="ETH"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_btc" />
+
+        <Button
+            android:id="@+id/wallet_eth_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_eth"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_btc_amount" />
+
+        <Button
+            android:id="@+id/wallet_eth_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_eth_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_btc_wealth" />
+
+        <Button
+            android:id="@+id/wallet_ltc"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="LTC"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_eth" />
+
+        <Button
+            android:id="@+id/wallet_ltc_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_ltc"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_eth_amount" />
+
+        <Button
+            android:id="@+id/wallet_ltc_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_ltc_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_eth_wealth" />
+
+        <Button
+            android:id="@+id/wallet_xag"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="XAG"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_ltc" />
+
+        <Button
+            android:id="@+id/wallet_xag_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_xag"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_ltc_amount" />
+
+        <Button
+            android:id="@+id/wallet_xag_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_xag_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_ltc_wealth" />
+
+        <Button
+            android:id="@+id/wallet_xau"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="XAU"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_xag" />
+
+        <Button
+            android:id="@+id/wallet_xau_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_xau"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_xag_amount" />
+
+        <Button
+            android:id="@+id/wallet_xau_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_xau_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_xag_wealth" />
+
+        <Button
+            android:id="@+id/wallet_googl"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="GOOGL"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_xau" />
+
+        <Button
+            android:id="@+id/wallet_googl_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_googl"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_xau_amount" />
+
+        <Button
+            android:id="@+id/wallet_googl_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_googl_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_xau_wealth" />
+
+        <Button
+            android:id="@+id/wallet_aapl"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="AAPL"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_googl" />
+
+        <Button
+            android:id="@+id/wallet_aapl_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_aapl"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_googl_amount" />
+
+        <Button
+            android:id="@+id/wallet_aapl_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_aapl_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_googl_wealth" />
+
+        <Button
+            android:id="@+id/wallet_gm"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="GM"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_aapl" />
+
+        <Button
+            android:id="@+id/wallet_gm_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_gm"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_aapl_amount" />
+
+        <Button
+            android:id="@+id/wallet_gm_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_gm_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_aapl_wealth" />
+
+        <Button
+            android:id="@+id/wallet_eur"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="EUR"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_gm" />
+
+        <Button
+            android:id="@+id/wallet_eur_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_eur"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_gm_amount" />
+
+        <Button
+            android:id="@+id/wallet_eur_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_eur_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_gm_wealth" />
+
+        <Button
+            android:id="@+id/wallet_gbp"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="GBP"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_eur" />
+
+        <Button
+            android:id="@+id/wallet_gbp_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_gbp"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_eur_amount" />
+
+        <Button
+            android:id="@+id/wallet_gbp_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_gbp_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_eur_wealth" />
+
+        <Button
+            android:id="@+id/wallet_try"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="TRY"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_gbp" />
+
+        <Button
+            android:id="@+id/wallet_try_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_try"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_gbp_amount" />
+
+        <Button
+            android:id="@+id/wallet_try_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_try_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_gbp_wealth" />
+
+        <Button
+            android:id="@+id/wallet_spy"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="SPY"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_try" />
+
+        <Button
+            android:id="@+id/wallet_spy_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_spy"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_try_amount" />
+
+        <Button
+            android:id="@+id/wallet_spy_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_spy_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_try_wealth" />
+
+        <Button
+            android:id="@+id/wallet_ivv"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="IVV"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_spy" />
+
+        <Button
+            android:id="@+id/wallet_ivv_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_ivv"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_spy_amount" />
+
+        <Button
+            android:id="@+id/wallet_ivv_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_ivv_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_spy_wealth" />
+
+        <Button
+            android:id="@+id/wallet_vti"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="VTI"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_ivv" />
+
+        <Button
+            android:id="@+id/wallet_vti_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_vti"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_ivv_amount" />
+
+        <Button
+            android:id="@+id/wallet_vti_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_vti_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_ivv_wealth" />
+
+        <Button
+            android:id="@+id/wallet_dji"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="DJI"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_vti" />
+
+        <Button
+            android:id="@+id/wallet_dji_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_dji"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_vti_amount" />
+
+        <Button
+            android:id="@+id/wallet_dji_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_dji_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_vti_wealth" />
+
+        <Button
+            android:id="@+id/wallet_ixic"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="IXIC"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_dji" />
+
+        <Button
+            android:id="@+id/wallet_ixic_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_ixic"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_dji_amount" />
+
+        <Button
+            android:id="@+id/wallet_ixic_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_ixic_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_dji_wealth" />
+
+        <Button
+            android:id="@+id/wallet_inx"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:enabled="true"
+            android:text="INX"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_ixic" />
+
+        <Button
+            android:id="@+id/wallet_inx_amount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_inx"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_ixic_amount" />
+
+        <Button
+            android:id="@+id/wallet_inx_wealth"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#B5A33535"
+            android:clickable="false"
+            android:enabled="true"
+            android:text="$0"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/wallet_inx_amount"
+            app:layout_constraintTop_toBottomOf="@+id/wallet_ixic_wealth" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

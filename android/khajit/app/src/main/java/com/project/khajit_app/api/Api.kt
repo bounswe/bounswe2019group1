@@ -55,6 +55,14 @@ interface Api {
     @POST("user/search_user/")
     fun searchUsername(@Body body: SearchRequest):Call<SearchResponse>
 
+    @Headers("Content-Type: application/json")
+    @GET("article/search/{key}/")
+    fun searchArticle(@Path(value = "key", encoded = true) key: String):Call<ArticleSearchResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("event/search/{key}/")
+    fun searchEvent(@Path(value = "key", encoded = true) key: String):Call<ListEventResponse>
+
     // TODO
     @Headers("Content-Type: application/json")
     @PUT("user/updatepass/")
@@ -163,6 +171,18 @@ interface Api {
     @Headers("Content-Type: application/json")
     @HTTP(method="DELETE", path="portfolio-follow/unfollow/", hasBody=true)
     fun unfollowPortfolio(@Body body: FollowUnfollowModel):Call<FollowUnfollowResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @POST("wallet/createWallet/")
+    fun createWallet():Call<createWalletResponse>
+
+    @Headers("Content-Type: application/json")
+    @DELETE("wallet/delete/")
+    fun deleteWallet():Call<createWalletResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("follow/listFollowingPending/" )
+    fun getFollowingPending():Call<FollowingPendingResponseModel>
 
     @Headers("Content-Type: application/json")
     @GET("article/listArticleByUserId/{id}/")
