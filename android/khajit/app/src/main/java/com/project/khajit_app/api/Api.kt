@@ -193,4 +193,8 @@ interface Api {
     @POST("prediction/predict/")
     fun makePrediction(@Body body: PredictionModel):Call<PredictionResponseModel>
 
+    @Headers("Content-Type: application/json")
+    @GET("event/list/" )
+    fun getAllEvents():Call<ListEventModel>
+
 }
