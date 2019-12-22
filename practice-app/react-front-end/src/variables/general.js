@@ -4,22 +4,12 @@
 
 
 var bugs = [
-  'BTC',
-  "ETH ",
-  "LTC ",
-  "XAG ",
-  "XAU",
-  "GOOGL ",
-  "AAPL",
-  "GM ",
-  "EUR ",
-  "GBP ",
-  "TRY ",
-  "SPY ",
-  "IVV ",
-  "VTI ",
-  "DJI ",
-  "IXIC",
+  
+  "User1",
+  "User2",
+  "User3",
+  "User4",
+  "User5",
   "INX"
 ];
 var website = [

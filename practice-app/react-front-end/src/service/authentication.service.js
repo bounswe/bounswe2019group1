@@ -18,16 +18,18 @@ export function login(username, password) {
       requestOptions.body,
       requestOptions.headers
     )
-    .then(res => (res.status === 200 ? res.data.token : null))
-    .then(token => {
+    .then(res => (res.status === 200 ? res.data : null))
+    .then(data => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
-      if (token) {
-        localStorage.setItem("currentUser", JSON.stringify(token));
+      if (data.token) {
+        localStorage.setItem("currentUser", JSON.stringify(data.token));
+        localStorage.setItem("userDetails", JSON.stringify({id: "http://www.khajiittraders.tk/user/" + data.user.id + "/", name: data.user.first_name + " "+ data.user.last_name, nickname: data.user.username}));
       }
-      return token;
+      return data.token;
     });
 }
 export function logout() {
   // remove user from local storage to log user out
   localStorage.removeItem("currentUser");
+  localStorage.removeItem("userDetails");
 }

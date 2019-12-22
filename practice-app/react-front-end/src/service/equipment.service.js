@@ -37,3 +37,39 @@ export function getTradeIndicesGainer() {
     .get(`${environment.api_url}equipment/traceindicesgainers/`)
     .then(res => (res.status === 200 ? res.data.token : null));
 }
+// Make the urls correct
+export function getCurrencyHistory(){
+  return axios
+      .get(`${environment.api_url}equipment/currencyList/`)
+      .then(res => (res.status === 200 ? res.data.token : null));
+}
+
+export function getCurrencyHistory(){
+  return axios
+      .get(`${environment.api_url}equipment/metalcurrencyList/`)
+      .then(res => (res.status === 200 ? res.data.token : null));
+}
+
+export function getCryptoCurrencyHistory(){
+  return axios
+      .get(`${environment.api_url}equipment/cryptocurrencyList/`)
+      .then(res => (res.status === 200 ? res.data.token : null));
+}
+
+export function getStockHistory(){
+  return axios
+      .get(`${environment.api_url}equipment/stockcurrencyList/`)
+      .then(res => (res.status === 200 ? res.data.token : null));
+}
+
+export function getETFHistory(){
+  return axios
+      .get(`${environment.api_url}equipment/etfList/`)
+      .then(res => (res.status === 200 ? res.data.token : null));
+}
+
+export function getTraceHistory(){
+  return axios
+      .get(`${environment.api_url}equipment/traceList/`)
+      .then(res => (res.status === 200 ? res.data.token : null));
+}

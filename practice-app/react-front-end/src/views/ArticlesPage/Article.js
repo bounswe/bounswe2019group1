@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
@@ -17,6 +17,7 @@ import CardFooter from "components/Card/CardFooter.js";
 import Footer from "components/Footer/Footer.js";
 import Header from "components/Header/Header.js";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
+import TextAnnotation from "../../components/Annotation/TextAnnotation";
 import avatar from "assets/img/faces/marc.jpg";
 import image from "assets/img/dollar-hd.jpg";
 import Paper from "@material-ui/core/Paper";
@@ -25,10 +26,14 @@ import Quote from "components/Typography/Quote.js";
 import swal from "sweetalert";
 
 import { getArticleById } from "service/article.service.js";
+import { getAnnotationsBySource} from "service/annotation.service.js";
 import {
   createComment,
   listCommentByArticleId
 } from "service/comment.service.js";
+import {TokenAnnotator, TextAnnotator} from 'react-text-annotate'
+
+
 const styles = {
   container: {
     "@media (min-width: 576px)": {
@@ -81,9 +86,12 @@ const useStyles = makeStyles(styles);
 export default function Article(props) {
   const classes = useStyles();
   const { ...rest } = props;
+
   var article_id = String(props.history.location.pathname);
+
   article_id = Number(article_id.substr(article_id.lastIndexOf("/") + 1));
 
+  const [annotations, setAnnotations] = useState([]);
   const [articleValues, setArticleValues] = useState({
     title: "",
     content: "",
@@ -91,6 +99,26 @@ export default function Article(props) {
     is_public: "",
     author: {}
   });
+
+  const handleToUpdate = annotation => {
+    var annotations = annotations;
+    annotations.push(annotation);
+    setAnnotations(
+        annotations
+    );
+  };
+
+  const [imageAnnotations, setImageAnnotations] = annotations.filter(a => a.target.type === "image");
+  const textAnnotations = annotations.filter(a => a.target.type === "text").sort(function (a, b) {
+    return parseFloat(a.target.start) - parseFloat(b.target.start);
+  });
+
+  useState(() => {
+    getAnnotationsBySource("http://www.khajiittraders.tk/article/" +article_id).then(res =>
+        setAnnotations(res)
+    );
+  });
+
   useState(() => {
     getArticleById(article_id).then(res =>
       setArticleValues({
@@ -193,7 +221,15 @@ export default function Article(props) {
               <Typography variant="h5" component="h3">
                 <center>{articleValues.title}</center>
               </Typography>
-              <Typography component="p">{articleValues.content}</Typography>
+              <Typography component="p">
+                <TextAnnotation
+                    text={articleValues.content}
+                    article_id={article_id}
+                    showAnnotations={true}
+                    annotations={textAnnotations}
+                    handleToUpdate={handleToUpdate}
+                />
+              </Typography>
             </Paper>
           </CardBody>
         </Card>

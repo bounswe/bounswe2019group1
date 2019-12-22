@@ -11,6 +11,7 @@ import LoginPage from "views/LoginPage/LoginPage.js";
 import App from "./App";
 import SignupPage from "views/SignupPage/SignupPage";
 import EditProfile from "./views/ProfilePage/EditProfile";
+import Equipment from "views/Equipment/Equipment";
 import ArticlesPage from "./views/ArticlesPage/ArticlesPage";
 import WalletPage from "./views/WalletPage/WalletPage";
 import Article from "./views/ArticlesPage/Article";
@@ -21,6 +22,7 @@ import SearchResults from "./views/SearchResults/SearchResults";
 import NotificationPage from "./views/PortfolioPage/Notification";
 import UserProfile from "./views/ProfilePage/UserProfile";
 import ResetPassword from "views/ResetPassword/ResetPassword";
+import Equipments from "views/Equipment/Equipment";
 var hist = createBrowserHistory();
 
 ReactDOM.render(
@@ -55,6 +57,16 @@ ReactDOM.render(
         render={() =>
           localStorage.getItem("currentUser") ? (
             <SearchResults history={hist} />
+          ) : (
+            <Redirect to="/login-page" />
+          )
+        }
+      />
+      <Route
+        path="/equipments"
+        render={() =>
+          localStorage.getItem("currentUser") ? (
+            <Equipments history={hist} />
           ) : (
             <Redirect to="/login-page" />
           )
@@ -172,6 +184,18 @@ ReactDOM.render(
         }
       />
       <Route path="/" component={App} />
+
+        <Route
+            path="/equipment/:name"
+            render={() =>
+                localStorage.getItem("currentUser") ? (
+                    <Equipment history={hist} />
+                ) : (
+                    <Redirect to="/login-page" />
+                )
+            }
+        />
+
     </Switch>
   </Router>,
   document.getElementById("root")
