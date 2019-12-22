@@ -81,15 +81,18 @@ export class TextAnnotation extends Component {
             });
     }
 
-    mySimpleRenderer(text, annotation) {
-        let explanation = annotation.tooltip;
+    /*
+ * 'text': the whole text, 'Hello World!'
+ * 'annotation': { offset: 6, length: 5, tooltip: "Welt" }
+ */
+    mySimpleRenderer = (text, annotation) => {
+        let explanation = annotation.tooltip
         let highlighted = text.substr(annotation.offset, annotation.length);
         return {
             explanation,
             highlighted
-        };
+        }
     }
-
 
     createTextAnnotation() {
         const values = {
@@ -99,7 +102,7 @@ export class TextAnnotation extends Component {
                 value: this.state.annotationInput.text
             },
             target: {
-                source: "https://35.163.120.227/article/" + this.props.article_id + "/",
+                source: "http://www.khajiittraders.tk/article/" + this.props.article_id + "/",
                 selector: {
                     refinedBy: {
                         type: "TextPositionSelector",
@@ -159,14 +162,15 @@ export class TextAnnotation extends Component {
                             <Button onClick={e => this.createTextAnnotation()}>Create</Button>
                         </div>
                     )}
+
                     {text && showAnnotations && annotations.length !== 0 ? (
                         <Paragraph
                             paragraph={{
                                 text: text,
                                 annotations: annotations.map(a => ({
-                                    offset: a.target.start,
-                                    length: a.target.end - a.target.start,
-                                    tooltip: a.body.text
+                                    offset: a.target.selector.refinedBy.start,
+                                    length: a.target.selector.refinedBy.end - a.target.selector.refinedBy.start,
+                                    tooltip: a.body[0].value
                                 }))
                             }}
                             tooltipRenderer={this.mySimpleRenderer}

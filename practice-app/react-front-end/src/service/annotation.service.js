@@ -10,12 +10,12 @@ export function getAnnotationsBySource(source){
         }
     };
     return axios(
-        `${environment.annotation_server_url}annotation/getannotations/?source=${source}`,
+        `${environment.annotation_server_url}annotation/getannotations/?source=${source}/`,
         requestOptions
     ).then(res => (res.status === 200 ? res.data : null));
 }
 function generateCreator() {
-    var creator =  localStorage.getItem("userDetails") ;
+    var creator =  JSON.parse(localStorage.getItem("userDetails")) ;
     creator.type = "Person";
     return creator;
 
