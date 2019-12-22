@@ -11,6 +11,7 @@ import LoginPage from "views/LoginPage/LoginPage.js";
 import App from "./App";
 import SignupPage from "views/SignupPage/SignupPage";
 import EditProfile from "./views/ProfilePage/EditProfile";
+import Equipment from "views/Equipment/Equipment";
 import ArticlesPage from "./views/ArticlesPage/ArticlesPage";
 import WalletPage from "./views/WalletPage/WalletPage";
 import Article from "./views/ArticlesPage/Article";
@@ -183,6 +184,18 @@ ReactDOM.render(
         }
       />
       <Route path="/" component={App} />
+
+        <Route
+            path="/equipment/:name"
+            render={() =>
+                localStorage.getItem("currentUser") ? (
+                    <Equipment history={hist} />
+                ) : (
+                    <Redirect to="/login-page" />
+                )
+            }
+        />
+
     </Switch>
   </Router>,
   document.getElementById("root")
