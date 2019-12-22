@@ -1,8 +1,7 @@
 import React from "react";
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
-import CanvasJSReact from '../../assets/canvasjs.react';
-
+import CanvasJSReact from "../../assets/canvasjs.react";
 
 // @material-ui/core
 import { makeStyles } from "@material-ui/core/styles";
@@ -26,7 +25,6 @@ import CardIcon from "components/Card2/CardIcon.js";
 import CardBody from "components/Card2/CardBody.js";
 import CardFooter from "components/Card2/CardFooter.js";
 
-
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 const useStyles = makeStyles(styles);
@@ -39,25 +37,25 @@ const options = {
   },
   axisY: {
     title: "USD / TRY",
-    includeZero: false,
+    includeZero: false
   },
   data: [
-  {
-    type: "area",
-    xValueFormatString: "YYYY",
-    yValueFormatString: "#,##0.## TRY",
-    dataPoints: [
-      { x: new Date(2019, 11), y: 5.91},
-      { x: new Date(2019, 10), y: 5.82},
-      { x: new Date(2019, 9), y: 5.75},
-      { x: new Date(2019, 8), y: 5.70},
-      { x: new Date(2019, 7), y: 5.55},
-      { x: new Date(2019, 6), y: 5.42},
-      { x: new Date(2019, 5), y: 5.36}
-    ]
-  }
+    {
+      type: "area",
+      xValueFormatString: "YYYY",
+      yValueFormatString: "#,##0.## TRY",
+      dataPoints: [
+        { x: new Date(2019, 11), y: 5.91 },
+        { x: new Date(2019, 10), y: 5.82 },
+        { x: new Date(2019, 9), y: 5.75 },
+        { x: new Date(2019, 8), y: 5.7 },
+        { x: new Date(2019, 7), y: 5.55 },
+        { x: new Date(2019, 6), y: 5.42 },
+        { x: new Date(2019, 5), y: 5.36 }
+      ]
+    }
   ]
-}
+};
 
 export default function Equipment(props) {
   const classes = useStyles();
@@ -74,7 +72,7 @@ export default function Equipment(props) {
     event.preventDefault();
     setValues({ ...values, [prop]: "It will decrease !" });
   };
-  
+
   return (
     <div>
       <Header
@@ -86,36 +84,31 @@ export default function Equipment(props) {
           height: 200,
           color: "white"
         }}
-        
       />
       <Parallax small filter image={require("assets/img/dollar-hd.jpg")} />
-    <GridContainer>
-        
-      
+      <GridContainer>
         <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="success">
-              
-              <CanvasJSChart options = {options} 
-				
-		        	/>
+              <CanvasJSChart options={options} />
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Your Prediction: {values.state}</h4>
+              <h4 className={classes.cardTitle}>
+                Your Prediction: {values.state}
+              </h4>
               <p className={classes.cardCategory}>
                 <Button color="transparent" onClick={upPredict("state")}>
-                <span className={classes.successText}>
-                  <ArrowUpward className={classes.upArrowCardCategory} /> Up
-                </span>
+                  <span className={classes.successText}>
+                    <ArrowUpward className={classes.upArrowCardCategory} /> Up
+                  </span>
                 </Button>
                 <Button color="transparent" onClick={downPredict("state")}>
-                <span className={classes.failText}>
-                  <ArrowDownward className={classes.upArrowCardCategory} /> Down
-                </span>
-
+                  <span className={classes.failText}>
+                    <ArrowDownward className={classes.upArrowCardCategory} />{" "}
+                    Down
+                  </span>
                 </Button>
-                {""} 
-                
+                {""}
               </p>
             </CardBody>
             <CardFooter chart>
@@ -125,7 +118,6 @@ export default function Equipment(props) {
             </CardFooter>
           </Card>
         </GridItem>
-
 
         {/* <GridItem xs={12} sm={12} md={4}>
           <Card chart>
@@ -163,9 +155,7 @@ export default function Equipment(props) {
             </CardFooter>
           </Card>
         </GridItem> */}
-      
       </GridContainer>
-      
     </div>
   );
 }
