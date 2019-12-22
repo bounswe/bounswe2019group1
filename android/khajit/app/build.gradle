@@ -72,4 +72,7 @@ dependencies {
     implementation 'com.github.kittinunf.fuel:fuel-android:1.15.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.android.support:appcompat-v7:23.2.0'
+    apply plugin: 'kotlin-kapt'
+    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    kapt 'com.github.bumptech.glide:compiler:4.4.0'
 }

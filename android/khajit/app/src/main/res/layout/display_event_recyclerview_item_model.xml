@@ -40,7 +40,7 @@
 
 
             <TextView
-                android:id="@+id/article_name"
+                android:id="@+id/event_name"
                 style="@style/TextAppearance.AppCompat.Subhead.Inverse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

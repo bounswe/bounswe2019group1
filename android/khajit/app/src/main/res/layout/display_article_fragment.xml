@@ -30,6 +30,15 @@
                 android:layout_marginTop="@dimen/dog_detail_name_margin_top"
                 android:layout_marginBottom="0dp"
                 android:text="@{generalArticleModel.title}" />
+            <ImageView
+                android:id="@+id/article_image_display_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dog_detail_image_margin_vertical"
+                android:layout_marginBottom="@dimen/dog_detail_image_margin_vertical"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop" />
 
 
             <TextView

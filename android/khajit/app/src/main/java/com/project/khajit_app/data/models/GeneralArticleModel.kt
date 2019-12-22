@@ -7,5 +7,6 @@ data class GeneralArticleModel(val id : Int?,
                                val content : String?,
                                val author : UserAllInfo?,
                                val is_public : Boolean?,
-                               val created_date : String?): Serializable
+                               val created_date : String?,
+                               val image : String?): Serializable
 

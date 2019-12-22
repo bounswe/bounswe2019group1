@@ -64,6 +64,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="scalingPercent" value="59" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -75,7 +76,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_event_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/notification/ic_do_not_disturb_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -100,7 +101,7 @@
                                     <map>
                                       <entry key="foregroundAssetType" value="CLIP_ART" />
                                       <entry key="foregroundImage" value="$USER_HOME$/Downloads/edit.svg" />
-                                      <entry key="outputName" value="ic_event_icon_image" />
+                                      <entry key="outputName" value="ic_article_image_no_content" />
                                     </map>
                                   </option>
                                 </PersistentState>
