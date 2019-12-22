@@ -11,7 +11,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import Autosuggest from 'react-autosuggest';
 
 // @material-ui/icons
-import { Apps, CloudDownload, Assignment } from "@material-ui/icons";
+import { Apps, CloudDownload, Assignment, AttachMoney } from "@material-ui/icons";
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 import Button from "components/CustomButtons/Button.js";
@@ -112,6 +112,7 @@ export default function PheaderLinks() {
               </div>
             </Link>
         </div>
+        
         <Link to="/articles" color="transparent">
           <Button className={classes.button} color="primary" target="_self">
             <CloudDownload className={classes.icons} /> Articles
@@ -120,6 +121,11 @@ export default function PheaderLinks() {
         <Link to="/market" className={classes.button} color="transparent">
           <Button className={classes.button} color="primary" target="_self">
             <Assignment className={classes.icons} /> Market
+          </Button>
+        </Link>
+        <Link to="/equipments" color="transparent">
+          <Button className={classes.button} color="primary" target="_self">
+            <AttachMoney className={classes.icons} /> Parity
           </Button>
         </Link>
 
