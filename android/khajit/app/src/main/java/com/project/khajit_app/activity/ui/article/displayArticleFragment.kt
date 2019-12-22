@@ -59,6 +59,7 @@ class displayArticleFragment : Fragment() {
         isFeedPage = arguments!!.getInt(ISFEEDPAGE)
         isFollowing = arguments!!.getInt(ISFOLLOWING)
         userId = arguments!!.getInt(USERID)
+
         DisplayArticleFragmentBinding.generalArticleModel = articleModel
         //model.text = String.format(getString(R.string.description_format), model.description, model.url)
         return DisplayArticleFragmentBinding.root

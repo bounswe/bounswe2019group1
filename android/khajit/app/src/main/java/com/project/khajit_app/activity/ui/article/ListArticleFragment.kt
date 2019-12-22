@@ -359,6 +359,7 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
          }
 
          override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+
              val article = GeneralArticleModel(articleIds[position], titles[position],
                  contents[position], authors[position],is_public_info[position],created_dates[position])
              viewHolder.setData(article)
