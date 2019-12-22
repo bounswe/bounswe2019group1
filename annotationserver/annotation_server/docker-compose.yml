@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  web:
+    build: .
+    restart: always
+    image: registry.docker.dev/annotation
+    command: >
+      bash -c "python /app/manage.py makemigrations && python /app/manage.py migrate && python /app/manage.py runserver 0.0.0.0:8020"
+    #hostname: wops_python
+    ports:
+      - "8020:8020"
+    volumes:
+      - .:/app/
