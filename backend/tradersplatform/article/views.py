@@ -20,11 +20,9 @@ class CreateArticleAPIView(CreateAPIView):
         check_if_user(request)
         id = request.user.id
         user = TemplateUser.objects.get(id=id)
-        title = request.data['title']
-        content = request.data['content']
-        is_public = request.data['is_public']
-        data = {"title": title, "content": content, "is_public": is_public, "author": user,
-                "created_date": django.utils.timezone.now()}
+        data=request.data
+        data['created_date']=django.utils.timezone.now()
+        data['author'] = user
         serializer = ArticleCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -45,6 +43,7 @@ class ListArticleAPIView(ListAPIView):
 class ListPublicArticleAPIView(ListAPIView):
     serializer_class = PublicArticleListSerializer
     queryset = Article.objects.filter(is_public=True).order_by('-created_date')
+
 
 class SearchArticle(ListAPIView):
 
