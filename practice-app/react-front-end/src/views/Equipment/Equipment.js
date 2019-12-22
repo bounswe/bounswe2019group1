@@ -13,6 +13,9 @@ import ArrowUpward from "@material-ui/icons/ArrowUpward";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import AccessTime from "@material-ui/icons/AccessTime";
 import Button from "components/CustomButtons/Button.js";
+import Parallax from "components/Parallax/Parallax.js";
+import Header from "components/Header/Header.js";
+import PheaderLinks from "components/ProfileHeader/PheaderLinks";
 
 // core components
 import GridItem from "components/Grid/GridItem.js";
@@ -56,10 +59,36 @@ const options = {
   ]
 }
 
-export default function Equipment() {
+export default function Equipment(props) {
   const classes = useStyles();
+  const [values, setValues] = React.useState({
+    state: "Nothing",
+    temp_amount: ""
+  });
+
+  const upPredict = prop => event => {
+    event.preventDefault();
+    setValues({ ...values, [prop]: "It will increase !" });
+  };
+  const downPredict = prop => event => {
+    event.preventDefault();
+    setValues({ ...values, [prop]: "It will decrease !" });
+  };
+  
   return (
     <div>
+      <Header
+        color="transparent"
+        brand="Khaji-it Traders Platform"
+        rightLinks={<PheaderLinks />}
+        fixed
+        changeColorOnScroll={{
+          height: 200,
+          color: "white"
+        }}
+        
+      />
+      <Parallax small filter image={require("assets/img/dollar-hd.jpg")} />
     <GridContainer>
         
       
@@ -72,20 +101,20 @@ export default function Equipment() {
 		        	/>
             </CardHeader>
             <CardBody>
-              <h4 className={classes.cardTitle}>Your Prediction</h4>
+              <h4 className={classes.cardTitle}>Your Prediction: {values.state}</h4>
               <p className={classes.cardCategory}>
-                <Button color="transparent">
+                <Button color="transparent" onClick={upPredict("state")}>
                 <span className={classes.successText}>
                   <ArrowUpward className={classes.upArrowCardCategory} /> Up
                 </span>
                 </Button>
-                <Button color="transparent">
+                <Button color="transparent" onClick={downPredict("state")}>
                 <span className={classes.failText}>
                   <ArrowDownward className={classes.upArrowCardCategory} /> Down
                 </span>
 
                 </Button>
-                {" "}
+                {""} 
                 
               </p>
             </CardBody>
