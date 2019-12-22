@@ -18,6 +18,9 @@ import GridItem from "components/Grid/GridItem.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 import { Link } from "react-router-dom";
+import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
+import CardBody from "components/Card2/CardBody.js";
 
 import profile from "assets/img/faces/marc.jpg";
 import portfolio1 from "assets/img/examples/ppp1.jpeg";
@@ -198,6 +201,19 @@ export default function ProfilePage(props) {
                     <Link to="/wallet-page">
                       <Icon fontSize="large">account_balance_wallet</Icon>
                     </Link>
+                    <CardBody>
+                      <h4 className={classes.cardTitle}>Prediction rate</h4>
+                      <p className={classes.cardCategory}>
+                        <span className={classes.successText}>
+                          <ArrowUpward className={classes.upArrowCardCategory} /> 75%
+                        </span>{" "}
+
+                        {/* <span className={classes.failText}>
+                          <ArrowDownward className={classes.upArrowCardCategory} /> %45
+                        </span> */}
+                        
+                      </p>
+                    </CardBody>
                   </div>
                   <div className={classes.root}>
                     <Grid container spacing={3}>
