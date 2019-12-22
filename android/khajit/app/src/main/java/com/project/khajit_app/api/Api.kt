@@ -188,4 +188,9 @@ interface Api {
     @GET("article/listArticleByUserId/{id}/")
     fun getArticlesByUserId(@Path(value = "id", encoded = true) userId: Int):Call<PublicArticleListResponse>
 
+
+    @Headers("Content-Type: application/json")
+    @POST("prediction/predict/")
+    fun makePrediction(@Body body: PredictionModel):Call<PredictionResponseModel>
+
 }
