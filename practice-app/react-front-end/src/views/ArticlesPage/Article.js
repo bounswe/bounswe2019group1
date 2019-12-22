@@ -32,6 +32,7 @@ import {
   listCommentByArticleId
 } from "service/comment.service.js";
 import {TokenAnnotator, TextAnnotator} from 'react-text-annotate'
+import imageTest from "assets/img/examples/ppp2.jpg";
 
 
 const styles = {
@@ -221,7 +222,12 @@ export default function Article(props) {
               <Typography variant="h5" component="h3">
                 <center>{articleValues.title}</center>
               </Typography>
-              <Typography component="p">
+              <img
+                  className={classes.img}
+                  alt="complex"
+                  src={imageTest} //articleValues.image
+                />
+                <Typography component="p">
                 <TextAnnotation
                     text={articleValues.content}
                     article_id={article_id}

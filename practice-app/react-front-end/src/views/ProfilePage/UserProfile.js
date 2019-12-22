@@ -21,7 +21,9 @@ import profile from "assets/img/faces/marc.jpg";
 import Icon from "@material-ui/core/Icon";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-
+import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
+import CardBody from "components/Card2/CardBody.js";
 import portfolio1 from "assets/img/examples/ppp1.jpeg";
 import portfolio2 from "assets/img/examples/po2.jpeg";
 import portfolio3 from "assets/img/examples/ppp3.jpg";
@@ -222,7 +224,19 @@ export default function UserProfilePage(props) {
                     <Button onClick={iconClick} variant="contained" color="primary">
                         {isFollowing?"Following":"Follow"}
                       </Button>
+                      <CardBody>
+                      <h4 className={classes.cardTitle}>Prediction rate</h4>
+                      <p className={classes.cardCategory}>
+                        <span className={classes.successText}>
+                          <ArrowUpward className={classes.upArrowCardCategory} /> 87%
+                        </span>{" "}
 
+                        {/* <span className={classes.failText}>
+                          <ArrowDownward className={classes.upArrowCardCategory} /> %34
+                        </span> */}
+                        
+                      </p>
+                    </CardBody>
                     </div>
                   </div>
                   <div className={classes.root}>
