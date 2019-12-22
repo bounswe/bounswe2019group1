@@ -15,8 +15,8 @@ export function getAnnotationsBySource(source){
     ).then(res => (res.status === 200 ? res.data : null));
 }
 function generateCreator() {
-    const creator =  localStorage.getItem("userDetails") ;
-    creator["type"] = "Person";
+    var creator =  localStorage.getItem("userDetails") ;
+    creator.type = "Person";
     return creator;
 
 }
@@ -38,7 +38,7 @@ export function createAnnotation(values){
             body: values.body,
             target: values.target,
             type: "Annotation",
-            motivation: values.motivation,
+            motivation: "commenting",
             created: getTimestamp()
         }
     }

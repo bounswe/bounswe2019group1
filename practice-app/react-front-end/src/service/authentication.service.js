@@ -23,7 +23,7 @@ export function login(username, password) {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       if (data.token) {
         localStorage.setItem("currentUser", JSON.stringify(data.token));
-        localStorage.setItem("userDetails", JSON.stringify({"id":data.user.id, name: data.user.first_name + " "+ data.user.last_name, nickname: data.user.username}));
+        localStorage.setItem("userDetails", JSON.stringify({id: "35.163.120.227/user/" + data.user.id, name: data.user.first_name + " "+ data.user.last_name, nickname: data.user.username}));
       }
       return data.token;
     });
