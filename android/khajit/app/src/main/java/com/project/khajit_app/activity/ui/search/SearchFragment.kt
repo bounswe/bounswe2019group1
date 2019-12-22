@@ -326,9 +326,9 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
                     )
                 }
             } else if(search_type == 1) {
-
+                //TO-DO Emirhan burayı image a göre ayarlaman lazım
                 val article = GeneralArticleModel(articleIds[position], titles[position],
-                    contents[position], authors[position],is_public_info[position],created_dates[position])
+                    contents[position], authors[position],is_public_info[position],created_dates[position],null)
 
                 fragmentTransaction(
                     parentActivityManager,
