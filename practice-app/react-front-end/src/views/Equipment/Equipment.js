@@ -15,7 +15,7 @@ import Button from "components/CustomButtons/Button.js";
 import Parallax from "components/Parallax/Parallax.js";
 import Header from "components/Header/Header.js";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
-
+import ShoppingCart from "@material-ui/icons/ShoppingCart";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -73,6 +73,11 @@ export default function Equipment(props) {
     setValues({ ...values, [prop]: "It will decrease !" });
   };
 
+  const buy = prop => event => {
+    event.preventDefault();
+    setValues({ ...values, [prop]: "Satın alındı !" });
+  };
+
   return (
     <div>
       <Header
@@ -109,6 +114,12 @@ export default function Equipment(props) {
                   </span>
                 </Button>
                 {""}
+                <Button color="transparent" onClick={buy("state")}>
+                  <span className={classes.buyText}>
+                    <ShoppingCart className={classes.upArrowCardCategory} />{" "}
+                    Purchase
+                  </span>
+                </Button>
               </p>
             </CardBody>
             <CardFooter chart>
