@@ -101,7 +101,8 @@ export default function Article(props) {
     content: "",
     created_date: "",
     is_public: "",
-    author: {}
+    author: {},
+    image:""
   });
 
   const handleToUpdate = annotation => {
@@ -132,7 +133,8 @@ export default function Article(props) {
         content: res.content,
         created_date: res.created_date,
         is_public: res.is_public,
-        author: res.author
+        author: res.author,
+        image: res.image
       })
     );
   });
@@ -226,10 +228,11 @@ export default function Article(props) {
               <Typography variant="h5" component="h3">
                 <center>{articleValues.title}</center>
               </Typography>
+
               <img
                   className={classes.img}
                   alt="complex"
-                  src={imageTest} //articleValues.image
+                  src= {articleValues.image ? "http://35.163.120.227:8000" + articleValues.image : imageTest}
                 />
                 <Typography component="p">
                 <TextAnnotation
