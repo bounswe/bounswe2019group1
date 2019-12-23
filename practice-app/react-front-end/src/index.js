@@ -23,6 +23,8 @@ import NotificationPage from "./views/PortfolioPage/Notification";
 import UserProfile from "./views/ProfilePage/UserProfile";
 import ResetPassword from "views/ResetPassword/ResetPassword";
 import Equipments from "views/Equipment/Equipment";
+import Event from "./views/EventsPage/Events";
+
 
 var hist = createBrowserHistory();
 
@@ -138,6 +140,16 @@ ReactDOM.render(
                 render={() =>
                     localStorage.getItem("currentUser") ? (
                         <Article history={hist}/>
+                    ) : (
+                        <Redirect to="/login-page"/>
+                    )
+                }
+            />
+            <Route
+                path="/events"
+                render={() =>
+                    localStorage.getItem("currentUser") ? (
+                        <Event history={hist}/>
                     ) : (
                         <Redirect to="/login-page"/>
                     )
