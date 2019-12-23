@@ -128,11 +128,7 @@ export default function PheaderLinks() {
             <Assignment className={classes.icons} /> Event
           </Button>
         </Link>
-        <Link to="/equipments" color="transparent">
-          <Button className={classes.button} color="primary" target="_self">
-            <AttachMoney className={classes.icons} /> Parity
-          </Button>
-        </Link>
+
 
         <CustomDropdown
           noLiPadding

@@ -115,12 +115,12 @@ export default function TableList() {
                           <Table
                             tableHeaderColor="primary"
                             tableHead={[
-                              "title",
-                              "country",
+                              "Title",
+                              "Country",
                               "Parity",
-                              "impact",
-                              "forecast",
-                              "previous"
+                              "Impact",
+                              "Forecast",
+                              "Previous"
                             ]}
                             tableData={list}
                           />
