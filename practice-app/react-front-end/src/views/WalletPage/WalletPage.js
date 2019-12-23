@@ -216,9 +216,6 @@ export default function Dashboard(props) {
                     <Card>
                         <CardHeader color="warning">
                             <h4 className={classes.cardTitleWhite}>Current Wealth</h4>
-                            <p className={classes.cardCategoryWhite}>
-                                Updated on 26th November, 2019
-                            </p>
                         </CardHeader>
                         <CardBody>
                             <Table
