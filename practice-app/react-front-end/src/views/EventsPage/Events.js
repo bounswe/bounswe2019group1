@@ -315,6 +315,94 @@ export default function TableList() {
       "",
       ""
     ],
+    [
+    "Unemployment Claims",
+    "USD",
+    "2019-12-26T08:30:00-05:00",
+    "Low",
+    "222K",
+    "234K"
+      ],
+      [
+    "Unemployment Rate",
+    "JPY",
+    "2019-12-26T18:30:00-05:00",
+    "Low",
+    "2.4%",
+    "2.4%"
+      ],
+      [
+    "Tokyo Core CPI y/y",
+    "JPY",
+    "2019-12-26T18:30:00-05:00",
+    "Low",
+    "0.6%",
+    "0.6%"
+      ],
+      [
+      "BOJ Summary of Opinions",
+      "JPY",
+      "2019-12-26T18:50:00-05:00",
+      "Low",
+      "",
+      ""
+      ],
+      [
+      "Prelim Industrial Production m/m",
+      "JPY",
+      "2019-12-26T18:50:00-05:00",
+      "Low",
+      "-1.1%",
+      "-4.2%"
+      ],
+      [
+      "Retail Sales y/y",
+      "JPY",
+      "2019-12-26T18:50:00-05:00",
+      "Low",
+      "-1.4%",
+      "-7.1%"
+      ],
+      [
+      "ECB Economic Bulletin",
+      "EUR",
+      "2019-12-27T04:00:00-05:00",
+      "Low",
+      "",
+      ""
+      ],
+      [
+      "Credit Suisse Economic Expectations",
+      "CHF",
+      "2019-12-27T04:00:00-05:00",
+      "Low",
+      "",
+      "-3.9"
+      ],
+      [
+      "High Street Lending",
+      "GBP",
+      "2019-12-27T04:30:00-05:00",
+      "Low",
+      "41.5K",
+      "41.2K"
+      ],
+      [
+      "Natural Gas Storage",
+      "USD",
+      "2019-12-27T10:30:00-05:00",
+      "Low",
+      "",
+      "-107B"
+    ],
+    [
+      "Crude Oil Inventories",
+      "USD",
+      "2019-12-27T11:00:00-05:00",
+      "Medium",
+      "",
+      "-1.1M"
+    ]
   ]);
 
   const handleChange = name => event => {
