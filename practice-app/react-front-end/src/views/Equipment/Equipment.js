@@ -24,6 +24,10 @@ import CardHeader from "components/Card2/CardHeader.js";
 import CardIcon from "components/Card2/CardIcon.js";
 import CardBody from "components/Card2/CardBody.js";
 import CardFooter from "components/Card2/CardFooter.js";
+import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import FormControl from "@material-ui/core/FormControl";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import {getTEValue} from "../../service/equipment.service";
@@ -80,10 +84,13 @@ export default function Equipment(props) {
         state: "Nothing",
         temp_amount: ""
     });
+    const handleChange = prop => event => {
+      setValues({ ...values, [prop]: event.target.value });
+    };
 
   const buy = prop => event => {
     event.preventDefault();
-    setValues({ ...values, [prop]: "Satın alındı !" });
+    //setValues({ ...values, [prop]: "Satın alındı !" });
   };
   const upPredict = prop => event => {
     event.preventDefault();
@@ -131,12 +138,33 @@ const downPredict = prop => event => {
                   </span>
                                 </Button>
                                 {""}
-                                <Button color="transparent" onClick={buy("state")}>
-                                <span className={classes.buyText}>
-                                  <ShoppingCart className={classes.upArrowCardCategory} />{" "}
-                                  Purchase
-                                </span>
-                              </Button>
+                                
+                              <FormControl
+                                  fullWidth
+                                  className={classes.margin}
+                                  variant="outlined"
+                                >
+                                  <InputLabel htmlFor="outlined-adornment-amount">
+                                    Amount
+                                  </InputLabel>
+                                  <OutlinedInput
+                                    id="outlined-adornment-amount"
+                                    value={values.temp_amount}
+                                    onChange={handleChange("temp_amount")}
+                                    startAdornment={
+                                      <InputAdornment position="start">$</InputAdornment>
+                                    }
+                                    labelWidth={60}
+                                  />
+                                </FormControl>
+                                   <p align="center">
+                                   <Button margin-left="30px" color="transparent" onClick={buy("state")}>
+                                      <span className={classes.buyText}>
+                                        <ShoppingCart className={classes.upArrowCardCategory} />{" "}
+                                        Purchase
+                                      </span>
+                                    </Button>
+                                    </p>
                             </p>
                         </CardBody>
                         <CardFooter chart>
