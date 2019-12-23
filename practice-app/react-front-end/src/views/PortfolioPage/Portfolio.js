@@ -21,6 +21,9 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import {getTEValue} from "../../service/equipment.service";
+import Icon from "@material-ui/core/Icon";
+import { Link } from "react-router-dom";
+
 //import { AnnotationCallout } from "react-annotation";
 
 const styles = {
@@ -77,36 +80,23 @@ export default function TableList() {
     });
 
     const [list, setList] = React.useState([]);
-    var links = [
-        "/equipment/EUR",
-        "/equipment/GBP",
-        "/equipment/TRY",
-        "/equipment/XAG",
-        "/equipment/XAU",
-        "/equipment/BTC",
-        "/equipment/ETH",
-        "/equipment/LTC",
-        "/equipment/GOOGL",
-        "/equipment/AAPL",
-        "/equipment/GM",
-        "/equipment/SPY",
-        "/equipment/IYV",
-        "/equipment/VTI"
-    ]
-    var initial_list = [["EUR/USD", "Euro/US Dollar", "0.1574"],
-        ["GBP/USD", "British Pound Sterling/US Dollar", "108.7480"],
-        ["TRY/USD", "Turkish Lira/US Dollar", "7.4000"],
-        ["XAG/USD", "Silver/US Dollar", "1.1074"],
-        ["XAU/USD", "Gold/US Dollar", "5.7182"],
-        ["BTC/USD", "Bitcoin/US Dollar", "6.3329"],
-        ["ETH/USD", "Etherium/US Dollar", "1.2952"],
-        ["LTC/USD", "Litecoin/US Dollar", "46235.9183"],
-        ["GOOGL/USD", "Google/US Dollar", "58.0200"],
-        ["AAPL/USD", "Apple/US Dollar", "1296.4000"],
-        ["GM/USD", "General Motors / US Dollar", "52.4900"],
-        ["SPY/USD", "Standard & Poor's Depozitary / US Dollar", "1232"],
-        ["IVV/USD", "Ishares S&P 500 / US Dollar", "123213"],
-        ["VTI/USD", "Vanguard Total Stock Market Index Fund / US Dollar", "12312"]];
+
+    var initial_list = [["EUR/USD", "Euro/US Dollar", "0.1574",<Link to="/equipment/EUR"><Icon color="primary">touch_app</Icon></Link>],
+        ["GBP/USD", "British Pound Sterling/US Dollar", "108.7480",<Link to="/equipment/GBP"><Icon color="primary">touch_app</Icon></Link>],
+        ["TRY/USD", "Turkish Lira/US Dollar", "7.4000",<Link to="/equipment/TRY"><Icon color="primary">touch_app</Icon></Link>],
+        ["XAG/USD", "Silver/US Dollar", "1.1074",<Link to="/equipment/XAG"><Icon color="primary">touch_app</Icon></Link>],
+        ["XAU/USD", "Gold/US Dollar", "5.7182",<Link to="/equipment/XAU"><Icon color="primary">touch_app</Icon></Link>],
+        ["BTC/USD", "Bitcoin/US Dollar", "6.3329",<Link to="/equipment/BTC"><Icon color="primary">touch_app</Icon></Link>],
+        ["ETH/USD", "Etherium/US Dollar", "1.2952",<Link to="/equipment/ETH"><Icon color="primary">touch_app</Icon></Link>],
+        ["LTC/USD", "Litecoin/US Dollar", "46235.9183",<Link to="/equipment/LTC"><Icon color="primary">touch_app</Icon></Link>],
+        ["GOOGL/USD", "Google/US Dollar", "58.0200",<Link to="/equipment/GOOGL"><Icon color="primary">touch_app</Icon></Link>],
+        ["AAPL/USD", "Apple/US Dollar", "1296.4000",<Link to="/equipment/AAPL"><Icon color="primary">touch_app</Icon></Link>],
+        ["GM/USD", "General Motors / US Dollar", "52.4900",<Link to="/equipment/GM"><Icon color="primary">touch_app</Icon></Link>],
+        ["SPY/USD", "Standard & Poor's Depozitary / US Dollar", "1232",<Link to="/equipment/SPY"><Icon color="primary">touch_app</Icon></Link>],
+        ["IVV/USD", "Ishares S&P 500 / US Dollar", "123213",<Link to="/equipments"><Icon color="/equipment/IYV">touch_app</Icon></Link>],
+        ["VTI/USD", "Vanguard Total Stock Market Index Fund / US Dollar", "12312",<Link to="/equipment/VTI"><Icon color="primary">touch_app</Icon></Link>]];
+
+
     useState(() => {
         getTEValue("EUR").then(res => {
                 initial_list[0][2] = res.te_value;
