@@ -76,6 +76,173 @@ export default function TableList() {
 
   const [list, setListState] = React.useState([
     ["Private Sector Credit m/m", "AUD", "2019-12-22T19:30:00-05:00" , "Low", "0.2%" , "0.1%"],
+    [
+           "All Industries Activity m/m",
+           "JPY",
+           "2019-12-22T23:30:00-05:00",
+           "Low",
+           "-4.3%",
+           "1.5%"
+       ],
+       [
+          "German Import Prices m/m",
+          "EUR",
+          "2019-12-23T01:48:00-05:00",
+          "Low",
+          "0.1%",
+          "-0.1%"
+      ],
+      [   "Durable Goods Orders m/m",
+          "USD",
+          "2019-12-23T08:30:00-05:00",
+          "Medium",
+          "0.2%",
+          "0.6%"
+      ],
+      [
+            "Core Durable Goods Orders m/m",
+            "USD",
+            "2019-12-23T08:30:00-05:00",
+            "Medium",
+            "1.5%",
+            "0.6%"
+        ],
+        [
+            "GDP m/m",
+            "CAD",
+            "2019-12-23T08:30:00-05:00",
+            "High",
+            "0.1%",
+            "0.1%"
+        ],
+        [
+            "New Home Sales",
+            "USD",
+            "2019-12-23T10:00:00-05:00",
+            "Low",
+            "730K",
+            "733K"
+        ],
+        [
+          "Treasury Currency Report",
+          "USD",
+          "2019-12-23T17:03:00-05:00",
+          "Medium",
+          "",
+          ""
+      ],
+      [
+          "Monetary Policy Meeting Minutes",
+          "JPY",
+          "2019-12-23T18:50:00-05:00",
+          "Low",
+          "",
+          ""
+      ],
+      [
+        "BOJ Core CPI y/y",
+        "JPY",
+        "2019-12-24T00:00:00-05:00",
+        "Low",
+        "0.3%",
+        "0.3%"
+    ],
+    [
+        "German Bank Holiday",
+        "EUR",
+        "2019-12-24T02:02:00-05:00",
+        "Holiday",
+        "",
+        ""
+    ],
+    [
+      "Richmond Manufacturing Index",
+      "USD",
+      "2019-12-24T10:00:00-05:00",
+      "Low",
+      "1",
+      "-1"
+       ],
+       [
+      "Bank Holiday",
+      "NZD",
+      "2019-12-24T15:00:00-05:00",
+      "Holiday",
+      "",
+      ""
+       ],
+     [
+      "Bank Holiday",
+      "AUD",
+      "2019-12-24T16:00:00-05:00",
+      "Holiday",
+      "",
+      ""
+       ],
+       [
+        "SPPI y/y",
+        "JPY",
+        "2019-12-24T18:50:00-05:00",
+        "Low",
+        "2.1%",
+        "2.1%"
+      ],
+      [
+        "Bank Holiday",
+        "CHF",
+        "2019-12-25T02:00:00-05:00",
+        "Holiday",
+        "",
+        ""
+      ],
+      [
+      "French Bank Holiday",
+      "EUR",
+      "2019-12-25T02:01:00-05:00",
+      "Holiday",
+      "",
+      ""
+       ],
+       [
+      "German Bank Holiday",
+      "EUR",
+      "2019-12-25T02:02:00-05:00",
+      "Holiday",
+      "",
+      ""
+       ],
+       [
+      "Italian Bank Holiday",
+      "EUR",
+      "2019-12-25T02:03:00-05:00",
+      "Holiday",
+      "",
+      ""
+       ],
+     [
+       "Bank Holiday",
+      "GBP",
+      "2019-12-25T03:00:00-05:00",
+      "Holiday",
+      "",
+      ""
+     ],
+     [
+      "Bank Holiday",
+      "CAD",
+      "2019-12-25T07:59:00-05:00",
+      "Holiday",
+      "",
+      ""
+     ],
+     [
+      "Bank Holiday",
+      "USD",
+      "2019-12-25T08:00:00-05:00",
+      "Holiday",
+      "",
+      ""
+     ],
   ]);
 
   const handleChange = name => event => {
