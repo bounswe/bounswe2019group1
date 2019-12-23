@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 // core components
 import Header from "components/Header/Header.js";
+
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
 import Parallax from "components/Parallax/Parallax.js";
 import classNames from "classnames";
@@ -79,20 +80,23 @@ export default function TableList() {
     });
 
     const [list, setList] = React.useState([]);
-    var initial_list = [["EUR/USD", "Euro/US Dollar", "0.1574",<Link to="/equipments"><Icon color="primary">touch_app</Icon></Link>],
-        ["GBP/USD", "British Pound Sterling/US Dollar", "108.7480",<Link to="/equipments"><Icon color="primary">touch_app</Icon></Link>],
-        ["TRY/USD", "Turkish Lira/US Dollar", "7.4000",<Link to="/equipments"><Icon color="primary">touch_app</Icon></Link>],
-        ["XAG/USD", "Silver/US Dollar", "1.1074",<Link to="/equipments"><Icon color="primary">touch_app</Icon></Link>],
-        ["XAU/USD", "Gold/US Dollar", "5.7182",<Link to="/equipments"><Icon color="primary">touch_app</Icon></Link>],
-        ["BTC/USD", "Bitcoin/US Dollar", "6.3329",<Link to="/equipments"><Icon color="primary">touch_app</Icon></Link>],
-        ["ETH/USD", "Etherium/US Dollar", "1.2952",<Link to="/equipments"><Icon color="primary">touch_app</Icon></Link>],
-        ["LTC/USD", "Litecoin/US Dollar", "46235.9183",<Link to="/equipments"><Icon color="primary">touch_app</Icon></Link>],
-        ["GOOGL/USD", "Google/US Dollar", "58.0200",<Link to="/equipments"><Icon color="primary">touch_app</Icon></Link>],
-        ["AAPL/USD", "Apple/US Dollar", "1296.4000",<Link to="/equipments"><Icon color="primary">touch_app</Icon></Link>],
-        ["GM/USD", "General Motors / US Dollar", "52.4900",<Link to="/equipments"><Icon color="primary">touch_app</Icon></Link>],
-        ["SPY/USD", "Standard & Poor's Depozitary / US Dollar", "1232",<Link to="/equipments"><Icon color="primary">touch_app</Icon></Link>],
-        ["IVV/USD", "Ishares S&P 500 / US Dollar", "123213",<Link to="/equipments"><Icon color="primary">touch_app</Icon></Link>],
-        ["VTI/USD", "Vanguard Total Stock Market Index Fund / US Dollar", "12312",<Link to="/equipments"><Icon color="primary">touch_app</Icon></Link>]];
+
+    var initial_list = [["EUR/USD", "Euro/US Dollar", "0.1574",<Link to="/equipment/EUR"><Icon color="primary">touch_app</Icon></Link>],
+        ["GBP/USD", "British Pound Sterling/US Dollar", "108.7480",<Link to="/equipment/GBP"><Icon color="primary">touch_app</Icon></Link>],
+        ["TRY/USD", "Turkish Lira/US Dollar", "7.4000",<Link to="/equipment/TRY"><Icon color="primary">touch_app</Icon></Link>],
+        ["XAG/USD", "Silver/US Dollar", "1.1074",<Link to="/equipment/XAG"><Icon color="primary">touch_app</Icon></Link>],
+        ["XAU/USD", "Gold/US Dollar", "5.7182",<Link to="/equipment/XAU"><Icon color="primary">touch_app</Icon></Link>],
+        ["BTC/USD", "Bitcoin/US Dollar", "6.3329",<Link to="/equipment/BTC"><Icon color="primary">touch_app</Icon></Link>],
+        ["ETH/USD", "Etherium/US Dollar", "1.2952",<Link to="/equipment/ETH"><Icon color="primary">touch_app</Icon></Link>],
+        ["LTC/USD", "Litecoin/US Dollar", "46235.9183",<Link to="/equipment/LTC"><Icon color="primary">touch_app</Icon></Link>],
+        ["GOOGL/USD", "Google/US Dollar", "58.0200",<Link to="/equipment/GOOGL"><Icon color="primary">touch_app</Icon></Link>],
+        ["AAPL/USD", "Apple/US Dollar", "1296.4000",<Link to="/equipment/AAPL"><Icon color="primary">touch_app</Icon></Link>],
+        ["GM/USD", "General Motors / US Dollar", "52.4900",<Link to="/equipment/GM"><Icon color="primary">touch_app</Icon></Link>],
+        ["SPY/USD", "Standard & Poor's Depozitary / US Dollar", "1232",<Link to="/equipment/SPY"><Icon color="primary">touch_app</Icon></Link>],
+        ["IVV/USD", "Ishares S&P 500 / US Dollar", "123213",<Link to="/equipments"><Icon color="/equipment/IYV">touch_app</Icon></Link>],
+        ["VTI/USD", "Vanguard Total Stock Market Index Fund / US Dollar", "12312",<Link to="/equipment/VTI"><Icon color="primary">touch_app</Icon></Link>]];
+
+
     useState(() => {
         getTEValue("EUR").then(res => {
                 initial_list[0][2] = res.te_value;
