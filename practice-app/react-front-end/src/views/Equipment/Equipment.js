@@ -70,7 +70,7 @@ export default function Equipment(props) {
         te_value: 0.0,
         changed_date: ""
     });
-    equipment_name = String(equipment_name.substr(equipment_name.lastIndexOf("/") + 1));
+    equipment_name = String(equipment_name.substr(equipment_name.lastIndexOf("/") + 1)).toUpperCase();
 
     useState(() => {
         getTEValue(equipment_name).then(res =>
