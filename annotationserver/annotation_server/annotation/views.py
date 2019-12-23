@@ -24,8 +24,14 @@ from annotation.serializers import RefinedBySerializer, SelectorSerializer, Targ
 class AnnotationCreate(APIView):
 
     def post(self, request, *args, **kwargs):
-        annotation_count=Annotation.objects.count()
-        annotation_id="http://khajiittraders.tk/annotation_id"+str(annotation_count)
+        last_annotation=Annotation.objects.last()
+        if not last_annotation:
+            annotation_id = "http://khajiittraders.tk/annotation_id1"
+        else:
+            last_id=last_annotation.id
+            arr=last_id.split("id")
+            value=int(arr[1])+1
+            annotation_id="http://khajiittraders.tk/annotation_id"+str(value)
         target=request.data.get('target', None)
         selector=target.get('selector',None)
         refinedBy = selector.get('refinedBy', None)
