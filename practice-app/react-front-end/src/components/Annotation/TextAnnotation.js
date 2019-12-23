@@ -112,7 +112,7 @@ export class TextAnnotation extends Component {
                     type: "FragmentSelector",
                     value: "xpointer(/doc/body/section[2]/para[1])"
                 },
-                type: "text",
+                type: "Text",
             },
             motivation: "Commenting"
         };

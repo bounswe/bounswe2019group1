@@ -36,6 +36,7 @@ import imageTest from "assets/img/examples/ppp2.jpg";
 
 import articleThumbnail from "assets/img/examples/investor.jpeg";
 import ButtonBase from "@material-ui/core/ButtonBase";
+import ImageAnnotation from "../../components/Annotation/ImageAnnotation";
 
 
 const styles = {
@@ -111,19 +112,17 @@ export default function Article(props) {
             annotations
         );
     };
-
-    const [imageAnnotations, setImageAnnotations] = annotations.filter(a => a.target.type === "image");
-    const textAnnotations = annotations.filter(a => a.target.type === "text").sort(function (a, b) {
-        return parseFloat(a.target.start) - parseFloat(b.target.start);
-    });
+    const [imageAnnotations, setImageAnnotations] = useState([]);
+    const [textAnnotations, setTextAnnotations] = useState([]);
 
     useState(() => {
-        getAnnotationsBySource("http://www.khajiittraders.tk/article/" + article_id).then(res =>
-            setAnnotations(res.sort(function (a, b) {
-                    return parseFloat(a.target.selector.refinedBy.start) - parseFloat(b.target.selector.refinedBy.start)
-                }
-                )
-            )
+        getAnnotationsBySource("http://www.khajiittraders.tk/article/" + article_id).then(res => {
+                setTextAnnotations(res.filter(a => a.target.type.toLowerCase() === "text").sort(function (a, b) {
+                        return parseFloat(a.target.selector.refinedBy.start) - parseFloat(b.target.selector.refinedBy.start)
+                    }
+                ));
+                setImageAnnotations(res.filter(a => a.target.type.toLowerCase() === "image"));
+            }
         );
     });
     useState(() => {
@@ -195,6 +194,22 @@ export default function Article(props) {
             });
     };
 
+    var article_image = <GridItem xs={12} sm={12} md={8}>
+        <GridContainer>
+            <GridItem xs={12} sm={12} md={12}>
+                <Paper className={classes.root} style={{padding: "32px"}}>
+                    <ImageAnnotation
+                        src={articleValues.image ? "http://35.163.120.227:8000" + articleValues.image : imageTest}
+                        article_id={article_id}
+                        showAnnotations={true}
+                        annotations={imageAnnotations}
+                        handleToUpdate={handleToUpdate}
+                    />
+                </Paper>
+            </GridItem>
+        </GridContainer>
+    </GridItem>;
+
     let MapOrForm;
 
     MapOrForm = (
@@ -229,12 +244,8 @@ export default function Article(props) {
                             <Typography variant="h5" component="h3">
                                 <center>{articleValues.title}</center>
                             </Typography>
+                            {article_image}
 
-                            <img
-                                className={classes.img}
-                                alt="complex"
-                                src={articleValues.image ? "http://35.163.120.227:8000" + articleValues.image : imageTest}
-                            />
                             <Typography component="p">
                                 <TextAnnotation
                                     text={articleValues.content}
