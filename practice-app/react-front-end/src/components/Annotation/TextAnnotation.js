@@ -96,11 +96,11 @@ export class TextAnnotation extends Component {
 
     createTextAnnotation() {
         const values = {
-            body: {
+            body: [{
                 type: "TextualBody",
                 purpose: "tagging",
                 value: this.state.annotationInput.text
-            },
+            }],
             target: {
                 source: "http://www.khajiittraders.tk/article/" + this.props.article_id + "/",
                 selector: {
@@ -113,7 +113,8 @@ export class TextAnnotation extends Component {
                     value: "xpointer(/doc/body/section[2]/para[1])"
                 },
                 type: "text",
-            }
+            },
+            motivation: "Commenting"
         };
         createAnnotation(values)
             .then(res => (res.status === 200 ? res : null))
@@ -125,7 +126,11 @@ export class TextAnnotation extends Component {
                 swal("Oops: ", error.message, "error");
             });
     }
-
+    // createTooltip = (annotation) => {
+    //     var tooltip = "";
+    //     annotation.body.forEach((item) => tooltip += item.value + " added by "  +annotation.creator.name + "," + annotation.created)
+    //     return tooltip;
+    // };
     render() {
         const {text, showAnnotations, annotations} = this.props;
         const {annotationInput} = this.state;
@@ -170,7 +175,7 @@ export class TextAnnotation extends Component {
                                 annotations: annotations.map(a => ({
                                     offset: a.target.selector.refinedBy.start,
                                     length: a.target.selector.refinedBy.end - a.target.selector.refinedBy.start,
-                                    tooltip: a.body[0].value
+                                    tooltip: a.body[0].value + " added by "  +a.creator.name + "," + a.created,
                                 }))
                             }}
                             tooltipRenderer={this.mySimpleRenderer}
