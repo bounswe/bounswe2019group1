@@ -444,7 +444,7 @@ export default function TableList() {
                             tableHead={[
                               "Title",
                               "Country",
-                              "Parity",
+                              "Date",
                               "Impact",
                               "Forecast",
                               "Previous"
