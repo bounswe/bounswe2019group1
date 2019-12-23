@@ -85,6 +85,14 @@ export default function Equipment(props) {
     event.preventDefault();
     setValues({ ...values, [prop]: "Satın alındı !" });
   };
+  const upPredict = prop => event => {
+    event.preventDefault();
+    setValues({...values, [prop]: "It will increase !"});
+};
+const downPredict = prop => event => {
+  event.preventDefault();
+  setValues({...values, [prop]: "It will decrease !"});
+};
 
   return (
     <div>
@@ -110,41 +118,8 @@ export default function Equipment(props) {
                 Your Prediction: {values.state}
               </h4>
               <p className={classes.cardCategory}>
+                  
                 <Button color="transparent" onClick={upPredict("state")}>
-    const upPredict = prop => event => {
-        event.preventDefault();
-        setValues({...values, [prop]: "It will increase !"});
-    };
-    const downPredict = prop => event => {
-        event.preventDefault();
-        setValues({...values, [prop]: "It will decrease !"});
-    };
-
-    return (
-        <div>
-            <Header
-                color="transparent"
-                brand="Khaji-it Traders Platform"
-                rightLinks={<PheaderLinks/>}
-                fixed
-                changeColorOnScroll={{
-                    height: 200,
-                    color: "white"
-                }}
-            />
-            <Parallax small filter image={require("assets/img/dollar-hd.jpg")}/>
-            <GridContainer>
-                <GridItem xs={12} sm={12} md={4}>
-                    <Card chart>
-                        <CardHeader color="success">
-                            <CanvasJSChart options={options}/>
-                        </CardHeader>
-                        <CardBody>
-                            <h4 className={classes.cardTitle}>
-                                Your Prediction: {values.state}
-                            </h4>
-                            <p className={classes.cardCategory}>
-                                <Button color="transparent" onClick={upPredict("state")}>
                   <span className={classes.successText}>
                     <ArrowUpward className={classes.upArrowCardCategory}/> Up
                   </span>
@@ -154,29 +129,14 @@ export default function Equipment(props) {
                     <ArrowDownward className={classes.upArrowCardCategory}/>{" "}
                       Down
                   </span>
-<<<<<<< HEAD
-                </Button>
-                {""}
-                <Button color="transparent" onClick={buy("state")}>
-                  <span className={classes.buyText}>
-                    <ShoppingCart className={classes.upArrowCardCategory} />{" "}
-                    Purchase
-                  </span>
-                </Button>
-              </p>
-            </CardBody>
-            <CardFooter chart>
-              <div className={classes.stats}>
-                <AccessTime /> updated 4 minutes ago
-              </div>
-            </CardFooter>
-          </Card>
-        </GridItem>
-
-        {/* <GridItem xs={12} sm={12} md={4}>
-=======
                                 </Button>
                                 {""}
+                                <Button color="transparent" onClick={buy("state")}>
+                                <span className={classes.buyText}>
+                                  <ShoppingCart className={classes.upArrowCardCategory} />{" "}
+                                  Purchase
+                                </span>
+                              </Button>
                             </p>
                         </CardBody>
                         <CardFooter chart>
@@ -190,7 +150,6 @@ export default function Equipment(props) {
                   {equipmentValue.te_value}
                 </GridItem>
                 {/* <GridItem xs={12} sm={12} md={4}>
->>>>>>> 5cc0ce0a076e426d1c094aa31a6b1da82e49d089
           <Card chart>
             <CardHeader color="warning">
             <CanvasJSChart options = {options} 
