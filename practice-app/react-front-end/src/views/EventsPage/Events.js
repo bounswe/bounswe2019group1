@@ -433,9 +433,9 @@ export default function TableList() {
                     <GridItem item xs={120} sm container>
                       <Card>
                         <CardHeader color="primary">
-                          <h4 className={classes.cardTitleWhite}>Market</h4>
+                          <h4 className={classes.cardTitleWhite}>Events</h4>
                           <p className={classes.cardCategoryWhite}>
-                            Equipments that is listed
+                            Recent events listed
                           </p>
                         </CardHeader>
                         <CardBody>
