@@ -19,6 +19,7 @@ class Target(models.Model):
     type = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')
     styleClass = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')
     source = models.URLField(max_length=300, blank=True, null=True, unique=False, default='')
+    image_id = models.URLField(max_length=300, blank=True, null=True, unique=False, default='')
     selector = models.ForeignKey(Selector, on_delete=models.CASCADE, default='',related_name='Selector')
 
 
