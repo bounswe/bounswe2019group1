@@ -24,6 +24,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Quote from "components/Typography/Quote.js";
 import swal from "sweetalert";
+import Image from 'react-image-resizer';
 
 import {getArticleById} from "service/article.service.js";
 import {getAnnotationsBySource} from "service/annotation.service.js";
@@ -205,6 +206,11 @@ export default function Article(props) {
                         annotations={imageAnnotations}
                         handleToUpdate={handleToUpdate}
                     />
+                     {/* <Image
+                            src={articleValues.image ? "http://35.163.120.227:8000" + articleValues.image : imageTest}
+                            height={620}
+                            width={620}
+                            /> */}
                 </Paper>
             </GridItem>
         </GridContainer>
@@ -245,7 +251,7 @@ export default function Article(props) {
                                 <center>{articleValues.title}</center>
                             </Typography>
                             {article_image}
-
+                           
                             <Typography component="p">
                                 <TextAnnotation
                                     text={articleValues.content}
