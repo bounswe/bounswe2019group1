@@ -75,21 +75,24 @@ export default function TableList() {
   });
 
   const [list, setListState] = React.useState([
-    ["TRY/EUR", "Turkish Lira/Euro", "0.1574"],
-    ["USD/JPY", "United States Dollar/Japanese Yen", "108.7480"],
-    ["GBP/TRY", "British Pound Sterling/Turkish Lira", "7.4000"],
-    ["EUR/USD", "Euro/United States Dollar", "1.1074"],
-    ["USD/TRY", "United States Dollar/Turkish Lira", "5.7182"],
-    ["EUR/TRY", "Euro/Japanese Yen", "6.3329"],
-    ["GBP/USD", "British Pound Sterling / United States Dollar", "1.2952"],
-    ["BTC/TRY", "Bitcoin / Turkish Lira", "46235.9183"],
-    ["XMR/USD", "Monero / United States Dollar", "58.0200"],
-    ["GOOGL/USD", "Alphabet Inc. / United States Dollar", "1296.4000"],
+    ["EUR/USD", "Euro / US Dollar", "0.1574"],
+    ["GBP/USD", "British Pound Sterling / US Dollar", "108.7480"],
+    ["TRY/USD", "Turkish Lira / US Dollar", "7.4000"],
+    ["XAG/USD", "Silver / US Dollar", "1.1074"],
+    ["XAU/USD", "Gold / US Dollar", "5.7182"],
+    ["BTC/USD", "Bitcoin / US Dollar", "6.3329"],
+    ["ETH/USD", "Etherium / US Dollar", "1.2952"],
+    ["LTC/USD", "Litecoin / US Dollar", "46235.9183"],
+    ["GOOGL/USD", "Google / US Dollar", "58.0200"],
+    ["AAPL/USD", "Apple / US Dollar", "1296.4000"],
     [
-      "AGTHX/USD",
-      "American Funds The Growth Fund of America Class A / United States Dollar",
+      "GM/USD",
+      "General Motors / US Dollar",
       "52.4900"
-    ]
+    ],
+    ["SPY/USD", "Standard & Poor's Depozitary / US Dollar" , "1232"],
+    ["IVV/USD" , "Ishares S&P 500 / US Dollar" , "123213"],
+    ["VTI/USD0" , "Vanguard Total Stock Market Index Fund / US Dollar" , "12312"]
   ]);
 
   const handleChange = name => event => {
@@ -99,7 +102,7 @@ export default function TableList() {
   const onApplyChange = event => {
     let altay = [];
     if (state.TRY_EUR) {
-      altay.push(["TRY/EUR", "Turkish Lira/Euro", "0.1574"]);
+      altay.push(["EUR/USD", "Euro / US Dollar", "0.1574"]);
     }
 
     if (state.USD_JPY) {
@@ -226,142 +229,8 @@ export default function TableList() {
                     </GridItem>
                     <GridItem xs={12} sm={12} md={12}>
                       <Card plain>
-                        <CardHeader plain color="primary">
-                          <h4 className={classes.cardTitleWhite}></h4>
-                          <p className={classes.cardCategoryWhite}>
-                            List/Unlist Equipments
-                          </p>
-                        </CardHeader>
+
                         <CardBody>
-                          <FormControl
-                            component="fieldset"
-                            className={classes.formControl}
-                          >
-                            <FormGroup>
-                              <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    checked={TRY_EUR}
-                                    onChange={handleChange("TRY_EUR")}
-                                    value="TRY_EUR"
-                                  />
-                                }
-                                label="TRY/EUR"
-                              />
-                              <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    checked={USD_JPY}
-                                    onChange={handleChange("USD_JPY")}
-                                    value="USD_JPY"
-                                  />
-                                }
-                                label="USD/JPY"
-                              />
-                              <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    checked={GBP_TRY}
-                                    onChange={handleChange("GBP_TRY")}
-                                    value="GBP_TRY"
-                                  />
-                                }
-                                label="GBP/TRY"
-                              />
-                              <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    checked={EUR_USD}
-                                    onChange={handleChange("EUR_USD")}
-                                    value="EUR_USD"
-                                  />
-                                }
-                                label="EUR/USD"
-                              />
-                              <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    checked={USD_TRY}
-                                    onChange={handleChange("USD_TRY")}
-                                    value="USD_TRY"
-                                  />
-                                }
-                                label="USD/TRY"
-                              />
-                              <FormControlLabel
-                                control={
-                                  <Checkbox
-                                    checked={EUR_TRY}
-                                    onChange={handleChange("EUR_TRY")}
-                                    value="EUR_TRY"
-                                  />
-                                }
-                                label="EUR/TRY"
-                              />
-                            </FormGroup>
-                          </FormControl>
-                          <FormControl
-                            component="fieldset"
-                            className={classes.formControl}
-                          >
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={GBP_USD}
-                                  onChange={handleChange("GBP_USD")}
-                                  value="GBP_USD"
-                                />
-                              }
-                              label="GBP/USD"
-                            />
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={BTC_TRY}
-                                  onChange={handleChange("BTC_TRY")}
-                                  value="BTC_TRY"
-                                />
-                              }
-                              label="BTC/TRY"
-                            />
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={XMR_USD}
-                                  onChange={handleChange("XMR_USD")}
-                                  value="XMR_USD"
-                                />
-                              }
-                              label="XMR/USD"
-                            />
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={GOOGL_USD}
-                                  onChange={handleChange("GOOGL_USD")}
-                                  value="GOOGL_USD"
-                                />
-                              }
-                              label="GOOGL/USD"
-                            />
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={AGTHX_USD}
-                                  onChange={handleChange("AGTHX_USD")}
-                                  value="AGTHX_USD"
-                                />
-                              }
-                              label="AGTHX/USD"
-                            />
-                          </FormControl>
-                          <Button
-                            variant="contained"
-                            className={classes.button}
-                            onClick={onApplyChange}
-                          >
-                            Apply changes
-                          </Button>
                         </CardBody>
                       </Card>
                     </GridItem>
