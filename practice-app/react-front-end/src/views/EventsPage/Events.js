@@ -75,116 +75,13 @@ export default function TableList() {
   });
 
   const [list, setListState] = React.useState([
-    ["EUR/USD", "Euro / US Dollar", "0.1574"],
-    ["GBP/USD", "British Pound Sterling / US Dollar", "108.7480"],
-    ["TRY/USD", "Turkish Lira / US Dollar", "7.4000"],
-    ["XAG/USD", "Silver / US Dollar", "1.1074"],
-    ["XAU/USD", "Gold / US Dollar", "5.7182"],
-    ["BTC/USD", "Bitcoin / US Dollar", "6.3329"],
-    ["ETH/USD", "Etherium / US Dollar", "1.2952"],
-    ["LTC/USD", "Litecoin / US Dollar", "46235.9183"],
-    ["GOOGL/USD", "Google / US Dollar", "58.0200"],
-    ["AAPL/USD", "Apple / US Dollar", "1296.4000"],
-    [
-      "GM/USD",
-      "General Motors / US Dollar",
-      "52.4900"
-    ],
-    ["SPY/USD", "Standard & Poor's Depozitary / US Dollar" , "1232"],
-    ["IVV/USD" , "Ishares S&P 500 / US Dollar" , "123213"],
-    ["VTI/USD0" , "Vanguard Total Stock Market Index Fund / US Dollar" , "12312"]
+    ["Private Sector Credit m/m", "AUD", "2019-12-22T19:30:00-05:00" , "Low", "0.2%" , "0.1%"],
   ]);
 
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });
   };
 
-  const onApplyChange = event => {
-    let altay = [];
-    if (state.TRY_EUR) {
-      altay.push(["EUR/USD", "Euro / US Dollar", "0.1574"]);
-    }
-
-    if (state.USD_JPY) {
-      altay.push(["USD/JPY", "United States Dollar/Japanese Yen", "108.7480"]);
-    }
-
-    if (state.GBP_TRY) {
-      altay.push(["GBP/TRY", "British Pound Sterling/Turkish Lira", "7.4000"]);
-    }
-
-    if (state.EUR_USD) {
-      altay.push(["EUR/USD", "Euro/United States Dollar", "1.1074"]);
-    }
-
-    if (state.USD_TRY) {
-      altay.push(["USD/TRY", "United States Dollar/Turkish Lira", "5.7182"]);
-    }
-
-    if (state.EUR_TRY) {
-      altay.push(["EUR/TRY", "Euro/Japanese Yen", "6.3329"]);
-    }
-    if (state.GBP_USD) {
-      altay.push([
-        "GBP/USD",
-        "British Pound Sterling / United States Dollar",
-        "1.2952"
-      ]);
-    }
-
-    if (state.BTC_TRY) {
-      altay.push(["BTC/TRY", "Bitcoin / Turkish Lira", "46235.9183"]);
-    }
-
-    if (state.XMR_USD) {
-      altay.push(["XMR/USD", "Monero / United States Dollar", "58.0200"]);
-    }
-
-    if (state.GOOGL_USD) {
-      altay.push([
-        "GOOGL/USD",
-        "Alphabet Inc. / United States Dollar",
-        "1296.4000"
-      ]);
-    }
-
-    if (state.AGTHX_USD) {
-      altay.push([
-        "AGTHX/USD",
-        "American Funds The Growth Fund of America Class A / United States Dollar",
-        "52.4900"
-      ]);
-    }
-    setListState(altay);
-  };
-
-  const {
-    TRY_EUR,
-    USD_JPY,
-    GBP_TRY,
-    EUR_USD,
-    USD_TRY,
-    EUR_TRY,
-    GBP_USD,
-    BTC_TRY,
-    XMR_USD,
-    GOOGL_USD,
-    AGTHX_USD
-  } = state;
-  const error =
-    [
-      TRY_EUR,
-      USD_JPY,
-      GBP_TRY,
-      EUR_USD,
-      USD_TRY,
-      EUR_TRY,
-      GBP_USD,
-      BTC_TRY,
-      XMR_USD,
-      GOOGL_USD,
-      AGTHX_USD
-    ].filter(v => v).length !== 2;
 
   return (
     <div>
@@ -218,9 +115,12 @@ export default function TableList() {
                           <Table
                             tableHeaderColor="primary"
                             tableHead={[
-                              "Equipment Symbol",
-                              "Equipment Long Name",
-                              "Parity"
+                              "title",
+                              "country",
+                              "Parity",
+                              "impact",
+                              "forecast",
+                              "previous"
                             ]}
                             tableData={list}
                           />
