@@ -130,7 +130,7 @@ export async function getTEHistory(trading_equipment) {
     }
     return {
         values: x,
-        times: y
+        dates: y
     };
 }
 

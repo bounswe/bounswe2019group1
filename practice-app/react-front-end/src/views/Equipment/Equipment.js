@@ -32,7 +32,7 @@ import OutlinedInput from "@material-ui/core/OutlinedInput";
 import FormControl from "@material-ui/core/FormControl";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
-import {getTEValue} from "../../service/equipment.service";
+import {getTEHistory, getTEValue} from "../../service/equipment.service";
 import {buyEquipment, sellEquipment} from "../../service/wallet.service";
 import swal from "sweetalert";
 
@@ -47,6 +47,14 @@ export default function Equipment(props) {
         te_value: 0.0,
         changed_date: ""
     });
+    const [equipmentHistory, setEquipmentHistory] = useState(
+        {
+            x: [],
+            y: []
+        }
+    )
+
+
     equipment_name = String(equipment_name.substr(equipment_name.lastIndexOf("/") + 1)).toUpperCase();
 
     const [options, setOptions] = useState({
@@ -78,6 +86,14 @@ export default function Equipment(props) {
         ]
     });
 
+    useState(() => {
+        getTEHistory(equipment_name).then(res =>
+            setEquipmentHistory({
+                x: res.dates,
+                y: res.values
+            })
+        );
+    });
 
 
     useState(() => {
