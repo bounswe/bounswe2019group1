@@ -136,4 +136,8 @@ interface Api {
     @GET("article/listArticleByUserId/{id}/")
     fun getArticlesByUserId(@Path(value = "id", encoded = true) userId: Int):Call<PublicArticleListResponse>
 
+    @Headers("Content-Type: application/json")
+    @GET("notification/listnotification/" )
+    fun getNotifications():Call<ListNotificationsResponse>
+
 }
