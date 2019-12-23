@@ -195,7 +195,6 @@ class TraceIndicesGainers(ListAPIView):
         :param kwargs:
         :return:
         '''
-        calculate_metal_currency()
         url = 'https://financialmodelingprep.com/api/v3/stock/gainers'
         headers = {}
         response = requests.request('GET', url, headers=headers, allow_redirects=False)
