@@ -14,19 +14,6 @@ export function getMyWallet() {
   ).then(res => (res.status === 200 ? res.data : null));
 }
 
-
-//http://35.163.120.227:8000/wallet/retrieve/
-export function getMyWallet(){
-  const requestOptions = {
-    headers: {
-      Authorization: authHeader()
-    }
-  };
-  return axios(
-    `${environment.api_url}wallet/retrieve/`,
-    requestOptions
-  ).then(res => (res.status === 200 ? res.data : null));
-}
 export function addFund(value){
 
   const requestOptions = {
