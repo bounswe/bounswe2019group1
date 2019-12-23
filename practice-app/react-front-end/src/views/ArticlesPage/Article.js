@@ -115,11 +115,13 @@ export default function Article(props) {
 
   useState(() => {
     getAnnotationsBySource("http://www.khajiittraders.tk/article/" +article_id).then(res =>
-        setAnnotations(res)
+        setAnnotations(res.sort(function (a, b) {
+          return parseFloat(a.target.selector.refinedBy.start) - parseFloat(b.target.selector.refinedBy.start)}
+          )
+        )
     );
   });
-
-  useState(() => {
+    useState(() => {
     getArticleById(article_id).then(res =>
       setArticleValues({
         title: res.title,
