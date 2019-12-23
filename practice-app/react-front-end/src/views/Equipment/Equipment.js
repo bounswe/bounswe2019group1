@@ -33,6 +33,8 @@ import FormControl from "@material-ui/core/FormControl";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
 import {getTEValue} from "../../service/equipment.service";
+import {buyEquipment, sellEquipment} from "../../service/wallet.service";
+import swal from "sweetalert";
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 const useStyles = makeStyles(styles);
@@ -45,22 +47,24 @@ export default function Equipment(props) {
         te_value: 0.0,
         changed_date: ""
     });
+    equipment_name = String(equipment_name.substr(equipment_name.lastIndexOf("/") + 1)).toUpperCase();
+
     const [options, setOptions] = useState({
         theme: "light2",
         animationEnabled: true,
         exportEnabled: true,
         title: {
-            text: "USD / TRY"
+            text: equipment_name +"/USD"
         },
         axisY: {
-            title: "USD / TRY",
+            title: equipment_name +"/USD",
             includeZero: false
         },
         data: [
             {
                 type: "area",
                 xValueFormatString: "YYYY",
-                yValueFormatString: "#,##0.## TRY",
+                yValueFormatString: "#,##0.##" + equipment_name,
                 dataPoints: [
                     {x: new Date(2019, 11), y: 5.91},
                     {x: new Date(2019, 10), y: 5.82},
@@ -76,16 +80,12 @@ export default function Equipment(props) {
 
 
 
-
-
-    equipment_name = String(equipment_name.substr(equipment_name.lastIndexOf("/") + 1)).toUpperCase();
-
     useState(() => {
         getTEValue(equipment_name).then(res =>
             setEquipmentValues({
-                    te_value: res.te_value,
-                    changed_date: res.changed_date
-                })
+                te_value: res.te_value,
+                changed_date: res.changed_date
+            })
         );
     });
     const [values, setValues] = React.useState({
@@ -95,49 +95,72 @@ export default function Equipment(props) {
         temp_amount: ""
     });
     const handleChange = prop => event => {
-      setValues({ ...values, [prop]: event.target.value });
+        setValues({...values, [prop]: event.target.value});
     };
-   
 
-  const buy = prop => event => {
-    event.preventDefault();
-    //setValues({ ...values, [prop]: "Satın alındı !" });
-  };
-  const upPredict = prop => event => {
-    event.preventDefault();
-    setValues({...values, [prop]: "It will increase !"});
-};
-const downPredict = prop => event => {
-  event.preventDefault();
-  setValues({...values, [prop]: "It will decrease !"});
-};
+    const handlePurchase = prop => event => {
+        event.preventDefault();
+        buyEquipment({
+            name: equipment_name,
+            amount: values.buy_amount
+        }).then(res => (res.status === 200 ? res : null))
+            .then(() => {
+                swal("Good job!", "The trading equipment is successfully bought by using USD");
+            })
+            .catch(error => {
+                swal("Oops: ", error.message, "error");
+            });
+    };
 
-  return (
-    <div>
-      <Header
-        color="transparent"
-        brand="Khaji-it Traders Platform"
-        rightLinks={<PheaderLinks />}
-        fixed
-        changeColorOnScroll={{
-          height: 200,
-          color: "white"
-        }}
-      />
-      <Parallax small filter image={require("assets/img/dollar-hd.jpg")} />
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card chart>
-            <CardHeader color="success">
-              <CanvasJSChart options={options} />
-            </CardHeader>
-            <CardBody>
-              <h4 className={classes.cardTitle}>
-                Your Prediction: {values.state}
-              </h4>
-              <p className={classes.cardCategory}>
-                  
-                <Button color="transparent" onClick={upPredict("state")}>
+    const handleSell = prop => event  => {
+        event.preventDefault();
+        sellEquipment({
+            name: equipment_name,
+            amount: values.sell_amount
+        }).then(res => (res.status === 200 ? res : null))
+            .then(() => {
+                swal("Good job!", "The trading equipment is successfully sold.");
+            })
+            .catch(error => {
+                swal("Oops: ", error.message, "error");
+            });
+    };
+
+    const upPredict = prop => event => {
+        event.preventDefault();
+        setValues({...values, [prop]: "It will increase !"});
+    };
+    const downPredict = prop => event => {
+        event.preventDefault();
+        setValues({...values, [prop]: "It will decrease !"});
+    };
+
+    return (
+        <div>
+            <Header
+                color="transparent"
+                brand="Khaji-it Traders Platform"
+                rightLinks={<PheaderLinks/>}
+                fixed
+                changeColorOnScroll={{
+                    height: 200,
+                    color: "white"
+                }}
+            />
+            <Parallax small filter image={require("assets/img/dollar-hd.jpg")}/>
+            <GridContainer>
+                <GridItem xs={12} sm={12} md={4}>
+                    <Card chart>
+                        <CardHeader color="success">
+                            <CanvasJSChart options={options}/>
+                        </CardHeader>
+                        <CardBody>
+                            <h4 className={classes.cardTitle}>
+                                Your Prediction: {values.state}
+                            </h4>
+                            <p className={classes.cardCategory}>
+
+                                <Button color="transparent" onClick={upPredict("state")}>
                   <span className={classes.successText}>
                     <ArrowUpward className={classes.upArrowCardCategory}/> Up
                   </span>
@@ -149,60 +172,60 @@ const downPredict = prop => event => {
                   </span>
                                 </Button>
                                 {""}
-                                
-                                <FormControl
-                                  fullWidth
-                                  className={classes.margin}
-                                  variant="outlined"
-                                >
-                                  <InputLabel htmlFor="outlined-adornment-amount">
-                                    Amount
-                                  </InputLabel>
-                                  <OutlinedInput
-                                    id="outlined-adornment-amount"
-                                    value={values.buy_amount}
-                                    onChange={handleChange("buy_amount")}
-                                    startAdornment={
-                                      <InputAdornment position="start">$</InputAdornment>
-                                    }
-                                    labelWidth={60}
-                                  />
-                                </FormControl>
-                                   <p align="center">
-                                   <Button margin-left="30px" color="transparent" onClick={buy("state")}>
-                                      <span className={classes.buyText}>
-                                        <ShoppingCart className={classes.upArrowCardCategory} />{" "}
-                                        Purchase
-                                      </span>
-                                    </Button>
-                                    </p>
 
-                                    <FormControl
-                                  fullWidth
-                                  className={classes.margin}
-                                  variant="outlined"
+                                <FormControl
+                                    fullWidth
+                                    className={classes.margin}
+                                    variant="outlined"
                                 >
-                                  <InputLabel htmlFor="outlined-adornment-amount">
-                                    Amount
-                                  </InputLabel>
-                                  <OutlinedInput
-                                    id="outlined-adornment-amount"
-                                    value={values.sell_amount}
-                                    onChange={handleChange("sell_amount")}
-                                    startAdornment={
-                                      <InputAdornment position="start">$</InputAdornment>
-                                    }
-                                    labelWidth={60}
-                                  />
+                                    <InputLabel htmlFor="outlined-adornment-amount">
+                                        Amount
+                                    </InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-amount"
+                                        value={values.buy_amount}
+                                        onChange={handleChange("buy_amount")}
+                                        startAdornment={
+                                            <InputAdornment position="start">$</InputAdornment>
+                                        }
+                                        labelWidth={60}
+                                    />
                                 </FormControl>
                                 <p align="center">
-                                   <Button margin-left="30px" color="transparent" onClick={buy("state")}>
+                                    <Button margin-left="30px" color="transparent" onClick={handlePurchase()}>
                                       <span className={classes.buyText}>
-                                        <MonetizationOn className={classes.upArrowCardCategory} />{" "}
-                                        Sell
+                                        <ShoppingCart className={classes.upArrowCardCategory}/>{" "}
+                                          Purchase
                                       </span>
                                     </Button>
-                                    </p>
+                                </p>
+
+                                <FormControl
+                                    fullWidth
+                                    className={classes.margin}
+                                    variant="outlined"
+                                >
+                                    <InputLabel htmlFor="outlined-adornment-amount">
+                                        Amount
+                                    </InputLabel>
+                                    <OutlinedInput
+                                        id="outlined-adornment-amount"
+                                        value={values.sell_amount}
+                                        onChange={handleChange("sell_amount")}
+                                        startAdornment={
+                                            <InputAdornment position="start">$</InputAdornment>
+                                        }
+                                        labelWidth={60}
+                                    />
+                                </FormControl>
+                                <p align="center">
+                                    <Button margin-left="30px" color="transparent" onClick={handleSell()}>
+                                      <span className={classes.buyText}>
+                                        <MonetizationOn className={classes.upArrowCardCategory}/>{" "}
+                                          Sell
+                                      </span>
+                                    </Button>
+                                </p>
                             </p>
                         </CardBody>
                         <CardFooter chart>
@@ -213,7 +236,7 @@ const downPredict = prop => event => {
                     </Card>
                 </GridItem>
                 <GridItem>
-                  {equipmentValue.te_value}
+                    {equipmentValue.te_value}
                 </GridItem>
                 {/* <GridItem xs={12} sm={12} md={4}>
           <Card chart>
