@@ -188,6 +188,7 @@ interface Api {
     @GET("article/listArticleByUserId/{id}/")
     fun getArticlesByUserId(@Path(value = "id", encoded = true) userId: Int):Call<PublicArticleListResponse>
 
+<<<<<<< HEAD
 
     @Headers("Content-Type: application/json")
     @POST("prediction/predict/")
@@ -196,5 +197,22 @@ interface Api {
     @Headers("Content-Type: application/json")
     @GET("event/list/" )
     fun getAllEvents():Call<ListEventModel>
+=======
+    @Headers("Content-Type: application/json")
+    @GET("notification/listnotification/" )
+    fun getNotifications():Call<ListNotificationsResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("follow/listFollowerPending/" )
+    fun getPendingFollowers():Call<PendingFollowerResponse>
+
+    @Headers("Content-Type: application/json")
+    @PUT("follow/approvefollow/{id}/" )
+    fun approveFollower(@Path(value = "id", encoded = true) followId: Int):Call<FollowModel3>
+
+    @Headers("Content-Type: application/json")
+    @PUT("follow/rejectfollow/{id}/" )
+    fun rejectFollower(@Path(value = "id", encoded = true) followId: Int):Call<FollowModel3>
+>>>>>>> eray_m3
 
 }
