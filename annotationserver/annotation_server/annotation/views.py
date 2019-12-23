@@ -24,6 +24,8 @@ from annotation.serializers import RefinedBySerializer, SelectorSerializer, Targ
 class AnnotationCreate(APIView):
 
     def post(self, request, *args, **kwargs):
+        annotation_count=Annotation.objects.count()
+        annotation_id="http://khajiittraders.tk/annotation_id"+str(annotation_count)
         target=request.data.get('target', None)
         selector=target.get('selector',None)
         refinedBy = selector.get('refinedBy', None)
@@ -66,6 +68,7 @@ class AnnotationCreate(APIView):
         data['creator'] = creator_id
         del data['body']
         #data['body'] = body_list
+        data['id']=annotation_id
         serializer = AnnotationSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -109,6 +112,7 @@ class AnnotationListAPIView(APIView):
         source = request.GET.get('source', None)
         if source is None:
             raise ValidationError({"detail": "Give id of annotation"})
+
         query_target=Target.objects.filter(source=source)
         annotation_query=Annotation.objects.none()
         query = Annotation.objects.filter(target=43)
@@ -123,6 +127,11 @@ class AnnotationListAPIView(APIView):
 class CreatorAPIView(CreateAPIView):
     serializer_class = CreatorSerializer
     queryset = Creator.objects.filter()
+
+
+class AnnotationAllListAPIView(ListAPIView):
+    serializer_class = AnnotationViewSerializer
+    queryset = Annotation.objects.all()
 
 
 class CreatorListAPIView(ListAPIView):
