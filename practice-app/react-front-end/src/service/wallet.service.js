@@ -22,10 +22,10 @@ export function addFund(value){
       "Content-Type": "application/json"
     },
     body:{
-      "USD": value
+      "USD": parseFloat(value)
     }
   };
-  return axios.post(
+  return axios.put(
       `${environment.api_url}wallet/sendUSD/`,
       requestOptions.body,
       {
@@ -43,10 +43,10 @@ export function buyEquipment(values){
     },
     body:{
       "name_of_eq": values.name,
-      "amount": values.amount
+      "amount": parseFloat(values.amount)
     }
   };
-  return axios.post(
+  return axios.put(
       `${environment.api_url}wallet/takeequipment/`,
       requestOptions.body,
       {
@@ -63,10 +63,10 @@ export function sellEquipment(values){
     },
     body:{
       "name_of_eq": values.name,
-      "amount": values.amount
+      "amount": parseFloat(values.amount)
     }
   };
-  return axios.post(
+  return axios.put(
       `${environment.api_url}wallet/sellequipment/`,
       requestOptions.body,
       {
