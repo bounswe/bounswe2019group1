@@ -30,8 +30,8 @@ const responseGoogleSuccess = response => {
 };
 
 const responseGoogleFailure = response => {
-  console.log(response.getStatusCode());
-  swal("Oops", "Incorrect username or password!", "error");
+  console.log(response.status);
+  // swal("Oops", "Incorrect username or password!", "error");
 };
 
 const useStyles = makeStyles(styles);
