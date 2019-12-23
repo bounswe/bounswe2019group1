@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 // core components
 import Header from "components/Header/Header.js";
+
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
 import Parallax from "components/Parallax/Parallax.js";
 import classNames from "classnames";
@@ -76,6 +77,22 @@ export default function TableList() {
     });
 
     const [list, setList] = React.useState([]);
+    var links = [
+        "/equipment/EUR",
+        "/equipment/GBP",
+        "/equipment/TRY",
+        "/equipment/XAG",
+        "/equipment/XAU",
+        "/equipment/BTC",
+        "/equipment/ETH",
+        "/equipment/LTC",
+        "/equipment/GOOGL",
+        "/equipment/AAPL",
+        "/equipment/GM",
+        "/equipment/SPY",
+        "/equipment/IYV",
+        "/equipment/VTI"
+    ]
     var initial_list = [["EUR/USD", "Euro/US Dollar", "0.1574"],
         ["GBP/USD", "British Pound Sterling/US Dollar", "108.7480"],
         ["TRY/USD", "Turkish Lira/US Dollar", "7.4000"],
