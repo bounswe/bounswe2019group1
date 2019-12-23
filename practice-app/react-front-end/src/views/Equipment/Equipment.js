@@ -16,6 +16,8 @@ import Parallax from "components/Parallax/Parallax.js";
 import Header from "components/Header/Header.js";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
 import ShoppingCart from "@material-ui/icons/ShoppingCart";
+import MonetizationOn from "@material-ui/icons/MonetizationOn";
+
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -82,11 +84,14 @@ export default function Equipment(props) {
     });
     const [values, setValues] = React.useState({
         state: "Nothing",
+        sell_amount: "",
+        buy_amount: "",
         temp_amount: ""
     });
     const handleChange = prop => event => {
       setValues({ ...values, [prop]: event.target.value });
     };
+   
 
   const buy = prop => event => {
     event.preventDefault();
@@ -139,7 +144,7 @@ const downPredict = prop => event => {
                                 </Button>
                                 {""}
                                 
-                              <FormControl
+                                <FormControl
                                   fullWidth
                                   className={classes.margin}
                                   variant="outlined"
@@ -149,8 +154,8 @@ const downPredict = prop => event => {
                                   </InputLabel>
                                   <OutlinedInput
                                     id="outlined-adornment-amount"
-                                    value={values.temp_amount}
-                                    onChange={handleChange("temp_amount")}
+                                    value={values.buy_amount}
+                                    onChange={handleChange("buy_amount")}
                                     startAdornment={
                                       <InputAdornment position="start">$</InputAdornment>
                                     }
@@ -162,6 +167,33 @@ const downPredict = prop => event => {
                                       <span className={classes.buyText}>
                                         <ShoppingCart className={classes.upArrowCardCategory} />{" "}
                                         Purchase
+                                      </span>
+                                    </Button>
+                                    </p>
+
+                                    <FormControl
+                                  fullWidth
+                                  className={classes.margin}
+                                  variant="outlined"
+                                >
+                                  <InputLabel htmlFor="outlined-adornment-amount">
+                                    Amount
+                                  </InputLabel>
+                                  <OutlinedInput
+                                    id="outlined-adornment-amount"
+                                    value={values.sell_amount}
+                                    onChange={handleChange("sell_amount")}
+                                    startAdornment={
+                                      <InputAdornment position="start">$</InputAdornment>
+                                    }
+                                    labelWidth={60}
+                                  />
+                                </FormControl>
+                                <p align="center">
+                                   <Button margin-left="30px" color="transparent" onClick={buy("state")}>
+                                      <span className={classes.buyText}>
+                                        <MonetizationOn className={classes.upArrowCardCategory} />{" "}
+                                        Sell
                                       </span>
                                     </Button>
                                     </p>
