@@ -243,6 +243,78 @@ export default function TableList() {
       "",
       ""
      ],
+     [
+      "Bank Holiday",
+      "NZD",
+      "2019-12-25T15:00:00-05:00",
+      "Holiday",
+      "",
+      ""
+      ],
+      [
+      "Bank Holiday",
+      "AUD",
+      "2019-12-25T16:00:00-05:00",
+      "Holiday",
+      "",
+      ""
+      ],
+      [
+      "Housing Starts y/y",
+      "JPY",
+      "2019-12-26T00:00:00-05:00",
+      "Low",
+      "-8.1%",
+      "-7.4%"
+      ],
+      [
+      "BOJ Gov Kuroda Speaks",
+      "JPY",
+      "2019-12-26T00:30:00-05:00",
+      "Low",
+      "",
+      ""
+  ],
+   [
+      "Bank Holiday",
+      "CHF",
+      "2019-12-26T02:00:00-05:00",
+      "Holiday",
+      "",
+      ""
+     ],
+     [
+      "German Bank Holiday",
+      "EUR",
+      "2019-12-26T02:02:00-05:00",
+      "Holiday",
+      "",
+      ""
+     ],
+     [
+      "Italian Bank Holiday",
+      "EUR",
+      "2019-12-26T02:03:00-05:00",
+      "Holiday",
+      "",
+      ""
+    ],
+    [
+      "Bank Holiday",
+      "GBP",
+      "2019-12-26T03:00:00-05:00",
+      "Holiday",
+      "",
+      ""
+    ],
+    [
+      "Bank Holiday",
+      "CAD",
+      "2019-12-26T07:59:00-05:00",
+      "Holiday",
+      "",
+      ""
+    ],
   ]);
 
   const handleChange = name => event => {
