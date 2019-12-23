@@ -13,6 +13,9 @@ const dashboardStyle = {
   failText: {
     color: dangerColor[0]
   },
+  buyText: {
+    color: grayColor[0]
+  },
   upArrowCardCategory: {
     width: "16px",
     height: "16px"

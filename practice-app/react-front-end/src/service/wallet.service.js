@@ -14,19 +14,67 @@ export function getMyWallet() {
   ).then(res => (res.status === 200 ? res.data : null));
 }
 
+export function addFund(value){
 
-//http://35.163.120.227:8000/wallet/retrieve/
-export function getWalletById(user_id) {
   const requestOptions = {
     headers: {
-      Authorization: authHeader()
+      Authorization: authHeader(),
+      "Content-Type": "application/json"
+    },
+    body:{
+      "USD": parseFloat(value)
     }
   };
-  return axios(
-    `${environment.api_url}wallet/retrieve/${user_id}/`,
-    requestOptions
-  ).then(res => (res.status === 200 ? res.data : null));
+  return axios.put(
+      `${environment.api_url}wallet/sendUSD/`,
+      requestOptions.body,
+      {
+        headers: requestOptions.headers
+      }
+  );
 }
+
+export function buyEquipment(values){
+
+  const requestOptions = {
+    headers: {
+      Authorization: authHeader(),
+      "Content-Type": "application/json"
+    },
+    body:{
+      "name_of_eq": values.name,
+      "amount": parseFloat(values.amount)
+    }
+  };
+  return axios.put(
+      `${environment.api_url}wallet/takeequipment/`,
+      requestOptions.body,
+      {
+        headers: requestOptions.headers
+      }
+  );
+}
+
+export function sellEquipment(values){
+  const requestOptions = {
+    headers: {
+      Authorization: authHeader(),
+      "Content-Type": "application/json"
+    },
+    body:{
+      "name_of_eq": values.name,
+      "amount": parseFloat(values.amount)
+    }
+  };
+  return axios.put(
+      `${environment.api_url}wallet/sellequipment/`,
+      requestOptions.body,
+      {
+        headers: requestOptions.headers
+      }
+  );
+}
+
 
 export function getWalletById2(user_id) {
   const requestOptions = {

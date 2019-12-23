@@ -32,6 +32,10 @@ import {
   listCommentByArticleId
 } from "service/comment.service.js";
 import {TokenAnnotator, TextAnnotator} from 'react-text-annotate'
+import imageTest from "assets/img/examples/ppp2.jpg";
+
+import articleThumbnail from "assets/img/examples/investor.jpeg";
+import ButtonBase from "@material-ui/core/ButtonBase";
 
 
 const styles = {
@@ -68,7 +72,7 @@ const styles = {
     marginBottom: "0"
   },
   cardTitle: {
-    textAlign: "center"
+    textAlign: "left"
   },
   cardTitleWhite: {
     color: "#FFFFFF",
@@ -97,7 +101,8 @@ export default function Article(props) {
     content: "",
     created_date: "",
     is_public: "",
-    author: {}
+    author: {},
+    image:""
   });
 
   const handleToUpdate = annotation => {
@@ -115,18 +120,21 @@ export default function Article(props) {
 
   useState(() => {
     getAnnotationsBySource("http://www.khajiittraders.tk/article/" +article_id).then(res =>
-        setAnnotations(res)
+        setAnnotations(res.sort(function (a, b) {
+          return parseFloat(a.target.selector.refinedBy.start) - parseFloat(b.target.selector.refinedBy.start)}
+          )
+        )
     );
   });
-
-  useState(() => {
+    useState(() => {
     getArticleById(article_id).then(res =>
       setArticleValues({
         title: res.title,
         content: res.content,
         created_date: res.created_date,
         is_public: res.is_public,
-        author: res.author
+        author: res.author,
+        image: res.image
       })
     );
   });
@@ -193,12 +201,11 @@ export default function Article(props) {
     <GridContainer justify="center">
       <GridItem xs={12} sm={12} md={12}>
         <Card profile>
-          <CardAvatar profile>
-            <a href="#pablo" onClick={e => e.preventDefault()}>
-              <img src={avatar} alt="..." />
-            </a>
-          </CardAvatar>
           <CardBody profile>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={12}>
+            </GridItem>
+          </GridContainer>
             <Link
               to={{
                 pathname: "/user/" + articleValues.author.id,
@@ -221,7 +228,13 @@ export default function Article(props) {
               <Typography variant="h5" component="h3">
                 <center>{articleValues.title}</center>
               </Typography>
-              <Typography component="p">
+
+              <img
+                  className={classes.img}
+                  alt="complex"
+                  src= {articleValues.image ? "http://35.163.120.227:8000" + articleValues.image : imageTest}
+                />
+                <Typography component="p">
                 <TextAnnotation
                     text={articleValues.content}
                     article_id={article_id}

@@ -23,7 +23,7 @@ import { fade } from "@material-ui/core/styles";
 
 const handleSubmit = event => {
   event.preventDefault();
-  
+
 };
 
 const useStyles = makeStyles(theme => ({
@@ -102,17 +102,17 @@ export default function PheaderLinks() {
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
         <div className={classes.search}>
-        
+
         <Searchh/>
-            
-          
+
+
             <Link to="/search-results">
               <div className={classes.searchIcon}>
               <SearchIcon />
               </div>
             </Link>
         </div>
-        
+
         <Link to="/articles" color="transparent">
           <Button className={classes.button} color="primary" target="_self">
             <CloudDownload className={classes.icons} /> Articles
@@ -123,11 +123,12 @@ export default function PheaderLinks() {
             <Assignment className={classes.icons} /> Market
           </Button>
         </Link>
-        <Link to="/equipments" color="transparent">
+        <Link to="/events" className={classes.button} color="transparent">
           <Button className={classes.button} color="primary" target="_self">
-            <AttachMoney className={classes.icons} /> Parity
+            <Assignment className={classes.icons} /> Event
           </Button>
         </Link>
+
 
         <CustomDropdown
           noLiPadding
@@ -207,7 +208,7 @@ const languages = [
     name: 'ilker',
     year: 1972
   },
-  
+
 ];
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
@@ -228,9 +229,9 @@ const getSuggestionValue = suggestion => suggestion.name;
 // Use your imagination to render suggestions.
 const renderSuggestion = suggestion => (
   <div>
-   
+
     {suggestion.name}
-    
+
   </div>
 );
 
@@ -254,7 +255,7 @@ class Searchh extends React.Component {
       value: newValue
     });
   };
-  
+
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
   onSuggestionsFetchRequested = ({ value }) => {
@@ -273,14 +274,14 @@ class Searchh extends React.Component {
 
   render() {
     const { value, suggestions } = this.state;
-    
+
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
       placeholder: 'Type to search',
       value,
       onChange: this.onChange
     };
-    
+
 
     // Finally, render it!
     return (
@@ -292,7 +293,7 @@ class Searchh extends React.Component {
         renderSuggestion={renderSuggestion}
         inputProps={inputProps}
       />
-      
+
     );
   }
 }
