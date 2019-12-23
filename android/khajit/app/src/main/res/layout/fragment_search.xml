@@ -12,6 +12,42 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".activity.ui.search.SearchFragment">
 
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search">
+
+        <RadioButton
+            android:id="@+id/radio1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="User" />
+
+        <RadioButton
+            android:id="@+id/radio2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="Article" />
+
+        <RadioButton
+            android:id="@+id/radio3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Event" />
+    </RadioGroup>
+
     <ProgressBar
         android:id="@+id/progress_loader"
         style="?android:attr/progressBarStyle"
@@ -31,14 +67,16 @@
         android:background="#BBFFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </SearchView>
 
     <ListView
         android:id="@+id/list_users"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
         android:background="#BBFFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

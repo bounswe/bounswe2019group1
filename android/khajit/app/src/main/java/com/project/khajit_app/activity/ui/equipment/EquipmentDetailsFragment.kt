@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.project.khajit_app.R
+import com.project.khajit_app.activity.ui.prediction.MakePredictionFragment
 import interfaces.fragmentOperationsInterface
 
 class EquipmentDetailsFragment : Fragment(), fragmentOperationsInterface {
@@ -34,9 +35,11 @@ class EquipmentDetailsFragment : Fragment(), fragmentOperationsInterface {
 
         val equipmentBuy = root.findViewById(R.id.details_equipment_buy) as Button
         val equipmentSell = root.findViewById(R.id.details_equipment_sell) as Button
+        val equipmentPredict = root.findViewById(R.id.details_equipment_predict) as Button
 
         equipmentBuy.setOnClickListener { goToEquipmentBuy(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
         equipmentSell.setOnClickListener { goToEquipmentSell(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
+        equipmentPredict.setOnClickListener { goToEquipmentPredict(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
 
         return root
     }
@@ -62,6 +65,20 @@ class EquipmentDetailsFragment : Fragment(), fragmentOperationsInterface {
         fragmentTransaction(
             parentActivityManager,
             EquipmentSellFragment.newInstance(equipment, value),
+            (containerId!!.id),
+            false,
+            true,
+            false
+        )
+    }
+
+    fun goToEquipmentPredict(equipment : String, value : String) {
+
+        val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
+
+        fragmentTransaction(
+            parentActivityManager,
+            MakePredictionFragment.newInstance(equipment, value),
             (containerId!!.id),
             false,
             true,

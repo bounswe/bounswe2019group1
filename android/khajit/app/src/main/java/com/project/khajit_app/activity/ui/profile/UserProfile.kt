@@ -9,16 +9,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.FragmentManager
+import com.mikhaellopez.circularimageview.CircularImageView
 
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.ListViewAdapter
 import com.project.khajit_app.activity.ui.followlist.FollowListFragment
+import com.project.khajit_app.activity.ui.myportfolio.MyPortfolioFragment
 import com.project.khajit_app.activity.ui.notificationdetails.notificationDetailFragment
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.FollowModel
 import com.project.khajit_app.data.models.GeneralFollowModel
 import com.project.khajit_app.data.models.GeneralFollowModel2
 import com.project.khajit_app.global.User
+import com.squareup.picasso.Picasso
 import interfaces.fragmentOperationsInterface
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,8 +40,9 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
 
     private lateinit var followerButton: Button
     private lateinit var followingButton: Button
+    private lateinit var myportfolioButton: Button
 
-
+    private lateinit var profile_pic: CircularImageView
 
     var equipments = arrayOf(
         "Android", "IPhone", "WindowsMobile", "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X", "Max OS X", "Max OS X")
@@ -78,10 +82,16 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
 
         followerButton = root.findViewById(R.id.follower_button) as Button
         followingButton = root.findViewById(R.id.following_button) as Button
+        myportfolioButton = root.findViewById(R.id.button_portfolio_page) as Button
+        profile_pic = root.findViewById(R.id.profile_pic) as CircularImageView
 
         nameBox.text = User.first_name + " " + User.last_name
         titleBox.text = User.title
         aboutBox.text = User.bio
+
+        if(User.photo != null) {
+            Picasso.get().load("http://35.163.120.227:8000" + User.photo).into(profile_pic)
+        }
 
         RetrofitClient.instance.followingList().enqueue(object :
             Callback<GeneralFollowModel> {
@@ -127,6 +137,9 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
             }
         })
 
+        println()
+        println(User.type.toString() + " --------->")
+        println()
 
         if(User.type == true) {
             traderImage.alpha = 1F
@@ -140,9 +153,25 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
             followList(root, "following")
         }
 
+        myportfolioButton.setOnClickListener { root ->
+            myPortfolio(root)
+        }
+
         return root
     }
 
+    fun myPortfolio(view: View) {
+        val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
+
+        fragmentTransaction(
+            parentActivityManager,
+            MyPortfolioFragment.newInstance(User.id),
+            (containerId!!.id),
+            true,
+            true,
+            false
+        )
+    }
 
     fun followList(view: View, request: String) {
         val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager

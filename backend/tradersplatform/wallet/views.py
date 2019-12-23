@@ -47,6 +47,22 @@ class WalletRetrieveAPIView(RetrieveAPIView):
         return Wallet.objects.filter(owner=user).first()
 
 
+class WalletDeleteAPIView(RetrieveAPIView):
+    serializer_class = WalletListSerializer
+    queryset = Wallet.objects.all()
+
+    def delete(self, request, *args, **kwargs):
+        check_if_user(request)
+        user=TemplateUser.objects.filter(id=request.user.id).first()
+        if not user:
+            raise ValidationError({"detail": "User does not exist"})
+        wallet=Wallet.objects.filter(owner=user).first()
+        if not wallet:
+            raise ValidationError({"detail": "wallet does not exist"})
+        wallet.delete()
+        return Response({}, status=200)
+
+
 class SendUSDAPIView(UpdateAPIView):
 
     def put(self, request, *args, **kwargs):
@@ -63,6 +79,7 @@ class SendUSDAPIView(UpdateAPIView):
         curr_wallet.USD=curr_wallet.USD+decimal.Decimal(dollar)
         curr_wallet.Sent_USD=curr_wallet.Sent_USD+decimal.Decimal(dollar)
         curr_wallet.save()
+        update_wealth(curr_wallet)
         serializer=WalletListSerializer(curr_wallet)
         return Response(serializer.data, status=200)
 
@@ -83,6 +100,7 @@ class PurchaseEquipmentAPIView(UpdateAPIView):
             raise ValidationError({"detail": "Amount must be in float or int form"})
         amount=decimal.Decimal(amount)
         is_etf=False
+        is_currency=False
         if name== 'BTC' or name == 'LTC' or name== 'ETH' :
             model='CryptoCurrencies'
         elif name== 'XAG' or name == 'XAU':
@@ -91,25 +109,24 @@ class PurchaseEquipmentAPIView(UpdateAPIView):
             model = 'Stocks'
         elif name== 'EUR' or name == 'GBP' or name== 'TRY' :
             model = 'Currencies'
+            is_currency=True
         elif name== 'DJI' or name == 'IXIC' or name== 'INX' :
             model = 'TraceIndices'
         elif name== 'SPY' or name == 'IVV' or name== 'VTI' :
-            model = 'ETFs'
+            model = 'ETFInformation'
             is_etf = True
         else:
             raise ValidationError({"detail": "Give a valid name"})
         equipment = apps.get_model("equipment", model)
         last=equipment.objects.all().last()
-        if not is_etf:
-            currency=getattr(last, name)
+        if is_currency:
+            currency = 1 / getattr(last, name)
         else:
-            if name == 'SPY':
-                currency = ETFPrice.objects.get(id=1).price
-            elif name == 'IVV':
-                currency = ETFPrice.objects.get(id=2).price
-            elif name == 'VTI':
-                currency = ETFPrice.objects.get(id=3).price
-            currency = decimal.Decimal(float(currency[1:]))
+            if is_etf:
+                temp_curr=float(getattr(last, name)[1:])
+                currency=round(decimal.Decimal(temp_curr),10)
+            else:
+                currency = getattr(last, name)
         subtract_usd = currency * amount
         curr_usd = curr_wallet.USD
         if curr_usd < subtract_usd:
@@ -139,7 +156,8 @@ class SellEquipmentAPIView(UpdateAPIView):
         if not is_float:
             raise ValidationError({"detail": "Amount must be in float or int form"})
         amount=round(decimal.Decimal(amount),10)
-        is_etf=False
+        is_currency = False
+        is_etf = False
         if name== 'BTC' or name == 'LTC' or name== 'ETH' :
             model='CryptoCurrencies'
         elif name== 'XAG' or name == 'XAU':
@@ -147,26 +165,25 @@ class SellEquipmentAPIView(UpdateAPIView):
         elif name== 'GOOGL' or name == 'AAPL' or name== 'GM' :
             model = 'Stocks'
         elif name== 'EUR' or name == 'GBP' or name== 'TRY' :
+            is_currency = True
             model = 'Currencies'
         elif name== 'DJI' or name == 'IXIC' or name== 'INX' :
             model = 'TraceIndices'
         elif name== 'SPY' or name == 'IVV' or name== 'VTI' :
-            model = 'ETFs'
-            is_etf = True
+            model = 'ETFInformation'
+            is_etf=True
         else:
             raise ValidationError({"detail": "Give a valid name"})
         equipment = apps.get_model("equipment", model)
         last=equipment.objects.all().last()
-        if not is_etf:
-            currency=getattr(last, name)
+        if is_currency:
+            currency = 1 / getattr(last, name)
         else:
-            if name == 'SPY':
-                currency = ETFPrice.objects.get(id=1).price
-            elif name == 'IVV':
-                currency = ETFPrice.objects.get(id=2).price
-            elif name == 'VTI':
-                currency = ETFPrice.objects.get(id=3).price
-            currency = decimal.Decimal(float(currency[1:]))
+            if is_etf:
+                temp_curr=float(getattr(last, name)[1:])
+                currency=round(decimal.Decimal(temp_curr),10)
+            else:
+                currency = getattr(last, name)
         wallet_amount=getattr(curr_wallet, name)
         addition_usd = currency * amount
         curr_usd = curr_wallet.USD
@@ -186,7 +203,8 @@ def update_wealth(wallet):
                        'INX', 'SPY', 'IVV', 'VTI']
     wealth=wallet.USD
     for i in range(0,len(list_currencies)):
-        is_etf = False
+        is_currency=False
+        is_etf=False
         if i < 3 :
             model='CryptoCurrencies'
         elif i < 5:
@@ -195,23 +213,22 @@ def update_wealth(wallet):
             model = 'Stocks'
         elif i < 11 :
             model = 'Currencies'
+            is_currency=True
         elif i < 14 :
             model = 'TraceIndices'
         elif i < 17 :
-            model = 'ETFs'
-            is_etf = True
+            model = 'ETFInformation'
+            is_etf=True
         equipment = apps.get_model("equipment", model)
         last = equipment.objects.all().last()
-        if not is_etf:
-            currency = getattr(last, list_currencies[i])
+        if not is_currency:
+            if is_etf:
+                temp_curr = float(getattr(last, list_currencies[i])[1:])
+                currency = round(decimal.Decimal(temp_curr), 10)
+            else:
+                currency = getattr(last, list_currencies[i])
         else:
-            if list_currencies[i] == 'SPY':
-                currency = ETFPrice.objects.get(id=1).price
-            elif list_currencies[i] == 'IVV':
-                currency = ETFPrice.objects.get(id=2).price
-            elif list_currencies[i] == 'VTI':
-                currency = ETFPrice.objects.get(id=3).price
-            currency = decimal.Decimal(float(currency[1:]))
+            currency = 1/getattr(last, list_currencies[i])
         amount = decimal.Decimal(getattr(wallet, list_currencies[i]))
         wealth=wealth+amount*currency
     wallet.Wealth_USD=wealth

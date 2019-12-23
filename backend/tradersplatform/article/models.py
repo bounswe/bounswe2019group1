@@ -10,3 +10,4 @@ class Article(models.Model):
     is_public = models.BooleanField(default=True)
     author = models.ForeignKey(TemplateUser, on_delete=models.CASCADE, blank=False, related_name="article")
     created_date = models.DateTimeField(default=django.utils.timezone.now)
+    image = models.FileField(upload_to="article", blank=True, null=True, unique=False)

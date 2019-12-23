@@ -32,6 +32,10 @@ import {
   listCommentByArticleId
 } from "service/comment.service.js";
 import {TokenAnnotator, TextAnnotator} from 'react-text-annotate'
+import imageTest from "assets/img/examples/ppp2.jpg";
+
+import articleThumbnail from "assets/img/examples/investor.jpeg";
+import ButtonBase from "@material-ui/core/ButtonBase";
 
 
 const styles = {
@@ -68,7 +72,7 @@ const styles = {
     marginBottom: "0"
   },
   cardTitle: {
-    textAlign: "center"
+    textAlign: "left"
   },
   cardTitleWhite: {
     color: "#FFFFFF",
@@ -195,12 +199,11 @@ export default function Article(props) {
     <GridContainer justify="center">
       <GridItem xs={12} sm={12} md={12}>
         <Card profile>
-          <CardAvatar profile>
-            <a href="#pablo" onClick={e => e.preventDefault()}>
-              <img src={avatar} alt="..." />
-            </a>
-          </CardAvatar>
           <CardBody profile>
+          <GridContainer>
+            <GridItem xs={12} sm={12} md={12}>
+            </GridItem>
+          </GridContainer>
             <Link
               to={{
                 pathname: "/user/" + articleValues.author.id,
@@ -223,7 +226,12 @@ export default function Article(props) {
               <Typography variant="h5" component="h3">
                 <center>{articleValues.title}</center>
               </Typography>
-              <Typography component="p">
+              <img
+                  className={classes.img}
+                  alt="complex"
+                  src={imageTest} //articleValues.image
+                />
+                <Typography component="p">
                 <TextAnnotation
                     text={articleValues.content}
                     article_id={article_id}

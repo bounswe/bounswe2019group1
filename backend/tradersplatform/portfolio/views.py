@@ -1,16 +1,20 @@
 from django.shortcuts import render
 
 # Create your views here.
-from rest_framework.generics import CreateAPIView, ListAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, DestroyAPIView
 from rest_framework.views import APIView
 
 from follow.views import check_if_user
 from myuser.models import TemplateUser
+from notification.models import Notification
 from portfolio.models import Portfolio
 from portfolio.serializers import PortfolioSerializer, PortfolioListSerializer
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 from django.apps import apps
+
+from portfolio_follow.models import PortfolioFollow
+from datetime import datetime
 
 
 class CreatePortfolioAPIView(CreateAPIView):
@@ -33,7 +37,7 @@ class UpdatePortfolioAPIView(CreateAPIView):
         check_if_user(request)
         id = kwargs.get("pk")
         owner_id=request.user.id
-        portfolio=Portfolio.objects.filter().first()
+        portfolio=Portfolio.objects.filter(id=id).first()
         if not portfolio:
             raise ValidationError({"detail": "Portfolit does not exist"})
         user_id = portfolio.owner.id
@@ -43,7 +47,39 @@ class UpdatePortfolioAPIView(CreateAPIView):
         serializer=PortfolioSerializer(portfolio,data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        followers=PortfolioFollow.objects.filter(portfolio=portfolio)
+        for follower in followers:
+            new_notification=Notification(
+                owner=follower.follower,
+                date=datetime.now(),
+                text=portfolio.name + " has updated"
+            )
+            new_notification.save()
         return Response(serializer.data, status=200)
+
+
+class DeletePortfolioAPIView(DestroyAPIView):
+
+    def delete(self, request, *args, **kwargs):
+        check_if_user(request)
+        id = kwargs.get("pk")
+        owner_id=request.user.id
+        portfolio=Portfolio.objects.filter(id=id).first()
+        if not portfolio:
+            raise ValidationError({"detail": "Portfolit does not exist"})
+        user_id = portfolio.owner.id
+        if user_id != owner_id:
+            raise ValidationError({"detail": "Portfolio does not belong to you"})
+        followers=PortfolioFollow.objects.filter(portfolio=portfolio)
+        for follower in followers:
+            new_notification=Notification(
+                owner=follower.follower,
+                date=datetime.now(),
+                text=portfolio.name + " has deleted"
+            )
+            new_notification.save()
+        portfolio.delete()
+        return Response({},status=200)
 
 
 class RetrievePortfolioAPIView(APIView):

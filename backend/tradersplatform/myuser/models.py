@@ -16,4 +16,6 @@ class TemplateUser(User):
     last_changed_password_date = models.DateTimeField( blank=True, null=True, unique=False, default=None)
     photo = models.FileField(upload_to="profile", blank=True, null=True, unique=False)
     is_public = models.BooleanField(default=False)
+    correct_prediction_counter = models.IntegerField(blank=True,null=True,unique=False,default=0)
+    prediction_counter = models.IntegerField(blank=True,null=True,unique=False,default=0)
     #yeni = models.CharField(max_length=300, blank=True, null=True, unique=False, default='')

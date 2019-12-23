@@ -14,6 +14,7 @@ import com.project.khajit_app.activity.ui.article.CreateArticleFragment
 import com.project.khajit_app.activity.ui.article.ListArticleFragment
 import com.project.khajit_app.activity.ui.editprofile.EditUserProfileFragment
 import com.project.khajit_app.activity.ui.equipment.EquipmentFragment
+import com.project.khajit_app.activity.ui.event.ListEventFragment
 import com.project.khajit_app.activity.ui.home.HomeFragment
 import com.project.khajit_app.activity.ui.mailbox.MailboxFragment
 import com.project.khajit_app.activity.ui.notifications.NotificationsFragment
@@ -132,8 +133,8 @@ class HomeFeedPageActivity : AppCompatActivity() , fragmentOperationsInterface{
                 )
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_messages -> {
-                val fragment = MailboxFragment()
+            R.id.navigation_events -> {
+                val fragment = ListEventFragment()
                 fragmentTransaction(
                     supportFragmentManager,
                     fragment,

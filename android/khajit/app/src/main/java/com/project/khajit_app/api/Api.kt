@@ -55,6 +55,14 @@ interface Api {
     @POST("user/search_user/")
     fun searchUsername(@Body body: SearchRequest):Call<SearchResponse>
 
+    @Headers("Content-Type: application/json")
+    @GET("article/search/{key}/")
+    fun searchArticle(@Path(value = "key", encoded = true) key: String):Call<ArticleSearchResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("event/search/{key}/")
+    fun searchEvent(@Path(value = "key", encoded = true) key: String):Call<ListEventResponse>
+
     // TODO
     @Headers("Content-Type: application/json")
     @PUT("user/updatepass/")
@@ -133,7 +141,60 @@ interface Api {
     fun getPublicArticles():Call<PublicArticleListResponse>
 
     @Headers("Content-Type: application/json")
+    @GET("portfolio/listportfolio/{id}/")
+    fun listPortfolio(@Path(value = "id", encoded = true) userId: String):Call<ListPortfolioResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("portfolio/retrieveportfolio/{id}/")
+    fun retrievePortfolio(@Path(value = "id", encoded = true) userId: String):Call<OnePortfolioResponse>
+
+    @Headers("Content-Type: application/json")
+    @PUT("portfolio/updateportfolio/{id}/")
+    fun updatePortfolio(@Path(value = "id", encoded = true) userId: String, @Body body: PortfolioEditRequestModel):Call<PortfolioEditResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @DELETE("portfolio/deleteportfolio/{id}/")
+    fun deletePortfolio(@Path(value = "id", encoded = true) userId: String):Call<PortfolioDeleteResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @POST("portfolio/createportfolio/")
+    fun createPortfolio(@Body body: PortfolioEditRequestModel):Call<PortfolioEditResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @GET("portfolio-follow/isFollowing/{id}/")
+    fun isFollowingThisPortfolio(@Path(value = "id", encoded = true) userId: String):Call<isFollowingPortfolioResponse>
+
+    @Headers("Content-Type: application/json")
+    @POST("portfolio-follow/follow/")
+    fun followPortfolio(@Body body: FollowUnfollowModel):Call<FollowUnfollowResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @HTTP(method="DELETE", path="portfolio-follow/unfollow/", hasBody=true)
+    fun unfollowPortfolio(@Body body: FollowUnfollowModel):Call<FollowUnfollowResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @POST("wallet/createWallet/")
+    fun createWallet():Call<createWalletResponse>
+
+    @Headers("Content-Type: application/json")
+    @DELETE("wallet/delete/")
+    fun deleteWallet():Call<createWalletResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("follow/listFollowingPending/" )
+    fun getFollowingPending():Call<FollowingPendingResponseModel>
+
+    @Headers("Content-Type: application/json")
     @GET("article/listArticleByUserId/{id}/")
     fun getArticlesByUserId(@Path(value = "id", encoded = true) userId: Int):Call<PublicArticleListResponse>
+
+
+    @Headers("Content-Type: application/json")
+    @POST("prediction/predict/")
+    fun makePrediction(@Body body: PredictionModel):Call<PredictionResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @GET("event/list/" )
+    fun getAllEvents():Call<ListEventModel>
 
 }
