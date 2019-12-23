@@ -72,7 +72,7 @@ const styles = {
     marginBottom: "0"
   },
   cardTitle: {
-    textAlign: "right"
+    textAlign: "left"
   },
   cardTitleWhite: {
     color: "#FFFFFF",
@@ -200,13 +200,6 @@ export default function Article(props) {
           <CardBody profile>
           <GridContainer>
             <GridItem xs={12} sm={12} md={12}>
-            <ButtonBase className={classes.image}>
-              <img
-                className={classes.img}
-                alt="complex"
-                src={articleThumbnail}
-              />
-            </ButtonBase>
             </GridItem>
           </GridContainer>
             <Link
