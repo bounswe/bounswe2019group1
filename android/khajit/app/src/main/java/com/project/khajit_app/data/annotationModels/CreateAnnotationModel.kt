@@ -1,14 +1,12 @@
 package com.project.khajit_app.data.annotationModels
 
 data class CreateAnnotationModel (
-    //@Suppress("IllegalIdentifier") val `@context` : String,
-    val id: String,
-    val creator : CreatorModel,
+    val creator : String,
     val body : List<BodyModel> ,
     val target : TargetModel,
-    val type : String?,
-    val motivation : String?,
-    val created : String?
+    val type : String,
+    val motivation : String,
+    val created : String
 
 )
 

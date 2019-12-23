@@ -33,6 +33,10 @@ interface AnnotationApi {
     @HTTP(method="DELETE", path="annotation/deleteannotation/", hasBody=true)
     fun deleteAnnotation(@Body body: DeleteAnnotationModel?):Call<DeleteAnnotationResponse>
 
+    @Headers("Content-Type: application/json")
+    @POST("annotation/createannotation/")
+    fun createAnnotation(@Body body: CreateAnnotationModel): Call<CreateAnnotationResponse>
+
     /*@Headers("Content-Type: application/json")
     @GET("article/listArticleByUserId/{id}/")
     fun checkCreatorExists(@Path(value = "id", encoded = true) userId: Int):Call<CreatorExistsResponse>*/
