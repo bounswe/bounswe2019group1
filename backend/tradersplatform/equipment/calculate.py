@@ -77,7 +77,7 @@ def calculate_metal_currency():
     :param kwargs:
     :return:
     '''
-    url = 'https://metals-api.com/api/latest?access_key=u7dd7xonqypenlp0680ycft68e2li9z5l7v8lnkp5882bv8a34hg54k70jv90862'
+    url = 'https://metals-api.com/api/latest?access_key=emaz1m99r6fhk110fbg7fpfv22t6e6ia1ilbr0c73g40mnegsxn7k6l1iey8429m'
     headers = {}
     response = requests.request('GET', url, headers=headers, allow_redirects=False)
     a = response.content
