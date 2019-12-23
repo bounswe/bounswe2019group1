@@ -36,34 +36,7 @@ import {getTEValue} from "../../service/equipment.service";
 
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 const useStyles = makeStyles(styles);
-const options = {
-    theme: "light2",
-    animationEnabled: true,
-    exportEnabled: true,
-    title: {
-        text: "USD / TRY"
-    },
-    axisY: {
-        title: "USD / TRY",
-        includeZero: false
-    },
-    data: [
-        {
-            type: "area",
-            xValueFormatString: "YYYY",
-            yValueFormatString: "#,##0.## TRY",
-            dataPoints: [
-                {x: new Date(2019, 11), y: 5.91},
-                {x: new Date(2019, 10), y: 5.82},
-                {x: new Date(2019, 9), y: 5.75},
-                {x: new Date(2019, 8), y: 5.7},
-                {x: new Date(2019, 7), y: 5.55},
-                {x: new Date(2019, 6), y: 5.42},
-                {x: new Date(2019, 5), y: 5.36}
-            ]
-        }
-    ]
-};
+
 
 export default function Equipment(props) {
     const classes = useStyles();
@@ -72,6 +45,39 @@ export default function Equipment(props) {
         te_value: 0.0,
         changed_date: ""
     });
+    const [options, setOptions] = useState({
+        theme: "light2",
+        animationEnabled: true,
+        exportEnabled: true,
+        title: {
+            text: "USD / TRY"
+        },
+        axisY: {
+            title: "USD / TRY",
+            includeZero: false
+        },
+        data: [
+            {
+                type: "area",
+                xValueFormatString: "YYYY",
+                yValueFormatString: "#,##0.## TRY",
+                dataPoints: [
+                    {x: new Date(2019, 11), y: 5.91},
+                    {x: new Date(2019, 10), y: 5.82},
+                    {x: new Date(2019, 9), y: 5.75},
+                    {x: new Date(2019, 8), y: 5.7},
+                    {x: new Date(2019, 7), y: 5.55},
+                    {x: new Date(2019, 6), y: 5.42},
+                    {x: new Date(2019, 5), y: 5.36}
+                ]
+            }
+        ]
+    });
+
+
+
+
+
     equipment_name = String(equipment_name.substr(equipment_name.lastIndexOf("/") + 1)).toUpperCase();
 
     useState(() => {
