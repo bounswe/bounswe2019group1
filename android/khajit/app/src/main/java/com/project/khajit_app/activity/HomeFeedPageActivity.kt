@@ -121,7 +121,7 @@ class HomeFeedPageActivity : AppCompatActivity() , fragmentOperationsInterface{
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                val fragment = NotificationsFragment.newInstance(1,1,1,0, 4)
+                val fragment = NotificationsFragment.newInstance(1, User.id!!)
                 fragmentTransaction(
                     supportFragmentManager,
                     fragment,

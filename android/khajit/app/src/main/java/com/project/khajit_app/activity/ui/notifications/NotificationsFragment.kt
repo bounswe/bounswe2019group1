@@ -20,9 +20,7 @@ import com.project.khajit_app.activity.HomeFeedPageActivity
 
 import com.project.khajit_app.activity.ui.notificationdetails.notificationDetailFragment
 import com.project.khajit_app.api.RetrofitClient
-import com.project.khajit_app.data.models.GeneralNotificationModel
-import com.project.khajit_app.data.models.ListNotificationsResponse
-import com.project.khajit_app.data.models.UserAllInfo
+import com.project.khajit_app.data.models.*
 import com.project.khajit_app.databinding.NotificationItemModelBinding
 import interfaces.fragmentOperationsInterface
 import retrofit2.Call
@@ -37,10 +35,7 @@ class NotificationsFragment : Fragment(),View.OnClickListener, fragmentOperation
     private var containerId : ViewGroup? = null
 
     private lateinit var recyclerView : RecyclerView
-    private var isGuest : Int = 0
     private var isLoggedInUser : Int = 0
-    private var isFeedPage: Int = 0
-    private var isFollowing : Int = 0
     private var userId : Int = 0
 
 
@@ -51,19 +46,12 @@ class NotificationsFragment : Fragment(),View.OnClickListener, fragmentOperation
 
         fragmentTransaction(
             parentActivityManager,
-            notificationDetailFragment.newInstance("bak bakim"),
+            notificationDetailFragment.newInstance(notifications[0]),
             (containerId!!.id),
             true,
             true,
             false
         )
-      /*println("iki")
-        val detailFragment=notificationDetailFragment.newInstance()
-        (activity as HomeFeedPageActivity).denemeFragment(
-            notificationDetailFragment.newInstance(),
-            R.id.homePageContent, true, addToBackStack = true,
-            addAnimation = false)*/
-
 
     }
 
@@ -76,14 +64,17 @@ class NotificationsFragment : Fragment(),View.OnClickListener, fragmentOperation
         savedInstanceState: Bundle?
     ): View? {
 
+        notifications.clear()
+
         notificationsViewModel =
             ViewModelProviders.of(this).get(NotificationsViewModel::class.java)
+
         val notificationView :View = inflater.inflate(R.layout.fragment_notifications, container, false)
         val activity = activity as Context
         containerId = container
         recyclerView = notificationView.findViewById(R.id.notification_fragment_recyclerview) as RecyclerView
-        recyclerView.layoutManager = GridLayoutManager(activity, 1)
-        recyclerView.adapter = NotificationsAdapter(isGuest,isLoggedInUser,isFeedPage,isFollowing,userId,notifications,activity)
+        //recyclerView.layoutManager = GridLayoutManager(activity, 1)
+        //recyclerView.adapter = NotificationsAdapter(isLoggedInUser,userId,notifications,activity)
 
         return notificationView
     }
@@ -92,24 +83,21 @@ class NotificationsFragment : Fragment(),View.OnClickListener, fragmentOperation
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        isGuest = arguments!!.getInt(ISGUEST)
         isLoggedInUser = arguments!!.getInt(ISLOGGEDINUSER)
-        isFeedPage = arguments!!.getInt(ISFEEDPAGE)
-        isFollowing = arguments!!.getInt(ISFOLLOWING)
         userId = arguments!!.getInt(USERID)
 
-        println(isGuest)
         println(isLoggedInUser)
-        println(isFeedPage)
-        println(isFollowing)
         println(userId)
+
         //if the guest home feed page is requesting
-        if (isGuest == 1 && isFeedPage == 1 && isLoggedInUser == 0 && isFollowing == 0 ){
-            println("girdi 1")
+        if (isLoggedInUser == 0){
+            println("guest user notifications")
         }
         //if the currently logged in user is requesting
         else if(isLoggedInUser == 1){
-            println("girdi 2")
+            println("logged in user notifications")
+
+            // request notifications from api
             RetrofitClient.instance.getNotifications().enqueue(object :
                 Callback<ListNotificationsResponse> {
                 override fun onResponse(
@@ -119,9 +107,9 @@ class NotificationsFragment : Fragment(),View.OnClickListener, fragmentOperation
                     println(response.toString())
                     if(response.code() == 200 ){
                         var count = response.body()?.count
-                        notifications.clear()
+                        //notifications.clear()
 
-                        var results = response.body()?.results as List<GeneralNotificationModel?>
+                        val results = response.body()?.results as List<GeneralNotificationModel?>
 
 
                         for (notification in results) {
@@ -129,7 +117,7 @@ class NotificationsFragment : Fragment(),View.OnClickListener, fragmentOperation
                         }
 
                         recyclerView.layoutManager = GridLayoutManager(activity, 1)
-                        recyclerView.adapter = NotificationsAdapter(isGuest,isLoggedInUser,isFeedPage,isFollowing,userId,notifications,context)
+                        recyclerView.adapter = NotificationsAdapter(isLoggedInUser,userId,notifications,context)
 
                     }else{
                         Log.d("error message:", response.message())
@@ -142,6 +130,41 @@ class NotificationsFragment : Fragment(),View.OnClickListener, fragmentOperation
                 }
             })
 
+            /*
+            // request pending followers from the api
+            RetrofitClient.instance.getPendingFollowers().enqueue(object :
+                Callback<PendingFollowerResponse> {
+                override fun onResponse(
+                    call: Call<PendingFollowerResponse>,
+                    response: Response<PendingFollowerResponse>
+                ) {
+                    println(response.toString())
+                    if(response.code() == 200 ){
+
+                        val pendingList = response.body()?.list as List<FollowModel3?>
+
+                        for (follower in pendingList) {
+                            val followRequestMessage = follower!!.follower.first_name + " " + follower!!.follower.last_name + " wants to follow you! "
+                            val notification = GeneralNotificationModel(null, followRequestMessage, null, null, null, null)
+                            notifications.add(notification)
+                        }
+
+                        recyclerView.layoutManager = GridLayoutManager(activity, 1)
+                        recyclerView.adapter = NotificationsAdapter(isLoggedInUser,userId,notifications,context)
+
+                    }else{
+                        Log.d("error message:", response.message())
+                    }
+                }
+                override fun onFailure(call: Call<PendingFollowerResponse>, t: Throwable) {
+                    println(t.message)
+                    println(t)
+                    Toast.makeText(context,t.message, Toast.LENGTH_LONG).show()
+                }
+            })
+            */
+
+
         } else {
             print("Something is wrong")
         }
@@ -150,19 +173,13 @@ class NotificationsFragment : Fragment(),View.OnClickListener, fragmentOperation
 
     companion object {
 
-        private const val ISGUEST = "isGuest"
         private const val ISLOGGEDINUSER = "isLoggedInUser"
-        private const val ISFEEDPAGE = "isFeedPage"
-        private const val ISFOLLOWING = "isFollowing"
         private const val USERID = "userId"
 
-        fun newInstance(isGuest : Int, isLoggedInUser : Int, isFeedPage: Int, isFollowing : Int, userId: Int): NotificationsFragment {
+        fun newInstance(isLoggedInUser : Int, userId: Int): NotificationsFragment {
             val fragmentNotification = NotificationsFragment()
             val args = Bundle()
-            args.putInt(ISGUEST,isGuest)
             args.putInt(ISLOGGEDINUSER,isLoggedInUser)
-            args.putInt(ISFEEDPAGE,isFeedPage)
-            args.putInt(ISFOLLOWING,isFollowing)
             args.putInt(USERID,userId)
             fragmentNotification.arguments = args
             return fragmentNotification
@@ -172,10 +189,7 @@ class NotificationsFragment : Fragment(),View.OnClickListener, fragmentOperation
 
 
     internal inner class NotificationsAdapter(
-        val isGuest : Int ,
         val isLoggedInUser : Int ,
-        val isFeedPage: Int ,
-        val isFollowing : Int ,
         val userId : Int,
         val notifications :ArrayList<GeneralNotificationModel>,
         val context: Context) :RecyclerView.Adapter<ViewHolder>() {
@@ -202,13 +216,7 @@ class NotificationsFragment : Fragment(),View.OnClickListener, fragmentOperation
 
                     fragmentTransaction(
                         parentActivityManager,
-                        NotificationsFragment.newInstance(
-                            isGuest,
-                            isLoggedInUser,
-                            isFeedPage,
-                            isFollowing,
-                            userId
-                        ),
+                        notificationDetailFragment.newInstance(notification),
                         (containerId!!.id),
                         true,
                         true,

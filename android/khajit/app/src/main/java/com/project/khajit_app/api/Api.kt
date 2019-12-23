@@ -140,4 +140,16 @@ interface Api {
     @GET("notification/listnotification/" )
     fun getNotifications():Call<ListNotificationsResponse>
 
+    @Headers("Content-Type: application/json")
+    @GET("follow/listFollowerPending/" )
+    fun getPendingFollowers():Call<PendingFollowerResponse>
+
+    @Headers("Content-Type: application/json")
+    @PUT("follow/approvefollow/{id}/" )
+    fun approveFollower(@Path(value = "id", encoded = true) followId: Int):Call<FollowModel3>
+
+    @Headers("Content-Type: application/json")
+    @PUT("follow/rejectfollow/{id}/" )
+    fun rejectFollower(@Path(value = "id", encoded = true) followId: Int):Call<FollowModel3>
+
 }
