@@ -15,7 +15,7 @@ import Button from "components/CustomButtons/Button.js";
 import Parallax from "components/Parallax/Parallax.js";
 import Header from "components/Header/Header.js";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
-
+import ShoppingCart from "@material-ui/icons/ShoppingCart";
 // core components
 import GridItem from "components/Grid/GridItem.js";
 import GridContainer from "components/Grid/GridContainer.js";
@@ -81,40 +81,45 @@ export default function Equipment(props) {
         temp_amount: ""
     });
 
-    const upPredict = prop => event => {
-        event.preventDefault();
-        setValues({...values, [prop]: "It will increase !"});
-    };
-    const downPredict = prop => event => {
-        event.preventDefault();
-        setValues({...values, [prop]: "It will decrease !"});
-    };
+  const buy = prop => event => {
+    event.preventDefault();
+    setValues({ ...values, [prop]: "Satın alındı !" });
+  };
+  const upPredict = prop => event => {
+    event.preventDefault();
+    setValues({...values, [prop]: "It will increase !"});
+};
+const downPredict = prop => event => {
+  event.preventDefault();
+  setValues({...values, [prop]: "It will decrease !"});
+};
 
-    return (
-        <div>
-            <Header
-                color="transparent"
-                brand="Khaji-it Traders Platform"
-                rightLinks={<PheaderLinks/>}
-                fixed
-                changeColorOnScroll={{
-                    height: 200,
-                    color: "white"
-                }}
-            />
-            <Parallax small filter image={require("assets/img/dollar-hd.jpg")}/>
-            <GridContainer>
-                <GridItem xs={12} sm={12} md={4}>
-                    <Card chart>
-                        <CardHeader color="success">
-                            <CanvasJSChart options={options}/>
-                        </CardHeader>
-                        <CardBody>
-                            <h4 className={classes.cardTitle}>
-                                Your Prediction: {values.state}
-                            </h4>
-                            <p className={classes.cardCategory}>
-                                <Button color="transparent" onClick={upPredict("state")}>
+  return (
+    <div>
+      <Header
+        color="transparent"
+        brand="Khaji-it Traders Platform"
+        rightLinks={<PheaderLinks />}
+        fixed
+        changeColorOnScroll={{
+          height: 200,
+          color: "white"
+        }}
+      />
+      <Parallax small filter image={require("assets/img/dollar-hd.jpg")} />
+      <GridContainer>
+        <GridItem xs={12} sm={12} md={4}>
+          <Card chart>
+            <CardHeader color="success">
+              <CanvasJSChart options={options} />
+            </CardHeader>
+            <CardBody>
+              <h4 className={classes.cardTitle}>
+                Your Prediction: {values.state}
+              </h4>
+              <p className={classes.cardCategory}>
+                  
+                <Button color="transparent" onClick={upPredict("state")}>
                   <span className={classes.successText}>
                     <ArrowUpward className={classes.upArrowCardCategory}/> Up
                   </span>
@@ -126,6 +131,12 @@ export default function Equipment(props) {
                   </span>
                                 </Button>
                                 {""}
+                                <Button color="transparent" onClick={buy("state")}>
+                                <span className={classes.buyText}>
+                                  <ShoppingCart className={classes.upArrowCardCategory} />{" "}
+                                  Purchase
+                                </span>
+                              </Button>
                             </p>
                         </CardBody>
                         <CardFooter chart>
