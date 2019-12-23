@@ -130,6 +130,25 @@ class AnnotationListAPIView(APIView):
         return Response(serializer.data, status=200)
 
 
+class AnnotationListMobileAPIView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        source = request.GET.get('source', None)
+        if source is None:
+            raise ValidationError({"detail": "Give id of annotation"})
+
+        query_target=Target.objects.filter(source=source)
+        annotation_query=Annotation.objects.none()
+        query = Annotation.objects.filter(target=43)
+        for target in query_target:
+            id=target.id
+            query=Annotation.objects.filter(target=target.id)
+            annotation_query=annotation_query | query
+        serializer= AnnotationViewSerializer(annotation_query,many=True)
+        dict={"result":serializer.data}
+        return Response(dict, status=200)
+
+
 class CreatorAPIView(CreateAPIView):
     serializer_class = CreatorSerializer
     queryset = Creator.objects.filter()
@@ -143,6 +162,15 @@ class AnnotationAllListAPIView(ListAPIView):
 class CreatorListAPIView(ListAPIView):
     serializer_class = CreatorSerializer
     queryset = Creator.objects.all()
+
+
+class CreatorListMobileAPIView(ListAPIView):
+
+    def get(self, request, *args, **kwargs):
+        queryset = Creator.objects.all()
+        serializer_class = CreatorSerializer(queryset,many=True)
+        dict={"result":serializer_class.data}
+        return Response(dict, status=200)
 
 
 class IsCreator(APIView):
