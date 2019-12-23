@@ -8,7 +8,7 @@ from collections import OrderedDict
 
 from rest_framework.exceptions import ValidationError
 # Create your views here.
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView
 from datetime import datetime
 
 from rest_framework.views import APIView
@@ -118,6 +118,28 @@ class AnnotationListAPIView(APIView):
             annotation_query=annotation_query | query
         serializer= AnnotationViewSerializer(annotation_query,many=True)
         return Response(serializer.data, status=200)
+
+
+class CreatorAPIView(CreateAPIView):
+    serializer_class = CreatorSerializer
+    queryset = Creator.objects.filter()
+
+
+class CreatorListAPIView(ListAPIView):
+    serializer_class = CreatorSerializer
+    queryset = Creator.objects.all()
+
+
+class IsCreator(APIView):
+
+    def get(self, request, *args, **kwargs):
+        id = request.GET.get('id', None)
+        if id is None:
+            raise ValidationError({"detail": "Give id of creator"})
+        creator = Creator.objects.filter(id=id).first()
+        if creator:
+            return Response({"message":"creator exists"}, status=200)
+        return Response({"message": "creator does not exist"}, status=200)
 
 
 class DeleteAnnotation(APIView):
