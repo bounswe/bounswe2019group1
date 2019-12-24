@@ -268,7 +268,7 @@ console.log(equipmentValue.te_value)
                         </CardBody>
                         <CardFooter chart>
                             <div className={classes.stats}>
-                                <AccessTime/> Current Value: {equipmentValue.te_value} (updated 4 minutes ago)
+                                <h4><AccessTime/> Current Value: {equipmentValue.te_value}</h4>
                             </div>
                         </CardFooter>
                     </Card>
