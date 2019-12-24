@@ -113,7 +113,9 @@ class NotificationsFragment : Fragment(),View.OnClickListener, fragmentOperation
 
 
                         for (notification in results) {
-                            notifications.add(notification!!)
+                            if (notification?.is_active!!) {
+                                notifications.add(notification!!)
+                            }
                         }
 
                         recyclerView.layoutManager = GridLayoutManager(activity, 1)
