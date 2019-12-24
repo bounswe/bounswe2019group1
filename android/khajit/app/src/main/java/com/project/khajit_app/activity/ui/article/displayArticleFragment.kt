@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 
 import com.project.khajit_app.R
+import com.project.khajit_app.activity.ui.annotation.DisplayAnnotationFromSourceFragment
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.annotationModels.GetAnnotationModelResponse
 import com.project.khajit_app.data.annotationModels.ShowTextAnnotationModel
@@ -95,7 +96,7 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
         //model.text = String.format(getString(R.string.description_format), model.description, model.url)
         displayArticleFragmentBinding.articlSpanableModel = null
         imageView = displayArticleFragmentBinding.articleImageDisplayDetails
-
+        containerId = container
         contentView = displayArticleFragmentBinding.articleContentDetails
 
         articleModel = arguments!!.getSerializable(ARTICLEMODEL) as GeneralArticleModel
@@ -104,17 +105,17 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
         isFeedPage = arguments!!.getInt(ISFEEDPAGE)
         isFollowing = arguments!!.getInt(ISFOLLOWING)
         userId = arguments!!.getInt(USERID)
+        val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
 
         article_id = articleModel.id!!
-        annotationSource = "http://www.khajiittraders.tk/article/10/"
-
         //getAnnotations(articleModel)
         spannable = SpannableString(articleModel.content)
-        val handlerThread = HandlerThread("NETWORK_FALAN")
+        val handlerThread = HandlerThread("NETWORK_FALAN MAHMUT")
         handlerThread.start()
         val handler = Handler(handlerThread.looper)
 
         handler.postDelayed({
+            annotationSource = "http://www.khajiittraders.tk/article/" + article_id+ "/"
             RetrofitClient.instanceAnnotation.getAnnotationsBySource(annotationSource).enqueue(object :
                 Callback<GetAnnotationModelResponse> {
                 override fun onResponse(
@@ -127,22 +128,26 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
                     //val oneAnnotation = ShowTextAnnotationModel("sagasg",null,null, "ljsfgh",8,16)
                     if(response.code() == 200 && response.body()!!.result != null){
                         for(resultAnnotationModel in response.body()!!.result) {
-                            if( resultAnnotationModel.target!!.type == "text"){
+                            if( resultAnnotationModel.target!!.type == "text" || resultAnnotationModel.target!!.type == "Text"){
                                 val startChar = resultAnnotationModel.target!!.selector.refinedBy.start
                                 val endChar = resultAnnotationModel.target!!.selector.refinedBy.end
                                 val annotationText = articleModel.content!!.substring(startChar,endChar)
-                                val oneAnnotation = ShowTextAnnotationModel(resultAnnotationModel.id!!,resultAnnotationModel.creator!!,resultAnnotationModel.body!!,annotationText,startChar,endChar)
+                                println("-------------> " + annotationText)
+                                val oneAnnotation = ShowTextAnnotationModel(resultAnnotationModel.id!!,resultAnnotationModel.creator!!,resultAnnotationModel.body!!,annotationText,startChar,endChar,"","")
                                 annotationTexts.add(oneAnnotation)
-                                spannable.setSpan( BackgroundColorSpan(Color.MAGENTA), oneAnnotation.startChar, oneAnnotation.endChar,Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-                                spannable.setSpan(ClickHandler(activity as Context,oneAnnotation.startChar),oneAnnotation.startChar, oneAnnotation.endChar,Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-                                articleSpannableModel = GeneralArticleSpannableModel(articleModel.id,articleModel.title,spannable,articleModel.author,articleModel.is_public,articleModel.created_date,articleModel.image)
-                                displayArticleFragmentBinding.articlSpanableModel = articleSpannableModel
-                                articleSpannableModel.author!!.first_name = articleSpannableModel.author!!.first_name + " "
-                                contentView.movementMethod = LinkMovementMethod.getInstance()
+
 
 
                             }
 
+                        }
+                        for(annotation in annotationTexts){
+                            spannable.setSpan( BackgroundColorSpan(Color.parseColor("#FFFFC107")), annotation.startChar, annotation.endChar,Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+                            spannable.setSpan(ClickHandler(activity as Context,annotation.startChar,annotation.endChar,parentActivityManager),annotation.startChar, annotation.endChar,Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+                            articleSpannableModel = GeneralArticleSpannableModel(articleModel.id,articleModel.title,spannable,articleModel.author,articleModel.is_public,articleModel.created_date,articleModel.image)
+                            displayArticleFragmentBinding.articlSpanableModel = articleSpannableModel
+                            articleSpannableModel.author!!.first_name = articleSpannableModel.author!!.first_name + " "
+                            contentView.movementMethod = LinkMovementMethod.getInstance()
                         }
                         //Toast.makeText(context,"Response döndü 1 " + annotationTexts.size,Toast.LENGTH_LONG).show()
 
@@ -184,13 +189,24 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
     }
 
 
-        class ClickHandler(
+        internal inner class ClickHandler(
+
             private val context : Context,
-            private val position: Int
-            //private val showTextAnnotationModel: ShowTextAnnotationModel
+            private val start_position: Int,
+            private val end_position: Int,
+            private val manager: FragmentManager
         ) : ClickableSpan() {
             override fun onClick(widget: View) {
-                Toast.makeText(context,"annotated position " + position, Toast.LENGTH_LONG).show()
+                //Toast.makeText(context,"annotated position " + position, Toast.LENGTH_LONG).show()
+
+
+                    fragmentTransaction(
+                    manager,
+                    DisplayAnnotationFromSourceFragment.newInstance(annotationTexts,start_position,end_position),
+                    (containerId!!.id),
+                    false,
+                    true,
+                    false)
 
             }
 
@@ -200,32 +216,6 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
             }
         }
 
-
-
-
-
-
-
-
-    //contentView.customSelectionActionModeCallback
-
-    //Toast.makeText(context,"context length dışarısı: "+ annotationTexts.size, Toast.LENGTH_LONG).show()
-
-    /* for( i in annotationTexts.indices ){
-
-         Toast.makeText(context,"context length: "+ annotationTexts[i].endChar + " " + annotationTexts[i].startChar, Toast.LENGTH_LONG).show()
-
-         spannable.setSpan( BackgroundColorSpan(Color.YELLOW), annotationTexts[i].startChar, annotationTexts[i].endChar,Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-         spannable.setSpan(ClickHandler(activity as Context,annotationTexts[i].startChar),annotationTexts[i].startChar, annotationTexts[i].endChar,Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-     }*/
-
-    //spannable.setSpan( BackgroundColorSpan(Color.YELLOW), 0, 11,Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-    //spannable.setSpan( BackgroundColorSpan(Color.RED), 4, 16,Spannable.SPAN_INCLUSIVE_INCLUSIVE)
-    //Toast.makeText(context,"context length: "+ articleModel.content!!.length, Toast.LENGTH_LONG).show()
-
-
-
-    //spannable.setSpan(ClickHandler(activity as Context,0),0,4,Spannable.SPAN_INCLUSIVE_INCLUSIVE)
 
 
 

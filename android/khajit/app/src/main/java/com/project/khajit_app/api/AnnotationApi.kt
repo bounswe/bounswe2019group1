@@ -36,6 +36,9 @@ interface AnnotationApi {
     @Headers("Content-Type: application/json")
     @POST("annotation/createannotation/")
     fun createAnnotation(@Body body: CreateAnnotationModel): Call<CreateAnnotationResponse>
+    @Headers("Content-Type: application/json")
+    @POST("annotation/createannotation/")
+    fun createAnnotationNewCreator(@Body body: CreateAnnotationModelNewCreator): Call<CreateAnnotationResponse>
 
     /*@Headers("Content-Type: application/json")
     @GET("article/listArticleByUserId/{id}/")
