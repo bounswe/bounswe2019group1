@@ -3,6 +3,7 @@ package com.project.khajit_app.activity.ui.search
 
 
 import android.os.Bundle
+import android.text.SpannableString
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
