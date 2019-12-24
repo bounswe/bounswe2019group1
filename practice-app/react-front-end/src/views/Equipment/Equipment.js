@@ -56,42 +56,20 @@ export default function Equipment(props) {
 
 
     equipment_name = String(equipment_name.substr(equipment_name.lastIndexOf("/") + 1)).toUpperCase();
+  
+    
+console.log(equipmentValue.te_value)
 
-    const [options, setOptions] = useState({
-        theme: "light2",
-        animationEnabled: true,
-        exportEnabled: true,
-        title: {
-            text: equipment_name +"/USD"
-        },
-        axisY: {
-            title: equipment_name +"/USD",
-            includeZero: false
-        },
-        data: [
-            {
-                type: "area",
-                xValueFormatString: "YYYY",
-                yValueFormatString: "#,##0.##" + equipment_name,
-                dataPoints: [
-                    {x: new Date(2019, 11), y: 5.91},
-                    {x: new Date(2019, 10), y: 5.82},
-                    {x: new Date(2019, 9), y: 5.75},
-                    {x: new Date(2019, 8), y: 5.7},
-                    {x: new Date(2019, 7), y: 5.55},
-                    {x: new Date(2019, 6), y: 5.42},
-                    {x: new Date(2019, 5), y: 5.36}
-                ]
-            }
-        ]
-    });
-
+    
+  
     useState(() => {
         getTEHistory(equipment_name).then(res =>
             setEquipmentHistory({
                 x: res.dates,
                 y: res.values
+               
             })
+            
         );
     });
 
@@ -150,6 +128,50 @@ export default function Equipment(props) {
         event.preventDefault();
         setValues({...values, [prop]: "It will decrease !"});
     };
+
+    const [options, setOptions] = useState({
+        
+        theme: "light2",
+        animationEnabled: true,
+        exportEnabled: true,
+        title: {
+            text: equipment_name +"/USD"
+        },
+        axisY: {
+            title: equipment_name +"/USD",
+            includeZero: false
+        },
+        data: [
+            {
+                type: "area",
+                xValueFormatString: "YYYY,MM,DD",
+                yValueFormatString: "#,##0.####" + "USD",
+                //last fifteen days
+                dataPoints: [
+                    {x: new Date(2019, 11,24), y: 0.1680}, 
+                    {x: new Date(2019, 11,23), y: 0.1685}, 
+                    {x: new Date(2019, 11,22), y: 0.1684}, 
+                    {x: new Date(2019, 11,21), y: 0.1684}, 
+                    {x: new Date(2019, 11,20), y: 0.1685}, 
+                    {x: new Date(2019, 11,19), y: 0.1683}, 
+                    {x: new Date(2019, 11,18), y: 0.1698}, 
+                    {x: new Date(2019, 11,17), y: 0.1709}, 
+                    {x: new Date(2019, 11,16), y: 0.1711}, 
+                    {x: new Date(2019, 11,15), y: 0.1717}, 
+                    {x: new Date(2019, 11,14), y: 0.1721}, 
+                    {x: new Date(2019, 11,13), y: 0.1729}, 
+                    {x: new Date(2019, 11,12), y: 0.1722}, 
+                    {x: new Date(2019, 11,11), y: 0.1721}, 
+                    {x: new Date(2019, 11,10), y: 0.1723},
+                    {x: new Date(2019, 11,9), y: 0.1730}, 
+                    {x: new Date(2019, 11,8), y: 0.1731}, 
+                    {x: new Date(2019, 11,7), y: 0.1730},  
+
+                     
+                ]
+            }
+        ]
+    });
 
     return (
         <div>
@@ -252,8 +274,8 @@ export default function Equipment(props) {
                     </Card>
                 </GridItem>
                 <GridItem>
-                    {equipmentValue.te_value}
-                </GridItem>
+                    {/*<h3>{equipmentValue.te_value}</h3>*/}
+                 </GridItem>
                 {/* <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="warning">
