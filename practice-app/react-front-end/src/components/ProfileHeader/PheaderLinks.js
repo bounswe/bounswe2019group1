@@ -106,7 +106,7 @@ export default function PheaderLinks() {
         <Searchh/>
 
 
-            <Link to="/search-results">
+            <Link to="/user/21">
               <div className={classes.searchIcon}>
               <SearchIcon />
               </div>
@@ -202,6 +202,10 @@ const languages = [
   },
   {
     name: 'omer',
+    year: 1972
+  },
+  {
+    name: 'ramazan mutlu',
     year: 1972
   },
   {

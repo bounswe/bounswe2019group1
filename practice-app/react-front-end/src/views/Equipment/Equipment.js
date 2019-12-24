@@ -268,14 +268,12 @@ console.log(equipmentValue.te_value)
                         </CardBody>
                         <CardFooter chart>
                             <div className={classes.stats}>
-                                <AccessTime/> updated 4 minutes ago
+                                <AccessTime/> Current Value: {equipmentValue.te_value} (updated 4 minutes ago)
                             </div>
                         </CardFooter>
                     </Card>
                 </GridItem>
-                <GridItem>
-                    {/*<h3>{equipmentValue.te_value}</h3>*/}
-                 </GridItem>
+                
                 {/* <GridItem xs={12} sm={12} md={4}>
           <Card chart>
             <CardHeader color="warning">

@@ -220,6 +220,7 @@ export default function UserProfilePage(props) {
                       {userProfileValues.last_name}
                     </h3>
                     <h6>{userProfileValues.title}</h6>
+                    <h6 className={classes.cardTitle}>Public User</h6>
                     <div>
                     <Button onClick={iconClick} variant="contained" color="primary">
                         {isFollowing?"Following":"Follow"}
@@ -248,7 +249,7 @@ export default function UserProfilePage(props) {
                           Followers
                         </Paper>
                       </Grid>
-
+              
                         </div>
                       </Grid>
                       <Grid item xs></Grid>

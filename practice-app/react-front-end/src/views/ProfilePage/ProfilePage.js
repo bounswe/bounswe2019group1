@@ -202,7 +202,7 @@ export default function ProfilePage(props) {
                       <Icon fontSize="large">account_balance_wallet</Icon>
                     </Link>
                     <CardBody>
-                      <h4 className={classes.cardTitle}>Prediction rate</h4>
+                      {/* <h4 className={classes.cardTitle}>Prediction rate</h4> 
                       <p className={classes.cardCategory}>
                         <span className={classes.successText}>
                           <ArrowUpward className={classes.upArrowCardCategory} /> 75%
@@ -210,9 +210,9 @@ export default function ProfilePage(props) {
 
                         {/* <span className={classes.failText}>
                           <ArrowDownward className={classes.upArrowCardCategory} /> %45
-                        </span> */}
+                        </span> 
                         
-                      </p>
+                      </p>*/}
                     </CardBody>
                   </div>
                   <div className={classes.root}>
