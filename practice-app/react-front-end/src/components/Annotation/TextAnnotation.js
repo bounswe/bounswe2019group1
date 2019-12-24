@@ -120,7 +120,7 @@ export class TextAnnotation extends Component {
             .then(res => (res.status === 200 ? res : null))
             .then(() => {
                 window.location.reload();
-                swal("Good job!", "Annotation is successfully added.", "Success");
+                swal("Good job!", "Text Annotation is successfully added.", "Success");
             })
             .catch(error => {
                 swal("Oops: ", error.message, "error");
