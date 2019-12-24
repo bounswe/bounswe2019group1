@@ -3,5 +3,5 @@
     <item
         android:id="@+id/annotation_write_comment"
         android:icon="@drawable/ic_article_write_comment_annotation_foreground"
-        android:title="@string/title_notifications" />
+        android:title="annotate" />
 </menu>

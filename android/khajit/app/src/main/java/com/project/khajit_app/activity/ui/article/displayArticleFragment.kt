@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 
 import com.project.khajit_app.R
+import com.project.khajit_app.activity.ui.annotation.CreateAnnotationFragment
 import com.project.khajit_app.activity.ui.annotation.DisplayAnnotationFromSourceFragment
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.annotationModels.GetAnnotationModelResponse
@@ -29,7 +30,9 @@ import com.project.khajit_app.data.annotationModels.ShowTextAnnotationModel
 import com.project.khajit_app.data.annotationModels.sourceModel
 import com.project.khajit_app.data.models.GeneralArticleModel
 import com.project.khajit_app.data.models.GeneralArticleSpannableModel
+import com.project.khajit_app.data.models.UserAllInfo
 import com.project.khajit_app.databinding.DisplayArticleFragmentBinding
+import com.project.khajit_app.global.User
 import interfaces.fragmentOperationsInterface
 import retrofit2.Call
 import retrofit2.Callback
@@ -92,28 +95,24 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
         annotationTexts.clear()
         displayArticleFragmentBinding =
             DisplayArticleFragmentBinding.inflate(inflater, container, false)
+        val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
 
-        //model.text = String.format(getString(R.string.description_format), model.description, model.url)
         displayArticleFragmentBinding.articlSpanableModel = null
         imageView = displayArticleFragmentBinding.articleImageDisplayDetails
         containerId = container
         contentView = displayArticleFragmentBinding.articleContentDetails
-
         articleModel = arguments!!.getSerializable(ARTICLEMODEL) as GeneralArticleModel
         isGuest = arguments!!.getInt(ISGUEST)
         isLoggedInUser = arguments!!.getInt(ISLOGGEDINUSER)
         isFeedPage = arguments!!.getInt(ISFEEDPAGE)
         isFollowing = arguments!!.getInt(ISFOLLOWING)
         userId = arguments!!.getInt(USERID)
-        val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
 
         article_id = articleModel.id!!
-        //getAnnotations(articleModel)
         spannable = SpannableString(articleModel.content)
         val handlerThread = HandlerThread("NETWORK_FALAN MAHMUT")
         handlerThread.start()
         val handler = Handler(handlerThread.looper)
-
         handler.postDelayed({
             annotationSource = "http://www.khajiittraders.tk/article/" + article_id+ "/"
             RetrofitClient.instanceAnnotation.getAnnotationsBySource(annotationSource).enqueue(object :
@@ -178,6 +177,7 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
 
 
         }, 3000)
+
         if(articleModel.image != null)
             Glide.with(activity).load(articleModel.image).into(imageView)
         else{
@@ -185,6 +185,46 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
             imageView.setImageResource(imgResId)
 
         }
+        val user = "http://www.khajiittraders.tk/user/{${User.id!!}/"
+
+        contentView.setCustomSelectionActionModeCallback(object :
+            ActionMode.Callback {
+            override fun onCreateActionMode(
+                mode: ActionMode,
+                menu: Menu?
+            ): Boolean {
+                mode.menuInflater.inflate(R.menu.annotation_create_menu, menu)
+                return true
+            }
+
+            override fun onPrepareActionMode(
+                mode: ActionMode?,
+                menu: Menu?
+            ): Boolean {
+                return false
+            }
+
+            override fun onActionItemClicked(
+                mode: ActionMode,
+                item: MenuItem
+            ): Boolean {
+                if (item.getItemId() == R.id.annotation_write_comment) {
+                    val selStart: Int = contentView.getSelectionStart()
+                    val selEnd: Int = contentView.getSelectionEnd()
+                    fragmentTransaction(
+                        parentActivityManager,
+                        CreateAnnotationFragment.newInstance(user,annotationSource,selStart,selEnd),
+                        (containerId!!.id),
+                        true,
+                        true,
+                        false)
+                    return true// annotateClicked(selStart, selEnd)
+                }
+                return false
+            }
+
+            override fun onDestroyActionMode(mode: ActionMode) {}
+        })
         return displayArticleFragmentBinding.root
     }
 
