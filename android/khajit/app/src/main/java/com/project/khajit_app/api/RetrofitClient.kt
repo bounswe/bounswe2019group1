@@ -14,6 +14,7 @@ object RetrofitClient {
 
     //var ipAddress = Inet4Address.getLocalHost().hostAddress
     private const val BASE_URL = "http://35.163.120.227:8000/"    //dynamic ip adresi girilmesi lazım
+    private const val BASE_URL_ANNOTATION = "http://35.163.120.227:8020/"    //dynamic ip adresi girilmesi lazım
 
 
     private val okHttpClient = OkHttpClient.Builder()
@@ -51,5 +52,14 @@ object RetrofitClient {
 
         retrofit.create(Api ::class.java)
     }
+    val instanceAnnotation: AnnotationApi by lazy{
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL_ANNOTATION)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(okHttpClient)
+            .build()
 
+        retrofit.create(AnnotationApi ::class.java)
+    }
 }

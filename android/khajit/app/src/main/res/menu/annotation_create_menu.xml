@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/annotation_write_comment"
+        android:icon="@drawable/ic_article_write_comment_annotation_foreground"
+        android:title="annotate" />
+</menu>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="textAnnotationModel"
+            type="com.project.khajit_app.data.annotationModels.ShowTextAnnotationModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/event_layout_general"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:background="#5BFFFFFF">
+
+
+        <TextView
+            android:id="@+id/annotation_bodies"
+            style="@style/TextAppearance.AppCompat.Subhead.Inverse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="8dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:minHeight="@dimen/recycler_item_footer_height_min"
+            android:paddingLeft="@dimen/recycler_item_footer_padding"
+            android:paddingTop="@dimen/recycler_item_footer_padding"
+            android:paddingRight="@dimen/recycler_item_footer_padding"
+            android:textColor="#FF000000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            tools:text="@{textAnnotationModel.bodyFinal}" />
+
+    </RelativeLayout>
+</layout>
