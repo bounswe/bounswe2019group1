@@ -79,7 +79,7 @@ class EquipmentFragment : Fragment(), fragmentOperationsInterface {
                 }
 
                 override fun onFailure(call: Call<CurrencyResponse>, t: Throwable) {
-                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                    println(t.message)
                 }
 
             })
@@ -96,7 +96,7 @@ class EquipmentFragment : Fragment(), fragmentOperationsInterface {
                 }
 
                 override fun onFailure(call: Call<CryptoResponse>, t: Throwable) {
-                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                    println(t.message)
                 }
 
             })
@@ -113,7 +113,7 @@ class EquipmentFragment : Fragment(), fragmentOperationsInterface {
                 }
 
                 override fun onFailure(call: Call<StockResponse>, t: Throwable) {
-                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                    println(t.message)
                 }
 
             })
@@ -130,7 +130,7 @@ class EquipmentFragment : Fragment(), fragmentOperationsInterface {
                 }
 
                 override fun onFailure(call: Call<CommodityResponse>, t: Throwable) {
-                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                    println(t.message)
                 }
 
             })
@@ -147,7 +147,7 @@ class EquipmentFragment : Fragment(), fragmentOperationsInterface {
                 }
 
                 override fun onFailure(call: Call<TradeIndiceResponse>, t: Throwable) {
-                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                    println(t.message)
                 }
 
             })
@@ -158,13 +158,13 @@ class EquipmentFragment : Fragment(), fragmentOperationsInterface {
                     call: Call<ETFResponse>?,
                     response: Response<ETFResponse>?
                 ) {
-                    value_spy.text = response?.body()?.obj_spy?.price
-                    value_ivv.text = response?.body()?.obj_ivv?.price
-                    value_vti.text = response?.body()?.obj_vti?.price
+                    value_spy.text = response?.body()?.obj_spy
+                    value_ivv.text = response?.body()?.obj_ivv
+                    value_vti.text = response?.body()?.obj_vti
                 }
 
                 override fun onFailure(call: Call<ETFResponse>, t: Throwable) {
-                    Toast.makeText(context, t.message, Toast.LENGTH_LONG).show()
+                    println(t.message)
                 }
 
             })
