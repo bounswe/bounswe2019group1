@@ -133,7 +133,7 @@ class NotificationsFragment : Fragment(),View.OnClickListener, fragmentOperation
         val activity = activity as Context
         containerId = container
         //val detailButton = notificationView.findViewById(R.id.buttonToGoToNotificationDetail) as Button
-        detailButton.setOnClickListener(this)
+        //detailButton.setOnClickListener(this)
         println(sendDateUAT.toString())
 
         recyclerView = notificationView.findViewById(R.id.notification_fragment_recyclerview) as RecyclerView
