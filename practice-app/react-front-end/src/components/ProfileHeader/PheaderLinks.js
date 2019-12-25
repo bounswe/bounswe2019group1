@@ -106,7 +106,7 @@ export default function PheaderLinks() {
         <Searchh/>
 
 
-            <Link to="/user/21">
+            <Link to="/search-results">
               <div className={classes.searchIcon}>
               <SearchIcon />
               </div>

@@ -148,26 +148,16 @@ console.log(equipmentValue.te_value)
                 yValueFormatString: "#,##0.####" + "USD",
                 //last fifteen days
                 dataPoints: [
-                    {x: new Date(2019, 11,24), y: 0.1680}, 
-                    {x: new Date(2019, 11,23), y: 0.1685}, 
-                    {x: new Date(2019, 11,22), y: 0.1684}, 
-                    {x: new Date(2019, 11,21), y: 0.1684}, 
-                    {x: new Date(2019, 11,20), y: 0.1685}, 
-                    {x: new Date(2019, 11,19), y: 0.1683}, 
-                    {x: new Date(2019, 11,18), y: 0.1698}, 
-                    {x: new Date(2019, 11,17), y: 0.1709}, 
-                    {x: new Date(2019, 11,16), y: 0.1711}, 
-                    {x: new Date(2019, 11,15), y: 0.1717}, 
-                    {x: new Date(2019, 11,14), y: 0.1721}, 
-                    {x: new Date(2019, 11,13), y: 0.1729}, 
-                    {x: new Date(2019, 11,12), y: 0.1722}, 
-                    {x: new Date(2019, 11,11), y: 0.1721}, 
-                    {x: new Date(2019, 11,10), y: 0.1723},
-                    {x: new Date(2019, 11,9), y: 0.1730}, 
-                    {x: new Date(2019, 11,8), y: 0.1731}, 
-                    {x: new Date(2019, 11,7), y: 0.1730},  
-
-                     
+                    {x: new Date(equipmentValue.changed_date), y: parseFloat(equipmentValue.te_value)}, 
+                    {x: new Date(equipmentValue.changed_date), y: parseFloat(equipmentValue.te_value)}, 
+                    {x: new Date(equipmentValue.changed_date), y: parseFloat(equipmentValue.te_value)}, 
+                    {x: new Date(equipmentValue.changed_date), y: parseFloat(equipmentValue.te_value)}, 
+                    {x: new Date(equipmentValue.changed_date), y: parseFloat(equipmentValue.te_value)},
+                    {x: new Date(equipmentValue.changed_date), y: parseFloat(equipmentValue.te_value)}, 
+                    {x: new Date(equipmentValue.changed_date), y: parseFloat(equipmentValue.te_value)}, 
+                    {x: new Date(equipmentValue.changed_date), y: parseFloat(equipmentValue.te_value)}, 
+                    {x: new Date(equipmentValue.changed_date), y: parseFloat(equipmentValue.te_value)}, 
+                    {x: new Date(equipmentValue.changed_date), y: parseFloat(equipmentValue.te_value)},                      
                 ]
             }
         ]
