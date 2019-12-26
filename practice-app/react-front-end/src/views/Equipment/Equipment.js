@@ -214,7 +214,7 @@ console.log(equipmentValue.te_value)
                                         value={values.buy_amount}
                                         onChange={handleChange("buy_amount")}
                                         startAdornment={
-                                            <InputAdornment position="start">$</InputAdornment>
+                                            <InputAdornment position="start">₺</InputAdornment>
                                         }
                                         labelWidth={60}
                                     />
@@ -241,7 +241,7 @@ console.log(equipmentValue.te_value)
                                         value={values.sell_amount}
                                         onChange={handleChange("sell_amount")}
                                         startAdornment={
-                                            <InputAdornment position="start">$</InputAdornment>
+                                            <InputAdornment position="start">₺</InputAdornment>
                                         }
                                         labelWidth={60}
                                     />
