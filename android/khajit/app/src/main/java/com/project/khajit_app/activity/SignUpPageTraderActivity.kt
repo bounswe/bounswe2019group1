@@ -14,6 +14,8 @@ import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.BasicRegisterResponse
 import com.project.khajit_app.data.models.BasicUser
 import com.project.khajit_app.data.models.TraderUser
+import com.project.khajit_app.data.models.createWalletResponse
+import com.project.khajit_app.global.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -95,6 +97,29 @@ class SignUpPageTraderActivity : AppCompatActivity() {
                             //Toast.makeText(applicationContext,response.body()?.username.toString(), Toast.LENGTH_LONG).show()
 
                         } else {
+                            User.token = response.body()!!.token
+                            RetrofitClient.instance.createWallet().enqueue(object :
+                                Callback<createWalletResponse> {
+                                override fun onResponse(
+                                    call: Call<createWalletResponse>,
+                                    response: Response<createWalletResponse>
+                                ) {
+                                    println(response.toString())
+                                    if(response.code() == 200 ){
+                                        if(response.body()?.detail != null){
+                                            println("NOT Upgraded")
+                                        }else{
+                                            println("UPGRADED")
+                                            User.token = ""
+                                        }
+                                    }else{
+
+                                    }
+                                }
+                                override fun onFailure(call: Call<createWalletResponse>, t: Throwable) {
+
+                                }
+                            })
                             // Toast.makeText(applicationContext,"User has been created",Toast.LENGTH_LONG).show()
                             Log.d("success:", "" + response.body()?.user?.username)
                             startActivity(
