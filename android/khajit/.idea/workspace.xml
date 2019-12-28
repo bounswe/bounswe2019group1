@@ -58,8 +58,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/display_article_fragment.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="263">
-              <caret line="64" selection-start-line="64" selection-end-line="64" />
+            <state relative-caret-position="443">
+              <caret line="76" column="56" selection-start-line="76" selection-start-column="56" selection-end-line="76" selection-end-column="56" />
+              <folding>
+                <element signature="e#3254#3289#0" expanded="true" />
+                <element signature="e#3325#3358#0" expanded="true" />
+                <element signature="e#3396#3431#0" expanded="true" />
+                <element signature="e#3470#3503#0" expanded="true" />
+              </folding>
             </state>
           </provider>
           <provider editor-type-id="android-designer2" />
@@ -757,8 +763,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/display_article_fragment.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="64" selection-start-line="64" selection-end-line="64" />
+        <state relative-caret-position="443">
+          <caret line="76" column="56" selection-start-line="76" selection-start-column="56" selection-end-line="76" selection-end-column="56" />
+          <folding>
+            <element signature="e#3254#3289#0" expanded="true" />
+            <element signature="e#3325#3358#0" expanded="true" />
+            <element signature="e#3396#3431#0" expanded="true" />
+            <element signature="e#3470#3503#0" expanded="true" />
+          </folding>
         </state>
       </provider>
       <provider editor-type-id="android-designer2" />
