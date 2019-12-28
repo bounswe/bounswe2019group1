@@ -125,8 +125,8 @@ interface Api {
     @POST("article/create/")
     @Multipart
     fun createArticle(
-        @Part("title") title: String,
-        @Part("content") content : String,
+        @Part("title") title: RequestBody,
+        @Part("content") content : RequestBody,
         @Part("is_public") is_public : Boolean,
         @Part file: MultipartBody.Part): Call<CreateArticleResponseModel>
 

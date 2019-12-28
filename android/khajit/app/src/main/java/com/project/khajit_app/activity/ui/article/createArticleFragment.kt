@@ -105,7 +105,8 @@ class CreateArticleFragment : Fragment(), fragmentOperationsInterface {
         var file = File(filePath)
         var requestBody  = RequestBody.create(MediaType.parse("image/*"),file)
         var part = MultipartBody.Part.createFormData("image", file.name, requestBody)
-        //var description = RequestBody.create(MediaType.parse("text/plain"), "image-type");
+        var title = RequestBody.create(MediaType.parse("text/plain"), title_info);
+        var content = RequestBody.create(MediaType.parse("text/plain"), content_info);
 
 
 
@@ -116,7 +117,7 @@ class CreateArticleFragment : Fragment(), fragmentOperationsInterface {
         println(articleInfo.is_public)*/
 
 
-        RetrofitClient.instance.createArticle(title_info,content_info,isPublic,part).enqueue(object :
+        RetrofitClient.instance.createArticle(title,content,isPublic,part).enqueue(object :
             Callback<CreateArticleResponseModel> {
             override fun onResponse(
                 call: Call<CreateArticleResponseModel>,
