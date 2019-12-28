@@ -1,6 +1,8 @@
 package com.project.khajit_app.api
 
 import com.project.khajit_app.data.models.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -116,9 +118,17 @@ interface Api {
     @GET("equipment/traceindices/")
     fun tradeValues():Call<TradeIndiceResponse>
 
-    @Headers("Content-Type: application/json")
+    /*@Headers("Content-Type: application/json")
     @POST("article/create/")
-    fun createArticle(@Body body: CreateArticleModel?):Call<CreateArticleResponseModel>
+    fun createArticle(@Body body: CreateArticleModel?):Call<CreateArticleResponseModel>*/
+
+    @POST("article/create/")
+    @Multipart
+    fun createArticle(
+        @Part("title") title: String,
+        @Part("content") content : String,
+        @Part("is_public") is_public : Boolean,
+        @Part file: MultipartBody.Part): Call<CreateArticleResponseModel>
 
     @Headers("Content-Type: application/json")
     @PUT("wallet/sendUSD/")
