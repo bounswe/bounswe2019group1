@@ -230,4 +230,8 @@ interface Api {
     @POST("notification/createbuyorder/")
     fun createBuyOrder(@Body body: EquipmentBSOrderModel?):Call<EquipmentBSOrderResponse>
 
+    @Headers("Content-Type: application/json")
+    @GET("article-comment/list/{id}/" )
+    fun getArticleComments(@Path(value = "id", encoded = true) articleId: Int):Call<ListArticleCommentModel>
+
 }
