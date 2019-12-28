@@ -7,11 +7,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.ui.prediction.MakePredictionFragment
+import com.project.khajit_app.api.RetrofitClient
 import interfaces.fragmentOperationsInterface
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class EquipmentDetailsFragment : Fragment(), fragmentOperationsInterface {
 
@@ -36,10 +41,16 @@ class EquipmentDetailsFragment : Fragment(), fragmentOperationsInterface {
         val equipmentBuy = root.findViewById(R.id.details_equipment_buy) as Button
         val equipmentSell = root.findViewById(R.id.details_equipment_sell) as Button
         val equipmentPredict = root.findViewById(R.id.details_equipment_predict) as Button
+        val equipmentBuyOrder = root.findViewById(R.id.details_equipment_buy_order) as Button
+        val equipmentSellOrder = root.findViewById(R.id.details_equipment_sell_order) as Button
+        //val equipmentFollow = root.findViewById(R.id.details_equipment_follow) as Button
 
         equipmentBuy.setOnClickListener { goToEquipmentBuy(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
         equipmentSell.setOnClickListener { goToEquipmentSell(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
         equipmentPredict.setOnClickListener { goToEquipmentPredict(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
+        equipmentBuyOrder.setOnClickListener { goToEquipmentBuyOrder(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
+        equipmentSellOrder.setOnClickListener { goToEquipmentSellOrder(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
+        //equipmentFollow.setOnClickListener { equipmentFollow(arguments?.getString("equipment")!!) }
 
         return root
     }
@@ -84,6 +95,39 @@ class EquipmentDetailsFragment : Fragment(), fragmentOperationsInterface {
             true,
             false
         )
+    }
+
+    fun goToEquipmentBuyOrder(equipment : String, value : String) {
+
+        val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
+
+        fragmentTransaction(
+            parentActivityManager,
+            EquipmentBuyOrderFragment.newInstance(equipment, value),
+            (containerId!!.id),
+            false,
+            true,
+            false
+        )
+    }
+
+    fun goToEquipmentSellOrder(equipment : String, value : String) {
+
+        val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
+
+        fragmentTransaction(
+            parentActivityManager,
+            EquipmentSellOrderFragment.newInstance(equipment, value),
+            (containerId!!.id),
+            false,
+            true,
+            false
+        )
+    }
+
+    fun equipmentFollow(equipment : String) {
+        // Follow the equipment
+
     }
 
 

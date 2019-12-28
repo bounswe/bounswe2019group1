@@ -4,3 +4,4 @@ data class EquipmentBSModel (
     val name_of_eq : String,
     val amount : Int
 )
+

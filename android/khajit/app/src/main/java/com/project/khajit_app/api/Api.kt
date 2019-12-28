@@ -1,6 +1,8 @@
 package com.project.khajit_app.api
 
 import com.project.khajit_app.data.models.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -116,9 +118,17 @@ interface Api {
     @GET("equipment/traceindices/")
     fun tradeValues():Call<TradeIndiceResponse>
 
-    @Headers("Content-Type: application/json")
+    /*@Headers("Content-Type: application/json")
     @POST("article/create/")
-    fun createArticle(@Body body: CreateArticleModel?):Call<CreateArticleResponseModel>
+    fun createArticle(@Body body: CreateArticleModel?):Call<CreateArticleResponseModel>*/
+
+    @POST("article/create/")
+    @Multipart
+    fun createArticle(
+        @Part("title") title: String,
+        @Part("content") content : String,
+        @Part("is_public") is_public : Boolean,
+        @Part file: MultipartBody.Part): Call<CreateArticleResponseModel>
 
     @Headers("Content-Type: application/json")
     @PUT("wallet/sendUSD/")
@@ -188,7 +198,6 @@ interface Api {
     @GET("article/listArticleByUserId/{id}/")
     fun getArticlesByUserId(@Path(value = "id", encoded = true) userId: Int):Call<PublicArticleListResponse>
 
-
     @Headers("Content-Type: application/json")
     @POST("prediction/predict/")
     fun makePrediction(@Body body: PredictionModel):Call<PredictionResponseModel>
@@ -196,5 +205,29 @@ interface Api {
     @Headers("Content-Type: application/json")
     @GET("event/list/" )
     fun getAllEvents():Call<ListEventModel>
+
+    @Headers("Content-Type: application/json")
+    @GET("notification/listnotification/" )
+    fun getNotifications():Call<ListNotificationsResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("follow/listFollowerPending/" )
+    fun getPendingFollowers():Call<PendingFollowerResponse>
+
+    @Headers("Content-Type: application/json")
+    @PUT("follow/approvefollow/{id}/" )
+    fun approveFollower(@Path(value = "id", encoded = true) followId: Int):Call<FollowModel3>
+
+    @Headers("Content-Type: application/json")
+    @PUT("follow/rejectfollow/{id}/" )
+    fun rejectFollower(@Path(value = "id", encoded = true) followId: Int):Call<FollowModel3>
+
+    @Headers("Content-Type: application/json")
+    @POST("notification/createsellorder/")
+    fun createSellOrder(@Body body: EquipmentBSOrderModel?):Call<EquipmentBSOrderResponse>
+
+    @Headers("Content-Type: application/json")
+    @POST("notification/createbuyorder/")
+    fun createBuyOrder(@Body body: EquipmentBSOrderModel?):Call<EquipmentBSOrderResponse>
 
 }
