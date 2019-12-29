@@ -161,6 +161,8 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
 
         if(!trader) { // If basic --> trader
 
+            User.type = true
+
             RetrofitClient.instance.upgradeUser().enqueue(object :
                 Callback<GenericUserModel> {
                 override fun onResponse(
@@ -174,7 +176,7 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                         }else{
                             println("UPGRADED")
                             updateAfterRequest(root)
-                            goBackFragment()
+
                         }
                     }else{
 
@@ -185,8 +187,32 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                 }
             })
 
+            RetrofitClient.instance.createWallet().enqueue(object :
+                Callback<createWalletResponse> {
+                override fun onResponse(
+                    call: Call<createWalletResponse>,
+                    response: Response<createWalletResponse>
+                ) {
+                    println(response.toString())
+                    if(response.code() == 200 ){
+                        if(response.body()?.detail != null){
+                            println("NOT Upgraded")
+                        }else{
+                            println("UPGRADED")
+                        }
+                    }else{
+
+                    }
+                }
+                override fun onFailure(call: Call<createWalletResponse>, t: Throwable) {
+
+                }
+            })
+
+
         } else {    // If trader --> basic
 
+            User.type = false
             RetrofitClient.instance.downgradeUser().enqueue(object :
                 Callback<GenericUserModel> {
                 override fun onResponse(
@@ -200,13 +226,35 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                         }else{
                             println("DOWNGRADED")
                             updateAfterRequest(root)
-                            goBackFragment()
+
                         }
                     }else{
 
                     }
                 }
                 override fun onFailure(call: Call<GenericUserModel>, t: Throwable) {
+
+                }
+            })
+
+            RetrofitClient.instance.deleteWallet().enqueue(object :
+                Callback<createWalletResponse> {
+                override fun onResponse(
+                    call: Call<createWalletResponse>,
+                    response: Response<createWalletResponse>
+                ) {
+                    println(response.toString())
+                    if(response.code() == 200 ){
+                        if(response.body()?.detail != null){
+                            println("NOT Upgraded")
+                        }else{
+                            println("UPGRADED")
+                        }
+                    }else{
+
+                    }
+                }
+                override fun onFailure(call: Call<createWalletResponse>, t: Throwable) {
 
                 }
             })
@@ -241,7 +289,7 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                         }else{
                             println("CHANGED")
                             updateAfterRequest(root)
-                            goBackFragment()
+
                         }
                     }else{
 
@@ -318,7 +366,6 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                     }else{
                         println("CHANGED")
                         updateAfterRequest(view)
-                        goBackFragment()
                     }
                 }else{
 
@@ -419,7 +466,14 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                         User.is_public = response.body()?.is_public
                         User.bio = response.body()?.biography
                         User.title = response.body()?.title
-                        User.type = response.body()?.groups?.get(0).equals("trader")
+                        //User.type = response.body()?.groups?.get(0).equals("trader")
+
+                        println()
+                        println()
+                        println(User.type.toString() + "    <<<<---- TYPE")
+                        println()
+                        println()
+                        goBackFragment()
                     }
                 }else{
 

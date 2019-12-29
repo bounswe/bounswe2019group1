@@ -5,8 +5,8 @@
     <data>
 
         <variable
-            name="generalArticleModel"
-            type="com.project.khajit_app.data.models.GeneralArticleModel" />
+            name="articlSpanableModel"
+            type="com.project.khajit_app.data.models.GeneralArticleSpannableModel" />
     </data>
 
     <ScrollView
@@ -29,11 +29,28 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dog_detail_name_margin_top"
                 android:layout_marginBottom="0dp"
-                android:text="@{generalArticleModel.title}" />
+                android:text="@{articlSpanableModel.title}" />
+            <TextView
+                android:id="@+id/creator"
+                style="@style/TextAppearance.AppCompat.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dog_detail_name_margin_top"
+                android:layout_marginBottom="0dp"
+                android:text="@{articlSpanableModel.author.first_name + articlSpanableModel.author.last_name }" />
+            <ImageView
+                android:id="@+id/article_image_display_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dog_detail_image_margin_vertical"
+                android:layout_marginBottom="@dimen/dog_detail_image_margin_vertical"
+                android:adjustViewBounds="true"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop" />
 
 
             <TextView
-                android:id="@+id/description"
+                android:id="@+id/article_content_details"
                 style="@style/TextAppearance.AppCompat.Body1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -41,9 +58,9 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginRight="@dimen/dog_detail_description_margin_right"
                 android:layout_marginBottom="@dimen/dog_detail_description_margin_bottom"
-                android:autoLink="web"
                 android:background="#81E4C9C8"
-                android:text="@{generalArticleModel.content}" />
+                android:textIsSelectable="true"
+                android:text="@{articlSpanableModel.content}" />
 
         </LinearLayout>
 

@@ -4,15 +4,18 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.text.SpannableString
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 import com.project.khajit_app.R
 import com.project.khajit_app.api.RetrofitClient
@@ -21,6 +24,7 @@ import com.project.khajit_app.data.models.PublicArticleListResponse
 import com.project.khajit_app.data.models.UserAllInfo
 import com.project.khajit_app.databinding.DisplayArticleRecyclerviewItemModelBinding
 import interfaces.fragmentOperationsInterface
+import kotlinx.android.synthetic.main.activity_main.*
 
 import kotlinx.android.synthetic.main.display_article_recyclerview_item_model.view.*
 import retrofit2.Call
@@ -40,9 +44,11 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
     private var authors = ArrayList<UserAllInfo>()
     private var is_public_info = ArrayList<Boolean>()
     private var created_dates = ArrayList<String>()
+    private var image_urls = ArrayList<String?>()
 
     private var containerId : ViewGroup? = null
     private lateinit var recyclerView : RecyclerView
+
     private var isGuest : Int = 0
     private var isLoggedInUser : Int = 0
     private var isFeedPage: Int = 0
@@ -106,6 +112,7 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
                         authors.clear()
                         is_public_info.clear()
                         created_dates.clear()
+                        image_urls.clear()
 
                         var results = response.body()?.results as List<GeneralArticleModel>
                         print(count)
@@ -117,10 +124,11 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
                             authors.add(article.author as UserAllInfo)
                             is_public_info.add(article.is_public as Boolean)
                             created_dates.add(article.created_date as String)
+                            image_urls.add(article.image as? String)
                             print(article.title)
                         }
                         recyclerView.layoutManager = GridLayoutManager(activity, 1)
-                        recyclerView.adapter = ArticleListAdapter(isGuest,isLoggedInUser,isFeedPage,isFollowing,userId,articleIds,titles,contents,authors,is_public_info,created_dates,context)
+                        recyclerView.adapter = ArticleListAdapter(isGuest,isLoggedInUser,isFeedPage,isFollowing,userId,articleIds,titles,contents,authors,is_public_info,created_dates,image_urls,context)
 
                     }else{
                         print("nalaka")
@@ -166,7 +174,7 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
                         }
 
                         recyclerView.layoutManager = GridLayoutManager(activity, 1)
-                        recyclerView.adapter = ArticleListAdapter(isGuest,isLoggedInUser,isFeedPage,isFollowing,userId,articleIds,titles,contents,authors,is_public_info,created_dates,context)
+                        recyclerView.adapter = ArticleListAdapter(isGuest,isLoggedInUser,isFeedPage,isFollowing,userId,articleIds,titles,contents,authors,is_public_info,created_dates,image_urls,context)
 
                     }else{
                         Log.d("error message:", response.message())
@@ -210,7 +218,7 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
                             created_dates.add(article.created_date as String)
                         }
                         recyclerView.layoutManager = GridLayoutManager(activity, 1)
-                        recyclerView.adapter = ArticleListAdapter(isGuest,isLoggedInUser,isFeedPage,isFollowing,userId,articleIds,titles,contents,authors,is_public_info,created_dates,context)
+                        recyclerView.adapter = ArticleListAdapter(isGuest,isLoggedInUser,isFeedPage,isFollowing,userId,articleIds,titles,contents,authors,is_public_info,created_dates,image_urls,context)
 
 
                     }else{
@@ -254,7 +262,7 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
                             created_dates.add(article.created_date as String)
                         }
                         recyclerView.layoutManager = GridLayoutManager(activity, 1)
-                        recyclerView.adapter = ArticleListAdapter(isGuest,isLoggedInUser,isFeedPage,isFollowing,userId,articleIds,titles,contents,authors,is_public_info,created_dates,context)
+                        recyclerView.adapter = ArticleListAdapter(isGuest,isLoggedInUser,isFeedPage,isFollowing,userId,articleIds,titles,contents,authors,is_public_info,created_dates,image_urls,context)
 
 
                     }else{
@@ -329,7 +337,7 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
         containerId = container
         recyclerView = view.findViewById(R.id.list_article_fragment_recyclerview) as RecyclerView
         recyclerView.layoutManager = GridLayoutManager(activity, 1)
-        recyclerView.adapter = ArticleListAdapter(isGuest,isLoggedInUser,isFeedPage,isFollowing,userId,articleIds,titles,contents,authors,is_public_info,created_dates,activity)
+        recyclerView.adapter = ArticleListAdapter(isGuest,isLoggedInUser,isFeedPage,isFollowing,userId,articleIds,titles,contents,authors,is_public_info,created_dates,image_urls,activity)
 
 
         return view
@@ -348,6 +356,7 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
                         val        authors :ArrayList<UserAllInfo>,
                         val   is_public_info : ArrayList<Boolean>,
                         val         created_dates : ArrayList<String>,
+                        val image_urls : ArrayList<String?>,
                         val context: Context) :RecyclerView.Adapter<ViewHolder>(){
 
         private val layoutInflater = LayoutInflater.from(context)
@@ -359,9 +368,12 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
          }
 
          override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+
              val article = GeneralArticleModel(articleIds[position], titles[position],
-                 contents[position], authors[position],is_public_info[position],created_dates[position])
-             viewHolder.setData(article)
+                 contents[position], authors[position],is_public_info[position],created_dates[position],image_urls[position])
+
+             val imageView = viewHolder.itemView.findViewById(R.id.article_list_item_image) as ImageView
+             viewHolder.setData(article,imageView)
              //viewHolder.itemView.setOnClickListener { listener.onArticleSelected(article,isGuest,isLoggedInUser,isFeedPage,isFollowing,userId) }
              viewHolder.itemView.setOnClickListener(object : View.OnClickListener {
                  override fun onClick(v: View?) {
@@ -389,8 +401,15 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
                                                      DisplayArticleRecyclerviewItemModelBinding
          ) :
              RecyclerView.ViewHolder(itemView) {
-             fun setData(generalArticleModel: GeneralArticleModel) {
+             fun setData(generalArticleModel: GeneralArticleModel,imageView: ImageView) {
                  print("##### SET DATA İÇİ " + generalArticleModel.title)
+                 if(generalArticleModel.image != null)
+                    Glide.with(activity).load(generalArticleModel.image).into(imageView)
+                 else{
+                     val imgResId = R.drawable.ic_article_item_icon_image_foreground
+                     imageView.setImageResource(imgResId)
+
+                 }
                  displayArticleListBinding.generalArticleModel = generalArticleModel
              }
          }

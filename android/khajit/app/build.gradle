@@ -14,6 +14,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -70,4 +71,8 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
     implementation 'com.github.kittinunf.fuel:fuel-android:1.15.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.android.support:appcompat-v7:23.2.0'
+    apply plugin: 'kotlin-kapt'
+    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    kapt 'com.github.bumptech.glide:compiler:4.4.0'
 }

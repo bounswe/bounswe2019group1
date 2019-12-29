@@ -22,8 +22,14 @@ class EventCalendar(ListAPIView):
         url = "https://cdn-nfs.faireconomy.media/ff_calendar_thisweek.json?date=" + day + "." + year
         response = urllib.request.urlopen(url)
         data = json.loads(response.read())
-
-        return Response(data, 200)
+        
+        events = {"count": 0, "results": []}
+        
+        for event in data:
+            events['count'] += 1
+            events['results'].append(event)
+        
+        return Response(events, 200)
 
 
 class SearchEvent(ListAPIView):
@@ -45,11 +51,13 @@ class SearchEvent(ListAPIView):
 
         search_results = {"count": 0,
                           "results": []}
+        titles = []
         for word in semantics:
             for event in data:
                 if word['word'] in event['title'].lower():
-
-                    search_results['results'].append(event)
-                    search_results['count'] += 1
+                    if event['title'] not in titles:
+                        titles.append(event['title'])
+                        search_results['results'].append(event)
+                        search_results['count'] += 1        
         
         return Response(search_results, 200)

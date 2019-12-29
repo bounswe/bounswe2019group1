@@ -18,6 +18,9 @@ import GridItem from "components/Grid/GridItem.js";
 import NavPills from "components/NavPills/NavPills.js";
 import Parallax from "components/Parallax/Parallax.js";
 import { Link } from "react-router-dom";
+import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
+import CardBody from "components/Card2/CardBody.js";
 
 import profile from "assets/img/faces/marc.jpg";
 import portfolio1 from "assets/img/examples/ppp1.jpeg";
@@ -198,6 +201,19 @@ export default function ProfilePage(props) {
                     <Link to="/wallet-page">
                       <Icon fontSize="large">account_balance_wallet</Icon>
                     </Link>
+                    <CardBody>
+                      {/* <h4 className={classes.cardTitle}>Prediction rate</h4> 
+                      <p className={classes.cardCategory}>
+                        <span className={classes.successText}>
+                          <ArrowUpward className={classes.upArrowCardCategory} /> 75%
+                        </span>{" "}
+
+                        {/* <span className={classes.failText}>
+                          <ArrowDownward className={classes.upArrowCardCategory} /> %45
+                        </span> 
+                        
+                      </p>*/}
+                    </CardBody>
                   </div>
                   <div className={classes.root}>
                     <Grid container spacing={3}>
@@ -241,61 +257,7 @@ export default function ProfilePage(props) {
                       tabContent: (
                         <GridContainer justify="center">
                           <GridItem xs={12} sm={12} md={40}>
-                            <Paper className={classes.paper}>
-                              <Grid container spacing={2}>
-                                <Grid item>
-                                  <ButtonBase className={classes.image}>
-                                    <img
-                                      className={classes.img}
-                                      alt="complex"
-                                      src={articleThumbnail}
-                                    />
-                                  </ButtonBase>
-                                </Grid>
-                                <Grid item xs={120} sm container>
-                                  <Grid
-                                    item
-                                    xs
-                                    container
-                                    direction="column"
-                                    spacing={2}
-                                  >
-                                    <Grid item xs>
-                                      <Typography
-                                        gutterBottom
-                                        variant="subtitle1"
-                                      >
-                                        {
-                                          "The Key Traits of Patient and Successful Investors"
-                                        }
-                                      </Typography>
-                                      <Typography variant="body2" gutterBottom>
-                                        {
-                                          "According to Entrepreneur Network partner Phil Town, one of the most valuable traits an investor can have is patience. If you are a patient investor and decide on good businesses, Town says there is virtually no scenario where you will not make money. Here are some of the traits of patient investors..."
-                                        }
-                                      </Typography>
-                                    </Grid>
-                                    <Grid item>
-                                      <Typography
-                                        variant="body2"
-                                        style={{ cursor: "pointer" }}
-                                      >
-                                        {"24 November, 2019"}
-                                      </Typography>
-                                      <div style={{ float: "right" }}>
-                                        <Button
-                                          variant="contained"
-                                          color="primary"
-                                          href="edit-article"
-                                        >
-                                          Edit Article
-                                        </Button>
-                                      </div>
-                                    </Grid>
-                                  </Grid>
-                                </Grid>
-                              </Grid>
-                            </Paper>
+                            {items}
                           </GridItem>
                         </GridContainer>
                       )
@@ -337,7 +299,6 @@ export default function ProfilePage(props) {
                         </GridContainer>
                       )
                     },
-                   
                     {
                       tabButton: "Events",
                       tabIcon: Event,
@@ -374,20 +335,8 @@ export default function ProfilePage(props) {
                           </GridItem>
                         </GridContainer>
                       )
-                    },
-                    {
-                      tabButton: "Articles",
-                      tabIcon: Articles,
-                      tabContent: (
-                        <GridContainer justify="center">
-                          <GridItem xs={12} sm={12} md={40}>
-                            {items}
-                          </GridItem>
-                        </GridContainer>
-                      )
                     }
-                    
-                  ]}
+                ]}
                 />
               </GridItem>
             </GridContainer>

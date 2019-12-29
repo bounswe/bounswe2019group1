@@ -5,7 +5,7 @@
     android:id="@+id/root_create_article_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ui.article.createArticleFragment">
+    tools:context=".activity.ui.article.CreateArticleFragment">
 
     <ScrollView
         android:id="@+id/root_scroll_create_article_fragment"

@@ -1,7 +1,13 @@
 import { container, title } from "assets/jss/material-kit-react.js";
 
 import imagesStyle from "assets/jss/material-kit-react/imagesStyles.js";
-
+import {
+  successColor,
+  whiteColor,
+  grayColor,
+  dangerColor,
+  hexToRgb
+} from "assets/jss/material-dashboard-react.js";
 
 const profilePageStyle = {
   container,
@@ -18,6 +24,12 @@ const profilePageStyle = {
     marginTop: "-80px",
     textAlign: "left",
     color: "#149",
+  },
+  successText: {
+    color: successColor[0]
+  },
+  failText: {
+    color: dangerColor[0]
   },
   following: {
     //marginTop: "-80px",

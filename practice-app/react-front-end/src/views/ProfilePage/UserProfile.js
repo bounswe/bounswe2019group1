@@ -21,7 +21,9 @@ import profile from "assets/img/faces/marc.jpg";
 import Icon from "@material-ui/core/Icon";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-
+import ArrowUpward from "@material-ui/icons/ArrowUpward";
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
+import CardBody from "components/Card2/CardBody.js";
 import portfolio1 from "assets/img/examples/ppp1.jpeg";
 import portfolio2 from "assets/img/examples/po2.jpeg";
 import portfolio3 from "assets/img/examples/ppp3.jpg";
@@ -40,8 +42,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import styles from "assets/jss/material-kit-react/views/profilePage.js";
 import { userRetrieve } from "service/user.service.js";
 import {
+  follow,
   listFollowersById,
-  listFollowingsById
+  listFollowingsById,
+  haveIFollowing
 } from "service/follower.service.js";
 import { getArticlesByUserId } from "service/article.service.js";
 import PheaderLinks from "components/ProfileHeader/PheaderLinks";
@@ -55,19 +59,23 @@ const useStyles = makeStyles(styles);
 
 export default function UserProfilePage(props) {
   const classes = useStyles();
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = event => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   var user_id = String(props.history.location.pathname);
   user_id = Number(user_id.substr(user_id.lastIndexOf("/") + 1));
+
+  const [isFollowing, setIsFollowing] = useState(false);
+
+  useState(() =>
+    haveIFollowing(user_id).then(
+      res => setIsFollowing(res.result === "Found")
+      // res.result === "Found" ? setIsFollowing(true) : setIsFollowing(false)
+    )
+  );
+  const iconClick = () => {
+    setIsFollowing(true);
+    followValues.followersCount++;
+    follow(user_id);
+  };
+
   const { ...rest } = props;
   const [userProfileValues, setUserProfileValues] = useState({
     username: "",
@@ -212,58 +220,47 @@ export default function UserProfilePage(props) {
                       {userProfileValues.last_name}
                     </h3>
                     <h6>{userProfileValues.title}</h6>
+                    <h6 className={classes.cardTitle}>Public User</h6>
                     <div>
-                      <Icon fontSize="large">person_add</Icon>
-                      <Icon fontSize="large">how_to_reg</Icon>
+                    <Button onClick={iconClick} variant="contained" color="primary">
+                        {isFollowing?"Following":"Follow"}
+                      </Button>
+                      <CardBody>
+                      <h4 className={classes.cardTitle}>Prediction rate</h4>
+                      <p className={classes.cardCategory}>
+                        <span className={classes.successText}>
+                          <ArrowUpward className={classes.upArrowCardCategory} /> 87%
+                        </span>{" "}
+
+                        {/* <span className={classes.failText}>
+                          <ArrowDownward className={classes.upArrowCardCategory} /> %34
+                        </span> */}
+                        
+                      </p>
+                    </CardBody>
                     </div>
                   </div>
                   <div className={classes.root}>
                     <Grid container spacing={3}>
                       <Grid item xs>
                         <div>
-                          <Button
-                            aria-controls="simple-menu"
-                            aria-haspopup="true"
-                            onClick={handleClick}
-                          >
-                            Followers
-                          </Button>
-                          <Menu
-                            id="simple-menu"
-                            anchorEl={anchorEl}
-                            keepMounted
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
-                          >
-                            <MenuItem onClick={handleClose}>User1</MenuItem>
-                            <MenuItem onClick={handleClose}>User2</MenuItem>
-                            <MenuItem onClick={handleClose}>User3</MenuItem>
-                            <MenuItem onClick={handleClose}>User4</MenuItem>
-                          </Menu>
+                        <Grid item xs>
+                        <Paper className={classes.paper}>
+                          Followers
+                        </Paper>
+                      </Grid>
+              
                         </div>
                       </Grid>
                       <Grid item xs></Grid>
                       <Grid item xs>
                         <div>
-                          <Button
-                            aria-controls="simple-menu"
-                            aria-haspopup="true"
-                            onClick={handleClick}
-                          >
-                            Following
-                          </Button>
-                          <Menu
-                            id="simple-menu"
-                            anchorEl={anchorEl}
-                            keepMounted
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}
-                          >
-                            <MenuItem onClick={handleClose}>User1</MenuItem>
-                            <MenuItem onClick={handleClose}>User2</MenuItem>
-                            <MenuItem onClick={handleClose}>User3</MenuItem>
-                            <MenuItem onClick={handleClose}>User4</MenuItem>
-                          </Menu>
+
+                          <Grid item xs>
+                        <Paper className={classes.paper}>
+                          Following
+                        </Paper>
+                      </Grid>
                         </div>
                       </Grid>
                     </Grid>
@@ -293,6 +290,17 @@ export default function UserProfilePage(props) {
                   alignCenter
                   color="primary"
                   tabs={[
+                    {
+                      tabButton: "Articles",
+                      tabIcon: Articles,
+                      tabContent: (
+                        <GridContainer justify="center">
+                          <GridItem xs={12} sm={12} md={40}>
+                            {items}
+                          </GridItem>
+                        </GridContainer>
+                      )
+                    },
                     {
                       tabButton: "Portfolios",
                       tabIcon: Camera,
@@ -363,17 +371,6 @@ export default function UserProfilePage(props) {
                               src={event5}
                               className={navImageClasses}
                             />
-                          </GridItem>
-                        </GridContainer>
-                      )
-                    },
-                    {
-                      tabButton: "Articles",
-                      tabIcon: Articles,
-                      tabContent: (
-                        <GridContainer justify="center">
-                          <GridItem xs={12} sm={12} md={40}>
-                            {items}
                           </GridItem>
                         </GridContainer>
                       )
