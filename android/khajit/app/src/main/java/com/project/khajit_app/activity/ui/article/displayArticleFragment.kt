@@ -12,7 +12,6 @@ import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.BackgroundColorSpan
 import android.text.style.ClickableSpan
-import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
@@ -20,8 +19,6 @@ import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.core.text.trimmedLength
 import androidx.fragment.app.FragmentManager
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
 import com.project.khajit_app.R
@@ -31,9 +28,10 @@ import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.annotationModels.GetAnnotationModelResponse
 import com.project.khajit_app.data.annotationModels.ShowTextAnnotationModel
 import com.project.khajit_app.data.annotationModels.sourceModel
-import com.project.khajit_app.data.models.*
+import com.project.khajit_app.data.models.GeneralArticleModel
+import com.project.khajit_app.data.models.GeneralArticleSpannableModel
+import com.project.khajit_app.data.models.UserAllInfo
 import com.project.khajit_app.databinding.DisplayArticleFragmentBinding
-import com.project.khajit_app.databinding.DisplayCommentFragmentRecyclerviewItemBinding
 import com.project.khajit_app.global.User
 import interfaces.fragmentOperationsInterface
 import retrofit2.Call
@@ -58,11 +56,6 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
     private lateinit var imageView : ImageView
     private lateinit var contentView : TextView
     private lateinit var displayArticleFragmentBinding : DisplayArticleFragmentBinding
-    private lateinit var recyclerView : RecyclerView
-
-    private var commentIds = ArrayList<Int>()
-    private var commentTexts = ArrayList<String>()
-    private var authors = ArrayList<String>()
 
 
     companion object {
@@ -185,56 +178,6 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
 
         }, 3000)
 
-
-        val handlerThreadComment = HandlerThread("COMMENT THREAD")
-        handlerThreadComment.start()
-        val handlerComment = Handler(handlerThreadComment.looper)
-        handlerComment.postDelayed({
-            RetrofitClient.instance.getArticleComments(article_id).enqueue(object :
-                Callback<ListArticleCommentModel> {
-                override fun onResponse(
-                    call: Call<ListArticleCommentModel>,
-                    response: Response<ListArticleCommentModel>
-                ) {
-                    println(response.toString())
-                    print("response " + (response.code() == 200 ))
-                    if(response.code() == 200 ){
-                        print("burdayız")
-                        commentIds.clear()
-                        commentTexts.clear()
-                        authors.clear()
-
-
-                        var results = response.body()?.results as List<ArticleCommentItem>
-                        if(results != null){
-
-                            for (comment in results) {
-                                commentIds.add(comment.id as Int)
-                                commentTexts.add(comment.text as String)
-                                authors.add((comment.user!!.first_name + " " + comment.user!!.last_name ))
-                            }
-                            recyclerView.layoutManager = GridLayoutManager(activity, 1)
-                            recyclerView.adapter = CommentListAdapter(commentIds,commentTexts,authors,activity as Context)
-
-                        }
-
-
-                    }else{
-                        print("nalaka")
-                        Log.d("error message:", response.message())
-                    }
-                }
-                override fun onFailure(call: Call<ListArticleCommentModel>, t: Throwable) {
-                    println(t.message)
-                    println(t)
-                    Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
-                }
-            })
-
-
-
-        }, 3000)
-
         if(articleModel.image != null)
             Glide.with(activity).load(articleModel.image).into(imageView)
         else{
@@ -282,11 +225,6 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
 
             override fun onDestroyActionMode(mode: ActionMode) {}
         })
-
-        recyclerView = displayArticleFragmentBinding.displayArticleFragmentCommentRecyclerview
-        //recyclerView.layoutManager = GridLayoutManager(activity, 1)
-        //recyclerView.adapter = CommentListAdapter(commentIds,commentTexts,authors,activity as Context)
-
         return displayArticleFragmentBinding.root
     }
 
@@ -317,45 +255,6 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
                 ds?.color = Color.BLACK
             }
         }
-
-    internal inner class CommentListAdapter(
-
-        val commentIds :ArrayList<Int>,
-        val    commentTexts :ArrayList<String>,
-        val   authors : ArrayList<String>,
-        val context: Context) : RecyclerView.Adapter<ViewHolder>(){
-
-        private val layoutInflater = LayoutInflater.from(context)
-
-        override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-            val DisplayArticleCommentRecyclerviewItemBinding =
-                DisplayCommentFragmentRecyclerviewItemBinding.inflate(layoutInflater, viewGroup, false)
-            return ViewHolder(DisplayArticleCommentRecyclerviewItemBinding.root, DisplayArticleCommentRecyclerviewItemBinding)
-        }
-
-        override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-
-            val commentItem = ShowArticleCommentModel(commentIds[position], commentTexts[position],
-                 authors[position])
-
-            viewHolder.setData(commentItem)
-        }
-
-        override fun getItemCount() = commentIds.size
-
-    }
-
-
-
-    internal inner class ViewHolder constructor(itemView: View,
-                                                private val displayArticleListBinding:
-                                                DisplayCommentFragmentRecyclerviewItemBinding
-    ) :
-        RecyclerView.ViewHolder(itemView) {
-        fun setData(commentModel : ShowArticleCommentModel) {
-            displayArticleListBinding.articleCommentModel = commentModel
-        }
-    }
 
 
 
