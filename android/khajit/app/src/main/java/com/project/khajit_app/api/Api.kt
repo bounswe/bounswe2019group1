@@ -3,7 +3,6 @@ package com.project.khajit_app.api
 import com.project.khajit_app.data.models.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -240,13 +239,5 @@ interface Api {
     @Headers("Content-Type: application/json")
     @POST("article-comment/create/")
     fun createComment(@Body body: CreateCommentModel):Call<CreateCommentResponseModel>
-
-    @Headers("Content-Type: application/json")
-    @POST("article-like/like/")
-    fun likeArticle(@Field("article_id") article_id: Int):Call<ArticleLikeResponseModel>
-
-    @Headers("Content-Type: application/json")
-    @POST("article-like/dislike/")
-    fun dislikeArticle(@Field("article_id") article_id: Int):Call<ArticleDislikeResponseModel>
 
 }
