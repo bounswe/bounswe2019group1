@@ -2,14 +2,12 @@ from django.shortcuts import render
 
 import json
 import requests
-import urllib
 import django.utils.timezone
 # Create your views here.
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import CreateAPIView, ListAPIView, DestroyAPIView, UpdateAPIView, RetrieveAPIView
 from rest_framework.response import Response
 
-from article_like.models import ArticleLike
 from follow.models import Follow
 from article.models import Article
 from article.serializers import ArticleCreateSerializer, ArticleListSerializer, PublicArticleListSerializer, \
@@ -23,8 +21,8 @@ class CreateArticleAPIView(CreateAPIView):
         check_if_user(request)
         id = request.user.id
         user = TemplateUser.objects.get(id=id)
-        data=request.data
-        data['created_date']=django.utils.timezone.now()
+        data = request.data
+        data['created_date'] = django.utils.timezone.now()
         data['author'] = user
         serializer = ArticleCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
@@ -40,7 +38,7 @@ class ListArticleAPIView(ListAPIView):
         user = TemplateUser.objects.get(id=id)
         query = Article.objects.filter(author=user).order_by('-created_date')
         serializer = ArticleListSerializer(query, many=True)
-        return Response(serializer.data, status=200)
+        return Response({"results": serializer.data}, status=200)
 
 
 class ListPublicArticleAPIView(ListAPIView):
@@ -60,10 +58,10 @@ class SearchArticle(ListAPIView):
         semantics = json.loads(response.content)
 
         semantics.insert(0, {"word": str(search_item), "score": 1000000, "tags": []})
-        search_results = {"count":0,
+        search_results = {"count": 0,
                           "results": []}
-        
-        ids =[]
+
+        ids = []
         for word in semantics:
             for article in queryset.all():
                 if word['word'] in article.title.lower() or word['word'] in article.content.lower():
@@ -73,8 +71,7 @@ class SearchArticle(ListAPIView):
                         serializer = ArticleGetSerializer(article)
                         data = serializer.data
                         search_results['results'].append(data)
-                        
-                    
+
         return Response(search_results, 200)
 
 
@@ -87,7 +84,7 @@ class ListPublicArticleWithUserIdAPIView(ListAPIView):
         user = TemplateUser.objects.get(id=id)
         query = Article.objects.filter(author=user, is_public=True).order_by('-created_date')
         serializer = PublicArticleListSerializer(query, many=True)
-        return Response(serializer.data, status=200)
+        return Response({"results": serializer.data}, status=200)
 
 
 class ListArticleWithUserIdAPIView(ListAPIView):
@@ -107,7 +104,7 @@ class ListArticleWithUserIdAPIView(ListAPIView):
         else:
             query = Article.objects.filter(author=user, is_public=True).order_by('-created_date')
             serializer = PublicArticleListSerializer(query, many=True)
-            return Response(serializer.data, status=200)
+            return Response({"results": serializer.data}, status=200)
 
 
 class ListArticleOfFollowingUsersAPIView(ListAPIView):
@@ -119,7 +116,7 @@ class ListArticleOfFollowingUsersAPIView(ListAPIView):
         following_query = Follow.objects.filter(follower=user, is_active=True).values('following')
         query = Article.objects.filter(author__in=following_query).order_by('-created_date')
         serializer = PublicArticleListSerializer(query, many=True)
-        return Response(serializer.data, status=200)
+        return Response({"results": serializer.data}, status=200)
 
 
 class FeedAPIView(ListAPIView):
@@ -133,7 +130,7 @@ class FeedAPIView(ListAPIView):
         queryset = Article.objects.filter(is_public=True).order_by('-created_date')
         feed = query | queryset
         serializer = PublicArticleListSerializer(feed.order_by('-created_date'), many=True)
-        return Response(serializer.data, status=200)
+        return Response({"results": serializer.data}, status=200)
 
 
 class DeleteArticleAPIView(DestroyAPIView):

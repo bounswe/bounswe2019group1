@@ -68,9 +68,10 @@ class UpdateArticleCommentAPIView(UpdateAPIView):
 class ListArticleCommentAPIView(DestroyAPIView):
     def get(self, request, *args, **kwargs):
         article_id = kwargs.get("pk")
-        query = ArticleComment.objects.filter(article_id=article_id)
+        article = Article.objects.get(id=article_id)
+        query = ArticleComment.objects.filter(article=article)
         serializer = ArticleCommentListSerializer(query, many=True)
-        return Response(serializer.data, status=200)
+        return Response({"results": serializer.data}, status=200)
 
 
 def check_if_user(request):
