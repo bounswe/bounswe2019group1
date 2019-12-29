@@ -12,4 +12,6 @@ urlpatterns = [
     url(r'^dislikesByArticleId/(?P<pk>[0-9_]+)/', views.ArticleDislikesAPIView.as_view(), name="get"),
     url(r'^likeCountByArticleId/(?P<pk>[0-9_]+)/', views.CountArticleLikeAPIView.as_view(), name="get"),
     url(r'^dislikeCountByArticleId/(?P<pk>[0-9_]+)/', views.CountArticleDislikeAPIView.as_view(), name="get"),
+    url(r'^isLikedByUser/(?P<pk>[0-9_]+)/', views.IsLikedAPIView.as_view(), name="get"),
+    url(r'^isDislikedByUser/(?P<pk>[0-9_]+)/', views.IsDislikedAPIView.as_view(), name="get"),
 ]
