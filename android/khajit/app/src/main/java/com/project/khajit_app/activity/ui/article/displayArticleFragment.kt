@@ -14,6 +14,7 @@ import android.text.style.BackgroundColorSpan
 import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.*
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -36,9 +37,13 @@ import com.project.khajit_app.databinding.DisplayArticleFragmentBinding
 import com.project.khajit_app.databinding.DisplayCommentFragmentRecyclerviewItemBinding
 import com.project.khajit_app.global.User
 import interfaces.fragmentOperationsInterface
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 import java.net.URLEncoder
 
 class displayArticleFragment : Fragment(), fragmentOperationsInterface {
@@ -49,6 +54,7 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
     private var isFollowing : Int = 0
     private var userId : Int = 0
     private var article_id : Int = 0
+    private lateinit var contentOfComment : EditText
     private lateinit var articleModel : GeneralArticleModel
     private lateinit var articleSpannableModel : GeneralArticleSpannableModel
     private var containerId : ViewGroup? = null
@@ -235,6 +241,17 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
 
         }, 3000)
 
+        val createCommentItem = displayArticleFragmentBinding.displayArticleWriteCommentButton
+        contentOfComment = displayArticleFragmentBinding.displayArticleWriteComment
+        val handlerThreadCreateComment = HandlerThread("CREATE COMMENT BUTTON THREAD")
+        handlerThreadCreateComment.start()
+        val handlerCreateComment = Handler(handlerThreadCreateComment.looper)
+        handlerCreateComment.postDelayed({
+
+            createCommentItem.setOnClickListener(createCommentButtonListener)
+        }, 3000)
+
+
         if(articleModel.image != null)
             Glide.with(activity).load(articleModel.image).into(imageView)
         else{
@@ -357,7 +374,56 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
         }
     }
 
+    private val createCommentButtonListener = View.OnClickListener { view ->
+        var comment_info = contentOfComment.text.toString().trim()
+        if (comment_info.isEmpty()) {
+            contentOfComment.error = "Title is required."
+            contentOfComment.requestFocus()
+            return@OnClickListener
+        }
 
+
+        val commentInfo = CreateCommentModel(comment_info,article_id)
+
+
+
+        RetrofitClient.instance.createComment(commentInfo).enqueue(object :
+            Callback<CreateCommentResponseModel> {
+            override fun onResponse(
+                call: Call<CreateCommentResponseModel>,
+                response: Response<CreateCommentResponseModel>
+            ) {
+                println(response.toString())
+                if(response.code() == 200 ){
+                    if(response.body()?.created_date != null){
+                        Toast.makeText(activity?.baseContext, "Comment Published!", Toast.LENGTH_SHORT).show()
+                        println("Everything looks fine!")
+                        val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
+
+
+                        fragmentTransaction(
+                            parentActivityManager,
+                            displayArticleFragment.newInstance(articleModel,isGuest,isLoggedInUser,isFeedPage,isFollowing,userId),
+                            (containerId!!.id),
+                            true,
+                            true,
+                            false)
+                    }else{
+
+                        println("Something went wrong!")
+                    }
+                }else{
+
+                }
+            }
+            override fun onFailure(call: Call<CreateCommentResponseModel>, t: Throwable) {
+                Toast.makeText(activity?.baseContext, "Request error!", Toast.LENGTH_SHORT).show()
+
+            }
+        })
+
+
+    }
 
 
 
