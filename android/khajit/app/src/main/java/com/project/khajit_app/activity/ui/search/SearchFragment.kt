@@ -194,13 +194,12 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
                                 is_public_info.clear()
                                 created_dates.clear()
                                 images.clear()
-                                var count = response.body()?.results?.count()
-
+                                var count = response.body()?.results!!.count()
                                 for (a in 1..count!!) {
                                     list_usernames.add(
                                         response.body()?.results?.get(a - 1)!!.title!!
                                     )
-                                    var author = response.body()?.results?.get(a - 1)!!.author!!
+                                    var author = response.body()?.results?.get(a - 1)!!.author!!.first_name + " " + response.body()?.results?.get(a - 1)!!.author!!.last_name
                                     if (author == "") {
                                         list_titles.add("Anonymous")
                                     }else {
@@ -215,10 +214,15 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
                                     articleIds.add(article.id as Int)
                                     titles.add(article.title as String)
                                     contents.add(article.content as String)
-                                    authors.add(UserAllInfo(null, 0, "", "", "", "", "", "", "", "", "", "", ""))
+                                    authors.add(UserAllInfo(null, article.author!!.id, article.author!!.username, article.author!!.first_name, article.author!!.last_name, "", article.author!!.location, article.author!!.phone_number, article.author!!.iban_number, article.author!!.citizenship_number, article.author!!.biography, article.author!!.title, article.author!!.last_changed_password_date))
                                     is_public_info.add(article.is_public as Boolean)
                                     created_dates.add(article.created_date as String)
-                                    images.add(article.image)
+                                    if(article.image == null) {
+                                        images.add(null)
+                                    }else {
+                                        images.add("http://35.163.120.227:8000" + article.image)
+                                    }
+
                                 }
 
                                 // This will be used for further methods in order to set prediction rates
@@ -327,9 +331,8 @@ class SearchFragment : Fragment(), fragmentOperationsInterface {
                     )
                 }
             } else if(search_type == 1) {
-                //TO-DO Emirhan burayı image a göre ayarlaman lazım
                 val article = GeneralArticleModel(articleIds[position], titles[position],
-                    contents[position], authors[position],is_public_info[position],created_dates[position],null)
+                    contents[position], authors[position],is_public_info[position],created_dates[position],images[position])
 
                 fragmentTransaction(
                     parentActivityManager,

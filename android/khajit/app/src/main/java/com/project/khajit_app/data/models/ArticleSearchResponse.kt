@@ -4,4 +4,4 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 
-data class ArticleSearchResponse (val results : List<ArticleSearchModelResponse>)
+data class ArticleSearchResponse (val results : List<ArticleSearchModelResponse>, val count : Int)
