@@ -41,6 +41,8 @@ class SignUpPageActivity : AppCompatActivity() {
     lateinit var google_user_register: Button
     lateinit var location_text: EditText
 
+    private var helper = HelperFunctions()
+
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var lastLocation: Location? = null
     private var resultReceiver: AddressResultReceiver = AddressResultReceiver(Handler())
@@ -127,18 +129,18 @@ class SignUpPageActivity : AppCompatActivity() {
         var lastname_information = last_name_input.text.toString().trim()
         var location_information = location_text.text.toString().trim()
 
-        if (email_information.isEmpty()) {
-            email_input.error = "Email is required."
+        if (!helper.isEmailValid(email_information)) {
+            email_input.error = "Email is not valid."
             email_input.requestFocus()
             return
         }
         if (password_information.isEmpty()) {
-            password_input.error = "Email is required."
+            password_input.error = "Password is not valid."
             password_input.requestFocus()
             return
         }
         if (repassword_information.isEmpty()) {
-            repeat_password_input.error = "Email is required."
+            repeat_password_input.error = "Password is not valid."
             repeat_password_input.requestFocus()
             return
         }

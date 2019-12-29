@@ -15,6 +15,7 @@ import androidx.annotation.ContentView
 import androidx.fragment.app.FragmentManager
 
 import com.project.khajit_app.R
+import com.project.khajit_app.activity.HelperFunctions
 import com.project.khajit_app.activity.ListViewAdapter
 import com.project.khajit_app.activity.LoginPageActivity
 import com.project.khajit_app.activity.ui.profile.UserProfile
@@ -49,6 +50,8 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
     private lateinit var privacy_change: Button
     private lateinit var personal_change: Button
     private lateinit var change_password: Button
+
+    private var helper = HelperFunctions()
 
 
     override fun onCreateView(
@@ -130,7 +133,7 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
         if(!trader) {
             iban_text = iban.text.toString()
         }
-        if(iban.text.length != 16 && !trader) {
+        if(!helper.validIban(iban_text) && !trader) {
             iban.error = "IBAN should be in the legnth of 16"
             iban.requestFocus()
             return

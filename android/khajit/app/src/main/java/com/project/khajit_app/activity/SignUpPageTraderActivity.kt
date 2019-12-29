@@ -16,6 +16,7 @@ import com.project.khajit_app.data.models.BasicUser
 import com.project.khajit_app.data.models.TraderUser
 import com.project.khajit_app.data.models.createWalletResponse
 import com.project.khajit_app.global.User
+import com.project.khajit_app.activity.HelperFunctions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,6 +28,8 @@ class SignUpPageTraderActivity : AppCompatActivity() {
     private lateinit var basic_user_register: Button
     private lateinit var userInfo: BasicUser
     private var googleUser: Int = 0
+
+    private var helper = HelperFunctions()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,11 +62,13 @@ class SignUpPageTraderActivity : AppCompatActivity() {
         }
     }
 
+
+
     fun goToMainTraderUserActivity(view: View) {
 
         var iban_information = iban_input.text.toString()
 
-        if (iban_information.length != 16) {
+        if (!helper.validIban(iban_information)) {
             iban_input.error = "IBAN lenght should be 16."
             iban_input.requestFocus()
             return
