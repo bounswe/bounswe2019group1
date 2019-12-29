@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 import json
+import requests
 import urllib
 import django.utils.timezone
 # Create your views here.
@@ -54,8 +55,9 @@ class SearchArticle(ListAPIView):
 
         search_item = kwargs.get("pk")
         url = "https://api.datamuse.com/words?ml=" + str(search_item) + "&max=100"
-        response = urllib.request.urlopen(url)
-        semantics = json.loads(response.read())
+        headers = {}
+        response = requests.request('GET', url, headers=headers, allow_redirects=False)
+        semantics = json.loads(response.content)
 
         semantics.insert(0, {"word": str(search_item), "score": 1000000, "tags": []})
         search_results = {"count":0,
@@ -68,13 +70,9 @@ class SearchArticle(ListAPIView):
                     # deserialized_article = json.loads(PublicArticleListSerializer(data=article))
                     if article.id not in ids:
                         ids.append(article.id)
-                        search_results['results'].append({"id": article.id,
-                                                          "title": article.title,
-                                                          "content": article.content,
-                                                          "author": "",
-                                                          "is_public": True,
-                                                          "created_date": article.created_date,
-                                                          "image": None})
+                        serializer = ArticleGetSerializer(article)
+                        data = serializer.data
+                        search_results['results'].append(data)
                         
                     
         return Response(search_results, 200)
