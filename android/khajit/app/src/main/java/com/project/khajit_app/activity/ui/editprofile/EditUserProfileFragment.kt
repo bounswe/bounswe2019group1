@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.ContentView
 import androidx.fragment.app.FragmentManager
+import com.mikhaellopez.circularimageview.CircularImageView
 
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.HelperFunctions
@@ -23,6 +24,7 @@ import com.project.khajit_app.activity.ui.profile.UserProfileViewModel
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.*
 import com.project.khajit_app.global.User
+import com.squareup.picasso.Picasso
 import interfaces.fragmentOperationsInterface
 import kotlinx.android.synthetic.main.edit_user_profile_fragment.*
 import retrofit2.Call
@@ -45,6 +47,8 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
     private lateinit var old_pw: EditText
     private lateinit var new_pw :EditText
     private lateinit var re_new_pw:EditText
+
+    private lateinit var profile_pic : CircularImageView
 
     private lateinit var button_upgrade_downgrade: Button
     private lateinit var privacy_change: Button
@@ -76,7 +80,7 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
         location = root.findViewById(R.id.input_location)as EditText
         phone_number = root.findViewById(R.id.phone_number)as EditText
         iban = root.findViewById(R.id.iban_number)as EditText
-
+        profile_pic = root.findViewById(R.id.profile_pic) as CircularImageView
         old_pw = root.findViewById(R.id.input_old_password)as EditText
         new_pw = root.findViewById(R.id.input_new_password)as EditText
         re_new_pw = root.findViewById(R.id.input_re_new_password) as EditText
@@ -106,6 +110,9 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
             button_upgrade_downgrade.setText("Upgrade To Trader")
         }
 
+        if(User.photo != null) {
+            Picasso.get().load("http://35.163.120.227:8000" + User.photo).into(profile_pic)
+        }
 
         personal_change.setOnClickListener { root ->
             changePersonalInfo(root)
