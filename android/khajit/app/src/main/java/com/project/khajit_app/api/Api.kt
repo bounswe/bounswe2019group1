@@ -234,10 +234,4 @@ interface Api {
     @GET("article-comment/list/{id}/" )
     fun getArticleComments(@Path(value = "id", encoded = true) articleId: Int):Call<ListArticleCommentModel>
 
-
-
-    @Headers("Content-Type: application/json")
-    @POST("article-comment/create/")
-    fun createComment(@Body body: CreateCommentModel):Call<CreateCommentResponseModel>
-
 }
