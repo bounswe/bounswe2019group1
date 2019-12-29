@@ -235,18 +235,35 @@ interface Api {
     @GET("article-comment/list/{id}/" )
     fun getArticleComments(@Path(value = "id", encoded = true) articleId: Int):Call<ListArticleCommentModel>
 
-
-
     @Headers("Content-Type: application/json")
     @POST("article-comment/create/")
     fun createComment(@Body body: CreateCommentModel):Call<CreateCommentResponseModel>
 
     @Headers("Content-Type: application/json")
     @POST("article-like/like/")
-    fun likeArticle(@Field("article_id") article_id: Int):Call<ArticleLikeResponseModel>
+
+    fun likeArticle(@Body body: ArticleLikeDislikeModel):Call<ArticleLikeResponseModel>
 
     @Headers("Content-Type: application/json")
     @POST("article-like/dislike/")
-    fun dislikeArticle(@Field("article_id") article_id: Int):Call<ArticleDislikeResponseModel>
+    fun dislikeArticle(@Body body: ArticleLikeDislikeModel):Call<ArticleDislikeResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @GET("article-like/likeCountByArticleId/{articleId}/" )
+    fun getLikeCountByArticleId(@Path(value = "articleId", encoded = true) articleId: Int):Call<ArticleLikeDislikeCountResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @GET("article-like/dislikeCountByArticleId/{articleId}/" )
+    fun getDislikeCountByArticleId(@Path(value = "articleId", encoded = true) articleId: Int):Call<ArticleLikeDislikeCountResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @GET("article-like/isDislikedByUser/{articleId}/" )
+    fun getIsDislikeByArticleId(@Path(value = "articleId", encoded = true) articleId: Int):Call<ArticleLikeDisLikeResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @GET("article-like/isLikedByUser/{articleId}/" )
+    fun getIsLikeByArticleId(@Path(value = "articleId", encoded = true) articleId: Int):Call<ArticleLikeDisLikeResponseModel>
+
+
 
 }

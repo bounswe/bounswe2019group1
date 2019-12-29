@@ -56,7 +56,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
 
-                tools:text="@{articleCommentModel.user.first_name + articleCommentModel.user.last_name}" />
+                tools:text="@{articleCommentModel.authorName}" />
 
             <TextView
                 android:id="@+id/user_comment"
@@ -75,7 +75,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
 
-                tools:text="@{articleCommentModel.text}" />
+                tools:text="@{articleCommentModel.commentText}" />
 
 
         </RelativeLayout>
