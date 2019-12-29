@@ -265,10 +265,10 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
 
 
 
-        }, 3000)
+        }, 1000)
 
 
-        /*val handlerThreadComment = HandlerThread("COMMENT THREAD")
+        val handlerThreadComment = HandlerThread("COMMENT THREAD")
         handlerThreadComment.start()
         val handlerComment = Handler(handlerThreadComment.looper)
         handlerComment.postDelayed({
@@ -315,7 +315,7 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
 
 
 
-        }, 3000)*/
+        }, 1000)
 
 
 

@@ -13,7 +13,7 @@
     <RelativeLayout
         android:id="@+id/event_layout_general"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:background="#ADFFFFFF">
 
@@ -29,29 +29,26 @@
             android:scaleType="centerInside"
             android:src="@drawable/ic_event_icon_image_foreground" />
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/recipe_list_text_layout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/event_list_item_image"
             app:layout_constraintBottom_toBottomOf="@id/event_layout_general"
+            android:orientation = "vertical"
             tools:ignore="NotSibling">
 
 
             <TextView
                 android:id="@+id/user_name"
-                style="@style/TextAppearance.AppCompat.Subhead.Inverse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:background="#FFFFFF"
-                android:gravity="center"
-                android:minHeight="@dimen/recycler_item_footer_height_min"
-                android:paddingLeft="@dimen/recycler_item_footer_padding"
-                android:paddingTop="@dimen/recycler_item_footer_padding"
-                android:paddingRight="@dimen/recycler_item_footer_padding"
+                android:gravity="left"
+
                 android:textColor="#FF000000"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -60,24 +57,20 @@
 
             <TextView
                 android:id="@+id/user_comment"
-                style="@style/TextAppearance.AppCompat.Subhead.Inverse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
                 android:background="#FFFFFF"
-                android:gravity="center"
-                android:minHeight="@dimen/recycler_item_footer_height_min"
-                android:paddingLeft="@dimen/recycler_item_footer_padding"
-                android:paddingTop="@dimen/recycler_item_footer_padding"
-                android:paddingRight="@dimen/recycler_item_footer_padding"
+                android:gravity="left"
+
                 android:textColor="#FF000000"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/event_layout_general"
+                app:layout_constraintTop_toBottomOf="@id/event_layout_general"
 
                 tools:text="@{articleCommentModel.commentText}" />
 
 
-        </RelativeLayout>
+        </LinearLayout>
     </RelativeLayout>
 </layout>
