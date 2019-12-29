@@ -76,7 +76,7 @@
                 app:layout_constraintTop_toTopOf="parent"
 
                 tools:text="@{articleCommentModel.text}" />
-            
+
 
         </RelativeLayout>
     </RelativeLayout>
