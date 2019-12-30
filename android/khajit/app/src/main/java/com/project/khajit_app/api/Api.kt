@@ -44,11 +44,10 @@ interface Api {
     @PUT("user/updateuser/")
     fun updateUser(@Body body: UpdateUser):Call<UpdateUserResponse>
 
-    @Headers("Content-Type: application/json")
+    //@Headers("Content-Type: application/json")
     @PUT("user/updateuser/")
     @Multipart
-    fun updateProfilePicture(@Part("title") title: String,
-                             @Part file: MultipartBody.Part):Call<UpdateUserResponse>
+    fun updateProfilePicture(@Part file: MultipartBody.Part):Call<UpdateUserResponse>
 
     @Headers("Content-Type: application/json")
     @PUT("user/updateuser/")

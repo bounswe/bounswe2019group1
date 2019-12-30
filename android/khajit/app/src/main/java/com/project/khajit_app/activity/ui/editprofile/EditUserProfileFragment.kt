@@ -556,7 +556,7 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
         println("B")
         println("B")
         println("B")
-        RetrofitClient.instance.updateProfilePicture(User.title!!,part).enqueue(object :
+        RetrofitClient.instance.updateProfilePicture(part).enqueue(object :
             Callback<UpdateUserResponse> {
             override fun onResponse(
                 call: Call<UpdateUserResponse>,
@@ -565,23 +565,19 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
                 println(response.toString())
                 if(response.code() == 200 ){
                     if(response.body()?.detail == null){
-                        goBackFragment()
+                        User.photo = response.body()?.photo
+                        Toast.makeText(context, "User Profile has been updated", Toast.LENGTH_LONG).show()
                     }else{
                         println("Something went wrong!")
                     }
-                    println("CODE 20000")
-                    println("CODE 20000")
-                    println("CODE 20000")
+
+
                 }else{
-                    println("CODE 40000")
-                    println("CODE 40000")
-                    println("CODE 40000")
+
                 }
             }
             override fun onFailure(call: Call<UpdateUserResponse>, t: Throwable) {
-                println("CODE 60000")
-                println("CODE 60000")
-                println("CODE 60000")
+
             }
         })
 
@@ -623,6 +619,8 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
             profile_pic.setImageURI(data?.data)
             image_uri = data?.data
+            change_image.isEnabled = true
+            change_image.isClickable = true
         }
     }
 
