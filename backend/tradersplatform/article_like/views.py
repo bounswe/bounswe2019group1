@@ -94,7 +94,7 @@ class IsLikedAPIView(RetrieveAPIView):
         if query:
             return Response({"result": True}, status=200)
         else:
-            return Response({"result": False}, status=404)
+            return Response({"result": False}, status=200)
 
 
 class IsDislikedAPIView(RetrieveAPIView):
@@ -109,7 +109,7 @@ class IsDislikedAPIView(RetrieveAPIView):
         if query:
             return Response({"result": True}, status=200)
         else:
-            return Response({"result": False}, status=404)
+            return Response({"result": False}, status=200)
 
 
 class ArticleLikesAPIView(ListAPIView):
