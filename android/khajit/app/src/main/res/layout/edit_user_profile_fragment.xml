@@ -370,6 +370,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:backgroundTint="#B5A33535"
+                android:clickable="true"
                 android:enabled="true"
                 android:text="Update Profile Picture"
                 android:textSize="12sp"

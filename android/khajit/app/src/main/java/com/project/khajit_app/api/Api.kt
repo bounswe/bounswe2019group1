@@ -1,6 +1,7 @@
 package com.project.khajit_app.api
 
 import com.project.khajit_app.data.models.*
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -42,6 +43,12 @@ interface Api {
     @Headers("Content-Type: application/json")
     @PUT("user/updateuser/")
     fun updateUser(@Body body: UpdateUser):Call<UpdateUserResponse>
+
+    @Headers("Content-Type: application/json")
+    @PUT("user/updateuser/")
+    @Multipart
+    fun updateProfilePicture(@Part("title") title: String,
+                             @Part file: MultipartBody.Part):Call<UpdateUserResponse>
 
     @Headers("Content-Type: application/json")
     @PUT("user/updateuser/")
