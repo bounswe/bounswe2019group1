@@ -1,6 +1,9 @@
 package com.project.khajit_app.api
 
 import com.project.khajit_app.data.models.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -116,9 +119,17 @@ interface Api {
     @GET("equipment/traceindices/")
     fun tradeValues():Call<TradeIndiceResponse>
 
-    @Headers("Content-Type: application/json")
+    /*@Headers("Content-Type: application/json")
     @POST("article/create/")
-    fun createArticle(@Body body: CreateArticleModel?):Call<CreateArticleResponseModel>
+    fun createArticle(@Body body: CreateArticleModel?):Call<CreateArticleResponseModel>*/
+
+    @POST("article/create/")
+    @Multipart
+    fun createArticle(
+        @Part("title") title: RequestBody,
+        @Part("content") content : RequestBody,
+        @Part("is_public") is_public : Boolean,
+        @Part file: MultipartBody.Part): Call<CreateArticleResponseModel>
 
     @Headers("Content-Type: application/json")
     @PUT("wallet/sendUSD/")
@@ -219,5 +230,40 @@ interface Api {
     @Headers("Content-Type: application/json")
     @POST("notification/createbuyorder/")
     fun createBuyOrder(@Body body: EquipmentBSOrderModel?):Call<EquipmentBSOrderResponse>
+
+    @Headers("Content-Type: application/json")
+    @GET("article-comment/list/{id}/" )
+    fun getArticleComments(@Path(value = "id", encoded = true) articleId: Int):Call<ListArticleCommentModel>
+
+    @Headers("Content-Type: application/json")
+    @POST("article-comment/create/")
+    fun createComment(@Body body: CreateCommentModel):Call<CreateCommentResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @POST("article-like/like/")
+
+    fun likeArticle(@Body body: ArticleLikeDislikeModel):Call<ArticleLikeResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @POST("article-like/dislike/")
+    fun dislikeArticle(@Body body: ArticleLikeDislikeModel):Call<ArticleDislikeResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @GET("article-like/likeCountByArticleId/{articleId}/" )
+    fun getLikeCountByArticleId(@Path(value = "articleId", encoded = true) articleId: Int):Call<ArticleLikeDislikeCountResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @GET("article-like/dislikeCountByArticleId/{articleId}/" )
+    fun getDislikeCountByArticleId(@Path(value = "articleId", encoded = true) articleId: Int):Call<ArticleLikeDislikeCountResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @GET("article-like/isDislikedByUser/{articleId}/" )
+    fun getIsDislikeByArticleId(@Path(value = "articleId", encoded = true) articleId: Int):Call<ArticleLikeDisLikeResponseModel>
+
+    @Headers("Content-Type: application/json")
+    @GET("article-like/isLikedByUser/{articleId}/" )
+    fun getIsLikeByArticleId(@Path(value = "articleId", encoded = true) articleId: Int):Call<ArticleLikeDisLikeResponseModel>
+
+
 
 }
