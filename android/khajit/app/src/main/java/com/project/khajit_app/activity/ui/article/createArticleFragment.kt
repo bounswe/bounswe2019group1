@@ -101,48 +101,87 @@ class CreateArticleFragment : Fragment(), fragmentOperationsInterface {
             contentOfArticle.requestFocus()
             return@OnClickListener
         }
-        var filePath = getPathFromURI(context!!,image_uri!!)
-        var file = File(filePath)
-        var requestBody  = RequestBody.create(MediaType.parse("image/*"),file)
-        var part = MultipartBody.Part.createFormData("image", file.name, requestBody)
-        var title = RequestBody.create(MediaType.parse("text/plain"), title_info);
-        var content = RequestBody.create(MediaType.parse("text/plain"), content_info);
+        if (!Uri.EMPTY.equals(image_uri)) {
+            var filePath = getPathFromURI(context!!,image_uri!!)
+            var file = File(filePath)
+
+            var requestBody  = RequestBody.create(MediaType.parse("image/*"),file)
+            var part = MultipartBody.Part.createFormData("image", file.name, requestBody)
+            var title = RequestBody.create(MediaType.parse("text/plain"), title_info);
+            var content = RequestBody.create(MediaType.parse("text/plain"), content_info);
 
 
+            RetrofitClient.instance.createArticle(title,content,isPublic,part).enqueue(object :
+                Callback<CreateArticleResponseModel> {
+                override fun onResponse(
+                    call: Call<CreateArticleResponseModel>,
+                    response: Response<CreateArticleResponseModel>
+                ) {
+                    println(response.toString())
+                    if(response.code() == 200 ){
+                        if(response.body()?.detail == null){
+                            Toast.makeText(activity?.baseContext, "Article Published!", Toast.LENGTH_SHORT).show()
+                            println("Everything looks fine!")
+                            val parentActivityManager: FragmentManager =
+                                activity?.supportFragmentManager as FragmentManager
+                            removeFragment(parentActivityManager)
+                        }else{
 
-
-        /*val articleInfo = CreateArticleModel(title_info,content_info,isPublic,)
-        println(articleInfo.title)
-        println(articleInfo.content)
-        println(articleInfo.is_public)*/
-
-
-        RetrofitClient.instance.createArticle(title,content,isPublic,part).enqueue(object :
-            Callback<CreateArticleResponseModel> {
-            override fun onResponse(
-                call: Call<CreateArticleResponseModel>,
-                response: Response<CreateArticleResponseModel>
-            ) {
-                println(response.toString())
-                if(response.code() == 200 ){
-                    if(response.body()?.detail == null){
-                        Toast.makeText(activity?.baseContext, "Article Published!", Toast.LENGTH_SHORT).show()
-                        println("Everything looks fine!")
-                        val parentActivityManager: FragmentManager =
-                            activity?.supportFragmentManager as FragmentManager
-                        removeFragment(parentActivityManager)
+                            println("Something went wrong!")
+                        }
                     }else{
 
-                        println("Something went wrong!")
                     }
-                }else{
+                }
+                override fun onFailure(call: Call<CreateArticleResponseModel>, t: Throwable) {
 
                 }
-            }
-            override fun onFailure(call: Call<CreateArticleResponseModel>, t: Throwable) {
+            })
+            //handle followUri
 
-            }
-        })
+        }else{
+
+
+
+
+
+
+            val articleInfo = CreateArticleModel(title_info,content_info,isPublic)
+            println(articleInfo.title)
+            println(articleInfo.content)
+            println(articleInfo.is_public)
+
+
+            RetrofitClient.instance.createArticleNoImage(articleInfo).enqueue(object :
+                Callback<CreateArticleResponseModel> {
+                override fun onResponse(
+                    call: Call<CreateArticleResponseModel>,
+                    response: Response<CreateArticleResponseModel>
+                ) {
+                    println(response.toString())
+                    if(response.code() == 200 ){
+                        if(response.body()?.detail == null){
+                            Toast.makeText(activity?.baseContext, "Article Published!", Toast.LENGTH_SHORT).show()
+                            println("Everything looks fine!")
+                            val parentActivityManager: FragmentManager =
+                                activity?.supportFragmentManager as FragmentManager
+                            removeFragment(parentActivityManager)
+                        }else{
+
+                            println("Something went wrong!")
+                        }
+                    }else{
+
+                    }
+                }
+                override fun onFailure(call: Call<CreateArticleResponseModel>, t: Throwable) {
+
+                }
+            })
+
+        }
+
+
 
 
     }
@@ -225,6 +264,7 @@ class CreateArticleFragment : Fragment(), fragmentOperationsInterface {
             cursor.close()
         } catch (e: Exception) {
             Toast.makeText(context,"zeze get path error " + e.message,Toast.LENGTH_SHORT).show()
+
         }
         return realPath
     }
