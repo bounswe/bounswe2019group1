@@ -1,10 +1,17 @@
 package com.project.khajit_app.activity.ui.editprofile
 
+import android.Manifest
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.provider.DocumentsContract
+import android.provider.MediaStore
 import android.text.method.ScrollingMovementMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,7 +19,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.ContentView
+import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.fragment.app.FragmentManager
+import com.mikhaellopez.circularimageview.CircularImageView
 
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.HelperFunctions
@@ -23,11 +32,16 @@ import com.project.khajit_app.activity.ui.profile.UserProfileViewModel
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.*
 import com.project.khajit_app.global.User
+import com.squareup.picasso.Picasso
 import interfaces.fragmentOperationsInterface
 import kotlinx.android.synthetic.main.edit_user_profile_fragment.*
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
 
@@ -45,6 +59,10 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
     private lateinit var old_pw: EditText
     private lateinit var new_pw :EditText
     private lateinit var re_new_pw:EditText
+
+    private lateinit var profile_pic : CircularImageView
+    private lateinit var change_image : Button
+    private var image_uri : Uri? = Uri.EMPTY
 
     private lateinit var button_upgrade_downgrade: Button
     private lateinit var privacy_change: Button
@@ -76,10 +94,11 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
         location = root.findViewById(R.id.input_location)as EditText
         phone_number = root.findViewById(R.id.phone_number)as EditText
         iban = root.findViewById(R.id.iban_number)as EditText
-
+        profile_pic = root.findViewById(R.id.profile_pic) as CircularImageView
         old_pw = root.findViewById(R.id.input_old_password)as EditText
         new_pw = root.findViewById(R.id.input_new_password)as EditText
         re_new_pw = root.findViewById(R.id.input_re_new_password) as EditText
+        change_image = root.findViewById(R.id.change_image) as Button
 
         button_upgrade_downgrade = root.findViewById(R.id.button_upgrade_downgrade) as Button
         personal_change = root.findViewById(R.id.button_apply_change_personal) as Button
@@ -106,6 +125,9 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
             button_upgrade_downgrade.setText("Upgrade To Trader")
         }
 
+        if(User.photo != null) {
+            Picasso.get().load("http://35.163.120.227:8000" + User.photo).into(profile_pic)
+        }
 
         personal_change.setOnClickListener { root ->
             changePersonalInfo(root)
@@ -124,6 +146,8 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
             changePrivacyMode(root)
         }
 
+        profile_pic.setOnClickListener(pickImageListener)
+        change_image.setOnClickListener(publishButtonListener)
         return root
     }
 
@@ -312,6 +336,10 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
     }
 
     companion object {
+        //image pick code
+        private val IMAGE_PICK_CODE = 1000;
+        //Permission code
+        private val PERMISSION_CODE = 1001;
         fun newInstance(): EditUserProfileFragment {
             val fragmentEditUser = EditUserProfileFragment()
             val args = Bundle()
@@ -509,6 +537,136 @@ class EditUserProfileFragment : Fragment(), fragmentOperationsInterface {
         User.iban_number = ""
         User.is_public = true
         User.whereIamAsId = 0 //it may be unnecessary to keep
+    }
+
+    private val publishButtonListener = View.OnClickListener { view ->
+        var filePath = getPathFromURI(context!!,image_uri!!)
+        var file = File(filePath)
+        var requestBody  = RequestBody.create(MediaType.parse("image/*"),file)
+        var part = MultipartBody.Part.createFormData("photo", file.name, requestBody)
+
+        println("A")
+        println("A")
+        println("A")
+        println(image_uri.toString())
+        println(filePath.toString())
+        println(file.toString())
+        println(requestBody.toString())
+        println(part.toString())
+        println("B")
+        println("B")
+        println("B")
+        RetrofitClient.instance.updateProfilePicture(part).enqueue(object :
+            Callback<UpdateUserResponse> {
+            override fun onResponse(
+                call: Call<UpdateUserResponse>,
+                response: Response<UpdateUserResponse>
+            ) {
+                println(response.toString())
+                if(response.code() == 200 ){
+                    if(response.body()?.detail == null){
+                        User.photo = response.body()?.photo
+                        Toast.makeText(context, "User Profile has been updated", Toast.LENGTH_LONG).show()
+                    }else{
+                        println("Something went wrong!")
+                    }
+
+
+                }else{
+
+                }
+            }
+            override fun onFailure(call: Call<UpdateUserResponse>, t: Throwable) {
+
+            }
+        })
+
+    }
+
+    private val pickImageListener = View.OnClickListener { view ->
+
+        if (checkSelfPermission(context as Context, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED){
+            //permission denied
+            val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE);
+            //show popup to request runtime permission
+            requestPermissions(permissions, PERMISSION_CODE);
+        }
+        else{
+            //permission already granted
+            pickImageFromGallery();
+        }
+
+
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            PERMISSION_CODE -> {
+                if (grantResults.size >0 && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED){
+                    //permission from popup granted
+                    pickImageFromGallery()
+                }
+                else{
+                    //permission from popup denied
+                    Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
+            profile_pic.setImageURI(data?.data)
+            image_uri = data?.data
+            change_image.isEnabled = true
+            change_image.isClickable = true
+        }
+    }
+
+    private fun pickImageFromGallery() {
+        //Intent to pick image
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+    fun getPathFromURI(context: Context, uri: Uri): String? {
+        val path: String = uri.path as String
+        var realPath: String? = null
+
+        val databaseUri: Uri
+        val selection: String?
+        val selectionArgs: Array<String>?
+        if (path.contains("/document/image:")) { // files selected from "Documents"
+            databaseUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            selection = "_id=?"
+            selectionArgs = arrayOf(DocumentsContract.getDocumentId(uri).split(":")[1])
+        } else { // files selected from all other sources, especially on Samsung devices
+            databaseUri = uri
+            selection = null
+            selectionArgs = null
+        }
+        try {
+            val projection = arrayOf(
+                MediaStore.Images.Media.DATA,
+                MediaStore.Images.Media._ID,
+                MediaStore.Images.Media.ORIENTATION,
+                MediaStore.Images.Media.DATE_TAKEN
+            ) // some example data you can query
+            val cursor = context.contentResolver.query(
+                databaseUri,
+                projection, selection, selectionArgs, null
+            )
+            if (cursor!!.moveToFirst()) {
+                val columnIndex = cursor.getColumnIndex(projection[0])
+                realPath = cursor.getString(columnIndex)
+            }
+            cursor.close()
+        } catch (e: Exception) {
+            Toast.makeText(context,"zeze get path error " + e.message,Toast.LENGTH_SHORT).show()
+        }
+        return realPath
     }
 
 }
