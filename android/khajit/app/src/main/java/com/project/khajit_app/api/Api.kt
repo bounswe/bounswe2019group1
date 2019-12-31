@@ -137,6 +137,10 @@ interface Api {
         @Part file: MultipartBody.Part): Call<CreateArticleResponseModel>
 
     @Headers("Content-Type: application/json")
+    @POST("article/create/")
+    fun createArticleNoImage(@Body body:CreateArticleModel): Call<CreateArticleResponseModel>
+
+    @Headers("Content-Type: application/json")
     @PUT("wallet/sendUSD/")
     fun depositFunds(@Body body: DepositFundsModel):Call<DepositFundsResponse>
 
