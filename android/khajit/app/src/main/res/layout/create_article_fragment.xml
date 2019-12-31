@@ -21,7 +21,21 @@
             android:paddingTop="20dp"
             android:paddingRight="24dp">
 
-
+            <ImageView
+                android:id="@+id/create_article_image_view"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_article_image_no_content_foreground"
+                android:layout_width="400dp"
+                android:layout_height="400dp" />
+            <Button
+                android:id="@+id/create_article_pick_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:layout_marginBottom="30dp"
+                android:background="#EEF2F5"
+                android:text="CHOOSE IMAGE" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"

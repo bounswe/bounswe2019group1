@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".activity.ui.article.displayArticleFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -59,10 +61,156 @@
                 android:layout_marginRight="@dimen/dog_detail_description_margin_right"
                 android:layout_marginBottom="@dimen/dog_detail_description_margin_bottom"
                 android:background="#81E4C9C8"
-                android:textIsSelectable="true"
-                android:text="@{articlSpanableModel.content}" />
+                android:text="@{articlSpanableModel.content}"
+                android:textIsSelectable="true" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/like_layout"
+                    android:layout_width="173dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="#ADFFFFFF">
+
+
+                    <ImageView
+                        android:id="@+id/like_image_content"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="10dp"
+                        android:contentDescription="denemeImage"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/ic_article_like_icon_foreground" />
+
+                    <RelativeLayout
+                        android:id="@+id/like_text_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/like_image_content"
+                        app:layout_constraintBottom_toBottomOf="@id/event_layout_general"
+                        tools:ignore="NotSibling">
+
+
+                        <TextView
+                            android:id="@+id/number_of_like"
+                            style="@style/TextAppearance.AppCompat.Subhead.Inverse"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginStart="8dp"
+                            android:gravity="center"
+                            android:minHeight="@dimen/recycler_item_footer_height_min"
+                            android:paddingLeft="@dimen/recycler_item_footer_padding"
+                            android:paddingTop="@dimen/recycler_item_footer_padding"
+                            android:paddingRight="@dimen/recycler_item_footer_padding"
+                            android:textColor="#FF000000"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+
+                            tools:text="Number of Likes" />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/dislike_layout"
+                    android:layout_width="173dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+
+                    android:layout_marginEnd="20dp"
+                    android:background="#ADFFFFFF">
+
+
+                    <ImageView
+                        android:id="@+id/dislike_image"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="10dp"
+                        android:contentDescription="denemeImage"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/ic_article_dislike_icon_foreground" />
+
+                    <RelativeLayout
+                        android:id="@+id/dislike_text_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/dislike_image"
+                        app:layout_constraintBottom_toBottomOf="@id/event_layout_general"
+                        tools:ignore="NotSibling">
+
+
+                        <TextView
+                            android:id="@+id/number_of_dislike"
+                            style="@style/TextAppearance.AppCompat.Subhead.Inverse"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_marginStart="8dp"
+                            android:gravity="center"
+                            android:minHeight="@dimen/recycler_item_footer_height_min"
+                            android:paddingLeft="@dimen/recycler_item_footer_padding"
+                            android:paddingTop="@dimen/recycler_item_footer_padding"
+                            android:paddingRight="@dimen/recycler_item_footer_padding"
+                            android:textColor="#FF000000"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+
+                            tools:text="Number of dislike" />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/display_article_fragment_comment_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                >
+
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+            <EditText
+                android:id="@+id/displayArticleWriteComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:singleLine="true"
+                android:hint="Add Comment"
+                />
+
+            <Button
+                android:id="@+id/displayArticleWriteCommentButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="80dp"
+                android:layout_marginRight="80dp"
+                android:layout_marginBottom="30dp"
+                android:background="#EEF2F5"
+                android:text="COMMENT" />
+
 
         </LinearLayout>
+
 
     </ScrollView>
 </layout>

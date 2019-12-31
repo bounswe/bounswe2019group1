@@ -99,9 +99,8 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="foregroundAssetType" value="CLIP_ART" />
-                                      <entry key="foregroundImage" value="$USER_HOME$/Downloads/edit.svg" />
-                                      <entry key="outputName" value="ic_article_image_no_content" />
+                                      <entry key="foregroundImage" value="$USER_HOME$/Downloads/icons8-thumbs-down-80.png" />
+                                      <entry key="outputName" value="ic_article_dislike_icon" />
                                     </map>
                                   </option>
                                 </PersistentState>
