@@ -145,7 +145,7 @@ export default function Article(props) {
     });
 
     useState(() =>
-        listCommentByArticleId(article_id).then(res => setValues({comments: res}))
+        listCommentByArticleId(article_id).then(res => setValues({comments: res.result}))
     );
     const items = [];
     if (values.comments) {

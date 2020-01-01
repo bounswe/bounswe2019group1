@@ -119,7 +119,7 @@ export default function ProfilePage(props) {
   });
 
   useState(() =>
-    getMyArticles().then(res => setArticleValues({ results: res }))
+    getMyArticles().then(res => setArticleValues({ results: res.results }))
   );
   const items = [];
   if (articleValues.results) {
