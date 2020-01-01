@@ -100,7 +100,7 @@ class ListArticleWithUserIdAPIView(ListAPIView):
         if follow_query:
             query = Article.objects.filter(author=user).order_by('-created_date')
             serializer = PublicArticleListSerializer(query, many=True)
-            return Response(serializer.data, status=200)
+            return Response({"results": serializer.data}, status=200)
         else:
             query = Article.objects.filter(author=user, is_public=True).order_by('-created_date')
             serializer = PublicArticleListSerializer(query, many=True)
