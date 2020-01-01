@@ -21,4 +21,35 @@ class HelperFunctions {
                     + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
         ).matcher(email).matches()
     }
+
+    fun isTitleValid(title : String):Boolean{
+        if(title ==""){
+            return false
+        }else{
+            return true
+        }
+    }
+
+    fun isCommentValid(comment : String):Boolean{
+        if(comment ==""){
+            return false
+        }else{
+            return true
+        }
+    }
+
+    fun isAnnotationValid(annotation: String):Boolean{
+        if(annotation ==""){
+            return false
+        }else{
+            return true
+        }
+    }
+    fun isAnnotationStartEndValid(Start: Int,End: Int):Boolean{
+        if(Start>=End){
+            return false
+        }else{
+            return true
+        }
+    }
 }
