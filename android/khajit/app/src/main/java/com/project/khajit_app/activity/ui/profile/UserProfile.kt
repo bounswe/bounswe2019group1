@@ -46,10 +46,8 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
 
     private lateinit var profile_pic: CircularImageView
 
-    var equipments = arrayOf(
-        "Android", "IPhone", "WindowsMobile", "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X", "Max OS X", "Max OS X")
-    var rates = arrayOf(
-        "%73", "%73", "%73", "%73", "%73", "%73", "%73", "%73", "%73", "%73")
+    var equipments = arrayOf<String>()
+    var rates = arrayOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
