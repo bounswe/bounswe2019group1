@@ -37,20 +37,36 @@ class EquipmentDetailsFragment : Fragment(), fragmentOperationsInterface {
 
         val equipmentValue = root.findViewById(R.id.details_equipment_value) as TextView
         equipmentValue.text = arguments?.getString("value")
-
+        val isGuest = arguments?.getInt("isGuest")
+        //this means user is not guess
         val equipmentBuy = root.findViewById(R.id.details_equipment_buy) as Button
         val equipmentSell = root.findViewById(R.id.details_equipment_sell) as Button
         val equipmentPredict = root.findViewById(R.id.details_equipment_predict) as Button
         val equipmentBuyOrder = root.findViewById(R.id.details_equipment_buy_order) as Button
         val equipmentSellOrder = root.findViewById(R.id.details_equipment_sell_order) as Button
         //val equipmentFollow = root.findViewById(R.id.details_equipment_follow) as Button
+        if(isGuest == 0){
 
-        equipmentBuy.setOnClickListener { goToEquipmentBuy(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
-        equipmentSell.setOnClickListener { goToEquipmentSell(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
-        equipmentPredict.setOnClickListener { goToEquipmentPredict(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
-        equipmentBuyOrder.setOnClickListener { goToEquipmentBuyOrder(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
-        equipmentSellOrder.setOnClickListener { goToEquipmentSellOrder(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
-        //equipmentFollow.setOnClickListener { equipmentFollow(arguments?.getString("equipment")!!) }
+            equipmentBuy.visibility = View.VISIBLE
+            equipmentSell.visibility = View.VISIBLE
+            equipmentPredict.visibility = View.VISIBLE
+            equipmentBuyOrder.visibility = View.VISIBLE
+            equipmentSellOrder.visibility = View.VISIBLE
+            equipmentBuy.setOnClickListener { goToEquipmentBuy(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
+            equipmentSell.setOnClickListener { goToEquipmentSell(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
+            equipmentPredict.setOnClickListener { goToEquipmentPredict(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
+            equipmentBuyOrder.setOnClickListener { goToEquipmentBuyOrder(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
+            equipmentSellOrder.setOnClickListener { goToEquipmentSellOrder(arguments?.getString("equipment")!!, arguments?.getString("value")!!) }
+            //equipmentFollow.setOnClickListener { equipmentFollow(arguments?.getString("equipment")!!) }
+
+        }else{
+            equipmentBuy.visibility = View.INVISIBLE
+            equipmentSell.visibility = View.INVISIBLE
+            equipmentPredict.visibility = View.INVISIBLE
+            equipmentBuyOrder.visibility = View.INVISIBLE
+            equipmentSellOrder.visibility = View.INVISIBLE
+        }
+
 
         return root
     }
@@ -132,11 +148,12 @@ class EquipmentDetailsFragment : Fragment(), fragmentOperationsInterface {
 
 
     companion object {
-        fun newInstance(equipment : String, value : String): EquipmentDetailsFragment {
+        fun newInstance(equipment : String, value : String,isGuest : Int): EquipmentDetailsFragment {
             val fragmentEquipmentDetails = EquipmentDetailsFragment()
             val args = Bundle()
             args.putSerializable("equipment",equipment)
             args.putSerializable("value",value)
+            args.putSerializable("isGuest",isGuest)
             fragmentEquipmentDetails.arguments = args
             return fragmentEquipmentDetails
         }

@@ -39,7 +39,7 @@ class HomeFeedPageActivity : AppCompatActivity() , fragmentOperationsInterface{
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
         //val fragment = HomeFragmentGuest.Companion.newInstance()
-        val fragment = ListArticleFragment.Companion.newInstance(1,0,1,0,-1)
+        val fragment = ListArticleFragment.Companion.newInstance(0,1,1,0,User.id!!)
         /*val user = UserAllInfo(        listOf("1","2"), 9,
         "cer3d@hotmail.com",
 
@@ -70,7 +70,7 @@ class HomeFeedPageActivity : AppCompatActivity() , fragmentOperationsInterface{
 
 
                 //val fragment = HomeFragmentGuest.Companion.newInstance()
-                val fragment = ListArticleFragment.Companion.newInstance(1,0,1,0,-1)
+                val fragment = ListArticleFragment.Companion.newInstance(0,1,1,0,User.id!!)
                 /*val user = UserAllInfo(        listOf("1","2"), 9,
                 "cer3d@hotmail.com",
 
@@ -110,7 +110,7 @@ class HomeFeedPageActivity : AppCompatActivity() , fragmentOperationsInterface{
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_equipments -> {
-                val fragment = EquipmentFragment()
+                val fragment = EquipmentFragment.newInstance(0)
                 fragmentTransaction(
                     supportFragmentManager,
                     fragment,

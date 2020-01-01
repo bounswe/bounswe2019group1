@@ -27,6 +27,7 @@ class EquipmentFragment : Fragment(), fragmentOperationsInterface {
 
     private lateinit var equipmentViewModel: EquipmentViewModel
     var containerId : ViewGroup? = null
+    var isGuest = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +39,8 @@ class EquipmentFragment : Fragment(), fragmentOperationsInterface {
             ViewModelProviders.of(this).get(EquipmentViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_equipment, container, false)
         containerId = container
+        isGuest = arguments?.getInt(ISGUEST)!!
+
 
         // define variables for equipment textviews
 
@@ -217,12 +220,25 @@ class EquipmentFragment : Fragment(), fragmentOperationsInterface {
 
         fragmentTransaction(
             parentActivityManager,
-            EquipmentDetailsFragment.newInstance(equipment, value),
+            EquipmentDetailsFragment.newInstance(equipment, value,isGuest),
             (containerId!!.id),
             true,
             true,
             false
         )
+    }
+    companion object {
+        private const val ISGUEST = "isGuest"
+
+
+
+        fun newInstance(isGuest : Int): EquipmentFragment {
+            val args = Bundle()
+            args.putInt(ISGUEST,isGuest)
+            val fragment = EquipmentFragment()
+            fragment.arguments = args
+            return fragment
+        }
     }
 
 }

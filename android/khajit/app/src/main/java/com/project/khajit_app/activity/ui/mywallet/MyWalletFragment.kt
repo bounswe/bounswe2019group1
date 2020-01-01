@@ -365,7 +365,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("BTC", btc_val.toString()),
+                EquipmentDetailsFragment.newInstance("BTC", btc_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,
@@ -376,7 +376,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("ETH", eth_val.toString()),
+                EquipmentDetailsFragment.newInstance("ETH", eth_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,
@@ -387,7 +387,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("LTC", ltc_val.toString()),
+                EquipmentDetailsFragment.newInstance("LTC", ltc_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,
@@ -398,7 +398,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("XAG", xag_val.toString()),
+                EquipmentDetailsFragment.newInstance("XAG", xag_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,
@@ -409,7 +409,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("XAU", xau_val.toString()),
+                EquipmentDetailsFragment.newInstance("XAU", xau_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,
@@ -420,7 +420,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("GOOGL", googl_val.toString()),
+                EquipmentDetailsFragment.newInstance("GOOGL", googl_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,
@@ -431,7 +431,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("BTC", aapl_val.toString()),
+                EquipmentDetailsFragment.newInstance("BTC", aapl_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,
@@ -442,7 +442,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("GM", gm_val.toString()),
+                EquipmentDetailsFragment.newInstance("GM", gm_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,
@@ -453,7 +453,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("EUR", eur_val.toString()),
+                EquipmentDetailsFragment.newInstance("EUR", eur_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,
@@ -464,7 +464,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("GBP", gbp_val.toString()),
+                EquipmentDetailsFragment.newInstance("GBP", gbp_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,
@@ -475,7 +475,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("TRY", try_val.toString()),
+                EquipmentDetailsFragment.newInstance("TRY", try_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,
@@ -486,7 +486,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("SPY", spy_val.toString()),
+                EquipmentDetailsFragment.newInstance("SPY", spy_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,
@@ -497,7 +497,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("IVV", ivv_val.toString()),
+                EquipmentDetailsFragment.newInstance("IVV", ivv_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,
@@ -508,7 +508,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("VTI", vti_val.toString()),
+                EquipmentDetailsFragment.newInstance("VTI", vti_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,
@@ -519,7 +519,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("DJI", dji_val.toString()),
+                EquipmentDetailsFragment.newInstance("DJI", dji_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,
@@ -530,7 +530,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("IXIC", ixic_val.toString()),
+                EquipmentDetailsFragment.newInstance("IXIC", ixic_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,
@@ -541,7 +541,7 @@ class MyWalletFragment : Fragment(), fragmentOperationsInterface {
             val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
             fragmentTransaction(
                 parentActivityManager,
-                EquipmentDetailsFragment.newInstance("INX", inx_val.toString()),
+                EquipmentDetailsFragment.newInstance("INX", inx_val.toString(),0),
                 (containerId!!.id),
                 true,
                 true,

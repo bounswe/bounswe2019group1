@@ -13,6 +13,7 @@ import com.mikhaellopez.circularimageview.CircularImageView
 
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.ListViewAdapter
+import com.project.khajit_app.activity.ui.article.ListArticleFragment
 import com.project.khajit_app.activity.ui.followlist.FollowListFragment
 import com.project.khajit_app.activity.ui.myportfolio.MyPortfolioFragment
 import com.project.khajit_app.activity.ui.notificationdetails.notificationDetailFragment
@@ -41,6 +42,7 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
     private lateinit var followerButton: Button
     private lateinit var followingButton: Button
     private lateinit var myportfolioButton: Button
+    private lateinit var buttonArticlePage: Button
 
     private lateinit var profile_pic: CircularImageView
 
@@ -79,7 +81,7 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
         followingBox = root.findViewById(R.id.following_number) as TextView
         followerBox = root.findViewById(R.id.follower_number) as TextView
         traderImage = root.findViewById(R.id.trader_image) as ImageView
-
+        buttonArticlePage = root.findViewById(R.id.button_article_page) as Button
         followerButton = root.findViewById(R.id.follower_button) as Button
         followingButton = root.findViewById(R.id.following_button) as Button
         myportfolioButton = root.findViewById(R.id.button_portfolio_page) as Button
@@ -88,7 +90,7 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
         nameBox.text = User.first_name + " " + User.last_name
         titleBox.text = User.title
         aboutBox.text = User.bio
-
+        buttonArticlePage.setOnClickListener(articleListListener)
         if(User.photo != null) {
             Picasso.get().load("http://35.163.120.227:8000" + User.photo).into(profile_pic)
         }
@@ -195,6 +197,19 @@ class UserProfile : Fragment(), fragmentOperationsInterface {
             args.putSerializable("request","ffsd")
             return fragmentUser
         }
+
+    }
+    private val articleListListener = View.OnClickListener { view ->
+        val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
+
+        fragmentTransaction(
+            parentActivityManager,
+            ListArticleFragment.newInstance(0,1,0,0,User.id!!),
+            (containerId!!.id),
+            true,
+            true,
+            false
+        )
 
     }
 }
