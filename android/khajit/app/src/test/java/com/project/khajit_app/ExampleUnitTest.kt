@@ -39,4 +39,27 @@ class ExampleUnitTest {
         assertEquals(false, helper.isEmailValid("emir.com"))
         assertEquals(false, helper.isEmailValid(""))
     }
+
+    @Test
+    fun articleVerificationCheck() {
+        assertEquals(true, helper.isTitleValid(" New Title"))
+        assertEquals(false, helper.isTitleValid(""))
+    }
+
+    @Test
+    fun commentVerificationCheck() {
+        assertEquals(true, helper.isCommentValid("This is a new comment!"))
+        assertEquals(false, helper.isCommentValid(""))
+    }
+
+    @Test
+    fun annotationVerificationCheck() {
+        assertEquals(true, helper.isAnnotationValid("annotation 1"))
+        assertEquals(false, helper.isAnnotationValid(""))
+        assertEquals(true, helper.isAnnotationStartEndValid(3,9))
+        assertEquals(false, helper.isAnnotationStartEndValid(0,0))
+        assertEquals(false, helper.isAnnotationStartEndValid(8,6))
+
+    }
+
 }
