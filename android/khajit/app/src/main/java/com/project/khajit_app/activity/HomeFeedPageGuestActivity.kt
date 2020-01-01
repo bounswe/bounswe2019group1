@@ -96,7 +96,7 @@ class HomeFeedPageGuestActivity : AppCompatActivity() , fragmentOperationsInterf
 
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_search_guest -> {
+            R.id.navigation_events_guest -> {
                 val fragment = ListEventFragment()
                 fragmentTransaction(
                     supportFragmentManager,
