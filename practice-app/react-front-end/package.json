@@ -15,6 +15,7 @@
     "d3-dsv": "^1.2.0",
     "email-validator": "^2.0.4",
     "history": "4.9.0",
+    "jest": "^24.9.0",
     "material-ui-icons": "^1.0.0-beta.36",
     "moment": "^2.24.0",
     "node-sass": "4.12.0",
@@ -61,7 +62,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && gulp licenses",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts src/test --env=jsdom",
     "eject": "react-scripts eject",
     "lint:check": "eslint . --ext=js,jsx;  exit 0",
     "lint:fix": "eslint . --ext=js,jsx --fix;  exit 0",
