@@ -145,7 +145,7 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
         //if the home feed page is requesting
         else if(isGuest == 0 && isFeedPage == 1 && isLoggedInUser == 1 && isFollowing == 0){
             println("girdi 2")
-            RetrofitClient.instance.getPublicArticles().enqueue(object :
+            RetrofitClient.instance.getUserFeedArticles().enqueue(object :
                 Callback<PublicArticleListResponse> {
                 override fun onResponse(
                     call: Call<PublicArticleListResponse>,
@@ -160,6 +160,7 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
                         authors.clear()
                         is_public_info.clear()
                         created_dates.clear()
+                        image_urls.clear()
 
                         var results = response.body()?.results as List<GeneralArticleModel>
 
@@ -171,6 +172,17 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
                             authors.add(article.author as UserAllInfo)
                             is_public_info.add(article.is_public as Boolean)
                             created_dates.add(article.created_date as String)
+                            if(article.image.isNullOrEmpty())
+                                image_urls.add(article.image as? String)
+                            else
+                                image_urls.add("http://35.163.120.227:8000"+article.image as? String)
+                            println(articleIds)
+                            println(titles)
+                            println(contents)
+                            println(authors)
+                            println(is_public_info)
+                            println(created_dates)
+
                         }
 
                         recyclerView.layoutManager = GridLayoutManager(activity, 1)
@@ -205,6 +217,7 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
                         authors.clear()
                         is_public_info.clear()
                         created_dates.clear()
+                        image_urls.clear()
 
                         var results = response.body()?.results as List<GeneralArticleModel>
 
@@ -216,7 +229,11 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
                             authors.add(article.author as UserAllInfo)
                             is_public_info.add(article.is_public as Boolean)
                             created_dates.add(article.created_date as String)
-                        }
+
+                            if(article.image.isNullOrEmpty())
+                                image_urls.add(article.image as? String)
+                            else
+                                image_urls.add("http://35.163.120.227:8000"+article.image as? String)                        }
                         recyclerView.layoutManager = GridLayoutManager(activity, 1)
                         recyclerView.adapter = ArticleListAdapter(isGuest,isLoggedInUser,isFeedPage,isFollowing,userId,articleIds,titles,contents,authors,is_public_info,created_dates,image_urls,context)
 
@@ -233,7 +250,7 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
             })
         }
         //if the following user page requesting
-        else if(isGuest == 0 && isFeedPage == 0 && isLoggedInUser == 0 && isFollowing == 1){
+        else if(isGuest == 0 && isFeedPage == 0){
             println("girdi 4")
             RetrofitClient.instance.getArticlesByUserId(userId).enqueue(object :
                 Callback<PublicArticleListResponse> {
@@ -249,6 +266,7 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
                         authors.clear()
                         is_public_info.clear()
                         created_dates.clear()
+                        image_urls.clear()
 
                         var results = response.body()?.results as List<GeneralArticleModel>
 
@@ -260,7 +278,10 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
                             authors.add(article.author as UserAllInfo)
                             is_public_info.add(article.is_public as Boolean)
                             created_dates.add(article.created_date as String)
-                        }
+                            if(article.image.isNullOrEmpty())
+                                image_urls.add(article.image as? String)
+                            else
+                                image_urls.add("http://35.163.120.227:8000"+article.image as? String)                        }
                         recyclerView.layoutManager = GridLayoutManager(activity, 1)
                         recyclerView.adapter = ArticleListAdapter(isGuest,isLoggedInUser,isFeedPage,isFollowing,userId,articleIds,titles,contents,authors,is_public_info,created_dates,image_urls,context)
 
@@ -275,50 +296,7 @@ class ListArticleFragment : Fragment() , fragmentOperationsInterface {
                     Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
                 }
             })
-        }
-        //if the not following page is requesting
-        else if(isGuest == 0 && isFeedPage == 0 && isLoggedInUser == 0 && isFollowing == 0){
-            RetrofitClient.instance.getArticlesByUserId(userId).enqueue(object :
-                Callback<PublicArticleListResponse> {
-                override fun onResponse(
-                    call: Call<PublicArticleListResponse>,
-                    response: Response<PublicArticleListResponse>
-                ) {
-                    println(response.toString())
-                    if(response.code() == 200 ){
-                        articleIds.clear()
-                        titles.clear()
-                        contents.clear()
-                        authors.clear()
-                        is_public_info.clear()
-                        created_dates.clear()
 
-                        var results = response.body()?.results as List<GeneralArticleModel>
-
-
-                        for (article in results) {
-                            if( article.is_public as Boolean){
-                                articleIds.add(article.id as Int)
-                                titles.add(article.title as String)
-                                contents.add(article.content as String)
-                                authors.add(article.author as UserAllInfo)
-                                is_public_info.add(article.is_public as Boolean)
-                                created_dates.add(article.created_date as String)
-                            }
-
-                        }
-
-
-                    }else{
-                        Log.d("error message:", response.message())
-                    }
-                }
-                override fun onFailure(call: Call<PublicArticleListResponse>, t: Throwable) {
-                    println(t.message)
-                    println(t)
-                    Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
-                }
-            })
         }else{
             print("Something is wrong")
         }

@@ -161,6 +161,11 @@ interface Api {
     fun getPublicArticles():Call<PublicArticleListResponse>
 
     @Headers("Content-Type: application/json")
+    @GET("article/feed/" )
+    fun getUserFeedArticles():Call<PublicArticleListResponse>
+
+
+    @Headers("Content-Type: application/json")
     @GET("portfolio/listportfolio/{id}/")
     fun listPortfolio(@Path(value = "id", encoded = true) userId: String):Call<ListPortfolioResponse>
 

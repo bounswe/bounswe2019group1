@@ -54,6 +54,7 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
     private var isFollowing = 0 // 0 --> Not following, 1 --> Following, 2 --> Pending
 
     private lateinit var other_id: String
+    private var  other_id_for_article = 0
     private lateinit var other_name: String
     private lateinit var profile_pic: CircularImageView
     var profile_pic_url: String? = ""
@@ -77,10 +78,8 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
         )
     }*/
 
-    var equipments = arrayOf(
-        "Android", "IPhone", "WindowsMobile", "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X", "Max OS X", "Max OS X")
-    var rates = arrayOf(
-        "%73", "%73", "%73", "%73", "%73", "%73", "%73", "%73", "%73", "%73")
+    var equipments = arrayOf<String>()
+    var rates = arrayOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -95,7 +94,7 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
         containerId = container
 
         other_id = arguments?.getInt("id").toString()
-
+        other_id_for_article = arguments?.getInt("id") as Int
         other_nameBox = root.findViewById(R.id.other_user_real_name) as TextView
         other_titleBox = root.findViewById(R.id.other_user_title) as TextView
         other_aboutBox = root.findViewById(R.id.other_text_bio) as TextView
@@ -110,7 +109,7 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
         other_user_article_button = root.findViewById(R.id.other_button_article_page) as Button
         other_portfolioButton = root.findViewById(R.id.other_button_portfolio_page) as Button
         profile_pic = root.findViewById(R.id.other_profile_pic) as CircularImageView
-
+        other_user_article_button.setOnClickListener(articleListListener)
         // This will be used for further methods in order to set prediction rates
         var lview =  root.findViewById(R.id.other_list_prediction_name) as ListView
         var ladapter = OtherListViewAdapter(this, equipments, rates)
@@ -396,7 +395,19 @@ class OtherUserProfile : Fragment(), fragmentOperationsInterface{
             false
         )
     }
+    private val articleListListener = View.OnClickListener { view ->
+        val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
 
+        fragmentTransaction(
+            parentActivityManager,
+            ListArticleFragment.newInstance(0,0,0,0,other_id_for_article),
+            (containerId!!.id),
+            true,
+            true,
+            false
+        )
+
+    }
     companion object {
         fun newInstance(id: Int): OtherUserProfile {
             val fragmentUser = OtherUserProfile()

@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import com.project.khajit_app.R
 import com.project.khajit_app.activity.ui.article.ListArticleFragment
 import com.project.khajit_app.activity.ui.equipment.EquipmentFragment
+import com.project.khajit_app.activity.ui.event.ListEventFragment
 import com.project.khajit_app.activity.ui.home.HomeFragment
 import com.project.khajit_app.activity.ui.home.HomeFragmentGuest
 import com.project.khajit_app.activity.ui.mailbox.MailboxFragment
@@ -95,8 +96,8 @@ class HomeFeedPageGuestActivity : AppCompatActivity() , fragmentOperationsInterf
 
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_search_guest -> {
-                val fragment = SearchFragment()
+            R.id.navigation_events_guest -> {
+                val fragment = ListEventFragment()
                 fragmentTransaction(
                     supportFragmentManager,
                     fragment,
@@ -108,7 +109,7 @@ class HomeFeedPageGuestActivity : AppCompatActivity() , fragmentOperationsInterf
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_equipments_guest -> {
-                val fragment = NotificationsFragment()
+                val fragment = EquipmentFragment.newInstance(1)
                 fragmentTransaction(
                     supportFragmentManager,
                     fragment,

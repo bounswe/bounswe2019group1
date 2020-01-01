@@ -123,25 +123,13 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
         article_id = articleModel.id!!
         spannable = SpannableString(articleModel.content)
 
-
-
         val createCommentItem = displayArticleFragmentBinding.displayArticleWriteCommentButton
         contentOfComment = displayArticleFragmentBinding.displayArticleWriteComment
-
-        createCommentItem.setOnClickListener(createCommentButtonListener)
-
-
-
         likeLayout = displayArticleFragmentBinding.likeLayout!!
         dislikeLayout = displayArticleFragmentBinding.dislikeLayout!!
 
         likeCountView = displayArticleFragmentBinding.numberOfLike
         dislikeCountView = displayArticleFragmentBinding.numberOfDislike
-
-        likeLayout.setOnClickListener(likeViewListener)
-        dislikeLayout.setOnClickListener(dislikeViewListener)
-
-
 
 
         if(articleModel.image != null)
@@ -153,44 +141,186 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
         }
         val user = "http://www.khajiittraders.tk/user/{${User.id!!}/"
 
-        contentView.setCustomSelectionActionModeCallback(object :
-            ActionMode.Callback {
-            override fun onCreateActionMode(
-                mode: ActionMode,
-                menu: Menu?
-            ): Boolean {
-                mode.menuInflater.inflate(R.menu.annotation_create_menu, menu)
-                return true
-            }
+        if(isGuest == 1){
+            createCommentItem.visibility = View.INVISIBLE
+            contentOfComment.visibility = View.INVISIBLE
+            getLikeDislike()
 
-            override fun onPrepareActionMode(
-                mode: ActionMode?,
-                menu: Menu?
-            ): Boolean {
-                return false
-            }
+        }else{
 
-            override fun onActionItemClicked(
-                mode: ActionMode,
-                item: MenuItem
-            ): Boolean {
-                if (item.getItemId() == R.id.annotation_write_comment) {
-                    val selStart: Int = contentView.getSelectionStart()
-                    val selEnd: Int = contentView.getSelectionEnd()
-                    fragmentTransaction(
-                        parentActivityManager,
-                        CreateAnnotationFragment.newInstance(user,annotationSource,selStart,selEnd),
-                        (containerId!!.id),
-                        true,
-                        true,
-                        false)
-                    return true// annotateClicked(selStart, selEnd)
+            createCommentItem.visibility = View.VISIBLE
+            contentOfComment.visibility = View.VISIBLE
+            createCommentItem.setOnClickListener(createCommentButtonListener)
+
+            likeLayout.setOnClickListener(likeViewListener)
+            dislikeLayout.setOnClickListener(dislikeViewListener)
+
+            contentView.setCustomSelectionActionModeCallback(object :
+                ActionMode.Callback {
+                override fun onCreateActionMode(
+                    mode: ActionMode,
+                    menu: Menu?
+                ): Boolean {
+                    mode.menuInflater.inflate(R.menu.annotation_create_menu, menu)
+                    return true
                 }
-                return false
-            }
 
-            override fun onDestroyActionMode(mode: ActionMode) {}
-        })
+                override fun onPrepareActionMode(
+                    mode: ActionMode?,
+                    menu: Menu?
+                ): Boolean {
+                    return false
+                }
+
+                override fun onActionItemClicked(
+                    mode: ActionMode,
+                    item: MenuItem
+                ): Boolean {
+                    if (item.getItemId() == R.id.annotation_write_comment) {
+                        val selStart: Int = contentView.getSelectionStart()
+                        val selEnd: Int = contentView.getSelectionEnd()
+                        fragmentTransaction(
+                            parentActivityManager,
+                            CreateAnnotationFragment.newInstance(user,annotationSource,selStart,selEnd),
+                            (containerId!!.id),
+                            true,
+                            true,
+                            false)
+                        return true// annotateClicked(selStart, selEnd)
+                    }
+                    return false
+                }
+
+                override fun onDestroyActionMode(mode: ActionMode) {}
+            })
+
+            val handlerThreadInitializeLikes = HandlerThread("LIKE DISLIKE INITIALIZE THREAD")
+            handlerThreadInitializeLikes.start()
+            val handlerThreadInitializeLikesLoop = Handler(handlerThreadInitializeLikes.looper)
+            handlerThreadInitializeLikesLoop.postDelayed({
+
+                RetrofitClient.instance.getIsLikeByArticleId(article_id).enqueue(object :
+                    Callback<ArticleLikeDisLikeResponseModel> {
+                    override fun onResponse(
+                        call: Call<ArticleLikeDisLikeResponseModel>,
+                        response: Response<ArticleLikeDisLikeResponseModel>
+                    ) {
+                        println(response.toString())
+                        print("response " + (response.code() == 200 ))
+
+                        val isLiked = response.body()!!.result
+
+                        if(isLiked){
+                            likeLayout.setBackgroundColor(Color.parseColor("#B5A33535"))
+                            dislikeLayout.setBackgroundColor(Color.parseColor("#ADFFFFFF"))
+
+                        }else{
+                            RetrofitClient.instance.getIsDislikeByArticleId(article_id).enqueue(object :
+                                Callback<ArticleLikeDisLikeResponseModel> {
+                                override fun onResponse(
+                                    call: Call<ArticleLikeDisLikeResponseModel>,
+                                    response: Response<ArticleLikeDisLikeResponseModel>
+                                ) {
+                                    println(response.toString())
+                                    print("response " + (response.code() == 200 ))
+                                    val isDisLiked = response.body()!!.result
+
+                                    if(isDisLiked){
+                                        dislikeLayout.setBackgroundColor(Color.parseColor("#B5A33535"))
+                                        likeLayout.setBackgroundColor(Color.parseColor("#ADFFFFFF"))
+                                    }else{
+                                        likeLayout.setBackgroundColor(Color.parseColor("#ADFFFFFF"))
+                                        dislikeLayout.setBackgroundColor(Color.parseColor("#ADFFFFFF"))
+                                    }
+
+
+
+
+                                }
+                                override fun onFailure(call: Call<ArticleLikeDisLikeResponseModel>, t: Throwable) {
+                                    println(t.message)
+                                    println(t)
+                                    Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
+                                }
+                            })
+
+                        }
+
+
+
+                        RetrofitClient.instance.getLikeCountByArticleId(article_id).enqueue(object :
+                            Callback<ArticleLikeDislikeCountResponseModel> {
+                            override fun onResponse(
+                                call: Call<ArticleLikeDislikeCountResponseModel>,
+                                response: Response<ArticleLikeDislikeCountResponseModel>
+                            ) {
+                                if(response.code() == 200 ){
+                                    likeCount = response.body()!!.count!!
+                                    likeCountView.setText(likeCount.toString() )
+
+
+                                }else{
+                                    print("nalaka")
+                                    Log.d("error message:", response.message())
+                                }
+                            }
+                            override fun onFailure(call: Call<ArticleLikeDislikeCountResponseModel>, t: Throwable) {
+                                println(t.message)
+                                println(t)
+                                Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
+                            }
+                        })
+
+                        RetrofitClient.instance.getDislikeCountByArticleId(article_id).enqueue(object :
+                            Callback<ArticleLikeDislikeCountResponseModel> {
+                            override fun onResponse(
+                                call: Call<ArticleLikeDislikeCountResponseModel>,
+                                response: Response<ArticleLikeDislikeCountResponseModel>
+                            ) {
+                                if(response.code() == 200 ){
+                                    dislikeCount = response.body()!!.count!!
+
+
+                                    dislikeCountView.setText(dislikeCount.toString())
+
+                                }else{
+                                    print("nalaka")
+                                    Log.d("error message:", response.message())
+                                }
+                            }
+                            override fun onFailure(call: Call<ArticleLikeDislikeCountResponseModel>, t: Throwable) {
+                                println(t.message)
+                                println(t)
+                                Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
+                            }
+                        })
+
+
+
+                    }
+
+                    override fun onFailure(call: Call<ArticleLikeDisLikeResponseModel>, t: Throwable) {
+                        println(t.message)
+                        println(t)
+                        Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
+                    }
+                })
+
+            }, 1000)
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
         recyclerView = displayArticleFragmentBinding.displayArticleFragmentCommentRecyclerview
 
@@ -319,119 +449,7 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
 
 
 
-        val handlerThreadInitializeLikes = HandlerThread("LIKE DISLIKE INITIALIZE THREAD")
-        handlerThreadInitializeLikes.start()
-        val handlerThreadInitializeLikesLoop = Handler(handlerThreadInitializeLikes.looper)
-        handlerThreadInitializeLikesLoop.postDelayed({
 
-            RetrofitClient.instance.getIsLikeByArticleId(article_id).enqueue(object :
-                Callback<ArticleLikeDisLikeResponseModel> {
-                override fun onResponse(
-                    call: Call<ArticleLikeDisLikeResponseModel>,
-                    response: Response<ArticleLikeDisLikeResponseModel>
-                ) {
-                    println(response.toString())
-                    print("response " + (response.code() == 200 ))
-
-                        val isLiked = response.body()!!.result
-
-                        if(isLiked){
-                            likeLayout.setBackgroundColor(Color.parseColor("#B5A33535"))
-                            dislikeLayout.setBackgroundColor(Color.parseColor("#ADFFFFFF"))
-
-                        }else{
-                            RetrofitClient.instance.getIsDislikeByArticleId(article_id).enqueue(object :
-                                Callback<ArticleLikeDisLikeResponseModel> {
-                                override fun onResponse(
-                                    call: Call<ArticleLikeDisLikeResponseModel>,
-                                    response: Response<ArticleLikeDisLikeResponseModel>
-                                ) {
-                                    println(response.toString())
-                                    print("response " + (response.code() == 200 ))
-                                        val isDisLiked = response.body()!!.result
-
-                                        if(isDisLiked){
-                                            dislikeLayout.setBackgroundColor(Color.parseColor("#B5A33535"))
-                                            likeLayout.setBackgroundColor(Color.parseColor("#ADFFFFFF"))
-                                        }else{
-                                            likeLayout.setBackgroundColor(Color.parseColor("#ADFFFFFF"))
-                                            dislikeLayout.setBackgroundColor(Color.parseColor("#ADFFFFFF"))
-                                        }
-
-
-
-
-                                }
-                                override fun onFailure(call: Call<ArticleLikeDisLikeResponseModel>, t: Throwable) {
-                                    println(t.message)
-                                    println(t)
-                                    Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
-                                }
-                            })
-
-                        }
-
-
-
-                        RetrofitClient.instance.getLikeCountByArticleId(article_id).enqueue(object :
-                            Callback<ArticleLikeDislikeCountResponseModel> {
-                            override fun onResponse(
-                                call: Call<ArticleLikeDislikeCountResponseModel>,
-                                response: Response<ArticleLikeDislikeCountResponseModel>
-                            ) {
-                                if(response.code() == 200 ){
-                                    likeCount = response.body()!!.count!!
-                                    likeCountView.setText(likeCount.toString() )
-
-
-                                }else{
-                                    print("nalaka")
-                                    Log.d("error message:", response.message())
-                                }
-                            }
-                            override fun onFailure(call: Call<ArticleLikeDislikeCountResponseModel>, t: Throwable) {
-                                println(t.message)
-                                println(t)
-                                Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
-                            }
-                        })
-
-                        RetrofitClient.instance.getDislikeCountByArticleId(article_id).enqueue(object :
-                            Callback<ArticleLikeDislikeCountResponseModel> {
-                            override fun onResponse(
-                                call: Call<ArticleLikeDislikeCountResponseModel>,
-                                response: Response<ArticleLikeDislikeCountResponseModel>
-                            ) {
-                                if(response.code() == 200 ){
-                                    dislikeCount = response.body()!!.count!!
-
-
-                                    dislikeCountView.setText(dislikeCount.toString())
-
-                                }else{
-                                    print("nalaka")
-                                    Log.d("error message:", response.message())
-                                }
-                            }
-                            override fun onFailure(call: Call<ArticleLikeDislikeCountResponseModel>, t: Throwable) {
-                                println(t.message)
-                                println(t)
-                                Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
-                            }
-                        })
-
-
-
-                }
-
-                override fun onFailure(call: Call<ArticleLikeDisLikeResponseModel>, t: Throwable) {
-                    println(t.message)
-                    println(t)
-                    Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
-                }
-            })
-
-        }, 1000)
 
 
 
@@ -709,6 +727,52 @@ class displayArticleFragment : Fragment(), fragmentOperationsInterface {
             }
         })
 
+    }
+
+    fun getLikeDislike(){
+        RetrofitClient.instance.getLikeCountByArticleId(article_id).enqueue(object :
+            Callback<ArticleLikeDislikeCountResponseModel> {
+            override fun onResponse(
+                call: Call<ArticleLikeDislikeCountResponseModel>,
+                response: Response<ArticleLikeDislikeCountResponseModel>
+            ) {
+                if(response.code() == 200 ){
+                    likeCount = response.body()!!.count!!
+                    likeCountView.setText(likeCount.toString())
+
+                }else{
+                    print("nalaka")
+                    Log.d("error message:", response.message())
+                }
+            }
+            override fun onFailure(call: Call<ArticleLikeDislikeCountResponseModel>, t: Throwable) {
+                println(t.message)
+                println(t)
+                Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
+            }
+        })
+
+        RetrofitClient.instance.getDislikeCountByArticleId(article_id).enqueue(object :
+            Callback<ArticleLikeDislikeCountResponseModel> {
+            override fun onResponse(
+                call: Call<ArticleLikeDislikeCountResponseModel>,
+                response: Response<ArticleLikeDislikeCountResponseModel>
+            ) {
+                if(response.code() == 200 ){
+                    dislikeCount = response.body()!!.count!!
+                    dislikeCountView.setText(dislikeCount.toString())
+
+                }else{
+                    print("nalaka")
+                    Log.d("error message:", response.message())
+                }
+            }
+            override fun onFailure(call: Call<ArticleLikeDislikeCountResponseModel>, t: Throwable) {
+                println(t.message)
+                println(t)
+                Toast.makeText(context,t.message,Toast.LENGTH_LONG).show()
+            }
+        })
     }
 
 

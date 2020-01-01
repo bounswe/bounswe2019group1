@@ -22,6 +22,7 @@ import com.project.khajit_app.R
 import com.project.khajit_app.api.RetrofitClient
 import com.project.khajit_app.data.models.CreateArticleModel
 import com.project.khajit_app.data.models.CreateArticleResponseModel
+import interfaces.IOnBackPressed
 import interfaces.fragmentOperationsInterface
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -31,7 +32,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
-class CreateArticleFragment : Fragment(), fragmentOperationsInterface {
+class CreateArticleFragment : Fragment(), fragmentOperationsInterface, IOnBackPressed {
 
     private lateinit var viewModel: CreateArticleViewModel
     private lateinit var titleOfArticle : EditText
@@ -40,13 +41,16 @@ class CreateArticleFragment : Fragment(), fragmentOperationsInterface {
     private var isPublic : Boolean = true
     private var image_uri : Uri? = Uri.EMPTY
 
+    override fun onBackPressed() {
+        val parentActivityManager : FragmentManager = activity?.supportFragmentManager as FragmentManager
+        removeFragment(parentActivityManager)}
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val createArticleRoot = inflater.inflate(R.layout.create_article_fragment, container, false)
         viewModel = ViewModelProviders.of(this).get(CreateArticleViewModel::class.java)
-
 
         titleOfArticle = createArticleRoot.findViewById(R.id.createArticleFragmentTitle) as EditText
         contentOfArticle = createArticleRoot.findViewById(R.id.createArticleFragmentContent) as EditText
@@ -268,6 +272,8 @@ class CreateArticleFragment : Fragment(), fragmentOperationsInterface {
         }
         return realPath
     }
+
+
 }
 
 
