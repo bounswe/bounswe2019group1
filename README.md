@@ -2,7 +2,7 @@
 
 Welcome to the project repository of CmpE 451 Group 1.
 
-Keep checking for any news.
+Checkout our webpage --> http://khajiittraders.tk
 
 ![Team Members](/resources/images/team_two.png)
 
