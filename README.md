@@ -11,6 +11,9 @@ Checkout our webpage --> http://khajiittraders.tk
 In this project, we will create a social platform for users who can be considered as a trader. The platform enables the users to trade and follow a broad variety of financial vehicles including indices, stocks, ETFs, bonds, commodities, currencies, funds, bonds, and cryptocurrencies.  The platform will support various interactions, such as sharing ideas as an article, commenting and rating ideas of other users, commenting about trading equipment. Users will be able to follow other users, and trading equipment and also set alerts for certain levels of trading equipment.
 
 **[Checkout our wiki for further information](https://github.com/bounswe/bounswe2019group1/wiki)**
+**[You can reach how to run backend in here](https://github.com/bounswe/bounswe2019group1/tree/master/backend)**
+**[You can reach how to run backend of annotation server in here](https://github.com/bounswe/bounswe2019group1/blob/master/annotationserver/annotation_server/how%20to%20run%20annotation)**
+**[You can reach our API Documentation in here](https://documenter.getpostman.com/view/8206487/SVzw624R?version=latest)**
 
 ## Contributors
 
