@@ -6,7 +6,7 @@ botocore==1.12.33
 celery==4.3.0
 certifi==2019.9.11
 chardet==3.0.4
-Django==2.2.6
+Django==2.2.21
 django-celery==3.3.1
 django-celery-results==1.1.2
 django-common-helpers==0.9.2
