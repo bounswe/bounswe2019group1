@@ -14,7 +14,7 @@ django-cors-headers==3.1.1
 django-cron==0.5.1
 django-crontab==0.7.1
 django-fcm==0.1.1
-djangorestframework==3.10.2
+djangorestframework==3.11.2
 djangorestframework-jwt==1.11.0
 docutils==0.15.2
 idna==2.8
