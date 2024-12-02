@@ -10,7 +10,7 @@ django-fcm==0.1.1
 djangorestframework==3.10.2
 djangorestframework-jwt==1.11.0
 idna==2.8
-PyJWT==1.7.1
+PyJWT==2.4.0
 pytz==2019.3
 requests==2.22.0
 sqlparse==0.3.0
